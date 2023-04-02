@@ -23,7 +23,7 @@
 padding: .space 36000
 # bounding boxes (x1, y1, x2, y2) inclusive for collisions
 # each box is 16 bytes
-platforms: .word 0 96 127 111
+platforms: .word 0 96 127 111 400 496 511 511
 .text
 
 .globl main
@@ -33,7 +33,7 @@ main:
     li $s2 0 # gravity x
     li $s3 4 # gravity y
     la $s7 platforms
-    addi $s7 $s7 16 # end of platforms
+    addi $s7 $s7 0x20 # end of platforms
 
     jal flatten_current # get current position to v0
     jal draw_player
@@ -46,9 +46,9 @@ main:
 
         update:
         # gravity
-        # move $a0 $s2 # update player position
-        # move $a1 $s3
-        # jal player_move
+        move $a0 $s2 # update player position
+        move $a1 $s3
+        jal player_move
 
         li $a0 REFRESH_RATE # sleep
         li $v0 32
@@ -123,12 +123,12 @@ player_move: # move towards (a0, a1)
         lw $t6 8($t9)
         lw $t7 12($t9) # get platform box (t4, t5, t6, t7)
 
-        sle $v0 $t0 $t6  # ax1 > bx2
-        sle $v1 $t4 $t2  # bx1 > ax2
+        sle $v0 $t0 $t6  # ax1 <= bx2
+        slt $v1 $t4 $t2  # bx1 < ax2
         and $v0 $v0 $v1
-        sle $v1 $t1 $t7  # ay1 > by2
+        sle $v1 $t1 $t7  # ay1 <= by2
         and $v0 $v0 $v1
-        sle $v1 $t5 $t3  # by1 > ay2
+        slt $v1 $t5 $t3  # by1 < ay2
         and $v0 $v0 $v1
         beq $v0 0 collision # no collision
 
@@ -750,4 +750,116 @@ draw_stage: # draw stage a0
     sw $t0 13940($v0)
     sw $t0 13944($v0)
     sw $t0 13948($v0)
+    sw $t0 63888($v0)
+    sw $t0 63892($v0)
+    sw $t0 63896($v0)
+    sw $t0 63900($v0)
+    sw $t0 64400($v0)
+    sw $t0 64404($v0)
+    sw $t0 64408($v0)
+    sw $t0 64412($v0)
+    sw $t0 64912($v0)
+    sw $t0 64916($v0)
+    sw $t0 64920($v0)
+    sw $t0 64924($v0)
+    sw $t0 65424($v0)
+    sw $t0 65428($v0)
+    sw $t0 65432($v0)
+    sw $t0 65436($v0)
+    sw $t0 63904($v0)
+    sw $t0 63908($v0)
+    sw $t0 63912($v0)
+    sw $t0 63916($v0)
+    sw $t0 64416($v0)
+    sw $t0 64420($v0)
+    sw $t0 64424($v0)
+    sw $t0 64428($v0)
+    sw $t0 64928($v0)
+    sw $t0 64932($v0)
+    sw $t0 64936($v0)
+    sw $t0 64940($v0)
+    sw $t0 65440($v0)
+    sw $t0 65444($v0)
+    sw $t0 65448($v0)
+    sw $t0 65452($v0)
+    sw $t0 63920($v0)
+    sw $t0 63924($v0)
+    sw $t0 63928($v0)
+    sw $t0 63932($v0)
+    sw $t0 64432($v0)
+    sw $t0 64436($v0)
+    sw $t0 64440($v0)
+    sw $t0 64444($v0)
+    sw $t0 64944($v0)
+    sw $t0 64948($v0)
+    sw $t0 64952($v0)
+    sw $t0 64956($v0)
+    sw $t0 65456($v0)
+    sw $t0 65460($v0)
+    sw $t0 65464($v0)
+    sw $t0 65468($v0)
+    sw $t0 63936($v0)
+    sw $t0 63940($v0)
+    sw $t0 63944($v0)
+    sw $t0 63948($v0)
+    sw $t0 64448($v0)
+    sw $t0 64452($v0)
+    sw $t0 64456($v0)
+    sw $t0 64460($v0)
+    sw $t0 64960($v0)
+    sw $t0 64964($v0)
+    sw $t0 64968($v0)
+    sw $t0 64972($v0)
+    sw $t0 65472($v0)
+    sw $t0 65476($v0)
+    sw $t0 65480($v0)
+    sw $t0 65484($v0)
+    sw $t0 63952($v0)
+    sw $t0 63956($v0)
+    sw $t0 63960($v0)
+    sw $t0 63964($v0)
+    sw $t0 64464($v0)
+    sw $t0 64468($v0)
+    sw $t0 64472($v0)
+    sw $t0 64476($v0)
+    sw $t0 64976($v0)
+    sw $t0 64980($v0)
+    sw $t0 64984($v0)
+    sw $t0 64988($v0)
+    sw $t0 65488($v0)
+    sw $t0 65492($v0)
+    sw $t0 65496($v0)
+    sw $t0 65500($v0)
+    sw $t0 63968($v0)
+    sw $t0 63972($v0)
+    sw $t0 63976($v0)
+    sw $t0 63980($v0)
+    sw $t0 64480($v0)
+    sw $t0 64484($v0)
+    sw $t0 64488($v0)
+    sw $t0 64492($v0)
+    sw $t0 64992($v0)
+    sw $t0 64996($v0)
+    sw $t0 65000($v0)
+    sw $t0 65004($v0)
+    sw $t0 65504($v0)
+    sw $t0 65508($v0)
+    sw $t0 65512($v0)
+    sw $t0 65516($v0)
+    sw $t0 63984($v0)
+    sw $t0 63988($v0)
+    sw $t0 63992($v0)
+    sw $t0 63996($v0)
+    sw $t0 64496($v0)
+    sw $t0 64500($v0)
+    sw $t0 64504($v0)
+    sw $t0 64508($v0)
+    sw $t0 65008($v0)
+    sw $t0 65012($v0)
+    sw $t0 65016($v0)
+    sw $t0 65020($v0)
+    sw $t0 65520($v0)
+    sw $t0 65524($v0)
+    sw $t0 65528($v0)
+    sw $t0 65532($v0)
     jr $ra # return
