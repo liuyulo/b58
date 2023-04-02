@@ -6,7 +6,7 @@
 # s4
 # s5
 # s6
-# s7 number of platforms
+# s7 end of platform array
 
 # NOTE: 1 pixel === 4 bytes
 .eqv BASE_ADDRESS   0x10008000  # ($gp)
@@ -32,7 +32,8 @@ main:
     li $s1 PLAYER_INIT # player y
     li $s2 0 # gravity x
     li $s3 4 # gravity y
-    li $s7 1 # number of platforms
+    la $s7 platforms
+    addi $s7 $s7 16 # end of platforms
 
     jal flatten_current # get current position to v0
     jal draw_player
@@ -112,23 +113,25 @@ player_move: # move towards (a0, a1)
     bge $t3 SIZE player_move_end
 
     # check collision, player box is (t0, t1, t2, t3)
-
-    la $t8 platforms # get platforms
-    move $t9 $s7
-    sll $t9 $t9 4
-    add $t9 $t9 $t8 # get address to end of platforms
+    la $t8 platforms # get platforms address to t8
+    move $t9 $s7 # get end of platforms to t9
     collision:
         sub $t9 $t9 16 # decrement platform index
-        blt $t9 $t8 collision_end
+        blt $t9 $t8 collision_end # no more platforms
         lw $t4 0($t9)
         lw $t5 4($t9)
         lw $t6 8($t9)
         lw $t7 12($t9) # get platform box (t4, t5, t6, t7)
 
-        bgt $t0 $t6 collision # ax1 > bx2
-        bgt $t4 $t2 collision # bx1 > ax2
-        bgt $t1 $t7 collision # ay1 > by2
-        bgt $t5 $t3 collision # by1 > ay2
+        sle $v0 $t0 $t6  # ax1 > bx2
+        sle $v1 $t4 $t2  # bx1 > ax2
+        and $v0 $v0 $v1
+        sle $v1 $t1 $t7  # ay1 > by2
+        and $v0 $v0 $v1
+        sle $v1 $t5 $t3  # by1 > ay2
+        and $v0 $v0 $v1
+        beq $v0 0 collision # no collision
+
         j player_move_end
     collision_end:
     move $s0 $t0 # update player position
