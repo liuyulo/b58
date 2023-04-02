@@ -28,6 +28,11 @@ main:
         beq $t0 1 keypressed # handle keypress
 
         update:
+
+        li $a0 0
+        li $a1 4
+        jal player_move
+
         li $a0 REFRESH_RATE # sleep
         li $v0 32
         syscall
@@ -48,27 +53,21 @@ keypressed: # handle keypress in 4($a0)
 
     la $ra keypressed_end
     keypressed_w:
-    ble $s1 0 keypressed_end # reach top boundary
     li $a0 0
     li $a1 -4
     j player_move
 
     keypressed_a:
-    ble $s0 0 keypressed_end # reach left boundary
     li $a0 -4
     li $a1 0
     j player_move
 
     keypressed_s:
-    addi $t0 $s1 PLAYER_HEIGHT
-    bge $t0 SIZE keypressed_end # reach bottom boundary
     li $a0 0
     li $a1 4
     j player_move
 
     keypressed_d:
-    addi $t0 $s0 PLAYER_WIDTH
-    bge $t0 SIZE keypressed_end # reach right boundary
     li $a0 4
     li $a1 0
     j player_move
@@ -79,27 +78,32 @@ keypressed: # handle keypress in 4($a0)
     jr $ra # return
 
 player_move: # move towards (a0, a1)
-    # todo check collision
     addi $sp $sp -4 # push ra to stack
     sw $ra 0($sp)
 
-    move $t0 $a0 # backup (Δx, Δy)
-    move $t1 $a1
+    sll $a3 $s1 WIDTH_SHIFT # save previous position to a3
+    add $a3 $a3 BASE_ADDRESS
+    add $a3 $a3 $s0
 
-    move $a0 $s0 # backup previous position to a3
-    move $a1 $s1
-    jal flatten
-    move $a3 $v0
+    add $t0 $s0 $a0 # get new coordinates
+    add $t1 $s1 $a1
 
-    move $a0 $t0 # restore (Δx, Δy)
-    move $a1 $t1
+    # check in bounds
+    bltz $t0 player_move_end
+    bltz $t1 player_move_end
+    add $t2 $t0 PLAYER_WIDTH
+    bge $t2 SIZE player_move_end
+    add $t2 $t1 PLAYER_HEIGHT
+    bge $t2 SIZE player_move_end
 
-    add $s0 $s0 $a0 # update coordinates
-    add $s1 $s1 $a1
-
-    jal flatten_current # get current position to v0
+    move $s0 $t0 # update player position
+    move $s1 $t1
+    sll $v0 $s1 WIDTH_SHIFT # get current position to v0
+    add $v0 $v0 BASE_ADDRESS
+    add $v0 $v0 $s0
     jal draw_player # draw player at new position
 
+    player_move_end:
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
     jr $ra # return
@@ -110,13 +114,13 @@ flatten_current: # convert (s0, s1) to pixel address in display in v0
     add $v0 $v0 $s0
     jr $ra # jump to caller
 
-flatten: # convert (a0, a1) to pixel address in display in v0
-    sll $v0 $a1 WIDTH_SHIFT
-    add $v0 $v0 BASE_ADDRESS
-    add $v0 $v0 $a0
-    jr $ra # jump to caller
+# flatten: # convert (a0, a1) to pixel address in display in v0
+#     sll $v0 $a1 WIDTH_SHIFT
+#     add $v0 $v0 BASE_ADDRESS
+#     add $v0 $v0 $a0
+#     jr $ra # jump to caller
 
-# draw player v0 with (Δx, Δy) in (a0, a1) and previous position in a2
+# draw player at v0 with (Δx, Δy) in (a0, a1) and previous position in a2
 draw_player:
     sw BACKGROUND 0($v0) # store background (0, 0)
     sw BACKGROUND 4($v0) # store background (1, 0)
