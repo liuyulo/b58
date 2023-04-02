@@ -4,17 +4,16 @@
 
 # NOTE: 1 pixel === 4 bytes
 .eqv BASE_ADDRESS   0x10008000  # ($gp)
-.eqv REFRESH_RATE   1000          # in miliseconds
+.eqv REFRESH_RATE   40          # in miliseconds
 .eqv BACKGROUND     0           # background color
 .eqv WIDTH          512         # screen width in bytes
 .eqv HEIGHT         512         # screen height in bytes
-.eqv WIDTH_SHIFT    7           # used for s0 << WIDTH_SHIFT
+.eqv WIDTH_SHIFT    7           # 4 << WIDTH_SHIFT == WIDTH
 .eqv PLAYER_WIDTH   56          # in bytes
 .eqv PLAYER_HEIGHT  64          # in bytes
 
 .data
     padding: .space 36000 # space padding to support 128x128 resolution
-    tmp: .word 0
 .text
 
 
@@ -31,15 +30,6 @@ main:
         jal keypressed
 
         update:
-        la $t1 tmp
-        lw $t2 0($t1)
-        addi $t3 $t2 BASE_ADDRESS
-        li $t0 0xffffff
-        sw $t0 0($t3)
-        addi $t2 $t2 4
-        rem $t2 $t2 512
-        sw $t2 0($t1)
-
         li $a0 REFRESH_RATE # sleep
         li $v0 32
         syscall
@@ -121,7 +111,8 @@ flatten: # convert (a0, a1) to pixel address in display in v0
     add $v0 $v0 $a0
     jr $ra # jump to caller
 
-draw_player: # draw player at (s0, s1)    addi $sp $sp -4 # push ra to stack
+draw_player: # draw player at (s0, s1)
+    addi $sp $sp -4 # push ra to stack
     sw $ra 0($sp)
 
     move $a0 $s0 # compute start position to v0
