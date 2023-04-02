@@ -4,7 +4,7 @@
 # s2 gravity x
 # s3 gravity y
 # s4
-# s5
+# s5 landed
 # s6 jump distance left
 # s7 end of platform array
 
@@ -18,6 +18,7 @@
 .eqv BACKGROUND     $0          # black
 .eqv PLAYER_INIT    32          # initial position
 .eqv PLATFORMS      4           # number of platforms
+.eqv JUMP_HEIGHT    128         # in bytes
 
 .data
 # space padding to support 128x128 resolution
@@ -32,6 +33,9 @@ main:
     li $s1 PLAYER_INIT # player y
     li $s2 0 # gravity x
     li $s3 4 # gravity y
+    li $s5 0 # landed
+
+    li $s6 0 # jump distance left
     la $s7 platforms
     li $t0 PLATFORMS
     sll $t0 $t0 4
@@ -43,15 +47,22 @@ main:
     loop:
         li $a0 0xffff0000 # check keypress
         lw $t0 0($a0)
-        la $ra update
+        la $ra gravity
         beq $t0 1 keypressed # handle keypress
 
-        update:
-        # gravity
-        # move $a0 $s2 # update player position
-        # move $a1 $s3
-        # jal player_move
+        bnez $s5 refresh # skip gravity if landed
+        gravity:
+        move $a0 $s2 # update player position
+        move $a1 $s3
+        beq $s6 0 gravity_end
+            neg $a0 $a0 # reverse gravity
+            neg $a1 $a1
+            sub $s6 $s6 $s2 # update jump distance, assume s2 == 0 or s3 == 0
+            sub $s6 $s6 $s3
+        gravity_end:
+        jal player_move
 
+        refresh:
         li $a0 REFRESH_RATE # sleep
         li $v0 32
         syscall
@@ -65,13 +76,15 @@ keypressed: # handle keypress in 4($a0)
 
     lw $t0 4($a0)
     beq $t0 0x20 keypressed_spc
-    beq $t0 0x77 keypressed_w
+    beq $t0 0x77 keypressed_spc
     beq $t0 0x61 keypressed_a
     beq $t0 0x73 keypressed_s
     beq $t0 0x64 keypressed_d
 
     la $ra keypressed_end
     keypressed_spc:
+    beqz $s5 keypressed_end # not landed
+    li $s6 JUMP_HEIGHT # jump
     li $a0 0
     li $a1 -4
     j player_move
@@ -140,8 +153,12 @@ player_move: # move towards (a0, a1)
         and $v0 $v0 $v1
         beq $v0 0 collision # no collision
 
+        # collision => landed
+        li $s5 1
         j player_move_end
     collision_end:
+
+    li $s5 0 # not landed
     move $s0 $t0 # update player position
     move $s1 $t1
     sll $v0 $s1 WIDTH_SHIFT # get current position to v0
