@@ -27,6 +27,14 @@ padding: .space 36000
 platforms: .word 0 96 124 108 208 400 300 412 0 496 124 508 400 496 508 508
 .text
 
+clear_screen:
+    li $t0 BASE_ADDRESS
+    li $t1 0x10018000
+    clear_screen_loop:
+        sw $0 0($t0)
+        addi $t0 $t0 4
+        ble $t0 $t1 clear_screen_loop
+
 .globl main
 main:
     li $s0 PLAYER_INIT # player x
