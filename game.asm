@@ -1,6 +1,12 @@
 
 # s0 player x in bytes
 # s1 player y in bytes
+# s2 gravity x
+# s3 gravity y
+# s4
+# s5
+# s6
+# s7 number of platforms
 
 # NOTE: 1 pixel === 4 bytes
 .eqv BASE_ADDRESS   0x10008000  # ($gp)
@@ -9,18 +15,28 @@
 .eqv WIDTH_SHIFT    7           # 4 << WIDTH_SHIFT == SIZE
 .eqv PLAYER_WIDTH   56          # in bytes
 .eqv PLAYER_HEIGHT  64          # in bytes
-.eqv BACKGROUND     $0 # black
+.eqv BACKGROUND     $0          # black
+.eqv PLAYER_INIT    32          # initial position
 
 .data
-    padding: .space 36000 # space padding to support 128x128 resolution
+# space padding to support 128x128 resolution
+padding: .space 36000
+# bounding boxes (x1, y1, x2, y2) inclusive for collisions
+# each box is 16 bytes
+platforms: .word 0 96 127 111
 .text
 
 .globl main
 main:
-    li $s0 4  # player x
-    li $s1 4 # player y
+    li $s0 PLAYER_INIT # player x
+    li $s1 PLAYER_INIT # player y
+    li $s2 0 # gravity x
+    li $s3 4 # gravity y
+    li $s7 1 # number of platforms
+
     jal flatten_current # get current position to v0
     jal draw_player
+    jal draw_stage
     loop:
         li $a0 0xffff0000 # check keypress
         lw $t0 0($a0)
@@ -28,16 +44,15 @@ main:
         beq $t0 1 keypressed # handle keypress
 
         update:
-
-        li $a0 0
-        li $a1 4
-        jal player_move
+        # gravity
+        # move $a0 $s2 # update player position
+        # move $a1 $s3
+        # jal player_move
 
         li $a0 REFRESH_RATE # sleep
         li $v0 32
         syscall
         j loop
-
     li $v0 10 # terminate the program gracefully
     syscall
 
@@ -93,9 +108,29 @@ player_move: # move towards (a0, a1)
     bltz $t1 player_move_end
     add $t2 $t0 PLAYER_WIDTH
     bge $t2 SIZE player_move_end
-    add $t2 $t1 PLAYER_HEIGHT
-    bge $t2 SIZE player_move_end
+    add $t3 $t1 PLAYER_HEIGHT
+    bge $t3 SIZE player_move_end
 
+    # check collision, player box is (t0, t1, t2, t3)
+
+    la $t8 platforms # get platforms
+    move $t9 $s7
+    sll $t9 $t9 4
+    add $t9 $t9 $t8 # get address to end of platforms
+    collision:
+        sub $t9 $t9 16 # decrement platform index
+        blt $t9 $t8 collision_end
+        lw $t4 0($t9)
+        lw $t5 4($t9)
+        lw $t6 8($t9)
+        lw $t7 12($t9) # get platform box (t4, t5, t6, t7)
+
+        bgt $t0 $t6 collision # ax1 > bx2
+        bgt $t4 $t2 collision # bx1 > ax2
+        bgt $t1 $t7 collision # ay1 > by2
+        bgt $t5 $t3 collision # by1 > ay2
+        j player_move_end
+    collision_end:
     move $s0 $t0 # update player position
     move $s1 $t1
     sll $v0 $s1 WIDTH_SHIFT # get current position to v0
@@ -579,4 +614,137 @@ draw_player:
         sw BACKGROUND 7168($a3) # clear (x, 14)
         sw BACKGROUND 7680($a3) # clear (x, 15)
     clear_end:
+    jr $ra # return
+
+draw_stage: # draw stage a0
+    li $v0 BASE_ADDRESS
+    li $t0 0xffffff
+    sw $t0 12288($v0)
+    sw $t0 12292($v0)
+    sw $t0 12296($v0)
+    sw $t0 12300($v0)
+    sw $t0 12800($v0)
+    sw $t0 12804($v0)
+    sw $t0 12808($v0)
+    sw $t0 12812($v0)
+    sw $t0 13312($v0)
+    sw $t0 13316($v0)
+    sw $t0 13320($v0)
+    sw $t0 13324($v0)
+    sw $t0 13824($v0)
+    sw $t0 13828($v0)
+    sw $t0 13832($v0)
+    sw $t0 13836($v0)
+    sw $t0 12304($v0)
+    sw $t0 12308($v0)
+    sw $t0 12312($v0)
+    sw $t0 12316($v0)
+    sw $t0 12816($v0)
+    sw $t0 12820($v0)
+    sw $t0 12824($v0)
+    sw $t0 12828($v0)
+    sw $t0 13328($v0)
+    sw $t0 13332($v0)
+    sw $t0 13336($v0)
+    sw $t0 13340($v0)
+    sw $t0 13840($v0)
+    sw $t0 13844($v0)
+    sw $t0 13848($v0)
+    sw $t0 13852($v0)
+    sw $t0 12320($v0)
+    sw $t0 12324($v0)
+    sw $t0 12328($v0)
+    sw $t0 12332($v0)
+    sw $t0 12832($v0)
+    sw $t0 12836($v0)
+    sw $t0 12840($v0)
+    sw $t0 12844($v0)
+    sw $t0 13344($v0)
+    sw $t0 13348($v0)
+    sw $t0 13352($v0)
+    sw $t0 13356($v0)
+    sw $t0 13856($v0)
+    sw $t0 13860($v0)
+    sw $t0 13864($v0)
+    sw $t0 13868($v0)
+    sw $t0 12336($v0)
+    sw $t0 12340($v0)
+    sw $t0 12344($v0)
+    sw $t0 12348($v0)
+    sw $t0 12848($v0)
+    sw $t0 12852($v0)
+    sw $t0 12856($v0)
+    sw $t0 12860($v0)
+    sw $t0 13360($v0)
+    sw $t0 13364($v0)
+    sw $t0 13368($v0)
+    sw $t0 13372($v0)
+    sw $t0 13872($v0)
+    sw $t0 13876($v0)
+    sw $t0 13880($v0)
+    sw $t0 13884($v0)
+    sw $t0 12352($v0)
+    sw $t0 12356($v0)
+    sw $t0 12360($v0)
+    sw $t0 12364($v0)
+    sw $t0 12864($v0)
+    sw $t0 12868($v0)
+    sw $t0 12872($v0)
+    sw $t0 12876($v0)
+    sw $t0 13376($v0)
+    sw $t0 13380($v0)
+    sw $t0 13384($v0)
+    sw $t0 13388($v0)
+    sw $t0 13888($v0)
+    sw $t0 13892($v0)
+    sw $t0 13896($v0)
+    sw $t0 13900($v0)
+    sw $t0 12368($v0)
+    sw $t0 12372($v0)
+    sw $t0 12376($v0)
+    sw $t0 12380($v0)
+    sw $t0 12880($v0)
+    sw $t0 12884($v0)
+    sw $t0 12888($v0)
+    sw $t0 12892($v0)
+    sw $t0 13392($v0)
+    sw $t0 13396($v0)
+    sw $t0 13400($v0)
+    sw $t0 13404($v0)
+    sw $t0 13904($v0)
+    sw $t0 13908($v0)
+    sw $t0 13912($v0)
+    sw $t0 13916($v0)
+    sw $t0 12384($v0)
+    sw $t0 12388($v0)
+    sw $t0 12392($v0)
+    sw $t0 12396($v0)
+    sw $t0 12896($v0)
+    sw $t0 12900($v0)
+    sw $t0 12904($v0)
+    sw $t0 12908($v0)
+    sw $t0 13408($v0)
+    sw $t0 13412($v0)
+    sw $t0 13416($v0)
+    sw $t0 13420($v0)
+    sw $t0 13920($v0)
+    sw $t0 13924($v0)
+    sw $t0 13928($v0)
+    sw $t0 13932($v0)
+    sw $t0 12400($v0)
+    sw $t0 12404($v0)
+    sw $t0 12408($v0)
+    sw $t0 12412($v0)
+    sw $t0 12912($v0)
+    sw $t0 12916($v0)
+    sw $t0 12920($v0)
+    sw $t0 12924($v0)
+    sw $t0 13424($v0)
+    sw $t0 13428($v0)
+    sw $t0 13432($v0)
+    sw $t0 13436($v0)
+    sw $t0 13936($v0)
+    sw $t0 13940($v0)
+    sw $t0 13944($v0)
+    sw $t0 13948($v0)
     jr $ra # return
