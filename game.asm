@@ -5,10 +5,8 @@
 # NOTE: 1 pixel === 4 bytes
 .eqv BASE_ADDRESS   0x10008000  # ($gp)
 .eqv REFRESH_RATE   40          # in miliseconds
-.eqv BACKGROUND     0           # background color
-.eqv WIDTH          512         # screen width in bytes
-.eqv HEIGHT         512         # screen height in bytes
-.eqv WIDTH_SHIFT    7           # 4 << WIDTH_SHIFT == WIDTH
+.eqv SIZE           512         # screen width & height in bytes
+.eqv WIDTH_SHIFT    7           # 4 << WIDTH_SHIFT == SIZE
 .eqv PLAYER_WIDTH   56          # in bytes
 .eqv PLAYER_HEIGHT  64          # in bytes
 
@@ -16,18 +14,17 @@
     padding: .space 36000 # space padding to support 128x128 resolution
 .text
 
-
 .globl main
 main:
-    li $s0 0  # player x
-    li $s1 0 # player y
+    li $s0 4  # player x
+    li $s1 4 # player y
 
     jal draw_player
     loop:
         li $a0 0xffff0000 # check keypress
         lw $t0 0($a0)
-        bne $t0 1 update # skip keypressed if no press
-        jal keypressed
+        la $ra update
+        beq $t0 1 keypressed # handle keypress
 
         update:
         li $a0 REFRESH_RATE # sleep
@@ -43,41 +40,37 @@ keypressed: # handle keypress in 4($a0)
     sw $ra 0($sp)
 
     lw $t0 4($a0)
-    #li $t0 0x73
-
     beq $t0 0x77 keypressed_w
     beq $t0 0x61 keypressed_a
     beq $t0 0x73 keypressed_s
     beq $t0 0x64 keypressed_d
 
+    la $ra keypressed_end
     keypressed_w:
     ble $s1 0 keypressed_end # reach top boundary
     li $a0 0
     li $a1 -4
-    j keypressed_move
+    j player_move
 
     keypressed_a:
     ble $s0 0 keypressed_end # reach left boundary
     li $a0 -4
     li $a1 0
-    j keypressed_move
+    j player_move
 
     keypressed_s:
     addi $t0 $s1 PLAYER_HEIGHT
-    bge $t0 HEIGHT keypressed_end # reach bottom boundary
+    bge $t0 SIZE keypressed_end # reach bottom boundary
     li $a0 0
     li $a1 4
-    j keypressed_move
+    j player_move
 
     keypressed_d:
     addi $t0 $s0 PLAYER_WIDTH
-    bge $t0 WIDTH keypressed_end # reach right boundary
+    bge $t0 SIZE keypressed_end # reach right boundary
     li $a0 4
     li $a1 0
-    j keypressed_move
-
-    keypressed_move:
-    jal player_move
+    j player_move
 
     keypressed_end:
     lw $ra 0($sp) # pop ra from stack
@@ -85,17 +78,9 @@ keypressed: # handle keypress in 4($a0)
     jr $ra # return
 
 player_move: # move towards (a0, a1)
-    # todo check collision and boundary
+    # todo check collision
     addi $sp $sp -4 # push ra to stack
     sw $ra 0($sp)
-
-    # beq $a0 0 clear_col_end # if move on x, clear column
-    #     beq $a0 1 clear_col_else # if move left
-    #         li $a0
-    #     clear_row_else:
-    #         e
-    #     li $t1 PLAYER_WIDTH
-    # clear_row_end:
 
     add $s0 $s0 $a0 # move x
     add $s1 $s1 $a1 # move y
@@ -141,7 +126,7 @@ draw_player: # draw player at (s0, s1)
     sw $t0 44($v0) # store pixel
     sw $t0 48($v0) # store pixel
     sw $t0 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     li $t1 0x010000 # load color
     sw $t1 0($v0) # store pixel
     sw $t0 4($v0) # store pixel
@@ -168,7 +153,7 @@ draw_player: # draw player at (s0, s1)
     li $t1 0x060103 # load color
     sw $t1 48($v0) # store pixel
     sw $t0 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     sw $t0 0($v0) # store pixel
     li $t1 0x0e0805 # load color
     sw $t1 4($v0) # store pixel
@@ -196,7 +181,7 @@ draw_player: # draw player at (s0, s1)
     sw $t1 48($v0) # store pixel
     li $t1 0x0f0a0b # load color
     sw $t1 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     sw $t0 0($v0) # store pixel
     li $t1 0x27150f # load color
     sw $t1 4($v0) # store pixel
@@ -224,7 +209,7 @@ draw_player: # draw player at (s0, s1)
     sw $t1 48($v0) # store pixel
     li $t1 0x4a3322 # load color
     sw $t1 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     sw $t0 0($v0) # store pixel
     li $t1 0x7d4333 # load color
     sw $t1 4($v0) # store pixel
@@ -252,7 +237,7 @@ draw_player: # draw player at (s0, s1)
     sw $t1 48($v0) # store pixel
     li $t1 0xb39355 # load color
     sw $t1 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     sw $t0 0($v0) # store pixel
     li $t1 0x914f3c # load color
     sw $t1 4($v0) # store pixel
@@ -280,7 +265,7 @@ draw_player: # draw player at (s0, s1)
     sw $t1 48($v0) # store pixel
     li $t1 0xbba15a # load color
     sw $t1 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     li $t1 0x010000 # load color
     sw $t1 0($v0) # store pixel
     li $t1 0x99543d # load color
@@ -309,7 +294,7 @@ draw_player: # draw player at (s0, s1)
     sw $t1 48($v0) # store pixel
     li $t1 0xa5844d # load color
     sw $t1 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     sw $t0 0($v0) # store pixel
     li $t1 0x924f39 # load color
     sw $t1 4($v0) # store pixel
@@ -337,7 +322,7 @@ draw_player: # draw player at (s0, s1)
     sw $t1 48($v0) # store pixel
     li $t1 0x1e1c11 # load color
     sw $t1 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     li $t1 0x533125 # load color
     sw $t1 0($v0) # store pixel
     li $t1 0xd37854 # load color
@@ -365,7 +350,7 @@ draw_player: # draw player at (s0, s1)
     li $t1 0x221412 # load color
     sw $t1 48($v0) # store pixel
     sw $t0 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     li $t1 0x553327 # load color
     sw $t1 0($v0) # store pixel
     li $t1 0xe1825a # load color
@@ -393,7 +378,7 @@ draw_player: # draw player at (s0, s1)
     li $t1 0x0c0605 # load color
     sw $t1 48($v0) # store pixel
     sw $t0 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     li $t1 0x241512 # load color
     sw $t1 0($v0) # store pixel
     li $t1 0x754432 # load color
@@ -420,7 +405,7 @@ draw_player: # draw player at (s0, s1)
     sw $t1 44($v0) # store pixel
     sw $t0 48($v0) # store pixel
     sw $t0 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     li $t1 0x232331 # load color
     sw $t1 0($v0) # store pixel
     li $t1 0x160d0b # load color
@@ -447,7 +432,7 @@ draw_player: # draw player at (s0, s1)
     sw $t1 44($v0) # store pixel
     sw $t0 48($v0) # store pixel
     sw $t0 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     li $t1 0x0c0b0f # load color
     sw $t1 0($v0) # store pixel
     sw $t0 4($v0) # store pixel
@@ -471,7 +456,7 @@ draw_player: # draw player at (s0, s1)
     sw $t1 44($v0) # store pixel
     sw $t0 48($v0) # store pixel
     sw $t0 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     sw $t0 0($v0) # store pixel
     li $t1 0x010101 # load color
     sw $t1 4($v0) # store pixel
@@ -498,7 +483,7 @@ draw_player: # draw player at (s0, s1)
     sw $t0 48($v0) # store pixel
     li $t1 0x000001 # load color
     sw $t1 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     li $t1 0x010101 # load color
     sw $t1 0($v0) # store pixel
     sw $t0 4($v0) # store pixel
@@ -524,7 +509,7 @@ draw_player: # draw player at (s0, s1)
     sw $t1 44($v0) # store pixel
     sw $t0 48($v0) # store pixel
     sw $t0 52($v0) # store pixel
-    addi $v0 $v0 WIDTH # go to next row
+    addi $v0 $v0 SIZE # go to next row
     sw $t0 0($v0) # store pixel
     sw $t0 4($v0) # store pixel
     sw $t0 8($v0) # store pixel
