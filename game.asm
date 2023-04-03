@@ -33,7 +33,17 @@ stage_gravity: .word 0 4 -4 0
 sc: .word 0
 .text
 
-clear_screen:
+init:
+    # if all stage completed
+    lw $t0 sc
+    bge $t0 STAGE_COUNT terminate
+
+    # new gravity
+    sll $t0 $t0 3 # convert to bytes
+    lw $s2 stage_gravity($t0) # gravity x
+    addi $t0 $t0 4
+    lw $s3 stage_gravity($t0) # gravity y
+
     li $t0 BASE_ADDRESS
     li $t1 0x10018000
     clear_screen_loop:
@@ -41,12 +51,8 @@ clear_screen:
         addi $t0 $t0 4
         ble $t0 $t1 clear_screen_loop
 
-.globl main
-main:
     li $s0 PLAYER_INIT # player x
     li $s1 PLAYER_INIT # player y
-    li $s2 -4 # gravity x
-    li $s3 0 # gravity y
     li $s4 1 # face east
     li $s5 0 # landed
 
@@ -61,34 +67,38 @@ main:
     add $v0 $v0 $s0
     jal draw_player
     jal draw_stage
-    loop:
-        li $a0 0xffff0000 # check keypress
-        lw $t0 0($a0)
-        la $ra gravity
-        beq $t0 1 keypressed # handle keypress
 
-        bnez $s5 refresh # skip gravity if landed
-        gravity:
-        # j refresh # disable gravity
-        move $a0 $s2 # update player position
-        move $a1 $s3
-        beq $s6 0 gravity_end
-            neg $a0 $a0 # reverse gravity
-            neg $a1 $a1
-            abs $t0 $s2 # get absolute value of jump distance
-            sub $s6 $s6 $t0 # update jump distance, assume s2 == 0 or s3 == 0
-            abs $t0 $s3
-            sub $s6 $s6 $t0
-        gravity_end:
-        jal player_move
+.globl main
+main:
+    li $a0 0xffff0000 # check keypress
+    lw $t0 0($a0)
+    la $ra gravity
+    beq $t0 1 keypressed # handle keypress
 
-        refresh:
-        li $a0 REFRESH_RATE # sleep
-        li $v0 32
-        syscall
-        j loop
-    terminate:
-    li $v0 10 # terminate the program gracefully
+    bnez $s5 refresh # skip gravity if landed
+    gravity:
+    # j refresh # disable gravity
+    move $a0 $s2 # update player position
+    move $a1 $s3
+    beq $s6 0 gravity_end
+        neg $a0 $a0 # reverse gravity
+        neg $a1 $a1
+        abs $t0 $s2 # get absolute value of jump distance
+        sub $s6 $s6 $t0 # update jump distance, assume s2 == 0 or s3 == 0
+        abs $t0 $s3
+        sub $s6 $s6 $t0
+    gravity_end:
+    jal player_move
+
+    refresh:
+    li $a0 REFRESH_RATE # sleep
+    li $v0 32
+    syscall
+    j main
+
+# terminate the program gracefully
+terminate:
+    li $v0 10
     syscall
 
 keypressed: # handle keypress in 4($a0)
@@ -164,7 +174,7 @@ player_move: # move towards (a0, a1)
 
     # check collision with door
     jal complete
-    bnez $v0 terminate
+    bnez $v0 next_stage
 
     li $s5 0 # not landed
     move $s0 $t0 # update player position
@@ -229,6 +239,12 @@ complete:
     and $v0 $v0 $v1
     jr $ra
 
+# prepare for next stage, then goto init
+next_stage:
+    lw $t0 sc
+    addi $t0 $t0 1
+    sw $t0 sc
+    j init
 # draw stage a0
 draw_stage:
     li $v0 BASE_ADDRESS
