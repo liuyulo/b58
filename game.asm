@@ -30,12 +30,12 @@ door: .word 480 400 508 476
 # stage gravity (Δx, Δy) for each stage
 stage_gravity: .word 0 4 -4 0
 # stage counter
-sc: .word 0
+stage: .word 0
 .text
 
 init:
     # if all stage completed
-    lw $t0 sc
+    lw $t0 stage
     bge $t0 STAGE_COUNT terminate
 
     # new gravity
@@ -257,9 +257,9 @@ complete:
 
 # prepare for next stage, then goto init
 next_stage:
-    lw $t0 sc
+    lw $t0 stage
     addi $t0 $t0 1
-    sw $t0 sc
+    sw $t0 stage
     j init
 # draw stage a0
 draw_stage:
