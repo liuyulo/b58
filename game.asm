@@ -54,7 +54,7 @@ init:
     li $s0 PLAYER_INIT # player x
     li $s1 PLAYER_INIT # player y
     li $s4 1 # face east
-    li $s5 0 # landed
+    addi $s5 $s5 0xfffe # not landed
 
     li $s6 0 # jump distance left
     la $s7 platforms
@@ -75,7 +75,8 @@ main:
     la $ra gravity
     beq $t0 1 keypressed # handle keypress
 
-    bnez $s5 refresh # skip gravity if landed
+    andi $t0 $s5 0x1
+    bnez $t0 refresh # skip gravity if landed
     gravity:
     # j refresh # disable gravity
     move $a0 $s2 # update player position
@@ -113,7 +114,8 @@ keypressed: # handle keypress in 4($a0)
     beq $t0 0x64 keypressed_d
 
     keypressed_spc:
-    beqz $s5 keypressed_end # not landed
+    andi $t0 $s5 0x1
+    beqz $t0 keypressed_end # not landed
     li $s6 JUMP_HEIGHT # jump
     j keypressed_end
 
@@ -176,7 +178,7 @@ player_move: # move towards (a0, a1)
     jal complete
     bnez $v0 next_stage
 
-    li $s5 0 # not landed
+    andi $s5 $s5 0xfffe # not landed
     move $s0 $t0 # update player position
     move $s1 $t1
     sll $v0 $s1 WIDTH_SHIFT # get current position to v0
@@ -190,7 +192,7 @@ player_move: # move towards (a0, a1)
         # consider landed if Δs == gravity
         bne $a0 $s2 player_move_end
         bne $a1 $s3 player_move_end
-        li $s5 1
+        ori $s5 $s5 0x1 # landed
     player_move_end:
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
