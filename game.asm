@@ -10,11 +10,10 @@
 
 # NOTE: 1 pixel === 4 bytes
 .eqv BASE_ADDRESS   0x10008000  # ($gp)
-.eqv REFRESH_RATE   40          # in miliseconds
+.eqv REFRESH_RATE   20          # in miliseconds
 .eqv SIZE           512         # screen width & height in bytes
 .eqv WIDTH_SHIFT    7           # 4 << WIDTH_SHIFT == SIZE
-.eqv PLAYER_WIDTH   56          # in bytes
-.eqv PLAYER_HEIGHT  64          # in bytes
+.eqv PLAYER_SIZE    64          # in bytes
 .eqv BACKGROUND     $0          # black
 .eqv PLAYER_INIT    32          # initial position
 .eqv PLATFORMS      4           # number of platforms
@@ -136,9 +135,9 @@ player_move: # move towards (a0, a1)
     # check in bounds
     bltz $t0 player_move_end
     bltz $t1 player_move_end
-    add $t2 $t0 PLAYER_WIDTH
+    add $t2 $t0 PLAYER_SIZE
     bge $t2 SIZE player_move_end
-    add $t3 $t1 PLAYER_HEIGHT
+    add $t3 $t1 PLAYER_SIZE
     bge $t3 SIZE player_move_end
 
     # check collision, player box is (t0, t1, t2, t3)
@@ -195,421 +194,490 @@ flatten_current: # convert (s0, s1) to pixel address in display in v0
 draw_player:
     sw BACKGROUND 0($v0) # store background (0, 0)
     sw BACKGROUND 4($v0) # store background (1, 0)
-    sw BACKGROUND 8($v0) # store background (2, 0)
     li $t0 0x020101 # load color
-    sw $t0 12($v0) # store color (3, 0)
-    li $t0 0x603320 # load color
+    sw $t0 8($v0) # store color (2, 0)
+    sw BACKGROUND 12($v0) # store background (3, 0)
+    li $t0 0x1f0e08 # load color
     sw $t0 16($v0) # store color (4, 0)
-    li $t0 0x816153 # load color
+    li $t0 0x73432d # load color
     sw $t0 20($v0) # store color (5, 0)
-    li $t0 0x6e6973 # load color
+    li $t0 0x7f655c # load color
     sw $t0 24($v0) # store color (6, 0)
-    li $t0 0x736266 # load color
+    li $t0 0x6d6973 # load color
     sw $t0 28($v0) # store color (7, 0)
-    li $t0 0x67565d # load color
+    li $t0 0x736266 # load color
     sw $t0 32($v0) # store color (8, 0)
-    li $t0 0x736870 # load color
+    li $t0 0x66555c # load color
     sw $t0 36($v0) # store color (9, 0)
-    li $t0 0x384041 # load color
+    li $t0 0x75676f # load color
     sw $t0 40($v0) # store color (10, 0)
-    sw BACKGROUND 44($v0) # store background (11, 0)
-    sw BACKGROUND 48($v0) # store background (12, 0)
+    li $t0 0x4e5255 # load color
+    sw $t0 44($v0) # store color (11, 0)
+    li $t0 0x0f1313 # load color
+    sw $t0 48($v0) # store color (12, 0)
     sw BACKGROUND 52($v0) # store background (13, 0)
-    li $t0 0x010000 # load color
+    li $t0 0x020202 # load color
+    sw $t0 56($v0) # store color (14, 0)
+    sw BACKGROUND 60($v0) # store background (15, 0)
+    li $t0 0x020101 # load color
     sw $t0 512($v0) # store color (0, 1)
     sw BACKGROUND 516($v0) # store background (1, 1)
-    li $t0 0x301c14 # load color
+    li $t0 0x0e0a08 # load color
     sw $t0 520($v0) # store color (2, 1)
-    li $t0 0xb46548 # load color
+    li $t0 0x6b3724 # load color
     sw $t0 524($v0) # store color (3, 1)
-    li $t0 0xf2beaa # load color
+    li $t0 0xda8e6f # load color
     sw $t0 528($v0) # store color (4, 1)
-    li $t0 0xd29dae # load color
+    li $t0 0xefc1b7 # load color
     sw $t0 532($v0) # store color (5, 1)
-    li $t0 0xbe728e # load color
+    li $t0 0xca91a7 # load color
     sw $t0 536($v0) # store color (6, 1)
-    li $t0 0xdc8998 # load color
+    li $t0 0xbf728d # load color
     sw $t0 540($v0) # store color (7, 1)
-    li $t0 0xda8795 # load color
+    li $t0 0xdc8998 # load color
     sw $t0 544($v0) # store color (8, 1)
-    li $t0 0xc37691 # load color
+    li $t0 0xdc8996 # load color
     sw $t0 548($v0) # store color (9, 1)
-    li $t0 0xc28d98 # load color
+    li $t0 0xc5758f # load color
     sw $t0 552($v0) # store color (10, 1)
-    li $t0 0x926857 # load color
+    li $t0 0xc2879b # load color
     sw $t0 556($v0) # store color (11, 1)
-    li $t0 0x060103 # load color
+    li $t0 0xb48479 # load color
     sw $t0 560($v0) # store color (12, 1)
-    sw BACKGROUND 564($v0) # store background (13, 1)
-    sw BACKGROUND 1024($v0) # store background (0, 2)
-    li $t0 0x0e0805 # load color
-    sw $t0 1028($v0) # store color (1, 2)
-    li $t0 0xaf6347 # load color
+    li $t0 0x442e24 # load color
+    sw $t0 564($v0) # store color (13, 1)
+    sw BACKGROUND 568($v0) # store background (14, 1)
+    li $t0 0x030302 # load color
+    sw $t0 572($v0) # store color (15, 1)
+    li $t0 0x030201 # load color
+    sw $t0 1024($v0) # store color (0, 2)
+    sw BACKGROUND 1028($v0) # store background (1, 2)
+    li $t0 0x623728 # load color
     sw $t0 1032($v0) # store color (2, 2)
-    li $t0 0xf6986b # load color
+    li $t0 0xe7865a # load color
     sw $t0 1036($v0) # store color (3, 2)
-    li $t0 0xbf8a94 # load color
+    li $t0 0xe89a7d # load color
     sw $t0 1040($v0) # store color (4, 2)
-    li $t0 0xb87187 # load color
+    li $t0 0xb37e94 # load color
     sw $t0 1044($v0) # store color (5, 2)
-    li $t0 0xdfa189 # load color
+    li $t0 0xbe7585 # load color
     sw $t0 1048($v0) # store color (6, 2)
-    li $t0 0xeeb988 # load color
+    li $t0 0xe2a589 # load color
     sw $t0 1052($v0) # store color (7, 2)
-    li $t0 0xf1bb8c # load color
+    li $t0 0xeeb988 # load color
     sw $t0 1056($v0) # store color (8, 2)
-    li $t0 0xe3aa87 # load color
+    li $t0 0xf1bc8c # load color
     sw $t0 1060($v0) # store color (9, 2)
-    li $t0 0xc78190 # load color
+    li $t0 0xe8b187 # load color
     sw $t0 1064($v0) # store color (10, 2)
-    li $t0 0xe48a80 # load color
+    li $t0 0xc8888d # load color
     sw $t0 1068($v0) # store color (11, 2)
-    li $t0 0x986141 # load color
+    li $t0 0xdc868d # load color
     sw $t0 1072($v0) # store color (12, 2)
-    li $t0 0x0f0a0b # load color
+    li $t0 0xd08063 # load color
     sw $t0 1076($v0) # store color (13, 2)
-    sw BACKGROUND 1536($v0) # store background (0, 3)
-    li $t0 0x27150f # load color
-    sw $t0 1540($v0) # store color (1, 3)
-    li $t0 0xd87c5d # load color
-    sw $t0 1544($v0) # store color (2, 3)
-    li $t0 0xf3c56f # load color
-    sw $t0 1548($v0) # store color (3, 3)
-    li $t0 0xde8b64 # load color
-    sw $t0 1552($v0) # store color (4, 3)
-    li $t0 0xf4bf79 # load color
-    sw $t0 1556($v0) # store color (5, 3)
-    li $t0 0xfdd972 # load color
-    sw $t0 1560($v0) # store color (6, 3)
-    li $t0 0xfddd6f # load color
-    sw $t0 1564($v0) # store color (7, 3)
-    li $t0 0xfcd96a # load color
-    sw $t0 1568($v0) # store color (8, 3)
-    li $t0 0xfedc71 # load color
-    sw $t0 1572($v0) # store color (9, 3)
-    li $t0 0xf7cc7a # load color
-    sw $t0 1576($v0) # store color (10, 3)
-    li $t0 0xf4cc82 # load color
-    sw $t0 1580($v0) # store color (11, 3)
-    li $t0 0xfdd175 # load color
-    sw $t0 1584($v0) # store color (12, 3)
-    li $t0 0x4a3322 # load color
-    sw $t0 1588($v0) # store color (13, 3)
-    sw BACKGROUND 2048($v0) # store background (0, 4)
-    li $t0 0x7d4333 # load color
-    sw $t0 2052($v0) # store color (1, 4)
-    li $t0 0xf5a86d # load color
-    sw $t0 2056($v0) # store color (2, 4)
-    li $t0 0xfada75 # load color
-    sw $t0 2060($v0) # store color (3, 4)
-    li $t0 0xedb27a # load color
-    sw $t0 2064($v0) # store color (4, 4)
-    li $t0 0xfdf1b7 # load color
-    sw $t0 2068($v0) # store color (5, 4)
-    li $t0 0xf4ca87 # load color
-    sw $t0 2072($v0) # store color (6, 4)
-    li $t0 0xf9da8c # load color
-    sw $t0 2076($v0) # store color (7, 4)
-    li $t0 0xfef0bc # load color
-    sw $t0 2080($v0) # store color (8, 4)
-    li $t0 0xf4c67d # load color
-    sw $t0 2084($v0) # store color (9, 4)
-    li $t0 0xffeea1 # load color
-    sw $t0 2088($v0) # store color (10, 4)
-    li $t0 0xf5cf93 # load color
-    sw $t0 2092($v0) # store color (11, 4)
-    li $t0 0xfbcb73 # load color
-    sw $t0 2096($v0) # store color (12, 4)
-    li $t0 0xb39355 # load color
-    sw $t0 2100($v0) # store color (13, 4)
-    sw BACKGROUND 2560($v0) # store background (0, 5)
-    li $t0 0x914f3c # load color
-    sw $t0 2564($v0) # store color (1, 5)
-    li $t0 0xfec879 # load color
-    sw $t0 2568($v0) # store color (2, 5)
-    li $t0 0xf0c06e # load color
-    sw $t0 2572($v0) # store color (3, 5)
-    li $t0 0xfcd07d # load color
-    sw $t0 2576($v0) # store color (4, 5)
-    li $t0 0xfccb8a # load color
-    sw $t0 2580($v0) # store color (5, 5)
-    li $t0 0xc26f50 # load color
-    sw $t0 2584($v0) # store color (6, 5)
-    li $t0 0xf7da7d # load color
-    sw $t0 2588($v0) # store color (7, 5)
-    li $t0 0xffe28e # load color
-    sw $t0 2592($v0) # store color (8, 5)
-    li $t0 0xb86a46 # load color
-    sw $t0 2596($v0) # store color (9, 5)
-    li $t0 0xdd9f69 # load color
-    sw $t0 2600($v0) # store color (10, 5)
-    li $t0 0xfade85 # load color
-    sw $t0 2604($v0) # store color (11, 5)
-    li $t0 0xea9f63 # load color
-    sw $t0 2608($v0) # store color (12, 5)
-    li $t0 0xbba15a # load color
-    sw $t0 2612($v0) # store color (13, 5)
-    li $t0 0x010000 # load color
-    sw $t0 3072($v0) # store color (0, 6)
-    li $t0 0x99543d # load color
-    sw $t0 3076($v0) # store color (1, 6)
-    li $t0 0xf6bb6f # load color
-    sw $t0 3080($v0) # store color (2, 6)
-    li $t0 0xf5c172 # load color
-    sw $t0 3084($v0) # store color (3, 6)
-    li $t0 0xd1915a # load color
-    sw $t0 3088($v0) # store color (4, 6)
-    li $t0 0x763d1d # load color
-    sw $t0 3092($v0) # store color (5, 6)
-    li $t0 0x854c39 # load color
-    sw $t0 3096($v0) # store color (6, 6)
-    li $t0 0xf1cc71 # load color
-    sw $t0 3100($v0) # store color (7, 6)
-    li $t0 0xd8804e # load color
-    sw $t0 3104($v0) # store color (8, 6)
-    li $t0 0x452422 # load color
-    sw $t0 3108($v0) # store color (9, 6)
-    li $t0 0x814839 # load color
-    sw $t0 3112($v0) # store color (10, 6)
-    li $t0 0xf6b768 # load color
-    sw $t0 3116($v0) # store color (11, 6)
-    li $t0 0xb77648 # load color
-    sw $t0 3120($v0) # store color (12, 6)
-    li $t0 0xa5844d # load color
-    sw $t0 3124($v0) # store color (13, 6)
-    sw BACKGROUND 3584($v0) # store background (0, 7)
-    li $t0 0x924f39 # load color
-    sw $t0 3588($v0) # store color (1, 7)
-    li $t0 0xe2ae62 # load color
-    sw $t0 3592($v0) # store color (2, 7)
-    li $t0 0xf7c86f # load color
-    sw $t0 3596($v0) # store color (3, 7)
-    li $t0 0x7b514c # load color
-    sw $t0 3600($v0) # store color (4, 7)
-    li $t0 0x383d49 # load color
-    sw $t0 3604($v0) # store color (5, 7)
-    li $t0 0x605d56 # load color
-    sw $t0 3608($v0) # store color (6, 7)
-    li $t0 0xf3b091 # load color
-    sw $t0 3612($v0) # store color (7, 7)
-    li $t0 0xecbbb2 # load color
-    sw $t0 3616($v0) # store color (8, 7)
-    li $t0 0x698d9f # load color
-    sw $t0 3620($v0) # store color (9, 7)
-    li $t0 0xbb9285 # load color
-    sw $t0 3624($v0) # store color (10, 7)
-    li $t0 0xdb9251 # load color
-    sw $t0 3628($v0) # store color (11, 7)
-    li $t0 0x583421 # load color
-    sw $t0 3632($v0) # store color (12, 7)
-    li $t0 0x1e1c11 # load color
-    sw $t0 3636($v0) # store color (13, 7)
-    li $t0 0x533125 # load color
-    sw $t0 4096($v0) # store color (0, 8)
-    li $t0 0xd37854 # load color
-    sw $t0 4100($v0) # store color (1, 8)
-    li $t0 0xd69c5c # load color
-    sw $t0 4104($v0) # store color (2, 8)
-    li $t0 0xf3c66a # load color
-    sw $t0 4108($v0) # store color (3, 8)
-    li $t0 0xdaac83 # load color
-    sw $t0 4112($v0) # store color (4, 8)
-    li $t0 0x71b6c7 # load color
-    sw $t0 4116($v0) # store color (5, 8)
-    li $t0 0x8eb6b8 # load color
-    sw $t0 4120($v0) # store color (6, 8)
-    li $t0 0xffe8df # load color
-    sw $t0 4124($v0) # store color (7, 8)
-    li $t0 0xfcede5 # load color
-    sw $t0 4128($v0) # store color (8, 8)
-    li $t0 0x92c9cf # load color
-    sw $t0 4132($v0) # store color (9, 8)
-    li $t0 0xc1937d # load color
-    sw $t0 4136($v0) # store color (10, 8)
-    li $t0 0xbd6643 # load color
-    sw $t0 4140($v0) # store color (11, 8)
-    li $t0 0x221412 # load color
-    sw $t0 4144($v0) # store color (12, 8)
-    sw BACKGROUND 4148($v0) # store background (13, 8)
-    li $t0 0x553327 # load color
-    sw $t0 4608($v0) # store color (0, 9)
-    li $t0 0xe1825a # load color
-    sw $t0 4612($v0) # store color (1, 9)
-    li $t0 0xb16141 # load color
-    sw $t0 4616($v0) # store color (2, 9)
-    li $t0 0xe7935f # load color
-    sw $t0 4620($v0) # store color (3, 9)
-    li $t0 0xd08b66 # load color
-    sw $t0 4624($v0) # store color (4, 9)
-    li $t0 0x89a0a8 # load color
-    sw $t0 4628($v0) # store color (5, 9)
-    li $t0 0xb9c1c1 # load color
-    sw $t0 4632($v0) # store color (6, 9)
-    li $t0 0xfff3e6 # load color
-    sw $t0 4636($v0) # store color (7, 9)
-    li $t0 0xfee9e0 # load color
-    sw $t0 4640($v0) # store color (8, 9)
-    li $t0 0xe5bbb2 # load color
-    sw $t0 4644($v0) # store color (9, 9)
-    li $t0 0xd37e60 # load color
-    sw $t0 4648($v0) # store color (10, 9)
-    li $t0 0x9d593d # load color
-    sw $t0 4652($v0) # store color (11, 9)
-    li $t0 0x0c0605 # load color
-    sw $t0 4656($v0) # store color (12, 9)
-    sw BACKGROUND 4660($v0) # store background (13, 9)
-    li $t0 0x241512 # load color
-    sw $t0 5120($v0) # store color (0, 10)
-    li $t0 0x754432 # load color
-    sw $t0 5124($v0) # store color (1, 10)
-    li $t0 0x412316 # load color
-    sw $t0 5128($v0) # store color (2, 10)
-    li $t0 0x874832 # load color
-    sw $t0 5132($v0) # store color (3, 10)
-    li $t0 0xbc7050 # load color
-    sw $t0 5136($v0) # store color (4, 10)
-    li $t0 0xf0b4b3 # load color
-    sw $t0 5140($v0) # store color (5, 10)
-    li $t0 0xffded7 # load color
-    sw $t0 5144($v0) # store color (6, 10)
-    li $t0 0xdc999b # load color
-    sw $t0 5148($v0) # store color (7, 10)
-    li $t0 0xeeb4b8 # load color
-    sw $t0 5152($v0) # store color (8, 10)
-    li $t0 0x9f7876 # load color
-    sw $t0 5156($v0) # store color (9, 10)
-    li $t0 0x81452b # load color
-    sw $t0 5160($v0) # store color (10, 10)
-    li $t0 0x4b2b1f # load color
-    sw $t0 5164($v0) # store color (11, 10)
-    sw BACKGROUND 5168($v0) # store background (12, 10)
-    sw BACKGROUND 5172($v0) # store background (13, 10)
-    li $t0 0x232331 # load color
-    sw $t0 5632($v0) # store color (0, 11)
-    li $t0 0x160d0b # load color
-    sw $t0 5636($v0) # store color (1, 11)
-    li $t0 0x000103 # load color
-    sw $t0 5640($v0) # store color (2, 11)
-    li $t0 0x060100 # load color
-    sw $t0 5644($v0) # store color (3, 11)
-    li $t0 0x7d5142 # load color
-    sw $t0 5648($v0) # store color (4, 11)
-    li $t0 0xdbd1df # load color
-    sw $t0 5652($v0) # store color (5, 11)
-    li $t0 0xe1b4bb # load color
-    sw $t0 5656($v0) # store color (6, 11)
-    li $t0 0xd27e89 # load color
-    sw $t0 5660($v0) # store color (7, 11)
-    li $t0 0xd9949f # load color
-    sw $t0 5664($v0) # store color (8, 11)
-    li $t0 0xc7bac1 # load color
-    sw $t0 5668($v0) # store color (9, 11)
-    li $t0 0x40262c # load color
-    sw $t0 5672($v0) # store color (10, 11)
-    li $t0 0x010000 # load color
-    sw $t0 5676($v0) # store color (11, 11)
-    sw BACKGROUND 5680($v0) # store background (12, 11)
-    sw BACKGROUND 5684($v0) # store background (13, 11)
-    li $t0 0x0c0b0f # load color
-    sw $t0 6144($v0) # store color (0, 12)
-    sw BACKGROUND 6148($v0) # store background (1, 12)
-    sw BACKGROUND 6152($v0) # store background (2, 12)
-    sw BACKGROUND 6156($v0) # store background (3, 12)
-    li $t0 0x1c2e51 # load color
-    sw $t0 6160($v0) # store color (4, 12)
-    li $t0 0x383d57 # load color
-    sw $t0 6164($v0) # store color (5, 12)
-    li $t0 0x5e5e7e # load color
-    sw $t0 6168($v0) # store color (6, 12)
-    li $t0 0x838999 # load color
-    sw $t0 6172($v0) # store color (7, 12)
-    li $t0 0x706e77 # load color
-    sw $t0 6176($v0) # store color (8, 12)
-    li $t0 0x27283a # load color
-    sw $t0 6180($v0) # store color (9, 12)
-    li $t0 0x080e27 # load color
-    sw $t0 6184($v0) # store color (10, 12)
-    li $t0 0x010103 # load color
-    sw $t0 6188($v0) # store color (11, 12)
-    sw BACKGROUND 6192($v0) # store background (12, 12)
-    sw BACKGROUND 6196($v0) # store background (13, 12)
-    sw BACKGROUND 6656($v0) # store background (0, 13)
+    li $t0 0x573924 # load color
+    sw $t0 1080($v0) # store color (14, 2)
+    li $t0 0x010106 # load color
+    sw $t0 1084($v0) # store color (15, 2)
     li $t0 0x010101 # load color
-    sw $t0 6660($v0) # store color (1, 13)
-    li $t0 0x080706 # load color
-    sw $t0 6664($v0) # store color (2, 13)
-    li $t0 0x4b536d # load color
-    sw $t0 6668($v0) # store color (3, 13)
-    li $t0 0x3f5480 # load color
-    sw $t0 6672($v0) # store color (4, 13)
-    li $t0 0x000012 # load color
-    sw $t0 6676($v0) # store color (5, 13)
-    li $t0 0x707694 # load color
-    sw $t0 6680($v0) # store color (6, 13)
-    li $t0 0xd8d3e1 # load color
-    sw $t0 6684($v0) # store color (7, 13)
-    li $t0 0xcfcbd7 # load color
-    sw $t0 6688($v0) # store color (8, 13)
-    li $t0 0x717b9c # load color
-    sw $t0 6692($v0) # store color (9, 13)
-    li $t0 0x383c4e # load color
-    sw $t0 6696($v0) # store color (10, 13)
-    li $t0 0x0c0b0c # load color
-    sw $t0 6700($v0) # store color (11, 13)
-    sw BACKGROUND 6704($v0) # store background (12, 13)
+    sw $t0 1536($v0) # store color (0, 3)
+    li $t0 0x060401 # load color
+    sw $t0 1540($v0) # store color (1, 3)
+    li $t0 0x8d483b # load color
+    sw $t0 1544($v0) # store color (2, 3)
+    li $t0 0xfab06f # load color
+    sw $t0 1548($v0) # store color (3, 3)
+    li $t0 0xe8b269 # load color
+    sw $t0 1552($v0) # store color (4, 3)
+    li $t0 0xe08d68 # load color
+    sw $t0 1556($v0) # store color (5, 3)
+    li $t0 0xf8c87a # load color
+    sw $t0 1560($v0) # store color (6, 3)
+    li $t0 0xfdda71 # load color
+    sw $t0 1564($v0) # store color (7, 3)
+    li $t0 0xfddd6f # load color
+    sw $t0 1568($v0) # store color (8, 3)
+    li $t0 0xfcd96a # load color
+    sw $t0 1572($v0) # store color (9, 3)
+    li $t0 0xfedd6f # load color
+    sw $t0 1576($v0) # store color (10, 3)
+    li $t0 0xf9d077 # load color
+    sw $t0 1580($v0) # store color (11, 3)
+    li $t0 0xeec67f # load color
+    sw $t0 1584($v0) # store color (12, 3)
+    li $t0 0xffe185 # load color
+    sw $t0 1588($v0) # store color (13, 3)
+    li $t0 0xb59151 # load color
+    sw $t0 1592($v0) # store color (14, 3)
+    li $t0 0x352019 # load color
+    sw $t0 1596($v0) # store color (15, 3)
+    sw BACKGROUND 2048($v0) # store background (0, 4)
+    li $t0 0x47231c # load color
+    sw $t0 2052($v0) # store color (1, 4)
+    li $t0 0xce7d59 # load color
+    sw $t0 2056($v0) # store color (2, 4)
+    li $t0 0xffce77 # load color
+    sw $t0 2060($v0) # store color (3, 4)
+    li $t0 0xf1c970 # load color
+    sw $t0 2064($v0) # store color (4, 4)
+    li $t0 0xf0be8c # load color
+    sw $t0 2068($v0) # store color (5, 4)
+    li $t0 0xfdf1b5 # load color
+    sw $t0 2072($v0) # store color (6, 4)
+    li $t0 0xf4c883 # load color
+    sw $t0 2076($v0) # store color (7, 4)
+    li $t0 0xf9da8c # load color
+    sw $t0 2080($v0) # store color (8, 4)
+    li $t0 0xfef2bd # load color
+    sw $t0 2084($v0) # store color (9, 4)
+    li $t0 0xf5c985 # load color
+    sw $t0 2088($v0) # store color (10, 4)
+    li $t0 0xfde494 # load color
+    sw $t0 2092($v0) # store color (11, 4)
+    li $t0 0xf7dd9f # load color
+    sw $t0 2096($v0) # store color (12, 4)
+    li $t0 0xffcf83 # load color
+    sw $t0 2100($v0) # store color (13, 4)
+    li $t0 0xdfb564 # load color
+    sw $t0 2104($v0) # store color (14, 4)
+    li $t0 0xaa8d52 # load color
+    sw $t0 2108($v0) # store color (15, 4)
+    sw BACKGROUND 2560($v0) # store background (0, 5)
+    li $t0 0x552721 # load color
+    sw $t0 2564($v0) # store color (1, 5)
+    li $t0 0xe09e67 # load color
+    sw $t0 2568($v0) # store color (2, 5)
+    li $t0 0xffce78 # load color
+    sw $t0 2572($v0) # store color (3, 5)
+    li $t0 0xefc16e # load color
+    sw $t0 2576($v0) # store color (4, 5)
+    li $t0 0xffd886 # load color
+    sw $t0 2580($v0) # store color (5, 5)
+    li $t0 0xf1b981 # load color
+    sw $t0 2584($v0) # store color (6, 5)
+    li $t0 0xc2714f # load color
+    sw $t0 2588($v0) # store color (7, 5)
+    li $t0 0xf7da7d # load color
+    sw $t0 2592($v0) # store color (8, 5)
+    li $t0 0xffeb92 # load color
+    sw $t0 2596($v0) # store color (9, 5)
+    li $t0 0xc0794f # load color
+    sw $t0 2600($v0) # store color (10, 5)
+    li $t0 0xcb8157 # load color
+    sw $t0 2604($v0) # store color (11, 5)
+    li $t0 0xf5d583 # load color
+    sw $t0 2608($v0) # store color (12, 5)
+    li $t0 0xf9c377 # load color
+    sw $t0 2612($v0) # store color (13, 5)
+    li $t0 0xd4975b # load color
+    sw $t0 2616($v0) # store color (14, 5)
+    li $t0 0xb6a35a # load color
+    sw $t0 2620($v0) # store color (15, 5)
+    sw BACKGROUND 3072($v0) # store background (0, 6)
+    li $t0 0x5d2d24 # load color
+    sw $t0 3076($v0) # store color (1, 6)
+    li $t0 0xdd965f # load color
+    sw $t0 3080($v0) # store color (2, 6)
+    li $t0 0xffcb76 # load color
+    sw $t0 3084($v0) # store color (3, 6)
+    li $t0 0xeeb66f # load color
+    sw $t0 3088($v0) # store color (4, 6)
+    li $t0 0xb77747 # load color
+    sw $t0 3092($v0) # store color (5, 6)
+    li $t0 0x6c331a # load color
+    sw $t0 3096($v0) # store color (6, 6)
+    li $t0 0x8e573f # load color
+    sw $t0 3100($v0) # store color (7, 6)
+    li $t0 0xf1cc71 # load color
+    sw $t0 3104($v0) # store color (8, 6)
+    li $t0 0xe58e55 # load color
+    sw $t0 3108($v0) # store color (9, 6)
+    li $t0 0x572d26 # load color
+    sw $t0 3112($v0) # store color (10, 6)
+    li $t0 0x592b2a # load color
+    sw $t0 3116($v0) # store color (11, 6)
+    li $t0 0xda9c5e # load color
+    sw $t0 3120($v0) # store color (12, 6)
+    li $t0 0xe39f5b # load color
+    sw $t0 3124($v0) # store color (13, 6)
+    li $t0 0xa57145 # load color
+    sw $t0 3128($v0) # store color (14, 6)
+    li $t0 0xa5874e # load color
+    sw $t0 3132($v0) # store color (15, 6)
+    sw BACKGROUND 3584($v0) # store background (0, 7)
+    li $t0 0x5a2b22 # load color
+    sw $t0 3588($v0) # store color (1, 7)
+    li $t0 0xc98754 # load color
+    sw $t0 3592($v0) # store color (2, 7)
+    li $t0 0xfdcf6f # load color
+    sw $t0 3596($v0) # store color (3, 7)
+    li $t0 0xd3a264 # load color
+    sw $t0 3600($v0) # store color (4, 7)
+    li $t0 0x5b3d47 # load color
+    sw $t0 3604($v0) # store color (5, 7)
+    li $t0 0x343f49 # load color
+    sw $t0 3608($v0) # store color (6, 7)
+    li $t0 0x6b6359 # load color
+    sw $t0 3612($v0) # store color (7, 7)
+    li $t0 0xf2b091 # load color
+    sw $t0 3616($v0) # store color (8, 7)
+    li $t0 0xf8bfb2 # load color
+    sw $t0 3620($v0) # store color (9, 7)
+    li $t0 0x7594a4 # load color
+    sw $t0 3624($v0) # store color (10, 7)
+    li $t0 0x968b8e # load color
+    sw $t0 3628($v0) # store color (11, 7)
+    li $t0 0xe79e67 # load color
+    sw $t0 3632($v0) # store color (12, 7)
+    li $t0 0x9f6435 # load color
+    sw $t0 3636($v0) # store color (13, 7)
+    li $t0 0x312016 # load color
+    sw $t0 3640($v0) # store color (14, 7)
+    li $t0 0x1b1c10 # load color
+    sw $t0 3644($v0) # store color (15, 7)
+    li $t0 0x462b20 # load color
+    sw $t0 4096($v0) # store color (0, 8)
+    li $t0 0xaa5e44 # load color
+    sw $t0 4100($v0) # store color (1, 8)
+    li $t0 0xde8e5c # load color
+    sw $t0 4104($v0) # store color (2, 8)
+    li $t0 0xe1b561 # load color
+    sw $t0 4108($v0) # store color (3, 8)
+    li $t0 0xf8c06e # load color
+    sw $t0 4112($v0) # store color (4, 8)
+    li $t0 0xbcab97 # load color
+    sw $t0 4116($v0) # store color (5, 8)
+    li $t0 0x68b5c9 # load color
+    sw $t0 4120($v0) # store color (6, 8)
+    li $t0 0x97b9b9 # load color
+    sw $t0 4124($v0) # store color (7, 8)
+    li $t0 0xffe8df # load color
+    sw $t0 4128($v0) # store color (8, 8)
+    li $t0 0xffefe5 # load color
+    sw $t0 4132($v0) # store color (9, 8)
+    li $t0 0x9dd2d9 # load color
+    sw $t0 4136($v0) # store color (10, 8)
+    li $t0 0xaaa195 # load color
+    sw $t0 4140($v0) # store color (11, 8)
+    li $t0 0xd67b56 # load color
+    sw $t0 4144($v0) # store color (12, 8)
+    li $t0 0x6f3a27 # load color
+    sw $t0 4148($v0) # store color (13, 8)
+    li $t0 0x030407 # load color
+    sw $t0 4152($v0) # store color (14, 8)
+    sw BACKGROUND 4156($v0) # store background (15, 8)
+    li $t0 0x452a21 # load color
+    sw $t0 4608($v0) # store color (0, 9)
+    li $t0 0xbb6e4d # load color
+    sw $t0 4612($v0) # store color (1, 9)
+    li $t0 0xcd714e # load color
+    sw $t0 4616($v0) # store color (2, 9)
+    li $t0 0xc2744b # load color
+    sw $t0 4620($v0) # store color (3, 9)
+    li $t0 0xee9660 # load color
+    sw $t0 4624($v0) # store color (4, 9)
+    li $t0 0xb88c74 # load color
+    sw $t0 4628($v0) # store color (5, 9)
+    li $t0 0x87a4af # load color
+    sw $t0 4632($v0) # store color (6, 9)
+    li $t0 0xc0c5c4 # load color
+    sw $t0 4636($v0) # store color (7, 9)
+    li $t0 0xfff3e6 # load color
+    sw $t0 4640($v0) # store color (8, 9)
+    li $t0 0xffece3 # load color
+    sw $t0 4644($v0) # store color (9, 9)
+    li $t0 0xe9c6bf # load color
+    sw $t0 4648($v0) # store color (10, 9)
+    li $t0 0xd88c74 # load color
+    sw $t0 4652($v0) # store color (11, 9)
+    li $t0 0xc06b49 # load color
+    sw $t0 4656($v0) # store color (12, 9)
+    li $t0 0x4d2c1e # load color
+    sw $t0 4660($v0) # store color (13, 9)
+    sw BACKGROUND 4664($v0) # store background (14, 9)
+    li $t0 0x030201 # load color
+    sw $t0 4668($v0) # store color (15, 9)
+    li $t0 0x1a0f0e # load color
+    sw $t0 5120($v0) # store color (0, 10)
+    li $t0 0x633a2c # load color
+    sw $t0 5124($v0) # store color (1, 10)
+    li $t0 0x593323 # load color
+    sw $t0 5128($v0) # store color (2, 10)
+    li $t0 0x552c1e # load color
+    sw $t0 5132($v0) # store color (3, 10)
+    li $t0 0x9e5538 # load color
+    sw $t0 5136($v0) # store color (4, 10)
+    li $t0 0xcb8067 # load color
+    sw $t0 5140($v0) # store color (5, 10)
+    li $t0 0xf7c2c3 # load color
+    sw $t0 5144($v0) # store color (6, 10)
+    li $t0 0xfddbd3 # load color
+    sw $t0 5148($v0) # store color (7, 10)
+    li $t0 0xdc999b # load color
+    sw $t0 5152($v0) # store color (8, 10)
+    li $t0 0xf0b3b7 # load color
+    sw $t0 5156($v0) # store color (9, 10)
+    li $t0 0xae8788 # load color
+    sw $t0 5160($v0) # store color (10, 10)
+    li $t0 0x874f39 # load color
+    sw $t0 5164($v0) # store color (11, 10)
+    li $t0 0x663621 # load color
+    sw $t0 5168($v0) # store color (12, 10)
+    li $t0 0x1f130f # load color
+    sw $t0 5172($v0) # store color (13, 10)
+    sw BACKGROUND 5176($v0) # store background (14, 10)
+    li $t0 0x020101 # load color
+    sw $t0 5180($v0) # store color (15, 10)
+    li $t0 0x242535 # load color
+    sw $t0 5632($v0) # store color (0, 11)
+    li $t0 0x1d1518 # load color
+    sw $t0 5636($v0) # store color (1, 11)
+    li $t0 0x0b0605 # load color
+    sw $t0 5640($v0) # store color (2, 11)
+    sw BACKGROUND 5644($v0) # store background (3, 11)
+    li $t0 0x281108 # load color
+    sw $t0 5648($v0) # store color (4, 11)
+    li $t0 0xa07a71 # load color
+    sw $t0 5652($v0) # store color (5, 11)
+    li $t0 0xe2d8e8 # load color
+    sw $t0 5656($v0) # store color (6, 11)
+    li $t0 0xdfaeb4 # load color
+    sw $t0 5660($v0) # store color (7, 11)
+    li $t0 0xd27e89 # load color
+    sw $t0 5664($v0) # store color (8, 11)
+    li $t0 0xd78d98 # load color
+    sw $t0 5668($v0) # store color (9, 11)
+    li $t0 0xd5c2c9 # load color
+    sw $t0 5672($v0) # store color (10, 11)
+    li $t0 0x675258 # load color
+    sw $t0 5676($v0) # store color (11, 11)
+    li $t0 0x0c0002 # load color
+    sw $t0 5680($v0) # store color (12, 11)
+    sw BACKGROUND 5684($v0) # store background (13, 11)
+    li $t0 0x020101 # load color
+    sw $t0 5688($v0) # store color (14, 11)
+    sw BACKGROUND 5692($v0) # store background (15, 11)
+    li $t0 0x0d0c11 # load color
+    sw $t0 6144($v0) # store color (0, 12)
+    li $t0 0x040405 # load color
+    sw $t0 6148($v0) # store color (1, 12)
     li $t0 0x000001 # load color
+    sw $t0 6152($v0) # store color (2, 12)
+    sw BACKGROUND 6156($v0) # store background (3, 12)
+    li $t0 0x080f1c # load color
+    sw $t0 6160($v0) # store color (4, 12)
+    li $t0 0x243559 # load color
+    sw $t0 6164($v0) # store color (5, 12)
+    li $t0 0x3d405a # load color
+    sw $t0 6168($v0) # store color (6, 12)
+    li $t0 0x626282 # load color
+    sw $t0 6172($v0) # store color (7, 12)
+    li $t0 0x838999 # load color
+    sw $t0 6176($v0) # store color (8, 12)
+    li $t0 0x76747d # load color
+    sw $t0 6180($v0) # store color (9, 12)
+    li $t0 0x343342 # load color
+    sw $t0 6184($v0) # store color (10, 12)
+    li $t0 0x0c112c # load color
+    sw $t0 6188($v0) # store color (11, 12)
+    li $t0 0x020510 # load color
+    sw $t0 6192($v0) # store color (12, 12)
+    sw BACKGROUND 6196($v0) # store background (13, 12)
+    li $t0 0x000001 # load color
+    sw $t0 6200($v0) # store color (14, 12)
+    sw BACKGROUND 6204($v0) # store background (15, 12)
+    sw BACKGROUND 6656($v0) # store background (0, 13)
+    li $t0 0x020203 # load color
+    sw $t0 6660($v0) # store color (1, 13)
+    sw BACKGROUND 6664($v0) # store background (2, 13)
+    li $t0 0x282932 # load color
+    sw $t0 6668($v0) # store color (3, 13)
+    li $t0 0x56658b # load color
+    sw $t0 6672($v0) # store color (4, 13)
+    li $t0 0x26375d # load color
+    sw $t0 6676($v0) # store color (5, 13)
+    li $t0 0x060517 # load color
+    sw $t0 6680($v0) # store color (6, 13)
+    li $t0 0x7c82a0 # load color
+    sw $t0 6684($v0) # store color (7, 13)
+    li $t0 0xd8d3e1 # load color
+    sw $t0 6688($v0) # store color (8, 13)
+    li $t0 0xd6d1dc # load color
+    sw $t0 6692($v0) # store color (9, 13)
+    li $t0 0x838baa # load color
+    sw $t0 6696($v0) # store color (10, 13)
+    li $t0 0x444b64 # load color
+    sw $t0 6700($v0) # store color (11, 13)
+    li $t0 0x1a1a1f # load color
+    sw $t0 6704($v0) # store color (12, 13)
+    li $t0 0x020100 # load color
     sw $t0 6708($v0) # store color (13, 13)
+    li $t0 0x000001 # load color
+    sw $t0 6712($v0) # store color (14, 13)
+    li $t0 0x000001 # load color
+    sw $t0 6716($v0) # store color (15, 13)
     li $t0 0x010101 # load color
     sw $t0 7168($v0) # store color (0, 14)
-    sw BACKGROUND 7172($v0) # store background (1, 14)
-    li $t0 0x030302 # load color
-    sw $t0 7176($v0) # store color (2, 14)
-    li $t0 0x4d4e52 # load color
+    li $t0 0x020202 # load color
+    sw $t0 7172($v0) # store color (1, 14)
+    sw BACKGROUND 7176($v0) # store background (2, 14)
+    li $t0 0x232423 # load color
     sw $t0 7180($v0) # store color (3, 14)
-    li $t0 0x67677c # load color
+    li $t0 0x5d5d66 # load color
     sw $t0 7184($v0) # store color (4, 14)
-    li $t0 0x7983a2 # load color
+    li $t0 0x6c6e87 # load color
     sw $t0 7188($v0) # store color (5, 14)
-    li $t0 0x7d85a8 # load color
+    li $t0 0x7a84a5 # load color
     sw $t0 7192($v0) # store color (6, 14)
-    li $t0 0x959cba # load color
+    li $t0 0x7d85a8 # load color
     sw $t0 7196($v0) # store color (7, 14)
-    li $t0 0xc6cbde # load color
+    li $t0 0x959cba # load color
     sw $t0 7200($v0) # store color (8, 14)
-    li $t0 0x9ca0bd # load color
+    li $t0 0xc4c9dc # load color
     sw $t0 7204($v0) # store color (9, 14)
-    li $t0 0x3c3c4a # load color
+    li $t0 0xacb0cd # load color
     sw $t0 7208($v0) # store color (10, 14)
-    li $t0 0x09080b # load color
+    li $t0 0x56576b # load color
     sw $t0 7212($v0) # store color (11, 14)
-    sw BACKGROUND 7216($v0) # store background (12, 14)
-    sw BACKGROUND 7220($v0) # store background (13, 14)
+    li $t0 0x141319 # load color
+    sw $t0 7216($v0) # store color (12, 14)
+    li $t0 0x010001 # load color
+    sw $t0 7220($v0) # store color (13, 14)
+    li $t0 0x000100 # load color
+    sw $t0 7224($v0) # store color (14, 14)
+    sw BACKGROUND 7228($v0) # store background (15, 14)
     sw BACKGROUND 7680($v0) # store background (0, 15)
     sw BACKGROUND 7684($v0) # store background (1, 15)
-    sw BACKGROUND 7688($v0) # store background (2, 15)
+    li $t0 0x010101 # load color
+    sw $t0 7688($v0) # store color (2, 15)
     sw BACKGROUND 7692($v0) # store background (3, 15)
-    li $t0 0x1b1a23 # load color
-    sw $t0 7696($v0) # store color (4, 15)
-    li $t0 0x8e8da0 # load color
+    sw BACKGROUND 7696($v0) # store background (4, 15)
+    li $t0 0x3d3b48 # load color
     sw $t0 7700($v0) # store color (5, 15)
-    li $t0 0x565560 # load color
+    li $t0 0x9492a5 # load color
     sw $t0 7704($v0) # store color (6, 15)
-    li $t0 0x000514 # load color
+    li $t0 0x4a4a55 # load color
     sw $t0 7708($v0) # store color (7, 15)
-    li $t0 0x838295 # load color
+    li $t0 0x000514 # load color
     sw $t0 7712($v0) # store color (8, 15)
-    li $t0 0x51505c # load color
+    li $t0 0x79798c # load color
     sw $t0 7716($v0) # store color (9, 15)
-    sw BACKGROUND 7720($v0) # store background (10, 15)
-    sw BACKGROUND 7724($v0) # store background (11, 15)
+    li $t0 0x666573 # load color
+    sw $t0 7720($v0) # store color (10, 15)
+    li $t0 0x101012 # load color
+    sw $t0 7724($v0) # store color (11, 15)
     sw BACKGROUND 7728($v0) # store background (12, 15)
-    sw BACKGROUND 7732($v0) # store background (13, 15)
+    li $t0 0x020202 # load color
+    sw $t0 7732($v0) # store color (13, 15)
+    sw BACKGROUND 7736($v0) # store background (14, 15)
+    sw BACKGROUND 7740($v0) # store background (15, 15)
 
     # clean previous, a3 is previous top left corner
     beqz $a1 clear_row_end # no movement on y axis
     move $t0 $a3
     bgez $a1 clear_row # skip shift
-        addi $t2 $a1 PLAYER_HEIGHT
+        addi $t2 $a1 PLAYER_SIZE
         sll $t2 $t2 WIDTH_SHIFT
         add $t0 $t0 $t2 # shift to bottom row
     clear_row:
@@ -627,11 +695,13 @@ draw_player:
         sw BACKGROUND 44($t0) # clear (11, y)
         sw BACKGROUND 48($t0) # clear (12, y)
         sw BACKGROUND 52($t0) # clear (13, y)
-        clear_row_end:
+        sw BACKGROUND 56($t0) # clear (14, y)
+        sw BACKGROUND 60($t0) # clear (15, y)
+    	clear_row_end:
     beqz $a0 clear_end # no movement on x axis
     bgez $a0 clear_column # skip shift
         add $a3 $a3 $a0
-        addi $a3 $a3 PLAYER_WIDTH # shift to right column
+        addi $a3 $a3 PLAYER_SIZE # shift to right column
     clear_column:
         sw BACKGROUND 0($a3) # clear (x, 0)
         sw BACKGROUND 512($a3) # clear (x, 1)
@@ -651,7 +721,6 @@ draw_player:
         sw BACKGROUND 7680($a3) # clear (x, 15)
     clear_end:
     jr $ra # return
-
 draw_stage: # draw stage a0
     li $v0 BASE_ADDRESS
     li $t0 0x887143
