@@ -26,7 +26,7 @@
 padding: .space 36000
 # bounding boxes (x1, y1, x2, y2) inclusive for collisions, each box is 16 bytes
 platforms: .word 0 96 124 108 208 400 300 412 0 496 124 508 400 496 508 508 224 416 236 444
-door: .word 432 384 508 476
+door: .word 480 400 508 476
 # stage gravity (Δx, Δy) for each stage
 stage_gravity: .word 0 4 -4 0
 # stage counter
@@ -162,6 +162,10 @@ player_move: # move towards (a0, a1)
     jal collision
     bnez $v0 player_move_landed # landed
 
+    # check collision with door
+    jal complete
+    bnez $v0 terminate
+
     li $s5 0 # not landed
     move $s0 $t0 # update player position
     move $s1 $t1
@@ -169,8 +173,8 @@ player_move: # move towards (a0, a1)
     add $v0 $v0 BASE_ADDRESS
     add $v0 $v0 $s0
 
-    jal draw_player # draw player at new position
-    j player_move_end
+    la $ra player_move_end
+    j draw_player # draw player at new position
 
     player_move_landed: # player not moved
         # consider landed if Δs == gravity
@@ -182,31 +186,47 @@ player_move: # move towards (a0, a1)
     addi $sp $sp 4
     jr $ra # return
 
-# check collision with box (t0, t1, t2, t3) from stack to v0
+# check collision with box (t0, t1, t2, t3) to v0
 collision:
     li $v0 0
     la $t8 platforms # get platforms address to t8
     move $t9 $s7 # get end of platforms to t9
 
     collision_loop:
-        sub $t9 $t9 16 # decrement platform index
-        blt $t9 $t8 collision_end # no more platforms
-        lw $t4 0($t9)
-        lw $t5 4($t9)
-        lw $t6 8($t9)
-        lw $t7 12($t9) # get platform box (t4, t5, t6, t7)
+    sub $t9 $t9 16 # decrement platform index
+    blt $t9 $t8 collision_end # no more platforms
+    lw $t4 0($t9)
+    lw $t5 4($t9)
+    lw $t6 8($t9)
+    lw $t7 12($t9) # get platform box (t4, t5, t6, t7)
 
-        sle $v0 $t0 $t6  # ax1 <= bx2
-        slt $v1 $t4 $t2  # bx1 < ax2
-        and $v0 $v0 $v1
-        sle $v1 $t1 $t7  # ay1 <= by2
-        and $v0 $v0 $v1
-        slt $v1 $t5 $t3  # by1 < ay2
-        and $v0 $v0 $v1
-        beq $v0 0 collision_loop # no collision
-
-        # has collision
+    sle $v0 $t0 $t6  # ax1 <= bx2
+    slt $v1 $t4 $t2  # bx1 < ax2
+    and $v0 $v0 $v1
+    sle $v1 $t1 $t7  # ay1 <= by2
+    and $v0 $v0 $v1
+    slt $v1 $t5 $t3  # by1 < ay2
+    and $v0 $v0 $v1
+    beq $v0 0 collision_loop # no collision
+    # has collision
     collision_end:
+    jr $ra
+
+# check stage complete with box (t0, t1, t2, t3) to v0
+complete:
+    li $v0 0
+    la $t8 door # get platforms address to t8
+    lw $t4 0($t8)
+    lw $t5 4($t8)
+    lw $t6 8($t8)
+    lw $t7 12($t8) # get door box (t4, t5, t6, t7)
+    sle $v0 $t0 $t6  # ax1 <= bx2
+    slt $v1 $t4 $t2  # bx1 < ax2
+    and $v0 $v0 $v1
+    sle $v1 $t1 $t7  # ay1 <= by2
+    and $v0 $v0 $v1
+    slt $v1 $t5 $t3  # by1 < ay2
+    and $v0 $v0 $v1
     jr $ra
 
 # draw stage a0
