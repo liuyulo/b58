@@ -125,7 +125,8 @@ keypressed: # handle keypress in 4($a0)
     keypressed_spc:
     andi $t0 $s5 3 # take double jump, landed
     beqz $t0 keypressed_end # can't jump
-    addi $s6 $s6 JUMP_HEIGHT # jump
+    # addi $s6 $s6 JUMP_HEIGHT # jump
+    li $s6 JUMP_HEIGHT
     andi $s5 $s5 0xfffc # reset last 2 bits
 
     andi $t0 $t0 0x1 # take last bit
@@ -203,7 +204,7 @@ player_move: # move towards (a0, a1)
     j draw_player # draw player at new position
 
     player_move_landed: # player not moved
-    andi $s5 $s5 0xfffe # not landed
+        andi $s5 $s5 0xfffe # not landed
         # reset jump distance if move towards top and bonk heaad
         add $t0 $a0 $s2
         add $t1 $a1 $s3
