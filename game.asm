@@ -4,8 +4,8 @@
 # s2 gravity x
 # s3 gravity y
 # s4 orientation (positive or negative)
-# s5 landed
-# s6 jump distance left
+# s5 flag: double_jump landed
+# s6 jump distance remaining
 # s7 end of platform array
 
 # NOTE: 1 pixel === 4 bytes
@@ -18,7 +18,7 @@
 .eqv BACKGROUND     $0          # black
 .eqv PLAYER_INIT    32          # initial position
 .eqv PLATFORMS      5           # number of platforms
-.eqv JUMP_HEIGHT    128         # in bytes
+.eqv JUMP_HEIGHT    96         # in bytes
 .eqv STAGE_COUNT    2           # number of stages
 
 .data
@@ -54,9 +54,9 @@ init:
     li $s0 PLAYER_INIT # player x
     li $s1 PLAYER_INIT # player y
     li $s4 1 # face east
-    addi $s5 $s5 0xfffe # not landed
+    li $s5 2 # not landad, allow double jump
 
-    li $s6 0 # jump distance left
+    li $s6 0 # jump distance remaining
     la $s7 platforms
     li $t0 PLATFORMS
     sll $t0 $t0 4
@@ -86,6 +86,7 @@ main:
         neg $a1 $a1
         abs $t0 $s2 # get absolute value of jump distance
         sub $s6 $s6 $t0 # update jump distance, assume s2 == 0 or s3 == 0
+
         abs $t0 $s3
         sub $s6 $s6 $t0
     gravity_end:
@@ -114,9 +115,14 @@ keypressed: # handle keypress in 4($a0)
     beq $t0 0x64 keypressed_d
 
     keypressed_spc:
-    andi $t0 $s5 0x1
-    beqz $t0 keypressed_end # not landed
-    li $s6 JUMP_HEIGHT # jump
+    andi $t0 $s5 3 # take double jump, landed
+    beqz $t0 keypressed_end # can't jump
+    addi $s6 $s6 JUMP_HEIGHT # jump
+    andi $s5 $s5 0xfffc # reset last 2 bits
+
+    andi $t0 $t0 0x1 # take last bit
+    sll $t0 $t0 1 # shift left
+    or $s5 $s5 $t0 # double jump iff not landed
     j keypressed_end
 
     la $ra keypressed_end
@@ -189,6 +195,14 @@ player_move: # move towards (a0, a1)
     j draw_player # draw player at new position
 
     player_move_landed: # player not moved
+    andi $s5 $s5 0xfffe # not landed
+        # reset jump distance if move towards top and bonk heaad
+        add $t0 $a0 $s2
+        add $t1 $a1 $s3
+        bnez $t0 player_reset_jump_end
+        bnez $t1 player_reset_jump_end
+        li $s6 0 # reset jump distance
+        player_reset_jump_end:
         # consider landed if Δs == gravity
         bne $a0 $s2 player_move_end
         bne $a1 $s3 player_move_end
