@@ -1,2 +1,8 @@
 venv
-*.jar # MARS binary
+# project handout
+*.pdf
+# MARS binary
+*.jar
+# images
+*.jpg
+*.png
