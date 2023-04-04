@@ -225,11 +225,17 @@ player_move: # move towards (a0, a1)
     sll $v0 $v0 2
     or $s5 $s5 $v0 # update doll collected
     beq $v0 0 player_move_update # no doll collected
-    # clear doll
+    # doll collected
     lw $v0 doll_address
     jal clear_doll
     lw $v0 door_address
     jal draw_door
+    # if stage 2
+    lw $t4 stage
+    bne $t4 4 player_move_update
+    # stage 2
+    li $s2 0 # reset gravity
+    li $s3 4
     j player_move_update
 
     player_move_door:
