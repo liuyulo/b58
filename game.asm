@@ -25,6 +25,7 @@
 pad: .space 36000
 door: .word 480 400 508 476
 doll: .word 48 448 92 492
+doll_address: .word 0 # address of doll
 # inclusive bounding boxes (x1, y1, x2, y2), each bbox is 16 bytes
 platforms: .word 0 96 124 108 208 400 300 412 0 496 124 508 400 496 508 508 0 0 172 12 16 176 28 236
 # address to end of platforms per stage
@@ -33,12 +34,22 @@ platforms_end: .word 64 96
 stage: .word 0
 # stage gravity (Δx, Δy) for each stage
 stage_gravity: .word 0 4 0 -4
+
 .text
+# set address of doll
+la $t2 doll
+lw $t0 0($t2)
+lw $t1 4($t2)
+sll $t1 $t1 WIDTH_SHIFT
+li $t2 BASE_ADDRESS
+add $t2 $t2 $t0
+add $t2 $t2 $t1
+sw $t2 doll_address
 
 init:
     # if all stage completed
-    lw $t2 stage
-    bge $t2 STAGE_COUNT terminate
+    lw $t0 stage
+    bge $t0 STAGE_COUNT terminate
 
     # new gravity
     sll $t0 $t0 1 # convert to byte offset for stage_gravity
@@ -64,6 +75,7 @@ init:
     add $v0 $v0 BASE_ADDRESS
     add $v0 $v0 $s0
     jal draw_player
+    jal draw_doll_0
     jal draw_stage
 
 .globl main
@@ -166,13 +178,25 @@ player_move: # move towards (a0, a1)
     movn $s4 $a1 $s2 # if gravity is horizontal, set to Δy
     movz $s4 $t2 $s4 # restore orientation
 
-    # check in bounds
-    bltz $t0 player_move_landed
-    bltz $t1 player_move_landed
-    add $t2 $t0 PLAYER_SIZE
-    bgt $t2 SIZE player_move_landed
-    add $t3 $t1 PLAYER_SIZE
-    bgt $t3 SIZE player_move_landed
+    # check on screen
+    bgez $t0 on_screen_1
+    bltz $s2 init # fell off screen
+    j player_move_landed
+    on_screen_1:
+        bgez $t1 on_screen_2
+        bltz $s3 init # fell off screen
+        j player_move_landed
+    on_screen_2:
+        add $t2 $t0 PLAYER_SIZE
+        ble $t2 SIZE on_screen_3
+        bgtz $s2 init # fell off screen
+        j player_move_landed
+    on_screen_3:
+        add $t3 $t1 PLAYER_SIZE
+        ble $t3 SIZE on_screen_end
+        bgtz $s3 init # fell off screen
+        j player_move_landed
+    on_screen_end:
 
     # check collision with platforms, player box is (t0, t1, t2, t3)
     la $t9 platforms # t9 = address to platforms
@@ -196,6 +220,8 @@ player_move: # move towards (a0, a1)
     jal collision
     sll $v0 $v0 2
     or $s5 $s5 $v0 # update doll collected
+    beq $v0 0 player_move_update # no doll collected
+    jal clear_doll # clear doll
     j player_move_update
 
     player_move_door:
@@ -256,7 +282,6 @@ next_stage:
     addi $t0 $t0 4
     sw $t0 stage
     j init
-
 # draw current stage
 draw_stage:
     lw $t9 stage
@@ -978,6 +1003,375 @@ draw_stage:
 
     draw_stage_end:
     jr $ra # return
+clear_doll:
+    lw $t4 doll_address
+    sw BACKGROUND 0($t4)
+    sw BACKGROUND 4($t4)
+    sw BACKGROUND 8($t4)
+    sw BACKGROUND 12($t4)
+    sw BACKGROUND 16($t4)
+    sw BACKGROUND 20($t4)
+    sw BACKGROUND 24($t4)
+    sw BACKGROUND 28($t4)
+    sw BACKGROUND 32($t4)
+    sw BACKGROUND 36($t4)
+    sw BACKGROUND 512($t4)
+    sw BACKGROUND 516($t4)
+    sw BACKGROUND 520($t4)
+    sw BACKGROUND 524($t4)
+    sw BACKGROUND 528($t4)
+    sw BACKGROUND 532($t4)
+    sw BACKGROUND 536($t4)
+    sw BACKGROUND 540($t4)
+    sw BACKGROUND 544($t4)
+    sw BACKGROUND 548($t4)
+    sw BACKGROUND 1024($t4)
+    sw BACKGROUND 1028($t4)
+    sw BACKGROUND 1032($t4)
+    sw BACKGROUND 1036($t4)
+    sw BACKGROUND 1040($t4)
+    sw BACKGROUND 1044($t4)
+    sw BACKGROUND 1048($t4)
+    sw BACKGROUND 1052($t4)
+    sw BACKGROUND 1056($t4)
+    sw BACKGROUND 1060($t4)
+    sw BACKGROUND 1536($t4)
+    sw BACKGROUND 1540($t4)
+    sw BACKGROUND 1544($t4)
+    sw BACKGROUND 1548($t4)
+    sw BACKGROUND 1552($t4)
+    sw BACKGROUND 1556($t4)
+    sw BACKGROUND 1560($t4)
+    sw BACKGROUND 1564($t4)
+    sw BACKGROUND 1568($t4)
+    sw BACKGROUND 1572($t4)
+    sw BACKGROUND 2048($t4)
+    sw BACKGROUND 2052($t4)
+    sw BACKGROUND 2056($t4)
+    sw BACKGROUND 2060($t4)
+    sw BACKGROUND 2064($t4)
+    sw BACKGROUND 2068($t4)
+    sw BACKGROUND 2072($t4)
+    sw BACKGROUND 2076($t4)
+    sw BACKGROUND 2080($t4)
+    sw BACKGROUND 2084($t4)
+    sw BACKGROUND 2560($t4)
+    sw BACKGROUND 2564($t4)
+    sw BACKGROUND 2568($t4)
+    sw BACKGROUND 2572($t4)
+    sw BACKGROUND 2576($t4)
+    sw BACKGROUND 2580($t4)
+    sw BACKGROUND 2584($t4)
+    sw BACKGROUND 2588($t4)
+    sw BACKGROUND 2592($t4)
+    sw BACKGROUND 2596($t4)
+    sw BACKGROUND 3072($t4)
+    sw BACKGROUND 3076($t4)
+    sw BACKGROUND 3080($t4)
+    sw BACKGROUND 3084($t4)
+    sw BACKGROUND 3088($t4)
+    sw BACKGROUND 3092($t4)
+    sw BACKGROUND 3096($t4)
+    sw BACKGROUND 3100($t4)
+    sw BACKGROUND 3104($t4)
+    sw BACKGROUND 3108($t4)
+    sw BACKGROUND 3584($t4)
+    sw BACKGROUND 3588($t4)
+    sw BACKGROUND 3592($t4)
+    sw BACKGROUND 3596($t4)
+    sw BACKGROUND 3600($t4)
+    sw BACKGROUND 3604($t4)
+    sw BACKGROUND 3608($t4)
+    sw BACKGROUND 3612($t4)
+    sw BACKGROUND 3616($t4)
+    sw BACKGROUND 3620($t4)
+    sw BACKGROUND 4096($t4)
+    sw BACKGROUND 4100($t4)
+    sw BACKGROUND 4104($t4)
+    sw BACKGROUND 4108($t4)
+    sw BACKGROUND 4112($t4)
+    sw BACKGROUND 4116($t4)
+    sw BACKGROUND 4120($t4)
+    sw BACKGROUND 4124($t4)
+    sw BACKGROUND 4128($t4)
+    sw BACKGROUND 4132($t4)
+    sw BACKGROUND 4608($t4)
+    sw BACKGROUND 4612($t4)
+    sw BACKGROUND 4616($t4)
+    sw BACKGROUND 4620($t4)
+    sw BACKGROUND 4624($t4)
+    sw BACKGROUND 4628($t4)
+    sw BACKGROUND 4632($t4)
+    sw BACKGROUND 4636($t4)
+    sw BACKGROUND 4640($t4)
+    sw BACKGROUND 4644($t4)
+    sw BACKGROUND 5120($t4)
+    sw BACKGROUND 5124($t4)
+    sw BACKGROUND 5128($t4)
+    sw BACKGROUND 5132($t4)
+    sw BACKGROUND 5136($t4)
+    sw BACKGROUND 5140($t4)
+    sw BACKGROUND 5144($t4)
+    sw BACKGROUND 5148($t4)
+    sw BACKGROUND 5152($t4)
+    sw BACKGROUND 5156($t4)
+    sw BACKGROUND 5632($t4)
+    sw BACKGROUND 5636($t4)
+    sw BACKGROUND 5640($t4)
+    sw BACKGROUND 5644($t4)
+    sw BACKGROUND 5648($t4)
+    sw BACKGROUND 5652($t4)
+    sw BACKGROUND 5656($t4)
+    sw BACKGROUND 5660($t4)
+    sw BACKGROUND 5664($t4)
+    sw BACKGROUND 5668($t4)
+    jr $ra
+
+
+draw_doll_0:
+    lw $t4 doll_address
+    li $t5 0x000000
+    sw $t5 0($t4)
+    li $t5 0x000000
+    sw $t5 4($t4)
+    li $t5 0x000000
+    sw $t5 8($t4)
+    li $t5 0x000000
+    sw $t5 12($t4)
+    li $t5 0x000000
+    sw $t5 16($t4)
+    li $t5 0x000000
+    sw $t5 20($t4)
+    li $t5 0x000000
+    sw $t5 24($t4)
+    li $t5 0x000000
+    sw $t5 28($t4)
+    li $t5 0x000000
+    sw $t5 32($t4)
+    li $t5 0x000000
+    sw $t5 36($t4)
+    li $t5 0x000000
+    sw $t5 512($t4)
+    li $t5 0x000000
+    sw $t5 516($t4)
+    li $t5 0x000000
+    sw $t5 520($t4)
+    li $t5 0x000000
+    sw $t5 524($t4)
+    li $t5 0x000000
+    sw $t5 528($t4)
+    li $t5 0x000000
+    sw $t5 532($t4)
+    li $t5 0x000000
+    sw $t5 536($t4)
+    li $t5 0x000000
+    sw $t5 540($t4)
+    li $t5 0x000000
+    sw $t5 544($t4)
+    li $t5 0x000000
+    sw $t5 548($t4)
+    li $t5 0x000000
+    sw $t5 1024($t4)
+    li $t5 0x000000
+    sw $t5 1028($t4)
+    li $t5 0x000000
+    sw $t5 1032($t4)
+    li $t5 0xda7141
+    sw $t5 1036($t4)
+    li $t5 0xda7141
+    sw $t5 1040($t4)
+    li $t5 0xda7141
+    sw $t5 1044($t4)
+    li $t5 0x000000
+    sw $t5 1048($t4)
+    li $t5 0x000000
+    sw $t5 1052($t4)
+    li $t5 0x000000
+    sw $t5 1056($t4)
+    li $t5 0x000000
+    sw $t5 1060($t4)
+    li $t5 0x000000
+    sw $t5 1536($t4)
+    li $t5 0x000000
+    sw $t5 1540($t4)
+    li $t5 0xda7141
+    sw $t5 1544($t4)
+    li $t5 0xfaff53
+    sw $t5 1548($t4)
+    li $t5 0x91003b
+    sw $t5 1552($t4)
+    li $t5 0x91003b
+    sw $t5 1556($t4)
+    li $t5 0xfaa753
+    sw $t5 1560($t4)
+    li $t5 0x000000
+    sw $t5 1564($t4)
+    li $t5 0x000000
+    sw $t5 1568($t4)
+    li $t5 0x000000
+    sw $t5 1572($t4)
+    li $t5 0xa0a0a0
+    sw $t5 2048($t4)
+    li $t5 0xa0a0a0
+    sw $t5 2052($t4)
+    li $t5 0xda7141
+    sw $t5 2056($t4)
+    li $t5 0x91003b
+    sw $t5 2060($t4)
+    li $t5 0x2b1408
+    sw $t5 2064($t4)
+    li $t5 0xffaa73
+    sw $t5 2068($t4)
+    li $t5 0x91003b
+    sw $t5 2072($t4)
+    li $t5 0xa0a0a0
+    sw $t5 2076($t4)
+    li $t5 0x000000
+    sw $t5 2080($t4)
+    li $t5 0x000000
+    sw $t5 2084($t4)
+    li $t5 0xa0a0a0
+    sw $t5 2560($t4)
+    li $t5 0xeeeeee
+    sw $t5 2564($t4)
+    li $t5 0x91003b
+    sw $t5 2568($t4)
+    li $t5 0xbd6455
+    sw $t5 2572($t4)
+    li $t5 0xd1003f
+    sw $t5 2576($t4)
+    li $t5 0xfde3b2
+    sw $t5 2580($t4)
+    li $t5 0x91003b
+    sw $t5 2584($t4)
+    li $t5 0x000000
+    sw $t5 2588($t4)
+    li $t5 0x000000
+    sw $t5 2592($t4)
+    li $t5 0x000000
+    sw $t5 2596($t4)
+    li $t5 0x000000
+    sw $t5 3072($t4)
+    li $t5 0xeeeeee
+    sw $t5 3076($t4)
+    li $t5 0x91003b
+    sw $t5 3080($t4)
+    li $t5 0xeeeeee
+    sw $t5 3084($t4)
+    li $t5 0x5e5e5e
+    sw $t5 3088($t4)
+    li $t5 0xeeeeee
+    sw $t5 3092($t4)
+    li $t5 0x91003b
+    sw $t5 3096($t4)
+    li $t5 0x000000
+    sw $t5 3100($t4)
+    li $t5 0x000000
+    sw $t5 3104($t4)
+    li $t5 0x000000
+    sw $t5 3108($t4)
+    li $t5 0x000000
+    sw $t5 3584($t4)
+    li $t5 0x000000
+    sw $t5 3588($t4)
+    li $t5 0xd1003f
+    sw $t5 3592($t4)
+    li $t5 0x1b1b1b
+    sw $t5 3596($t4)
+    li $t5 0x4d0027
+    sw $t5 3600($t4)
+    li $t5 0x4d0027
+    sw $t5 3604($t4)
+    li $t5 0x880033
+    sw $t5 3608($t4)
+    li $t5 0x000000
+    sw $t5 3612($t4)
+    li $t5 0x000000
+    sw $t5 3616($t4)
+    li $t5 0x000000
+    sw $t5 3620($t4)
+    li $t5 0x000000
+    sw $t5 4096($t4)
+    li $t5 0x000000
+    sw $t5 4100($t4)
+    li $t5 0x91003b
+    sw $t5 4104($t4)
+    li $t5 0x880033
+    sw $t5 4108($t4)
+    li $t5 0x5e5e5e
+    sw $t5 4112($t4)
+    li $t5 0x5e5e5e
+    sw $t5 4116($t4)
+    li $t5 0x91003b
+    sw $t5 4120($t4)
+    li $t5 0x000000
+    sw $t5 4124($t4)
+    li $t5 0x000000
+    sw $t5 4128($t4)
+    li $t5 0x000000
+    sw $t5 4132($t4)
+    li $t5 0x000000
+    sw $t5 4608($t4)
+    li $t5 0x000000
+    sw $t5 4612($t4)
+    li $t5 0x880033
+    sw $t5 4616($t4)
+    li $t5 0x880033
+    sw $t5 4620($t4)
+    li $t5 0xeeeeee
+    sw $t5 4624($t4)
+    li $t5 0xeeeeee
+    sw $t5 4628($t4)
+    li $t5 0x000000
+    sw $t5 4632($t4)
+    li $t5 0x000000
+    sw $t5 4636($t4)
+    li $t5 0x000000
+    sw $t5 4640($t4)
+    li $t5 0x000000
+    sw $t5 4644($t4)
+    li $t5 0x000000
+    sw $t5 5120($t4)
+    li $t5 0x000000
+    sw $t5 5124($t4)
+    li $t5 0x1b1b1b
+    sw $t5 5128($t4)
+    li $t5 0x880033
+    sw $t5 5132($t4)
+    li $t5 0xd1003f
+    sw $t5 5136($t4)
+    li $t5 0xd1003f
+    sw $t5 5140($t4)
+    li $t5 0x000000
+    sw $t5 5144($t4)
+    li $t5 0x000000
+    sw $t5 5148($t4)
+    li $t5 0x000000
+    sw $t5 5152($t4)
+    li $t5 0x000000
+    sw $t5 5156($t4)
+    li $t5 0x000000
+    sw $t5 5632($t4)
+    li $t5 0x000000
+    sw $t5 5636($t4)
+    li $t5 0x000000
+    sw $t5 5640($t4)
+    li $t5 0x2b1408
+    sw $t5 5644($t4)
+    li $t5 0x2b1408
+    sw $t5 5648($t4)
+    li $t5 0x000000
+    sw $t5 5652($t4)
+    li $t5 0x000000
+    sw $t5 5656($t4)
+    li $t5 0x000000
+    sw $t5 5660($t4)
+    li $t5 0x000000
+    sw $t5 5664($t4)
+    li $t5 0x000000
+    sw $t5 5668($t4)
+    jr $ra
+
 # draw alice at v0 with orientation and gravity
 # (Δx, Δy) in (a0, a1)
 # previous position in a2
