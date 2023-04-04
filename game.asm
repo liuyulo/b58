@@ -33,7 +33,7 @@ platforms_end: .word 64 96 144 160 192
 # stage counter * 4
 stage: .word 0
 # stage gravity (Δx, Δy) for each stage
-stage_gravity: .word 0 4 0 -4 -4 0 4 0 4 0
+stage_gravity: .half 0 4 0 -4 -4 0 4 0 4 0
 
 .text
 # set address of doll
@@ -52,10 +52,9 @@ init:
     bge $t0 STAGE_COUNT terminate
 
     # new gravity
-    sll $t0 $t0 1 # convert to byte offset for stage_gravity
-    lw $s2 stage_gravity($t0) # gravity x
-    addi $t0 $t0 4
-    lw $s3 stage_gravity($t0) # gravity y
+    lh $s2 stage_gravity($t0) # gravity x
+    addi $t0 $t0 2
+    lh $s3 stage_gravity($t0) # gravity y
 
     li $t0 BASE_ADDRESS
     li $t1 0x10018000
