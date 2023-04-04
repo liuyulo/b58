@@ -47,8 +47,6 @@ jal save_address
 
 
 init:
-    li $a0 0
-    li $a1 0
     # if all stage completed
     lw $t0 stage
     bge $t0 STAGE_COUNT terminate
@@ -76,9 +74,9 @@ init:
     sll $v0 $s1 WIDTH_SHIFT  # get current position to v0
     add $v0 $v0 BASE_ADDRESS
     add $v0 $v0 $s0
-    jal draw_player
-    lw $v0 doll_address
-    jal draw_doll_0
+    li $a0 0
+    li $a1 0
+    jal player_move
     jal draw_stage
 
 .globl main
@@ -218,6 +216,9 @@ player_move: # move towards (a0, a1)
 
     andi $t4 $s5 4 # check door_unlocked
     bnez $t4 player_move_door # door unlocked
+    lw $v0 doll_address
+    jal draw_doll_0
+
     # check collision with collectibles
     la $t8 doll
     jal collision
