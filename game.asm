@@ -56,7 +56,7 @@ init:
     li $s0 PLAYER_INIT # player x
     li $s1 PLAYER_INIT # player y
     li $s4 1 # face east
-    li $s5 2 # not landed, allow double jump
+    li $s5 2 # door locked, not landed, can double jump
 
     li $s6 0 # jump distance remaining
 
@@ -174,8 +174,7 @@ player_move: # move towards (a0, a1)
     add $t3 $t1 PLAYER_SIZE
     bgt $t3 SIZE player_move_landed
 
-    # check collision, player box is (t0, t1, t2, t3)
-    li $v0 0
+    # check collision with platforms, player box is (t0, t1, t2, t3)
     la $t9 platforms # t9 = address to platforms
     # get end of platforms to t9
     lw $t8 stage # get stage number
@@ -190,11 +189,22 @@ player_move: # move towards (a0, a1)
     collision_end:
     bnez $v0 player_move_landed # landed
 
+    andi $t4 $s5 4 # check door_unlocked
+    bnez $t4 player_move_door # door unlocked
+    # check collision with collectibles
+    la $t8 doll
+    jal collision
+    sll $v0 $v0 2
+    or $s5 $s5 $v0 # update doll collected
+    j player_move_update
+
+    player_move_door:
     # check collision with door
-    la $t8 door # get platforms address to t8
+    la $t8 door
     jal collision
     bnez $v0 next_stage
 
+    player_move_update:
     andi $s5 $s5 0xfffe # not landed
     move $s0 $t0 # update player position
     move $s1 $t1
