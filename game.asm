@@ -3,9 +3,9 @@
 # s2 gravity x
 # s3 gravity y
 # s4 orientation (positive or negative)
-# s5 flag: double_jump landed
+# s5 flag: door_unlocked double_jump landed
 # s6 jump distance remaining
-# s7 end of platform array
+# s7 time
 
 # NOTE: 1 pixel === 4 bytes
 .eqv BASE_ADDRESS   0x10008000  # ($gp)
@@ -17,21 +17,22 @@
 .eqv BACKGROUND     $0          # black
 .eqv PLAYER_INIT    32          # initial position
 .eqv PLATFORMS      5           # number of platforms
-.eqv JUMP_HEIGHT    96         # in bytes
-.eqv STAGE_COUNT    2           # number of stages
+.eqv JUMP_HEIGHT    96          # in bytes
+.eqv STAGE_COUNT    8           # size of platforms_end
 
 .data
 # space padding to support 128x128 resolution
-padding: .space 36000
-# bounding boxes (x1, y1, x2, y2) inclusive for collisions, each box is 16 bytes
-platforms: .word 0 96 124 108 208 400 300 412 0 496 124 508 400 496 508 508 0 0 172 12 16 176 28 236
-# number of platforms per stage
-nplat: .word 4 6
+pad: .space 36000
 door: .word 480 400 508 476
+doll: .word 48 448 92 492
+# inclusive bounding boxes (x1, y1, x2, y2), each bbox is 16 bytes
+platforms: .word 0 96 124 108 208 400 300 412 0 496 124 508 400 496 508 508 0 0 172 12 16 176 28 236
+# address to end of platforms per stage
+platforms_end: .word 64 96
+# stage counter * 4
+stage: .word 0
 # stage gravity (Δx, Δy) for each stage
 stage_gravity: .word 0 4 0 -4
-# stage counter
-stage: .word 0
 .text
 
 init:
@@ -40,7 +41,7 @@ init:
     bge $t2 STAGE_COUNT terminate
 
     # new gravity
-    sll $t0 $t0 3 # convert to bytes
+    sll $t0 $t0 1 # convert to byte offset for stage_gravity
     lw $s2 stage_gravity($t0) # gravity x
     addi $t0 $t0 4
     lw $s3 stage_gravity($t0) # gravity y
@@ -58,17 +59,6 @@ init:
     li $s5 2 # not landed, allow double jump
 
     li $s6 0 # jump distance remaining
-    # get end of platforms
-    sll $t2 $t2 2 # stage index in bytes
-    lw $t2 nplat($t2) # get number of platforms in word
-    sll $t2 $t2 4 # convert to for of 16 bytes
-    la $s7 platforms
-    add $s7 $s7 $t2 # end of platforms
-
-    # la $t0 nplat
-    # li $t0 PLATFORMS
-    # sll $t0 $t0 4
-    # add $s7 $s7 $t0  # end of platforms
 
     sll $v0 $s1 WIDTH_SHIFT  # get current position to v0
     add $v0 $v0 BASE_ADDRESS
@@ -83,8 +73,6 @@ main:
     la $ra gravity
     beq $t0 1 keypressed # handle keypress
 
-    andi $t0 $s5 0x1
-    bnez $t0 refresh # skip gravity if landed
     gravity:
     # j refresh # disable gravity
     move $a0 $s2 # update player position
@@ -101,6 +89,7 @@ main:
     jal player_move
 
     refresh:
+    addi $s7 $s7 1 # increment time
     li $a0 REFRESH_RATE # sleep
     li $v0 32
     syscall
@@ -224,8 +213,11 @@ player_move: # move towards (a0, a1)
 # check collision with box (t0, t1, t2, t3) to v0
 collision:
     li $v0 0
-    la $t8 platforms # get platforms address to t8
-    move $t9 $s7 # get end of platforms to t9
+    la $t8 platforms # t8 = address to platforms
+    # get end of platforms to t9
+    lw $t9 stage # get stage number
+    lw $t9 platforms_end($t9) # number of platforms * 16 bytes
+    add $t9 $t9 $t8 # t9 = address to end of platforms
 
     collision_loop:
     sub $t9 $t9 16 # decrement platform index
@@ -267,7 +259,7 @@ complete:
 # prepare for next stage, then goto init
 next_stage:
     lw $t0 stage
-    addi $t0 $t0 1
+    addi $t0 $t0 4
     sw $t0 stage
     j init
 draw_stage:
