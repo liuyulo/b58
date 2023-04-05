@@ -32,16 +32,22 @@
     208 112 220 316
     224 448 236 508   304 288 316 412
     # address to end of platforms per stage
-    platforms_end: .word 64 96 144 160 192
-    doll: .word 48 448 92 492 # bbox
-    doll_address: .word 0 # address on screen
-    dolls: .word 0:22 # animation frames
-    door: .word 464 400 508 492 # bbox
-    door_address: .word 0 # address on screen
-    alice: .word 0:6 # alice frames
-    stage: .word 0 # stage counter * 4
+    platforms_end:  .word 64 96 144 160 192
+    doll:           .word 48 448 92 492 # bbox
+    doll_address:   .word 0 # address on screen
+    dolls: .word draw_doll_00 draw_doll_01
+        draw_doll_02 draw_doll_03 draw_doll_04 draw_doll_05
+        draw_doll_06 draw_doll_07 draw_doll_08 draw_doll_09
+        draw_doll_10 draw_doll_11 draw_doll_12 draw_doll_13
+        draw_doll_14 draw_doll_15 draw_doll_16 draw_doll_17
+        draw_doll_18 draw_doll_19 draw_doll_20 draw_doll_21
+    door:           .word 464 400 508 492 # bbox
+    door_address:   .word 0 # address on screen
+    alice: .word draw_alice_00 draw_alice_01 draw_alice_02
+        draw_alice_03 draw_alice_04 draw_alice_05
+    stage:          .word 0 # stage counter * 4
     # stage gravity (Δx, Δy) for each stage
-    stage_gravity: .half 0 4 0 -4 -4 0 4 0 4 0
+    stage_gravity:  .half 0 4 0 -4 -4 0 4 0 4 0
 
 # .macro
     .macro flatten(%x, %y, %out) # flatten 2d coordinates to 1d
@@ -81,71 +87,8 @@
         and $v0 $v0 $v1
     .end_macro
 .text
-    # save address of doll
     save(doll, doll_address)
-    # save address of door
     save(door, door_address)
-    # save address of doll frames
-    la $t0 dolls
-    la $t1 draw_doll_00
-    sw $t1 0($t0)
-    la $t1 draw_doll_01
-    sw $t1 4($t0)
-    la $t1 draw_doll_02
-    sw $t1 8($t0)
-    la $t1 draw_doll_03
-    sw $t1 12($t0)
-    la $t1 draw_doll_04
-    sw $t1 16($t0)
-    la $t1 draw_doll_05
-    sw $t1 20($t0)
-    la $t1 draw_doll_06
-    sw $t1 24($t0)
-    la $t1 draw_doll_07
-    sw $t1 28($t0)
-    la $t1 draw_doll_08
-    sw $t1 32($t0)
-    la $t1 draw_doll_09
-    sw $t1 36($t0)
-    la $t1 draw_doll_10
-    sw $t1 40($t0)
-    la $t1 draw_doll_11
-    sw $t1 44($t0)
-    la $t1 draw_doll_12
-    sw $t1 48($t0)
-    la $t1 draw_doll_13
-    sw $t1 52($t0)
-    la $t1 draw_doll_14
-    sw $t1 56($t0)
-    la $t1 draw_doll_15
-    sw $t1 60($t0)
-    la $t1 draw_doll_16
-    sw $t1 64($t0)
-    la $t1 draw_doll_17
-    sw $t1 68($t0)
-    la $t1 draw_doll_18
-    sw $t1 72($t0)
-    la $t1 draw_doll_19
-    sw $t1 76($t0)
-    la $t1 draw_doll_20
-    sw $t1 80($t0)
-    la $t1 draw_doll_21
-    sw $t1 84($t0)
-    # save address of alice frames
-    la $t0 alice
-    la $t1 draw_alice_00
-    sw $t1 0($t0)
-    la $t1 draw_alice_01
-    sw $t1 4($t0)
-    la $t1 draw_alice_02
-    sw $t1 8($t0)
-    la $t1 draw_alice_03
-    sw $t1 12($t0)
-    la $t1 draw_alice_04
-    sw $t1 16($t0)
-    la $t1 draw_alice_05
-    sw $t1 20($t0)
-
 init:
     # if all stage completed
     lw $t0 stage
@@ -173,20 +116,19 @@ init:
     li $a1 0
     jal draw_alice
     jal draw_stage
-
 .globl main
 main:
     li $a0 0
     li $a1 0
     li $a2 0
     li $a3 0
-    jal keypress # handle keypress
+    jal keypress
     jal check_move
     jal gravity
     jal check_move
     jal player_move
 
-    # draw doll
+    # draw current doll frame
     andi $t4 $s5 4 # check door_unlocked
     bnez $t4 refresh # doll not on screen
     rem $t4 $s7 DOLLS_FRAME # current time mod
@@ -203,9 +145,7 @@ main:
     li $v0 32
     syscall
     j main
-
-# terminate the program gracefully
-terminate:
+terminate: # terminate the program gracefully
     li $v0 10
     syscall
 
@@ -241,7 +181,6 @@ keypress: # check keypress, return dx dy as a0 a1
     movement(4,0)
     keypress_end:
     jr $ra
-
 gravity:
     move $a2 $s2 # update player position
     move $a3 $s3
@@ -255,7 +194,6 @@ gravity:
     sub $s6 $s6 $t0
     gravity_end:
     jr $ra
-
 check_move: # possibly a0 += a2 and a1 += a3 but ensure no collision
     # get new coordinates
     add $t0 $s0 $a0
@@ -316,7 +254,6 @@ check_move: # possibly a0 += a2 and a1 += a3 but ensure no collision
         add $a0 $a0 $a2
         add $a1 $a1 $a3
         jr $ra
-
 player_move: # move towards (a0, a1)
     addi $sp $sp -4 # push ra to stack
     sw $ra 0($sp)
@@ -370,12 +307,12 @@ player_move: # move towards (a0, a1)
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
     jr $ra # return
+
 next_stage: # prepare for next stage, then goto init
     lw $t0 stage
     addi $t0 $t0 4
     sw $t0 stage
     j init
-
 stage_1: # stage 1 gimmick
     li $s2 0 # reset gravity
     li $s3 4
@@ -6711,7 +6648,6 @@ draw_alice: # start at v0 with Δx Δy in a0 a1, previous position in a2
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
     jr $ra # return
-
 draw_alice_00:
     sw BACKGROUND 0($v0) # store background (0, 0)
     add $v0 $v0 $t0 # shift x
