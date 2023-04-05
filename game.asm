@@ -45,7 +45,7 @@
     door_address:   .word 0 # address on screen
     alice: .word draw_alice_00 draw_alice_01 draw_alice_02
         draw_alice_03 draw_alice_04 draw_alice_05
-    stage:          .word 0 # stage counter * 4
+    stage:          .word 8 # stage counter * 4
     # stage gravity (Δx, Δy) for each stage
     stage_gravity:  .half 0 4 0 -4 -4 0 4 0 4 0
 
@@ -157,8 +157,11 @@ keypress: # check keypress, return dx dy as a0 a1
     beq $t0 0x20 keypress_spc
     # the rest are movements
     beq $t0 0x77 keypress_w
-    beq $t0 0x61 keypress_a
     beq $t0 0x73 keypress_s
+
+    # a or d pressed
+    bnez $s2 keypress_end # can't move top/bottom
+    beq $t0 0x61 keypress_a
     beq $t0 0x64 keypress_d
 
     keypress_spc:
@@ -172,11 +175,13 @@ keypress: # check keypress, return dx dy as a0 a1
         or $s5 $s5 $t0 # double jump iff not landed
         jr $ra
     keypress_w:
+    bnez $s3 keypress_end # can't move up
     movement(0,-4)
+    keypress_s:
+    bnez $s3 keypress_end # can't move up
+    movement(0,4)
     keypress_a:
     movement(-4,0)
-    keypress_s:
-    movement(0,4)
     keypress_d:
     movement(4,0)
     keypress_end:
