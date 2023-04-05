@@ -56,7 +56,7 @@ stage_gravity: .half 0 4 0 -4 -4 0 4 0 4 0
 .macro movement(%dx, %dy) # set a0 a1 and jump to player_move
     li $a0 %dx
     li $a1 %dy
-    j keypressed_end
+    jr $ra
 .end_macro
 .text
     # save address of doll
@@ -143,8 +143,9 @@ init:
 main:
     li $a0 0xffff0000 # check keypress
     lw $t0 0($a0)
-    jal keypressed # handle keypress
-    jal player_move
+    jal keypress # handle keypress
+    la $ra gravity
+    bnez $v0 player_move # move if movement
 
     gravity:
     # j refresh # disable gravity
@@ -184,47 +185,41 @@ terminate:
     li $v0 10
     syscall
 
-keypressed: # handle keypress in 4($a0)
-    addi $sp $sp -4 # push ra to stack
-    sw $ra 0($sp)
-
-    li $a0 0
-    li $a1 0
+keypress: # check keypress, return movement in v0
+    li $v0 0
     li $t1 0xffff0000 # check keypress
     lw $t0 0($t1)
-    beqz $t0 keypressed_end # handle keypress
+    beqz $t0 keypress_end # handle keypress
     lw $t0 4($t1)
-    beq $t0 0x20 keypressed_spc
-    beq $t0 0x77 keypressed_w
-    beq $t0 0x61 keypressed_a
-    beq $t0 0x73 keypressed_s
-    beq $t0 0x64 keypressed_d
+    beq $t0 0x20 keypress_spc
+    # the rest are movements
+    li $v0 1
+    beq $t0 0x77 keypress_w
+    beq $t0 0x61 keypress_a
+    beq $t0 0x73 keypress_s
+    beq $t0 0x64 keypress_d
 
-    keypressed_spc:
-    andi $t0 $s5 3 # take double jump, landed
-    beqz $t0 keypressed_end # can't jump
-    # addi $s6 $s6 JUMP_HEIGHT # jump
-    li $s6 JUMP_HEIGHT
-    andi $s5 $s5 0xfffc # reset last 2 bits
+    keypress_spc:
+        andi $t0 $s5 3 # take double jump, landed
+        beqz $t0 keypress_end # can't jump
+        # addi $s6 $s6 JUMP_HEIGHT # jump
+        li $s6 JUMP_HEIGHT
+        andi $s5 $s5 0xfffc # reset last 2 bits
 
-    andi $t0 $t0 0x1 # take last bit
-    sll $t0 $t0 1 # shift left
-    or $s5 $s5 $t0 # double jump iff not landed
-    j keypressed_end
-
-    la $ra keypressed_end
-    keypressed_w:
+        andi $t0 $t0 0x1 # take last bit
+        sll $t0 $t0 1 # shift left
+        or $s5 $s5 $t0 # double jump iff not landed
+        jr $ra
+    keypress_w:
     movement(0,-4)
-    keypressed_a:
+    keypress_a:
     movement(-4,0)
-    keypressed_s:
+    keypress_s:
     movement(0,4)
-    keypressed_d:
+    keypress_d:
     movement(4,0)
-    keypressed_end:
-    lw $ra 0($sp) # pop ra from stack
-    addi $sp $sp 4
-    jr $ra # return
+    keypress_end:
+    jr $ra
 
 player_move: # move towards (a0, a1)
     addi $sp $sp -4 # push ra to stack
