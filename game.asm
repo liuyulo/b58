@@ -37,15 +37,30 @@ stage: .word 0
 # stage gravity (Δx, Δy) for each stage
 stage_gravity: .half 0 4 0 -4 -4 0 4 0 4 0
 
+.macro flatten(%x, %y, %out) # flatten 2d coordinates to 1d
+    sll %out %y WIDTH_SHIFT # add y
+    add %out %out %x # add x
+    addi %out %out BASE_ADDRESS # add base
+.end_macro
+
+.macro save(%bbox, %addr) # save address on screen
+    la $t0 %bbox # load bbox
+    lw $t1 4($t0) # load y
+    lw $t0 0($t0) # load x
+    flatten($t0, $t1, $t2)
+    sw $t2 %addr # save to memory
+.end_macro
+
+.macro set_move(%dx, %dy) # set a0 a1 and jump to player_move
+    li $a0 %dx
+    li $a1 %dy
+    j player_move
+.end_macro
 .text
     # save address of doll
-    la $a0 doll
-    la $v0 doll_address
-    jal save_address
+    save(doll, doll_address)
     # save address of door
-    la $a0 door
-    la $v0 door_address
-    jal save_address
+    save(door, door_address)
     # save address of doll frames
     la $t0 dolls
     la $t1 draw_doll_00
@@ -98,7 +113,6 @@ init:
     # if all stage completed
     lw $t0 stage
     bge $t0 STAGE_COUNT terminate
-
     # new gravity
     lh $s2 stage_gravity($t0) # gravity x
     addi $t0 $t0 2
@@ -115,12 +129,9 @@ init:
     li $s1 PLAYER_INIT # player y
     li $s4 1 # face east
     li $s5 2 # door locked, not landed, can double jump
-
     li $s6 0 # jump distance remaining
-
-    sll $v0 $s1 WIDTH_SHIFT  # get current position to v0
-    add $v0 $v0 BASE_ADDRESS
-    add $v0 $v0 $s0
+    # get current position to v0
+    flatten($s0, $s1, $v0)
     li $a0 0
     li $a1 0
     jal player_move
@@ -198,37 +209,22 @@ keypressed: # handle keypress in 4($a0)
 
     la $ra keypressed_end
     keypressed_w:
-    li $a0 0
-    li $a1 -4
-    j player_move
-
+    set_move(0,-4)
     keypressed_a:
-    li $a0 -4
-    li $a1 0
-    j player_move
-
+    set_move(-4,0)
     keypressed_s:
-    li $a0 0
-    li $a1 4
-    j player_move
-
+    set_move(0,4)
     keypressed_d:
-    li $a0 4
-    li $a1 0
-    j player_move
-
+    set_move(4,0)
     keypressed_end:
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
     jr $ra # return
-
 player_move: # move towards (a0, a1)
     addi $sp $sp -4 # push ra to stack
     sw $ra 0($sp)
 
-    sll $a3 $s1 WIDTH_SHIFT # save previous position to a3
-    add $a3 $a3 BASE_ADDRESS
-    add $a3 $a3 $s0
+    flatten($s0, $s1, $a3)  # save previous position to a3
 
     add $t0 $s0 $a0 # get new coordinates
     add $t1 $s1 $a1
@@ -305,9 +301,7 @@ player_move: # move towards (a0, a1)
     andi $s5 $s5 0xfffe # not landed
     move $s0 $t0 # update player position
     move $s1 $t1
-    sll $v0 $s1 WIDTH_SHIFT # get current position to v0
-    add $v0 $v0 BASE_ADDRESS
-    add $v0 $v0 $s0
+    flatten($s0, $s1, $v0)
     la $ra player_move_end
     j draw_player # draw player at new position
 
@@ -352,15 +346,6 @@ next_stage: # prepare for next stage, then goto init
     sw $t0 stage
     j init
 
-save_address: # save address from $a0 to $v0
-    lw $t0 0($a0)
-    lw $t1 4($a0)
-    sll $t1 $t1 WIDTH_SHIFT
-    li $t2 BASE_ADDRESS
-    add $t2 $t2 $t0
-    add $t2 $t2 $t1
-    sw $t2 0($v0)
-    jr $ra
 stage_1: # stage 1 gimmick
     li $s2 0 # reset gravity
     li $s3 4
