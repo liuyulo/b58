@@ -143,21 +143,8 @@ init:
 main:
     li $a0 0xffff0000 # check keypress
     lw $t0 0($a0)
-    la $ra postkeypressed
+    la $ra gravity
     beq $t0 1 keypressed # handle keypress
-
-    postkeypressed:
-
-    # get draw doll
-    andi $t4 $s5 4 # check door_unlocked
-    bnez $t4 gravity # doll not on screen
-    rem $t4 $s7 DOLLS_FRAME # current time mod
-    sll $t4 $t4 2 # in words
-    la $t5 dolls
-    add $t5 $t5 $t4 # address to doll frame
-    lw $t5 0($t5) # get doll frame
-    lw $v0 doll_address
-    jalr $t5
 
     gravity:
     # j refresh # disable gravity
@@ -173,6 +160,17 @@ main:
         sub $s6 $s6 $t0
     gravity_end:
     jal player_move
+
+    # get draw doll
+    andi $t4 $s5 4 # check door_unlocked
+    bnez $t4 refresh # doll not on screen
+    rem $t4 $s7 DOLLS_FRAME # current time mod
+    sll $t4 $t4 2 # in words
+    la $t5 dolls
+    add $t5 $t5 $t4 # address to doll frame
+    lw $t5 0($t5) # get doll frame
+    lw $v0 doll_address
+    jalr $t5
 
     refresh:
     addi $s7 $s7 1 # increment time
