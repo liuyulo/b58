@@ -8,56 +8,57 @@
 # s7 time
 
 # NOTE: 1 pixel === 4 bytes
-.eqv BASE_ADDRESS   0x10008000  # ($gp)
-.eqv REFRESH_RATE   40          # in miliseconds
-.eqv SIZE           512         # screen width & height in bytes
-.eqv WIDTH_SHIFT    7           # 4 << WIDTH_SHIFT == SIZE
-.eqv PLAYER_SIZE    64          # in bytes
-.eqv PLAYER_END     60           # PLAYER_SIZE - 4 bytes
-.eqv BACKGROUND     $0          # black
-.eqv PLAYER_INIT    32          # initial position
-.eqv JUMP_HEIGHT    96          # in bytes
-.eqv STAGE_COUNT    20           # size of platforms_end
-.eqv DOLLS_FRAME    22           # number of frames for doll animation
-.eqv ALICE_FRAME    6          # number of frames for alice animation
+    .eqv BASE_ADDRESS   0x10008000  # ($gp)
+    .eqv REFRESH_RATE   40          # in miliseconds
+    .eqv SIZE           512         # screen width & height in bytes
+    .eqv WIDTH_SHIFT    7           # 4 << WIDTH_SHIFT == SIZE
+    .eqv PLAYER_SIZE    64          # in bytes
+    .eqv PLAYER_END     60           # PLAYER_SIZE - 4 bytes
+    .eqv BACKGROUND     $0          # black
+    .eqv PLAYER_INIT    32          # initial position
+    .eqv JUMP_HEIGHT    96          # in bytes
+    .eqv STAGE_COUNT    20           # size of platforms_end
+    .eqv DOLLS_FRAME    22           # number of frames for doll animation
+    .eqv ALICE_FRAME    6          # number of frames for alice animation
 
 .data
-# space padding to support 128x128 resolution
-pad: .space 36000
-# inclusive bounding boxes (x1, y1, x2, y2), each bbox is 16 bytes
-platforms: .word 0 96 124 108 208 400 300 412 0 496 124 508 400 496 508 508 0 0 172 12 16 176 28 236 16 32 28 76 0 432 12 492 224 416 236 444 208 112 220 316 224 448 236 508 304 288 316 412
-# address to end of platforms per stage
-platforms_end: .word 64 96 144 160 192
-doll: .word 48 448 92 492 # bbox
-doll_address: .word 0 # address on screen
-dolls: .word 0:22 # animation frames
-door: .word 464 400 508 492 # bbox
-door_address: .word 0 # address on screen
-alice: .word 0:6 # alice frames
-# stage counter * 4
-stage: .word 0
-# stage gravity (Δx, Δy) for each stage
-stage_gravity: .half 0 4 0 -4 -4 0 4 0 4 0
+    # space padding to support 128x128 resolution
+    pad: .space 36000
+    # inclusive bounding boxes (x1, y1, x2, y2), each bbox is 16 bytes
+    platforms: .word 0 96 124 108 208 400 300 412 0 496 124 508 400 496 508 508 0 0 172 12 16 176 28 236 16 32 28 76 0 432 12 492 224 416 236 444 208 112 220 316 224 448 236 508 304 288 316 412
+    # address to end of platforms per stage
+    platforms_end: .word 64 96 144 160 192
+    doll: .word 48 448 92 492 # bbox
+    doll_address: .word 0 # address on screen
+    dolls: .word 0:22 # animation frames
+    door: .word 464 400 508 492 # bbox
+    door_address: .word 0 # address on screen
+    alice: .word 0:6 # alice frames
+    # stage counter * 4
+    stage: .word 0
+    # stage gravity (Δx, Δy) for each stage
+    stage_gravity: .half 0 4 0 -4 -4 0 4 0 4 0
 
-.macro flatten(%x, %y, %out) # flatten 2d coordinates to 1d
-    sll %out %y WIDTH_SHIFT # add y
-    add %out %out %x # add x
-    addi %out %out BASE_ADDRESS # add base
-.end_macro
+# macros
+    .macro flatten(%x, %y, %out) # flatten 2d coordinates to 1d
+        sll %out %y WIDTH_SHIFT # add y
+        add %out %out %x # add x
+        addi %out %out BASE_ADDRESS # add base
+    .end_macro
 
-.macro save(%bbox, %addr) # save address on screen
-    la $t0 %bbox # load bbox
-    lw $t1 4($t0) # load y
-    lw $t0 0($t0) # load x
-    flatten($t0, $t1, $t2)
-    sw $t2 %addr # save to memory
-.end_macro
+    .macro save(%bbox, %addr) # save address on screen
+        la $t0 %bbox # load bbox
+        lw $t1 4($t0) # load y
+        lw $t0 0($t0) # load x
+        flatten($t0, $t1, $t2)
+        sw $t2 %addr # save to memory
+    .end_macro
 
-.macro movement(%dx, %dy) # set a0 a1 and jump to player_move
-    li $a0 %dx
-    li $a1 %dy
-    jr $ra
-.end_macro
+    .macro movement(%dx, %dy) # set a0 a1 and jump to player_move
+        li $a0 %dx
+        li $a1 %dy
+        jr $ra
+    .end_macro
 .text
     # save address of doll
     save(doll, doll_address)
@@ -141,8 +142,6 @@ init:
 
 .globl main
 main:
-    li $a0 0xffff0000 # check keypress
-    lw $t0 0($a0)
     jal keypress # handle keypress
     la $ra gravity
     bnez $v0 player_move # move if movement
@@ -276,11 +275,13 @@ player_move: # move towards (a0, a1)
         # reset jump distance if move towards top and bonk heaad
         add $t0 $a0 $s2
         add $t1 $a1 $s3
-        bnez $t0 player_reset_jump_end
-        bnez $t1 player_reset_jump_end
+        bnez $t0 player_bonk_end
+        bnez $t1 player_bonk_end
         li $s6 0 # reset jump distance
-        player_reset_jump_end:
+        player_bonk_end:
         # consider landed if Δs == gravity
+        li $a0 0
+        li $a1 0
         bne $a0 $s2 player_move_end
         bne $a1 $s3 player_move_end
         ori $s5 $s5 0x1 # landed
@@ -314,9 +315,9 @@ player_move: # move towards (a0, a1)
         andi $s5 $s5 0xfffe # not landed
         move $s0 $t0 # update player position
         move $s1 $t1
+    player_move_end:
         flatten($s0, $s1, $v0)
         jal draw_alice # draw player at new position
-    player_move_end:
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
     jr $ra # return
