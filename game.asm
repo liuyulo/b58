@@ -225,89 +225,54 @@ player_move: # move towards (a0, a1)
     addi $sp $sp -4 # push ra to stack
     sw $ra 0($sp)
 
-    flatten($s0, $s1, $a3)  # save previous position to a3
-
-    add $t0 $s0 $a0 # get new coordinates
-    add $t1 $s1 $a1
-
     # update orientation
-    move $t2 $s4 # backup orientation to t2
+    move $t0 $s4 # backup orientation to t8
     movn $s4 $a0 $s3 # if gravity is vertical, set to Δx
     movn $s4 $a1 $s2 # if gravity is horizontal, set to Δy
-    movz $s4 $t2 $s4 # restore orientation
+    movz $s4 $t0 $s4 # restore orientation
 
-    # check on screen
-    bgez $t0 on_screen_1
+    flatten($s0, $s1, $a3)  # save previous position to a3
+
+    # get new coordinates
+    add $t0 $s0 $a0
+    add $t1 $s1 $a1
+
+    # check on screen and get bbox t0 t1 t2 t3
+    li $v0 1
+    bgez $t0 player_bbox_1
     bltz $s2 init # fell off screen
-    j player_move_landed
-    on_screen_1:
-        bgez $t1 on_screen_2
+    j collision_end
+    player_bbox_1:
+        bgez $t1 player_bbox_2
         bltz $s3 init # fell off screen
-        j player_move_landed
-    on_screen_2:
+        j collision_end
+    player_bbox_2:
         add $t2 $t0 PLAYER_SIZE
-        ble $t2 SIZE on_screen_3
+        ble $t2 SIZE player_bbox_3
         bgtz $s2 init # fell off screen
-        j player_move_landed
-    on_screen_3:
+        j collision_end
+    player_bbox_3:
         add $t3 $t1 PLAYER_SIZE
-        ble $t3 SIZE on_screen_end
+        ble $t3 SIZE player_bbox_end
         bgtz $s3 init # fell off screen
-        j player_move_landed
-    on_screen_end:
+        j collision_end
+    player_bbox_end:
 
-    # check collision with platforms, player box is (t0, t1, t2, t3)
+    # check collision with platforms
     la $t9 platforms # t9 = address to platforms
-    # get end of platforms to t9
-    lw $t8 stage # get stage number
-    lw $t8 platforms_end($t8) # number of platforms * 16 bytes
-    add $t8 $t8 $t9 # t8 = address to end of platforms
-
+    # get end of platforms to t8
+    lw $t8 stage
+    lw $t8 platforms_end($t8)
+    add $t8 $t8 $t9
     collision_loop:
-    sub $t8 $t8 16 # decrement platform index
-    blt $t8 $t9 collision_end # no more platforms
-    jal collision
-    beq $v0 0 collision_loop # no collision
+        sub $t8 $t8 16 # decrement platform index
+        blt $t8 $t9 collision_end # no more platforms
+        jal collision
+        beq $v0 0 collision_loop # no collision
     collision_end:
-    bnez $v0 player_move_landed # landed
-
-    andi $t4 $s5 4 # check door_unlocked
-    bnez $t4 player_move_door # door unlocked
-
-    # check collision with collectibles
-    la $t8 doll
-    jal collision
-    sll $v0 $v0 2
-    or $s5 $s5 $v0 # update doll collected
-    beq $v0 0 player_move_update # no doll collected
-    # doll collected
-    lw $v0 doll_address
-    jal clear_doll
-    lw $v0 door_address
-    jal draw_door
-    lw $t4 stage
-
-    la $ra player_move_update
-    beq $t4 4 stage_1
-    beq $t4 12 stage_3
-    j player_move_update
-
-    player_move_door:
-    # check collision with door
-    la $t8 door
-    jal collision
-    bnez $v0 next_stage
-
-    player_move_update:
-    andi $s5 $s5 0xfffe # not landed
-    move $s0 $t0 # update player position
-    move $s1 $t1
-    flatten($s0, $s1, $v0)
-    la $ra player_move_end
-    j draw_alice # draw player at new position
-
-    player_move_landed: # player not moved
-        andi $s5 $s5 0xfffe # not landed
+        beqz $v0 player_moved
+        # player not moved
+        andi $s5 $s5 0xfffe # set not landed
         # reset jump distance if move towards top and bonk heaad
         add $t0 $a0 $s2
         add $t1 $a1 $s3
@@ -319,6 +284,38 @@ player_move: # move towards (a0, a1)
         bne $a0 $s2 player_move_end
         bne $a1 $s3 player_move_end
         ori $s5 $s5 0x1 # landed
+        j player_move_end
+
+    player_moved: # actual movement happened
+    andi $t4 $s5 4 # check door_unlocked
+    bnez $t4 player_move_door # door unlocked
+        # check collision with collectibles
+        la $t8 doll
+        jal collision
+        sll $v0 $v0 2
+        or $s5 $s5 $v0 # update collected
+        beq $v0 0 player_move_update # not collected
+            # collected
+            lw $v0 doll_address
+            jal clear_doll
+            lw $v0 door_address
+            jal draw_door
+            lw $t4 stage
+            # apply stage specific gimmicks
+            la $ra player_move_update
+            beq $t4 4 stage_1
+            beq $t4 12 stage_3
+            j player_move_update
+    player_move_door: # check collision with door
+        la $t8 door
+        jal collision
+        bnez $v0 next_stage
+    player_move_update:
+        andi $s5 $s5 0xfffe # not landed
+        move $s0 $t0 # update player position
+        move $s1 $t1
+        flatten($s0, $s1, $v0)
+        jal draw_alice # draw player at new position
     player_move_end:
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
