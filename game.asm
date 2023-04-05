@@ -55,9 +55,26 @@
     .end_macro
 
     .macro movement(%dx, %dy) # set a0 a1 and jump to player_move
-        li $a0 %dx
-        li $a1 %dy
+        li $a2 %dx
+        li $a3 %dy
         jr $ra
+    .end_macro
+
+    # check collision bbox with with bbox t0 t1 t2 t3 return at v0
+    .macro coll(%bbox)
+        # get platform box (t4, t5, t6, t7)
+        lw $t4 0(%bbox)
+        lw $t5 4(%bbox)
+        lw $t6 8(%bbox)
+        lw $t7 12(%bbox)
+
+        sle $v0 $t0 $t6  # ax1 <= bx2
+        slt $v1 $t4 $t2  # bx1 < ax2
+        and $v0 $v0 $v1
+        sle $v1 $t1 $t7  # ay1 <= by2
+        and $v0 $v0 $v1
+        slt $v1 $t5 $t3  # by1 < ay2
+        and $v0 $v0 $v1
     .end_macro
 .text
     # save address of doll
@@ -111,7 +128,6 @@
     la $t1 draw_doll_21
     sw $t1 84($t0)
 
-
 init:
     # if all stage completed
     lw $t0 stage
@@ -137,31 +153,22 @@ init:
     flatten($s0, $s1, $v0)
     li $a0 0
     li $a1 0
-    jal player_move
+    jal draw_alice
     jal draw_stage
 
 .globl main
 main:
+    li $a0 0
+    li $a1 0
+    li $a2 0
+    li $a3 0
     jal keypress # handle keypress
-    la $ra gravity
-    bnez $v0 player_move # move if movement
-
-    gravity:
-    # j refresh # disable gravity
-    move $a0 $s2 # update player position
-    move $a1 $s3
-    beq $s6 0 gravity_end
-        neg $a0 $a0 # reverse gravity
-        neg $a1 $a1
-        abs $t0 $s2 # get absolute value of jump distance
-        sub $s6 $s6 $t0 # update jump distance, assume s2 == 0 or s3 == 0
-
-        abs $t0 $s3
-        sub $s6 $s6 $t0
-    gravity_end:
+    jal check_move
+    jal gravity
+    jal check_move
     jal player_move
 
-    # get draw doll
+    # draw doll
     andi $t4 $s5 4 # check door_unlocked
     bnez $t4 refresh # doll not on screen
     rem $t4 $s7 DOLLS_FRAME # current time mod
@@ -184,15 +191,13 @@ terminate:
     li $v0 10
     syscall
 
-keypress: # check keypress, return movement in v0
-    li $v0 0
+keypress: # check keypress, return dx dy as a0 a1
     li $t1 0xffff0000 # check keypress
     lw $t0 0($t1)
     beqz $t0 keypress_end # handle keypress
     lw $t0 4($t1)
     beq $t0 0x20 keypress_spc
     # the rest are movements
-    li $v0 1
     beq $t0 0x77 keypress_w
     beq $t0 0x61 keypress_a
     beq $t0 0x73 keypress_s
@@ -201,7 +206,6 @@ keypress: # check keypress, return movement in v0
     keypress_spc:
         andi $t0 $s5 3 # take double jump, landed
         beqz $t0 keypress_end # can't jump
-        # addi $s6 $s6 JUMP_HEIGHT # jump
         li $s6 JUMP_HEIGHT
         andi $s5 $s5 0xfffc # reset last 2 bits
 
@@ -220,24 +224,29 @@ keypress: # check keypress, return movement in v0
     keypress_end:
     jr $ra
 
-player_move: # move towards (a0, a1)
-    addi $sp $sp -4 # push ra to stack
-    sw $ra 0($sp)
+gravity:
+    move $a2 $s2 # update player position
+    move $a3 $s3
+    beq $s6 0 gravity_end
+    # jumping
+    neg $a2 $a2 # reverse gravity
+    neg $a3 $a3
+    abs $t0 $s2 # get absolute value of jump distance
+    sub $s6 $s6 $t0 # update jump distance, assume s2 == 0 or s3 == 0
+    abs $t0 $s3
+    sub $s6 $s6 $t0
+    gravity_end:
+    jr $ra
 
-    # update orientation
-    move $t0 $s4 # backup orientation to t8
-    movn $s4 $a0 $s3 # if gravity is vertical, set to Δx
-    movn $s4 $a1 $s2 # if gravity is horizontal, set to Δy
-    movz $s4 $t0 $s4 # restore orientation
-
-    flatten($s0, $s1, $a3)  # save previous position to a3
-
+check_move: # possibly a0 += a2 and a1 += a3 but ensure no collision
     # get new coordinates
     add $t0 $s0 $a0
     add $t1 $s1 $a1
+    add $t0 $t0 $a2
+    add $t1 $t1 $a3
 
-    # check on screen and get bbox t0 t1 t2 t3
     li $v0 1
+    # check on screen and get bbox t0 t1 t2 t3
     bgez $t0 player_bbox_1
     bltz $s2 init # fell off screen
     j collision_end
@@ -257,7 +266,7 @@ player_move: # move towards (a0, a1)
         j collision_end
     player_bbox_end:
 
-    # check collision with platforms
+    # collision with platforms
     la $t9 platforms # t9 = address to platforms
     # get end of platforms to t8
     lw $t8 stage
@@ -266,33 +275,54 @@ player_move: # move towards (a0, a1)
     collision_loop:
         sub $t8 $t8 16 # decrement platform index
         blt $t8 $t9 collision_end # no more platforms
-        jal collision
+        coll($t8)
         beq $v0 0 collision_loop # no collision
     collision_end:
-        beqz $v0 player_moved
-        # player not moved
+        beqz $v0 no_collision
+        # has collision
         andi $s5 $s5 0xfffe # set not landed
         # reset jump distance if move towards top and bonk heaad
-        add $t0 $a0 $s2
-        add $t1 $a1 $s3
+        add $t0 $a2 $s2
+        add $t1 $a3 $s3
         bnez $t0 player_bonk_end
         bnez $t1 player_bonk_end
         li $s6 0 # reset jump distance
         player_bonk_end:
         # consider landed if Δs == gravity
-        li $a0 0
-        li $a1 0
-        bne $a0 $s2 player_move_end
-        bne $a1 $s3 player_move_end
-        ori $s5 $s5 0x1 # landed
-        j player_move_end
+        bne $a2 $s2 has_collision
+        bne $a3 $s3 has_collision
+        ori $s5 $s5 0x3 # landed (and can double jump)
+    has_collision:
+        jr $ra
+    no_collision:
+        add $a0 $a0 $a2
+        add $a1 $a1 $a3
+        jr $ra
 
-    player_moved: # actual movement happened
+player_move: # move towards (a0, a1)
+    addi $sp $sp -4 # push ra to stack
+    sw $ra 0($sp)
+
+    flatten($s0, $s1, $a3)  # save previous position to a3
+
+    or $t0 $a0 $a1
+    beqz $t0 player_move_end # no movement
+
+    # update orientation
+    move $t0 $s4 # backup orientation to t8
+    movn $s4 $a0 $s3 # if gravity is vertical, set to Δx
+    movn $s4 $a1 $s2 # if gravity is horizontal, set to Δy
+    movz $s4 $t0 $s4 # restore orientation
+
+    # get new coordinates
+    add $t0 $s0 $a0
+    add $t1 $s1 $a1
+
     andi $t4 $s5 4 # check door_unlocked
     bnez $t4 player_move_door # door unlocked
         # check collision with collectibles
         la $t8 doll
-        jal collision
+        coll($t8)
         sll $v0 $v0 2
         or $s5 $s5 $v0 # update collected
         beq $v0 0 player_move_update # not collected
@@ -309,15 +339,15 @@ player_move: # move towards (a0, a1)
             j player_move_update
     player_move_door: # check collision with door
         la $t8 door
-        jal collision
+        coll($t8)
         bnez $v0 next_stage
     player_move_update:
         andi $s5 $s5 0xfffe # not landed
         move $s0 $t0 # update player position
         move $s1 $t1
     player_move_end:
-        flatten($s0, $s1, $v0)
-        jal draw_alice # draw player at new position
+    flatten($s0, $s1, $v0)
+    jal draw_alice # draw player at new position
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
     jr $ra # return
