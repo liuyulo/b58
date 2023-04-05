@@ -19,6 +19,7 @@
 .eqv JUMP_HEIGHT    96          # in bytes
 .eqv STAGE_COUNT    20           # size of platforms_end
 .eqv DOLLS_FRAME    22           # number of frames for doll animation
+.eqv ALICE_FRAME    6          # number of frames for alice animation
 
 .data
 # space padding to support 128x128 resolution
@@ -32,6 +33,7 @@ doll_address: .word 0 # address on screen
 dolls: .word 0:22 # animation frames
 door: .word 464 400 508 492 # bbox
 door_address: .word 0 # address on screen
+alice: .word 0:6 # alice frames
 # stage counter * 4
 stage: .word 0
 # stage gravity (Δx, Δy) for each stage
@@ -51,7 +53,7 @@ stage_gravity: .half 0 4 0 -4 -4 0 4 0 4 0
     sw $t2 %addr # save to memory
 .end_macro
 
-.macro set_move(%dx, %dy) # set a0 a1 and jump to player_move
+.macro movement(%dx, %dy) # set a0 a1 and jump to player_move
     li $a0 %dx
     li $a1 %dy
     j player_move
@@ -209,17 +211,18 @@ keypressed: # handle keypress in 4($a0)
 
     la $ra keypressed_end
     keypressed_w:
-    set_move(0,-4)
+    movement(0,-4)
     keypressed_a:
-    set_move(-4,0)
+    movement(-4,0)
     keypressed_s:
-    set_move(0,4)
+    movement(0,4)
     keypressed_d:
-    set_move(4,0)
+    movement(4,0)
     keypressed_end:
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
     jr $ra # return
+
 player_move: # move towards (a0, a1)
     addi $sp $sp -4 # push ra to stack
     sw $ra 0($sp)
@@ -303,7 +306,7 @@ player_move: # move towards (a0, a1)
     move $s1 $t1
     flatten($s0, $s1, $v0)
     la $ra player_move_end
-    j draw_player # draw player at new position
+    j draw_alice # draw player at new position
 
     player_move_landed: # player not moved
         andi $s5 $s5 0xfffe # not landed
@@ -340,6 +343,7 @@ collision:
     slt $v1 $t5 $t3  # by1 < ay2
     and $v0 $v0 $v1
     jr $ra
+
 next_stage: # prepare for next stage, then goto init
     lw $t0 stage
     addi $t0 $t0 4
@@ -1631,6 +1635,7 @@ draw_stage: # use t\d
 
     draw_stage_end:
     jr $ra # return
+
 draw_doll_00: # start at v0, use t4
     li $t4 0x000000
     sw $t4 0($v0)
@@ -6038,7 +6043,6 @@ draw_doll_21: # start at v0, use t4
     li $t4 0x2b030e
     sw $t4 5656($v0)
     jr $ra
-
 clear_doll: # start at v0, use t4
     sw BACKGROUND 0($v0)
     sw BACKGROUND 4($v0)
@@ -6161,6 +6165,7 @@ clear_doll: # start at v0, use t4
     sw BACKGROUND 5664($v0)
     sw BACKGROUND 5668($v0)
     jr $ra
+
 draw_door: # start at v0, use t4
     li $t4 0x7d4400
     sw $t4 0($v0)
@@ -6553,7 +6558,8 @@ draw_door: # start at v0, use t4
     li $t4 0x7b4400
     sw $t4 11308($v0)
     jr $ra
-draw_player: # start at v0 with (Δx, Δy) in (a0, a1), previous position in a2
+
+draw_alice: # start at v0 with (Δx, Δy) in (a0, a1), previous position in a2
     # binary seach go brrr
     beqz $s3 draw_c # draw columns first
         bltz $s3 draw_rn # draw rows towards north
