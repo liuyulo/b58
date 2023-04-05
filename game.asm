@@ -65,7 +65,7 @@
     .end_macro
 
     # check collision bbox with with bbox t0 t1 t2 t3 return at v0
-    .macro coll(%bbox)
+    .macro collision(%bbox)
         # get platform box (t4, t5, t6, t7)
         lw $t4 0(%bbox)
         lw $t5 4(%bbox)
@@ -293,7 +293,7 @@ check_move: # possibly a0 += a2 and a1 += a3 but ensure no collision
     collision_loop:
         sub $t8 $t8 16 # decrement platform index
         blt $t8 $t9 collision_end # no more platforms
-        coll($t8)
+        collision($t8)
         beq $v0 0 collision_loop # no collision
     collision_end:
         beqz $v0 no_collision
@@ -340,7 +340,7 @@ player_move: # move towards (a0, a1)
     bnez $t4 player_move_door # door unlocked
         # check collision with collectibles
         la $t8 doll
-        coll($t8)
+        collision($t8)
         sll $v0 $v0 2
         or $s5 $s5 $v0 # update collected
         beq $v0 0 player_move_update # not collected
@@ -358,7 +358,7 @@ player_move: # move towards (a0, a1)
             j player_move_update
     player_move_door: # check collision with door
         la $t8 door
-        coll($t8)
+        collision($t8)
         bnez $v0 next_stage
     player_move_update:
         andi $s5 $s5 0xfffe # not landed
@@ -370,25 +370,6 @@ player_move: # move towards (a0, a1)
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
     jr $ra # return
-
-# check collision bbox at t8 with with bbox (t0, t1, t2, t3)
-# use t4 t5 t6 t7, return at v0
-collision:
-    # get platform box (t4, t5, t6, t7)
-    lw $t4 0($t8)
-    lw $t5 4($t8)
-    lw $t6 8($t8)
-    lw $t7 12($t8)
-
-    sle $v0 $t0 $t6  # ax1 <= bx2
-    slt $v1 $t4 $t2  # bx1 < ax2
-    and $v0 $v0 $v1
-    sle $v1 $t1 $t7  # ay1 <= by2
-    and $v0 $v0 $v1
-    slt $v1 $t5 $t3  # by1 < ay2
-    and $v0 $v0 $v1
-    jr $ra
-
 next_stage: # prepare for next stage, then goto init
     lw $t0 stage
     addi $t0 $t0 4
