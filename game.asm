@@ -56,7 +56,7 @@ stage_gravity: .half 0 4 0 -4 -4 0 4 0 4 0
 .macro movement(%dx, %dy) # set a0 a1 and jump to player_move
     li $a0 %dx
     li $a1 %dy
-    j player_move
+    j keypressed_end
 .end_macro
 .text
     # save address of doll
@@ -143,8 +143,8 @@ init:
 main:
     li $a0 0xffff0000 # check keypress
     lw $t0 0($a0)
-    la $ra gravity
-    beq $t0 1 keypressed # handle keypress
+    jal keypressed # handle keypress
+    jal player_move
 
     gravity:
     # j refresh # disable gravity
@@ -188,7 +188,12 @@ keypressed: # handle keypress in 4($a0)
     addi $sp $sp -4 # push ra to stack
     sw $ra 0($sp)
 
-    lw $t0 4($a0)
+    li $a0 0
+    li $a1 0
+    li $t1 0xffff0000 # check keypress
+    lw $t0 0($t1)
+    beqz $t0 keypressed_end # handle keypress
+    lw $t0 4($t1)
     beq $t0 0x20 keypressed_spc
     beq $t0 0x77 keypressed_w
     beq $t0 0x61 keypressed_a
