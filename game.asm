@@ -6554,7 +6554,7 @@ draw_door: # start at v0, use t4
     sw $t4 11308($v0)
     jr $ra
 
-draw_alice: # start at v0 with (Δx, Δy) in (a0, a1), previous position in a2
+draw_alice: # start at v0 with Δx Δy in a0 a1, previous position in a2
     # binary seach go brrr
     beqz $s3 draw_c # draw columns first
         bltz $s3 draw_rn # draw rows towards north
@@ -6608,7 +6608,9 @@ draw_alice: # start at v0 with (Δx, Δy) in (a0, a1), previous position in a2
                 j draw_end
     draw_end:
 
-    move $t3 $t2 # t3 tracks position
+    move $t3 $t2
+    # t1 is Δx, t0 is Δy
+    # t2 is start, t3 is current
     sw BACKGROUND 0($t3) # store background (0, 0)
     add $t3 $t3 $t0 # shift x
     sw BACKGROUND 0($t3) # store background (1, 0)
@@ -7376,7 +7378,7 @@ draw_alice: # start at v0 with (Δx, Δy) in (a0, a1), previous position in a2
     sw BACKGROUND 0($t3) # store background (15, 15)
     add $t3 $t3 $t0 # shift x
 
-    # clean previous, a3 is previous top left corner
+    # clean previously drawed
     beqz $a1 clear_row_end # no movement on y axis
     move $t0 $a3
     bgez $a1 clear_row # skip shift
@@ -7400,9 +7402,9 @@ draw_alice: # start at v0 with (Δx, Δy) in (a0, a1), previous position in a2
         sw BACKGROUND 52($t0) # clear (13, y)
         sw BACKGROUND 56($t0) # clear (14, y)
         sw BACKGROUND 60($t0) # clear (15, y)
-    	clear_row_end:
-    beqz $a0 clear_end # no movement on x axis
-    bgez $a0 clear_column # skip shift
+    clear_row_end:
+        beqz $a0 clear_end # no movement on x axis
+        bgez $a0 clear_column # skip shift
         addi $a3 $a3 PLAYER_END # shift to right column
     clear_column:
         sw BACKGROUND 0($a3) # clear (x, 0)
