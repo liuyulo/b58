@@ -45,7 +45,7 @@
     door_address:   .word 0 # address on screen
     alice: .word draw_alice_00 draw_alice_01 draw_alice_02
         draw_alice_03 draw_alice_04 draw_alice_05
-    stage:          .word 8 # stage counter * 4
+    stage:          .word 0 # stage counter * 4
     # stage gravity (Δx, Δy) for each stage
     stage_gravity:  .half 0 4 0 -4 -4 0 4 0 4 0
 
@@ -138,6 +138,10 @@ main:
     lw $t5 0($t5) # get doll frame
     lw $v0 doll_address
     jalr $t5
+    # todo fix sll somewhere for alice/doll frames, need remainder
+    rem $t5 $s7 32
+    bnez $t5 refresh
+    jal music
 
     refresh:
     addi $s7 $s7 1 # increment time
@@ -145,6 +149,14 @@ main:
     li $v0 32
     syscall
     j main
+music:
+    li $a0 72
+    li $a1 500
+    li $a2 0
+    li $a3 50
+    li $v0 31
+    syscall
+    jr $ra
 terminate: # terminate the program gracefully
     li $v0 10
     syscall
