@@ -131,6 +131,7 @@ main:
     andi $t4 $s5 4 # check door_unlocked
     bnez $t4 refresh # doll not on screen
     andi $t4 $s7 1 # every 2 frames
+    bnez $t4 refresh # skip
     srl $t4 $s7 1
     rem $t4 $t4 DOLLS_FRAME
     sll $t4 $t4 2 # in words
