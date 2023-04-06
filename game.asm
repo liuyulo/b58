@@ -14,7 +14,6 @@
     .eqv WIDTH_SHIFT    7           # 4 << WIDTH_SHIFT == SIZE
     .eqv PLAYER_SIZE    64          # in bytes
     .eqv PLAYER_END     60           # PLAYER_SIZE - 4 bytes
-    .eqv BACKGROUND     $0          # black
     .eqv PLAYER_INIT    32          # initial position
     .eqv JUMP_HEIGHT    96          # in bytes
     .eqv STAGE_COUNT    20           # size of platforms_end
@@ -2090,53 +2089,53 @@ draw_alice: # start at v0 with Δx Δy in a0 a1, previous position in a2
         sll $t2 $t2 WIDTH_SHIFT
         add $t0 $t0 $t2 # shift to bottom row
     clear_row:
-        sw BACKGROUND 0($t0) # clear (0, y)
-        sw BACKGROUND 4($t0) # clear (1, y)
-        sw BACKGROUND 8($t0) # clear (2, y)
-        sw BACKGROUND 12($t0) # clear (3, y)
-        sw BACKGROUND 16($t0) # clear (4, y)
-        sw BACKGROUND 20($t0) # clear (5, y)
-        sw BACKGROUND 24($t0) # clear (6, y)
-        sw BACKGROUND 28($t0) # clear (7, y)
-        sw BACKGROUND 32($t0) # clear (8, y)
-        sw BACKGROUND 36($t0) # clear (9, y)
-        sw BACKGROUND 40($t0) # clear (10, y)
-        sw BACKGROUND 44($t0) # clear (11, y)
-        sw BACKGROUND 48($t0) # clear (12, y)
-        sw BACKGROUND 52($t0) # clear (13, y)
-        sw BACKGROUND 56($t0) # clear (14, y)
-        sw BACKGROUND 60($t0) # clear (15, y)
+        sw $0 0($t0) # clear (0, y)
+        sw $0 4($t0) # clear (1, y)
+        sw $0 8($t0) # clear (2, y)
+        sw $0 12($t0) # clear (3, y)
+        sw $0 16($t0) # clear (4, y)
+        sw $0 20($t0) # clear (5, y)
+        sw $0 24($t0) # clear (6, y)
+        sw $0 28($t0) # clear (7, y)
+        sw $0 32($t0) # clear (8, y)
+        sw $0 36($t0) # clear (9, y)
+        sw $0 40($t0) # clear (10, y)
+        sw $0 44($t0) # clear (11, y)
+        sw $0 48($t0) # clear (12, y)
+        sw $0 52($t0) # clear (13, y)
+        sw $0 56($t0) # clear (14, y)
+        sw $0 60($t0) # clear (15, y)
     clear_row_end:
         beqz $a0 clear_end # no movement on x axis
         bgez $a0 clear_column # skip shift
         addi $a3 $a3 PLAYER_END # shift to right column
     clear_column:
-        sw BACKGROUND 0($a3) # clear (x, 0)
-        sw BACKGROUND 512($a3) # clear (x, 1)
-        sw BACKGROUND 1024($a3) # clear (x, 2)
-        sw BACKGROUND 1536($a3) # clear (x, 3)
-        sw BACKGROUND 2048($a3) # clear (x, 4)
-        sw BACKGROUND 2560($a3) # clear (x, 5)
-        sw BACKGROUND 3072($a3) # clear (x, 6)
-        sw BACKGROUND 3584($a3) # clear (x, 7)
-        sw BACKGROUND 4096($a3) # clear (x, 8)
-        sw BACKGROUND 4608($a3) # clear (x, 9)
-        sw BACKGROUND 5120($a3) # clear (x, 10)
-        sw BACKGROUND 5632($a3) # clear (x, 11)
-        sw BACKGROUND 6144($a3) # clear (x, 12)
-        sw BACKGROUND 6656($a3) # clear (x, 13)
-        sw BACKGROUND 7168($a3) # clear (x, 14)
-        sw BACKGROUND 7680($a3) # clear (x, 15)
+        sw $0 0($a3) # clear (x, 0)
+        sw $0 512($a3) # clear (x, 1)
+        sw $0 1024($a3) # clear (x, 2)
+        sw $0 1536($a3) # clear (x, 3)
+        sw $0 2048($a3) # clear (x, 4)
+        sw $0 2560($a3) # clear (x, 5)
+        sw $0 3072($a3) # clear (x, 6)
+        sw $0 3584($a3) # clear (x, 7)
+        sw $0 4096($a3) # clear (x, 8)
+        sw $0 4608($a3) # clear (x, 9)
+        sw $0 5120($a3) # clear (x, 10)
+        sw $0 5632($a3) # clear (x, 11)
+        sw $0 6144($a3) # clear (x, 12)
+        sw $0 6656($a3) # clear (x, 13)
+        sw $0 7168($a3) # clear (x, 14)
+        sw $0 7680($a3) # clear (x, 15)
     clear_end:
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
     jr $ra # return
 draw_alice_00:
-    sw BACKGROUND 0($v0) # store background (0, 0)
+    sw $0 0($v0) # store background (0, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 0)
+    sw $0 0($v0) # store background (1, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 0)
+    sw $0 0($v0) # store background (2, 0)
     add $v0 $v0 $t0 # shift x
     li $t4 0x2f1c14 # load color
     sw $t4 0($v0) # store color (3, 0)
@@ -2168,15 +2167,15 @@ draw_alice_00:
     li $t4 0x382d1f # load color
     sw $t4 0($v0) # store color (12, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 0)
+    sw $0 0($v0) # store background (13, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 0)
+    sw $0 0($v0) # store background (14, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 0)
+    sw $0 0($v0) # store background (15, 0)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 1)
+    sw $0 0($v0) # store background (0, 1)
     add $v0 $v0 $t0 # shift x
     li $t4 0x0b0705 # load color
     sw $t4 0($v0) # store color (1, 1)
@@ -2220,11 +2219,11 @@ draw_alice_00:
     li $t4 0x040303 # load color
     sw $t4 0($v0) # store color (14, 1)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 1)
+    sw $0 0($v0) # store background (15, 1)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 2)
+    sw $0 0($v0) # store background (0, 2)
     add $v0 $v0 $t0 # shift x
     li $t4 0x724330 # load color
     sw $t4 0($v0) # store color (1, 2)
@@ -2615,7 +2614,7 @@ draw_alice_00:
     li $t4 0x4d2b1f # load color
     sw $t4 0($v0) # store color (13, 9)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 9)
+    sw $0 0($v0) # store background (14, 9)
     add $v0 $v0 $t0 # shift x
     li $t4 0x010101 # load color
     sw $t4 0($v0) # store color (15, 9)
@@ -2664,19 +2663,19 @@ draw_alice_00:
     li $t4 0x0b0604 # load color
     sw $t4 0($v0) # store color (13, 10)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 10)
+    sw $0 0($v0) # store background (14, 10)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 10)
+    sw $0 0($v0) # store background (15, 10)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 11)
+    sw $0 0($v0) # store background (0, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 11)
+    sw $0 0($v0) # store background (1, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 11)
+    sw $0 0($v0) # store background (2, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (3, 11)
+    sw $0 0($v0) # store background (3, 11)
     add $v0 $v0 $t0 # shift x
     li $t4 0x110700 # load color
     sw $t4 0($v0) # store color (4, 11)
@@ -2702,21 +2701,21 @@ draw_alice_00:
     li $t4 0x312840 # load color
     sw $t4 0($v0) # store color (11, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (12, 11)
+    sw $0 0($v0) # store background (12, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 11)
+    sw $0 0($v0) # store background (13, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 11)
+    sw $0 0($v0) # store background (14, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 11)
+    sw $0 0($v0) # store background (15, 11)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 12)
+    sw $0 0($v0) # store background (0, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 12)
+    sw $0 0($v0) # store background (1, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 12)
+    sw $0 0($v0) # store background (2, 12)
     add $v0 $v0 $t0 # shift x
     li $t4 0x040508 # load color
     sw $t4 0($v0) # store color (3, 12)
@@ -2748,20 +2747,20 @@ draw_alice_00:
     li $t4 0x212332 # load color
     sw $t4 0($v0) # store color (12, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 12)
+    sw $0 0($v0) # store background (13, 12)
     add $v0 $v0 $t0 # shift x
     li $t4 0x010102 # load color
     sw $t4 0($v0) # store color (14, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 12)
+    sw $0 0($v0) # store background (15, 12)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 13)
+    sw $0 0($v0) # store background (0, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 13)
+    sw $0 0($v0) # store background (1, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 13)
+    sw $0 0($v0) # store background (2, 13)
     add $v0 $v0 $t0 # shift x
     li $t4 0x3f414d # load color
     sw $t4 0($v0) # store color (3, 13)
@@ -2793,20 +2792,20 @@ draw_alice_00:
     li $t4 0x171619 # load color
     sw $t4 0($v0) # store color (12, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 13)
+    sw $0 0($v0) # store background (13, 13)
     add $v0 $v0 $t0 # shift x
     li $t4 0x010101 # load color
     sw $t4 0($v0) # store color (14, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 13)
+    sw $0 0($v0) # store background (15, 13)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 14)
+    sw $0 0($v0) # store background (0, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 14)
+    sw $0 0($v0) # store background (1, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 14)
+    sw $0 0($v0) # store background (2, 14)
     add $v0 $v0 $t0 # shift x
     li $t4 0x0b0b0a # load color
     sw $t4 0($v0) # store color (3, 14)
@@ -2835,23 +2834,23 @@ draw_alice_00:
     li $t4 0x1b191d # load color
     sw $t4 0($v0) # store color (11, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (12, 14)
+    sw $0 0($v0) # store background (12, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 14)
+    sw $0 0($v0) # store background (13, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 14)
+    sw $0 0($v0) # store background (14, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 14)
+    sw $0 0($v0) # store background (15, 14)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 15)
+    sw $0 0($v0) # store background (0, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 15)
+    sw $0 0($v0) # store background (1, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 15)
+    sw $0 0($v0) # store background (2, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (3, 15)
+    sw $0 0($v0) # store background (3, 15)
     add $v0 $v0 $t0 # shift x
     li $t4 0x0a0c10 # load color
     sw $t4 0($v0) # store color (4, 15)
@@ -2874,24 +2873,24 @@ draw_alice_00:
     li $t4 0x48516d # load color
     sw $t4 0($v0) # store color (10, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (11, 15)
+    sw $0 0($v0) # store background (11, 15)
     add $v0 $v0 $t0 # shift x
     li $t4 0x010101 # load color
     sw $t4 0($v0) # store color (12, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 15)
+    sw $0 0($v0) # store background (13, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 15)
+    sw $0 0($v0) # store background (14, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 15)
+    sw $0 0($v0) # store background (15, 15)
     add $v0 $v0 $t0 # shift x
     jr $ra
 draw_alice_01:
-    sw BACKGROUND 0($v0) # store background (0, 0)
+    sw $0 0($v0) # store background (0, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 0)
+    sw $0 0($v0) # store background (1, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 0)
+    sw $0 0($v0) # store background (2, 0)
     add $v0 $v0 $t0 # shift x
     li $t4 0x281812 # load color
     sw $t4 0($v0) # store color (3, 0)
@@ -2923,15 +2922,15 @@ draw_alice_01:
     li $t4 0x22160e # load color
     sw $t4 0($v0) # store color (12, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 0)
+    sw $0 0($v0) # store background (13, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 0)
+    sw $0 0($v0) # store background (14, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 0)
+    sw $0 0($v0) # store background (15, 0)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 1)
+    sw $0 0($v0) # store background (0, 1)
     add $v0 $v0 $t0 # shift x
     li $t4 0x090504 # load color
     sw $t4 0($v0) # store color (1, 1)
@@ -2975,7 +2974,7 @@ draw_alice_01:
     li $t4 0x020101 # load color
     sw $t4 0($v0) # store color (14, 1)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 1)
+    sw $0 0($v0) # store background (15, 1)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
@@ -3371,9 +3370,9 @@ draw_alice_01:
     li $t4 0x3d2318 # load color
     sw $t4 0($v0) # store color (13, 9)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 9)
+    sw $0 0($v0) # store background (14, 9)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 9)
+    sw $0 0($v0) # store background (15, 9)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
@@ -3419,19 +3418,19 @@ draw_alice_01:
     li $t4 0x0a0604 # load color
     sw $t4 0($v0) # store color (13, 10)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 10)
+    sw $0 0($v0) # store background (14, 10)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 10)
+    sw $0 0($v0) # store background (15, 10)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 11)
+    sw $0 0($v0) # store background (0, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 11)
+    sw $0 0($v0) # store background (1, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 11)
+    sw $0 0($v0) # store background (2, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (3, 11)
+    sw $0 0($v0) # store background (3, 11)
     add $v0 $v0 $t0 # shift x
     li $t4 0x1d120b # load color
     sw $t4 0($v0) # store color (4, 11)
@@ -3457,21 +3456,21 @@ draw_alice_01:
     li $t4 0x2c2537 # load color
     sw $t4 0($v0) # store color (11, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (12, 11)
+    sw $0 0($v0) # store background (12, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 11)
+    sw $0 0($v0) # store background (13, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 11)
+    sw $0 0($v0) # store background (14, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 11)
+    sw $0 0($v0) # store background (15, 11)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 12)
+    sw $0 0($v0) # store background (0, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 12)
+    sw $0 0($v0) # store background (1, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 12)
+    sw $0 0($v0) # store background (2, 12)
     add $v0 $v0 $t0 # shift x
     li $t4 0x05070a # load color
     sw $t4 0($v0) # store color (3, 12)
@@ -3503,17 +3502,17 @@ draw_alice_01:
     li $t4 0x181924 # load color
     sw $t4 0($v0) # store color (12, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 12)
+    sw $0 0($v0) # store background (13, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 12)
+    sw $0 0($v0) # store background (14, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 12)
+    sw $0 0($v0) # store background (15, 12)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 13)
+    sw $0 0($v0) # store background (0, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 13)
+    sw $0 0($v0) # store background (1, 13)
     add $v0 $v0 $t0 # shift x
     li $t4 0x010102 # load color
     sw $t4 0($v0) # store color (2, 13)
@@ -3548,19 +3547,19 @@ draw_alice_01:
     li $t4 0x0e0e10 # load color
     sw $t4 0($v0) # store color (12, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 13)
+    sw $0 0($v0) # store background (13, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 13)
+    sw $0 0($v0) # store background (14, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 13)
+    sw $0 0($v0) # store background (15, 13)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 14)
+    sw $0 0($v0) # store background (0, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 14)
+    sw $0 0($v0) # store background (1, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 14)
+    sw $0 0($v0) # store background (2, 14)
     add $v0 $v0 $t0 # shift x
     li $t4 0x0d0d0c # load color
     sw $t4 0($v0) # store color (3, 14)
@@ -3589,23 +3588,23 @@ draw_alice_01:
     li $t4 0x141316 # load color
     sw $t4 0($v0) # store color (11, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (12, 14)
+    sw $0 0($v0) # store background (12, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 14)
+    sw $0 0($v0) # store background (13, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 14)
+    sw $0 0($v0) # store background (14, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 14)
+    sw $0 0($v0) # store background (15, 14)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 15)
+    sw $0 0($v0) # store background (0, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 15)
+    sw $0 0($v0) # store background (1, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 15)
+    sw $0 0($v0) # store background (2, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (3, 15)
+    sw $0 0($v0) # store background (3, 15)
     add $v0 $v0 $t0 # shift x
     li $t4 0x16171e # load color
     sw $t4 0($v0) # store color (4, 15)
@@ -3628,23 +3627,23 @@ draw_alice_01:
     li $t4 0x3e465e # load color
     sw $t4 0($v0) # store color (10, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (11, 15)
+    sw $0 0($v0) # store background (11, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (12, 15)
+    sw $0 0($v0) # store background (12, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 15)
+    sw $0 0($v0) # store background (13, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 15)
+    sw $0 0($v0) # store background (14, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 15)
+    sw $0 0($v0) # store background (15, 15)
     add $v0 $v0 $t0 # shift x
     jr $ra
 draw_alice_02:
-    sw BACKGROUND 0($v0) # store background (0, 0)
+    sw $0 0($v0) # store background (0, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 0)
+    sw $0 0($v0) # store background (1, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 0)
+    sw $0 0($v0) # store background (2, 0)
     add $v0 $v0 $t0 # shift x
     li $t4 0x140c09 # load color
     sw $t4 0($v0) # store color (3, 0)
@@ -3676,17 +3675,17 @@ draw_alice_02:
     li $t4 0x170f09 # load color
     sw $t4 0($v0) # store color (12, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 0)
+    sw $0 0($v0) # store background (13, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 0)
+    sw $0 0($v0) # store background (14, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 0)
+    sw $0 0($v0) # store background (15, 0)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 1)
+    sw $0 0($v0) # store background (0, 1)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 1)
+    sw $0 0($v0) # store background (1, 1)
     add $v0 $v0 $t0 # shift x
     li $t4 0x3b2219 # load color
     sw $t4 0($v0) # store color (2, 1)
@@ -3724,13 +3723,13 @@ draw_alice_02:
     li $t4 0x3e3028 # load color
     sw $t4 0($v0) # store color (13, 1)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 1)
+    sw $0 0($v0) # store background (14, 1)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 1)
+    sw $0 0($v0) # store background (15, 1)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 2)
+    sw $0 0($v0) # store background (0, 2)
     add $v0 $v0 $t0 # shift x
     li $t4 0x623928 # load color
     sw $t4 0($v0) # store color (1, 2)
@@ -4124,7 +4123,7 @@ draw_alice_02:
     li $t4 0x000001 # load color
     sw $t4 0($v0) # store color (14, 9)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 9)
+    sw $0 0($v0) # store background (15, 9)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
@@ -4170,13 +4169,13 @@ draw_alice_02:
     li $t4 0x26130b # load color
     sw $t4 0($v0) # store color (13, 10)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 10)
+    sw $0 0($v0) # store background (14, 10)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 10)
+    sw $0 0($v0) # store background (15, 10)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 11)
+    sw $0 0($v0) # store background (0, 11)
     add $v0 $v0 $t0 # shift x
     li $t4 0x140b09 # load color
     sw $t4 0($v0) # store color (1, 11)
@@ -4217,15 +4216,15 @@ draw_alice_02:
     li $t4 0x0f1828 # load color
     sw $t4 0($v0) # store color (13, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 11)
+    sw $0 0($v0) # store background (14, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 11)
+    sw $0 0($v0) # store background (15, 11)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 12)
+    sw $0 0($v0) # store background (0, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 12)
+    sw $0 0($v0) # store background (1, 12)
     add $v0 $v0 $t0 # shift x
     li $t4 0x1d2637 # load color
     sw $t4 0($v0) # store color (2, 12)
@@ -4266,11 +4265,11 @@ draw_alice_02:
     li $t4 0x000001 # load color
     sw $t4 0($v0) # store color (14, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 12)
+    sw $0 0($v0) # store background (15, 12)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 13)
+    sw $0 0($v0) # store background (0, 13)
     add $v0 $v0 $t0 # shift x
     li $t4 0x05070a # load color
     sw $t4 0($v0) # store color (1, 13)
@@ -4311,15 +4310,15 @@ draw_alice_02:
     li $t4 0x0b121c # load color
     sw $t4 0($v0) # store color (13, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 13)
+    sw $0 0($v0) # store background (14, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 13)
+    sw $0 0($v0) # store background (15, 13)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 14)
+    sw $0 0($v0) # store background (0, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 14)
+    sw $0 0($v0) # store background (1, 14)
     add $v0 $v0 $t0 # shift x
     li $t4 0x101218 # load color
     sw $t4 0($v0) # store color (2, 14)
@@ -4354,21 +4353,21 @@ draw_alice_02:
     li $t4 0x0b121d # load color
     sw $t4 0($v0) # store color (12, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 14)
+    sw $0 0($v0) # store background (13, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 14)
+    sw $0 0($v0) # store background (14, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 14)
+    sw $0 0($v0) # store background (15, 14)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 15)
+    sw $0 0($v0) # store background (0, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 15)
+    sw $0 0($v0) # store background (1, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 15)
+    sw $0 0($v0) # store background (2, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (3, 15)
+    sw $0 0($v0) # store background (3, 15)
     add $v0 $v0 $t0 # shift x
     li $t4 0x18181e # load color
     sw $t4 0($v0) # store color (4, 15)
@@ -4391,23 +4390,23 @@ draw_alice_02:
     li $t4 0x424c6a # load color
     sw $t4 0($v0) # store color (10, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (11, 15)
+    sw $0 0($v0) # store background (11, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (12, 15)
+    sw $0 0($v0) # store background (12, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 15)
+    sw $0 0($v0) # store background (13, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 15)
+    sw $0 0($v0) # store background (14, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 15)
+    sw $0 0($v0) # store background (15, 15)
     add $v0 $v0 $t0 # shift x
     jr $ra
 draw_alice_03:
-    sw BACKGROUND 0($v0) # store background (0, 0)
+    sw $0 0($v0) # store background (0, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 0)
+    sw $0 0($v0) # store background (1, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 0)
+    sw $0 0($v0) # store background (2, 0)
     add $v0 $v0 $t0 # shift x
     li $t4 0x150d0a # load color
     sw $t4 0($v0) # store color (3, 0)
@@ -4439,18 +4438,18 @@ draw_alice_03:
     li $t4 0x261d14 # load color
     sw $t4 0($v0) # store color (12, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 0)
+    sw $0 0($v0) # store background (13, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 0)
+    sw $0 0($v0) # store background (14, 0)
     add $v0 $v0 $t0 # shift x
     li $t4 0x010000 # load color
     sw $t4 0($v0) # store color (15, 0)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 1)
+    sw $0 0($v0) # store background (0, 1)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 1)
+    sw $0 0($v0) # store background (1, 1)
     add $v0 $v0 $t0 # shift x
     li $t4 0x371f17 # load color
     sw $t4 0($v0) # store color (2, 1)
@@ -4488,13 +4487,13 @@ draw_alice_03:
     li $t4 0x59453c # load color
     sw $t4 0($v0) # store color (13, 1)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 1)
+    sw $0 0($v0) # store background (14, 1)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 1)
+    sw $0 0($v0) # store background (15, 1)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 2)
+    sw $0 0($v0) # store background (0, 2)
     add $v0 $v0 $t0 # shift x
     li $t4 0x5b3526 # load color
     sw $t4 0($v0) # store color (1, 2)
@@ -4885,9 +4884,9 @@ draw_alice_03:
     li $t4 0x76422f # load color
     sw $t4 0($v0) # store color (13, 9)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 9)
+    sw $0 0($v0) # store background (14, 9)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 9)
+    sw $0 0($v0) # store background (15, 9)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
@@ -4933,13 +4932,13 @@ draw_alice_03:
     li $t4 0x211006 # load color
     sw $t4 0($v0) # store color (13, 10)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 10)
+    sw $0 0($v0) # store background (14, 10)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 10)
+    sw $0 0($v0) # store background (15, 10)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 11)
+    sw $0 0($v0) # store background (0, 11)
     add $v0 $v0 $t0 # shift x
     li $t4 0x070303 # load color
     sw $t4 0($v0) # store color (1, 11)
@@ -4991,7 +4990,7 @@ draw_alice_03:
     li $t4 0x010101 # load color
     sw $t4 0($v0) # store color (0, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 12)
+    sw $0 0($v0) # store background (1, 12)
     add $v0 $v0 $t0 # shift x
     li $t4 0x1b2333 # load color
     sw $t4 0($v0) # store color (2, 12)
@@ -5032,7 +5031,7 @@ draw_alice_03:
     li $t4 0x020204 # load color
     sw $t4 0($v0) # store color (14, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 12)
+    sw $0 0($v0) # store background (15, 12)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
@@ -5078,7 +5077,7 @@ draw_alice_03:
     li $t4 0x09111c # load color
     sw $t4 0($v0) # store color (13, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 13)
+    sw $0 0($v0) # store background (14, 13)
     add $v0 $v0 $t0 # shift x
     li $t4 0x000101 # load color
     sw $t4 0($v0) # store color (15, 13)
@@ -5088,7 +5087,7 @@ draw_alice_03:
     li $t4 0x000001 # load color
     sw $t4 0($v0) # store color (0, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 14)
+    sw $0 0($v0) # store background (1, 14)
     add $v0 $v0 $t0 # shift x
     li $t4 0x070809 # load color
     sw $t4 0($v0) # store color (2, 14)
@@ -5123,22 +5122,22 @@ draw_alice_03:
     li $t4 0x0b1421 # load color
     sw $t4 0($v0) # store color (12, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 14)
+    sw $0 0($v0) # store background (13, 14)
     add $v0 $v0 $t0 # shift x
     li $t4 0x000101 # load color
     sw $t4 0($v0) # store color (14, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 14)
+    sw $0 0($v0) # store background (15, 14)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 15)
+    sw $0 0($v0) # store background (0, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 15)
+    sw $0 0($v0) # store background (1, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 15)
+    sw $0 0($v0) # store background (2, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (3, 15)
+    sw $0 0($v0) # store background (3, 15)
     add $v0 $v0 $t0 # shift x
     li $t4 0x0b0b0b # load color
     sw $t4 0($v0) # store color (4, 15)
@@ -5161,24 +5160,24 @@ draw_alice_03:
     li $t4 0x495477 # load color
     sw $t4 0($v0) # store color (10, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (11, 15)
+    sw $0 0($v0) # store background (11, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (12, 15)
+    sw $0 0($v0) # store background (12, 15)
     add $v0 $v0 $t0 # shift x
     li $t4 0x000101 # load color
     sw $t4 0($v0) # store color (13, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 15)
+    sw $0 0($v0) # store background (14, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 15)
+    sw $0 0($v0) # store background (15, 15)
     add $v0 $v0 $t0 # shift x
     jr $ra
 draw_alice_04:
-    sw BACKGROUND 0($v0) # store background (0, 0)
+    sw $0 0($v0) # store background (0, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 0)
+    sw $0 0($v0) # store background (1, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 0)
+    sw $0 0($v0) # store background (2, 0)
     add $v0 $v0 $t0 # shift x
     li $t4 0x2e1c13 # load color
     sw $t4 0($v0) # store color (3, 0)
@@ -5210,15 +5209,15 @@ draw_alice_04:
     li $t4 0x3a2d20 # load color
     sw $t4 0($v0) # store color (12, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 0)
+    sw $0 0($v0) # store background (13, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 0)
+    sw $0 0($v0) # store background (14, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 0)
+    sw $0 0($v0) # store background (15, 0)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 1)
+    sw $0 0($v0) # store background (0, 1)
     add $v0 $v0 $t0 # shift x
     li $t4 0x0b0705 # load color
     sw $t4 0($v0) # store color (1, 1)
@@ -5262,11 +5261,11 @@ draw_alice_04:
     li $t4 0x050303 # load color
     sw $t4 0($v0) # store color (14, 1)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 1)
+    sw $0 0($v0) # store background (15, 1)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 2)
+    sw $0 0($v0) # store background (0, 2)
     add $v0 $v0 $t0 # shift x
     li $t4 0x714230 # load color
     sw $t4 0($v0) # store color (1, 2)
@@ -5657,7 +5656,7 @@ draw_alice_04:
     li $t4 0x4f2c20 # load color
     sw $t4 0($v0) # store color (13, 9)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 9)
+    sw $0 0($v0) # store background (14, 9)
     add $v0 $v0 $t0 # shift x
     li $t4 0x010000 # load color
     sw $t4 0($v0) # store color (15, 9)
@@ -5706,17 +5705,17 @@ draw_alice_04:
     li $t4 0x090300 # load color
     sw $t4 0($v0) # store color (13, 10)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 10)
+    sw $0 0($v0) # store background (14, 10)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 10)
+    sw $0 0($v0) # store background (15, 10)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 11)
+    sw $0 0($v0) # store background (0, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 11)
+    sw $0 0($v0) # store background (1, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 11)
+    sw $0 0($v0) # store background (2, 11)
     add $v0 $v0 $t0 # shift x
     li $t4 0x111926 # load color
     sw $t4 0($v0) # store color (3, 11)
@@ -5751,7 +5750,7 @@ draw_alice_04:
     li $t4 0x070b13 # load color
     sw $t4 0($v0) # store color (13, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 11)
+    sw $0 0($v0) # store background (14, 11)
     add $v0 $v0 $t0 # shift x
     li $t4 0x000101 # load color
     sw $t4 0($v0) # store color (15, 11)
@@ -5761,7 +5760,7 @@ draw_alice_04:
     li $t4 0x010101 # load color
     sw $t4 0($v0) # store color (0, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 12)
+    sw $0 0($v0) # store background (1, 12)
     add $v0 $v0 $t0 # shift x
     li $t4 0x161c26 # load color
     sw $t4 0($v0) # store color (2, 12)
@@ -5799,7 +5798,7 @@ draw_alice_04:
     li $t4 0x2f436a # load color
     sw $t4 0($v0) # store color (13, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 12)
+    sw $0 0($v0) # store background (14, 12)
     add $v0 $v0 $t0 # shift x
     li $t4 0x000001 # load color
     sw $t4 0($v0) # store color (15, 12)
@@ -5859,7 +5858,7 @@ draw_alice_04:
     li $t4 0x000001 # load color
     sw $t4 0($v0) # store color (0, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 14)
+    sw $0 0($v0) # store background (1, 14)
     add $v0 $v0 $t0 # shift x
     li $t4 0x161922 # load color
     sw $t4 0($v0) # store color (2, 14)
@@ -5894,20 +5893,20 @@ draw_alice_04:
     li $t4 0x121d2e # load color
     sw $t4 0($v0) # store color (12, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 14)
+    sw $0 0($v0) # store background (13, 14)
     add $v0 $v0 $t0 # shift x
     li $t4 0x010102 # load color
     sw $t4 0($v0) # store color (14, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 14)
+    sw $0 0($v0) # store background (15, 14)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 15)
+    sw $0 0($v0) # store background (0, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 15)
+    sw $0 0($v0) # store background (1, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 15)
+    sw $0 0($v0) # store background (2, 15)
     add $v0 $v0 $t0 # shift x
     li $t4 0x08090b # load color
     sw $t4 0($v0) # store color (3, 15)
@@ -5933,22 +5932,22 @@ draw_alice_04:
     li $t4 0x4b526e # load color
     sw $t4 0($v0) # store color (10, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (11, 15)
+    sw $0 0($v0) # store background (11, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (12, 15)
+    sw $0 0($v0) # store background (12, 15)
     add $v0 $v0 $t0 # shift x
     li $t4 0x000101 # load color
     sw $t4 0($v0) # store color (13, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 15)
+    sw $0 0($v0) # store background (14, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 15)
+    sw $0 0($v0) # store background (15, 15)
     add $v0 $v0 $t0 # shift x
     jr $ra
 draw_alice_05:
-    sw BACKGROUND 0($v0) # store background (0, 0)
+    sw $0 0($v0) # store background (0, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 0)
+    sw $0 0($v0) # store background (1, 0)
     add $v0 $v0 $t0 # shift x
     li $t4 0x020201 # load color
     sw $t4 0($v0) # store color (2, 0)
@@ -5986,13 +5985,13 @@ draw_alice_05:
     li $t4 0x010000 # load color
     sw $t4 0($v0) # store color (13, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 0)
+    sw $0 0($v0) # store background (14, 0)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 0)
+    sw $0 0($v0) # store background (15, 0)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 1)
+    sw $0 0($v0) # store background (0, 1)
     add $v0 $v0 $t0 # shift x
     li $t4 0x120b07 # load color
     sw $t4 0($v0) # store color (1, 1)
@@ -6036,7 +6035,7 @@ draw_alice_05:
     li $t4 0x060302 # load color
     sw $t4 0($v0) # store color (14, 1)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 1)
+    sw $0 0($v0) # store background (15, 1)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
@@ -6432,9 +6431,9 @@ draw_alice_05:
     li $t4 0x291710 # load color
     sw $t4 0($v0) # store color (13, 9)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 9)
+    sw $0 0($v0) # store background (14, 9)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 9)
+    sw $0 0($v0) # store background (15, 9)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
@@ -6480,15 +6479,15 @@ draw_alice_05:
     li $t4 0x030201 # load color
     sw $t4 0($v0) # store color (13, 10)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 10)
+    sw $0 0($v0) # store background (14, 10)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 10)
+    sw $0 0($v0) # store background (15, 10)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 11)
+    sw $0 0($v0) # store background (0, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 11)
+    sw $0 0($v0) # store background (1, 11)
     add $v0 $v0 $t0 # shift x
     li $t4 0x04070b # load color
     sw $t4 0($v0) # store color (2, 11)
@@ -6526,15 +6525,15 @@ draw_alice_05:
     li $t4 0x080b13 # load color
     sw $t4 0($v0) # store color (13, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 11)
+    sw $0 0($v0) # store background (14, 11)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 11)
+    sw $0 0($v0) # store background (15, 11)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 12)
+    sw $0 0($v0) # store background (0, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 12)
+    sw $0 0($v0) # store background (1, 12)
     add $v0 $v0 $t0 # shift x
     li $t4 0x131821 # load color
     sw $t4 0($v0) # store color (2, 12)
@@ -6572,13 +6571,13 @@ draw_alice_05:
     li $t4 0x171f2f # load color
     sw $t4 0($v0) # store color (13, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 12)
+    sw $0 0($v0) # store background (14, 12)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 12)
+    sw $0 0($v0) # store background (15, 12)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 13)
+    sw $0 0($v0) # store background (0, 13)
     add $v0 $v0 $t0 # shift x
     li $t4 0x050609 # load color
     sw $t4 0($v0) # store color (1, 13)
@@ -6619,15 +6618,15 @@ draw_alice_05:
     li $t4 0x05070b # load color
     sw $t4 0($v0) # store color (13, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 13)
+    sw $0 0($v0) # store background (14, 13)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 13)
+    sw $0 0($v0) # store background (15, 13)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 14)
+    sw $0 0($v0) # store background (0, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 14)
+    sw $0 0($v0) # store background (1, 14)
     add $v0 $v0 $t0 # shift x
     li $t4 0x0e1015 # load color
     sw $t4 0($v0) # store color (2, 14)
@@ -6662,21 +6661,21 @@ draw_alice_05:
     li $t4 0x030509 # load color
     sw $t4 0($v0) # store color (12, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 14)
+    sw $0 0($v0) # store background (13, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 14)
+    sw $0 0($v0) # store background (14, 14)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 14)
+    sw $0 0($v0) # store background (15, 14)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw BACKGROUND 0($v0) # store background (0, 15)
+    sw $0 0($v0) # store background (0, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (1, 15)
+    sw $0 0($v0) # store background (1, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (2, 15)
+    sw $0 0($v0) # store background (2, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (3, 15)
+    sw $0 0($v0) # store background (3, 15)
     add $v0 $v0 $t0 # shift x
     li $t4 0x1b1c22 # load color
     sw $t4 0($v0) # store color (4, 15)
@@ -6699,274 +6698,274 @@ draw_alice_05:
     li $t4 0x323a51 # load color
     sw $t4 0($v0) # store color (10, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (11, 15)
+    sw $0 0($v0) # store background (11, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (12, 15)
+    sw $0 0($v0) # store background (12, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (13, 15)
+    sw $0 0($v0) # store background (13, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (14, 15)
+    sw $0 0($v0) # store background (14, 15)
     add $v0 $v0 $t0 # shift x
-    sw BACKGROUND 0($v0) # store background (15, 15)
+    sw $0 0($v0) # store background (15, 15)
     add $v0 $v0 $t0 # shift x
     jr $ra
 clear_alice: # start at v0
-    sw BACKGROUND 0($v0) # (0, 0)
-    sw BACKGROUND 4($v0) # (1, 0)
-    sw BACKGROUND 8($v0) # (2, 0)
-    sw BACKGROUND 12($v0) # (3, 0)
-    sw BACKGROUND 16($v0) # (4, 0)
-    sw BACKGROUND 20($v0) # (5, 0)
-    sw BACKGROUND 24($v0) # (6, 0)
-    sw BACKGROUND 28($v0) # (7, 0)
-    sw BACKGROUND 32($v0) # (8, 0)
-    sw BACKGROUND 36($v0) # (9, 0)
-    sw BACKGROUND 40($v0) # (10, 0)
-    sw BACKGROUND 44($v0) # (11, 0)
-    sw BACKGROUND 48($v0) # (12, 0)
-    sw BACKGROUND 52($v0) # (13, 0)
-    sw BACKGROUND 56($v0) # (14, 0)
-    sw BACKGROUND 60($v0) # (15, 0)
-    sw BACKGROUND 512($v0) # (0, 1)
-    sw BACKGROUND 516($v0) # (1, 1)
-    sw BACKGROUND 520($v0) # (2, 1)
-    sw BACKGROUND 524($v0) # (3, 1)
-    sw BACKGROUND 528($v0) # (4, 1)
-    sw BACKGROUND 532($v0) # (5, 1)
-    sw BACKGROUND 536($v0) # (6, 1)
-    sw BACKGROUND 540($v0) # (7, 1)
-    sw BACKGROUND 544($v0) # (8, 1)
-    sw BACKGROUND 548($v0) # (9, 1)
-    sw BACKGROUND 552($v0) # (10, 1)
-    sw BACKGROUND 556($v0) # (11, 1)
-    sw BACKGROUND 560($v0) # (12, 1)
-    sw BACKGROUND 564($v0) # (13, 1)
-    sw BACKGROUND 568($v0) # (14, 1)
-    sw BACKGROUND 572($v0) # (15, 1)
-    sw BACKGROUND 1024($v0) # (0, 2)
-    sw BACKGROUND 1028($v0) # (1, 2)
-    sw BACKGROUND 1032($v0) # (2, 2)
-    sw BACKGROUND 1036($v0) # (3, 2)
-    sw BACKGROUND 1040($v0) # (4, 2)
-    sw BACKGROUND 1044($v0) # (5, 2)
-    sw BACKGROUND 1048($v0) # (6, 2)
-    sw BACKGROUND 1052($v0) # (7, 2)
-    sw BACKGROUND 1056($v0) # (8, 2)
-    sw BACKGROUND 1060($v0) # (9, 2)
-    sw BACKGROUND 1064($v0) # (10, 2)
-    sw BACKGROUND 1068($v0) # (11, 2)
-    sw BACKGROUND 1072($v0) # (12, 2)
-    sw BACKGROUND 1076($v0) # (13, 2)
-    sw BACKGROUND 1080($v0) # (14, 2)
-    sw BACKGROUND 1084($v0) # (15, 2)
-    sw BACKGROUND 1536($v0) # (0, 3)
-    sw BACKGROUND 1540($v0) # (1, 3)
-    sw BACKGROUND 1544($v0) # (2, 3)
-    sw BACKGROUND 1548($v0) # (3, 3)
-    sw BACKGROUND 1552($v0) # (4, 3)
-    sw BACKGROUND 1556($v0) # (5, 3)
-    sw BACKGROUND 1560($v0) # (6, 3)
-    sw BACKGROUND 1564($v0) # (7, 3)
-    sw BACKGROUND 1568($v0) # (8, 3)
-    sw BACKGROUND 1572($v0) # (9, 3)
-    sw BACKGROUND 1576($v0) # (10, 3)
-    sw BACKGROUND 1580($v0) # (11, 3)
-    sw BACKGROUND 1584($v0) # (12, 3)
-    sw BACKGROUND 1588($v0) # (13, 3)
-    sw BACKGROUND 1592($v0) # (14, 3)
-    sw BACKGROUND 1596($v0) # (15, 3)
-    sw BACKGROUND 2048($v0) # (0, 4)
-    sw BACKGROUND 2052($v0) # (1, 4)
-    sw BACKGROUND 2056($v0) # (2, 4)
-    sw BACKGROUND 2060($v0) # (3, 4)
-    sw BACKGROUND 2064($v0) # (4, 4)
-    sw BACKGROUND 2068($v0) # (5, 4)
-    sw BACKGROUND 2072($v0) # (6, 4)
-    sw BACKGROUND 2076($v0) # (7, 4)
-    sw BACKGROUND 2080($v0) # (8, 4)
-    sw BACKGROUND 2084($v0) # (9, 4)
-    sw BACKGROUND 2088($v0) # (10, 4)
-    sw BACKGROUND 2092($v0) # (11, 4)
-    sw BACKGROUND 2096($v0) # (12, 4)
-    sw BACKGROUND 2100($v0) # (13, 4)
-    sw BACKGROUND 2104($v0) # (14, 4)
-    sw BACKGROUND 2108($v0) # (15, 4)
-    sw BACKGROUND 2560($v0) # (0, 5)
-    sw BACKGROUND 2564($v0) # (1, 5)
-    sw BACKGROUND 2568($v0) # (2, 5)
-    sw BACKGROUND 2572($v0) # (3, 5)
-    sw BACKGROUND 2576($v0) # (4, 5)
-    sw BACKGROUND 2580($v0) # (5, 5)
-    sw BACKGROUND 2584($v0) # (6, 5)
-    sw BACKGROUND 2588($v0) # (7, 5)
-    sw BACKGROUND 2592($v0) # (8, 5)
-    sw BACKGROUND 2596($v0) # (9, 5)
-    sw BACKGROUND 2600($v0) # (10, 5)
-    sw BACKGROUND 2604($v0) # (11, 5)
-    sw BACKGROUND 2608($v0) # (12, 5)
-    sw BACKGROUND 2612($v0) # (13, 5)
-    sw BACKGROUND 2616($v0) # (14, 5)
-    sw BACKGROUND 2620($v0) # (15, 5)
-    sw BACKGROUND 3072($v0) # (0, 6)
-    sw BACKGROUND 3076($v0) # (1, 6)
-    sw BACKGROUND 3080($v0) # (2, 6)
-    sw BACKGROUND 3084($v0) # (3, 6)
-    sw BACKGROUND 3088($v0) # (4, 6)
-    sw BACKGROUND 3092($v0) # (5, 6)
-    sw BACKGROUND 3096($v0) # (6, 6)
-    sw BACKGROUND 3100($v0) # (7, 6)
-    sw BACKGROUND 3104($v0) # (8, 6)
-    sw BACKGROUND 3108($v0) # (9, 6)
-    sw BACKGROUND 3112($v0) # (10, 6)
-    sw BACKGROUND 3116($v0) # (11, 6)
-    sw BACKGROUND 3120($v0) # (12, 6)
-    sw BACKGROUND 3124($v0) # (13, 6)
-    sw BACKGROUND 3128($v0) # (14, 6)
-    sw BACKGROUND 3132($v0) # (15, 6)
-    sw BACKGROUND 3584($v0) # (0, 7)
-    sw BACKGROUND 3588($v0) # (1, 7)
-    sw BACKGROUND 3592($v0) # (2, 7)
-    sw BACKGROUND 3596($v0) # (3, 7)
-    sw BACKGROUND 3600($v0) # (4, 7)
-    sw BACKGROUND 3604($v0) # (5, 7)
-    sw BACKGROUND 3608($v0) # (6, 7)
-    sw BACKGROUND 3612($v0) # (7, 7)
-    sw BACKGROUND 3616($v0) # (8, 7)
-    sw BACKGROUND 3620($v0) # (9, 7)
-    sw BACKGROUND 3624($v0) # (10, 7)
-    sw BACKGROUND 3628($v0) # (11, 7)
-    sw BACKGROUND 3632($v0) # (12, 7)
-    sw BACKGROUND 3636($v0) # (13, 7)
-    sw BACKGROUND 3640($v0) # (14, 7)
-    sw BACKGROUND 3644($v0) # (15, 7)
-    sw BACKGROUND 4096($v0) # (0, 8)
-    sw BACKGROUND 4100($v0) # (1, 8)
-    sw BACKGROUND 4104($v0) # (2, 8)
-    sw BACKGROUND 4108($v0) # (3, 8)
-    sw BACKGROUND 4112($v0) # (4, 8)
-    sw BACKGROUND 4116($v0) # (5, 8)
-    sw BACKGROUND 4120($v0) # (6, 8)
-    sw BACKGROUND 4124($v0) # (7, 8)
-    sw BACKGROUND 4128($v0) # (8, 8)
-    sw BACKGROUND 4132($v0) # (9, 8)
-    sw BACKGROUND 4136($v0) # (10, 8)
-    sw BACKGROUND 4140($v0) # (11, 8)
-    sw BACKGROUND 4144($v0) # (12, 8)
-    sw BACKGROUND 4148($v0) # (13, 8)
-    sw BACKGROUND 4152($v0) # (14, 8)
-    sw BACKGROUND 4156($v0) # (15, 8)
-    sw BACKGROUND 4608($v0) # (0, 9)
-    sw BACKGROUND 4612($v0) # (1, 9)
-    sw BACKGROUND 4616($v0) # (2, 9)
-    sw BACKGROUND 4620($v0) # (3, 9)
-    sw BACKGROUND 4624($v0) # (4, 9)
-    sw BACKGROUND 4628($v0) # (5, 9)
-    sw BACKGROUND 4632($v0) # (6, 9)
-    sw BACKGROUND 4636($v0) # (7, 9)
-    sw BACKGROUND 4640($v0) # (8, 9)
-    sw BACKGROUND 4644($v0) # (9, 9)
-    sw BACKGROUND 4648($v0) # (10, 9)
-    sw BACKGROUND 4652($v0) # (11, 9)
-    sw BACKGROUND 4656($v0) # (12, 9)
-    sw BACKGROUND 4660($v0) # (13, 9)
-    sw BACKGROUND 4664($v0) # (14, 9)
-    sw BACKGROUND 4668($v0) # (15, 9)
-    sw BACKGROUND 5120($v0) # (0, 10)
-    sw BACKGROUND 5124($v0) # (1, 10)
-    sw BACKGROUND 5128($v0) # (2, 10)
-    sw BACKGROUND 5132($v0) # (3, 10)
-    sw BACKGROUND 5136($v0) # (4, 10)
-    sw BACKGROUND 5140($v0) # (5, 10)
-    sw BACKGROUND 5144($v0) # (6, 10)
-    sw BACKGROUND 5148($v0) # (7, 10)
-    sw BACKGROUND 5152($v0) # (8, 10)
-    sw BACKGROUND 5156($v0) # (9, 10)
-    sw BACKGROUND 5160($v0) # (10, 10)
-    sw BACKGROUND 5164($v0) # (11, 10)
-    sw BACKGROUND 5168($v0) # (12, 10)
-    sw BACKGROUND 5172($v0) # (13, 10)
-    sw BACKGROUND 5176($v0) # (14, 10)
-    sw BACKGROUND 5180($v0) # (15, 10)
-    sw BACKGROUND 5632($v0) # (0, 11)
-    sw BACKGROUND 5636($v0) # (1, 11)
-    sw BACKGROUND 5640($v0) # (2, 11)
-    sw BACKGROUND 5644($v0) # (3, 11)
-    sw BACKGROUND 5648($v0) # (4, 11)
-    sw BACKGROUND 5652($v0) # (5, 11)
-    sw BACKGROUND 5656($v0) # (6, 11)
-    sw BACKGROUND 5660($v0) # (7, 11)
-    sw BACKGROUND 5664($v0) # (8, 11)
-    sw BACKGROUND 5668($v0) # (9, 11)
-    sw BACKGROUND 5672($v0) # (10, 11)
-    sw BACKGROUND 5676($v0) # (11, 11)
-    sw BACKGROUND 5680($v0) # (12, 11)
-    sw BACKGROUND 5684($v0) # (13, 11)
-    sw BACKGROUND 5688($v0) # (14, 11)
-    sw BACKGROUND 5692($v0) # (15, 11)
-    sw BACKGROUND 6144($v0) # (0, 12)
-    sw BACKGROUND 6148($v0) # (1, 12)
-    sw BACKGROUND 6152($v0) # (2, 12)
-    sw BACKGROUND 6156($v0) # (3, 12)
-    sw BACKGROUND 6160($v0) # (4, 12)
-    sw BACKGROUND 6164($v0) # (5, 12)
-    sw BACKGROUND 6168($v0) # (6, 12)
-    sw BACKGROUND 6172($v0) # (7, 12)
-    sw BACKGROUND 6176($v0) # (8, 12)
-    sw BACKGROUND 6180($v0) # (9, 12)
-    sw BACKGROUND 6184($v0) # (10, 12)
-    sw BACKGROUND 6188($v0) # (11, 12)
-    sw BACKGROUND 6192($v0) # (12, 12)
-    sw BACKGROUND 6196($v0) # (13, 12)
-    sw BACKGROUND 6200($v0) # (14, 12)
-    sw BACKGROUND 6204($v0) # (15, 12)
-    sw BACKGROUND 6656($v0) # (0, 13)
-    sw BACKGROUND 6660($v0) # (1, 13)
-    sw BACKGROUND 6664($v0) # (2, 13)
-    sw BACKGROUND 6668($v0) # (3, 13)
-    sw BACKGROUND 6672($v0) # (4, 13)
-    sw BACKGROUND 6676($v0) # (5, 13)
-    sw BACKGROUND 6680($v0) # (6, 13)
-    sw BACKGROUND 6684($v0) # (7, 13)
-    sw BACKGROUND 6688($v0) # (8, 13)
-    sw BACKGROUND 6692($v0) # (9, 13)
-    sw BACKGROUND 6696($v0) # (10, 13)
-    sw BACKGROUND 6700($v0) # (11, 13)
-    sw BACKGROUND 6704($v0) # (12, 13)
-    sw BACKGROUND 6708($v0) # (13, 13)
-    sw BACKGROUND 6712($v0) # (14, 13)
-    sw BACKGROUND 6716($v0) # (15, 13)
-    sw BACKGROUND 7168($v0) # (0, 14)
-    sw BACKGROUND 7172($v0) # (1, 14)
-    sw BACKGROUND 7176($v0) # (2, 14)
-    sw BACKGROUND 7180($v0) # (3, 14)
-    sw BACKGROUND 7184($v0) # (4, 14)
-    sw BACKGROUND 7188($v0) # (5, 14)
-    sw BACKGROUND 7192($v0) # (6, 14)
-    sw BACKGROUND 7196($v0) # (7, 14)
-    sw BACKGROUND 7200($v0) # (8, 14)
-    sw BACKGROUND 7204($v0) # (9, 14)
-    sw BACKGROUND 7208($v0) # (10, 14)
-    sw BACKGROUND 7212($v0) # (11, 14)
-    sw BACKGROUND 7216($v0) # (12, 14)
-    sw BACKGROUND 7220($v0) # (13, 14)
-    sw BACKGROUND 7224($v0) # (14, 14)
-    sw BACKGROUND 7228($v0) # (15, 14)
-    sw BACKGROUND 7680($v0) # (0, 15)
-    sw BACKGROUND 7684($v0) # (1, 15)
-    sw BACKGROUND 7688($v0) # (2, 15)
-    sw BACKGROUND 7692($v0) # (3, 15)
-    sw BACKGROUND 7696($v0) # (4, 15)
-    sw BACKGROUND 7700($v0) # (5, 15)
-    sw BACKGROUND 7704($v0) # (6, 15)
-    sw BACKGROUND 7708($v0) # (7, 15)
-    sw BACKGROUND 7712($v0) # (8, 15)
-    sw BACKGROUND 7716($v0) # (9, 15)
-    sw BACKGROUND 7720($v0) # (10, 15)
-    sw BACKGROUND 7724($v0) # (11, 15)
-    sw BACKGROUND 7728($v0) # (12, 15)
-    sw BACKGROUND 7732($v0) # (13, 15)
-    sw BACKGROUND 7736($v0) # (14, 15)
-    sw BACKGROUND 7740($v0) # (15, 15)
+    sw $0 0($v0) # (0, 0)
+    sw $0 4($v0) # (1, 0)
+    sw $0 8($v0) # (2, 0)
+    sw $0 12($v0) # (3, 0)
+    sw $0 16($v0) # (4, 0)
+    sw $0 20($v0) # (5, 0)
+    sw $0 24($v0) # (6, 0)
+    sw $0 28($v0) # (7, 0)
+    sw $0 32($v0) # (8, 0)
+    sw $0 36($v0) # (9, 0)
+    sw $0 40($v0) # (10, 0)
+    sw $0 44($v0) # (11, 0)
+    sw $0 48($v0) # (12, 0)
+    sw $0 52($v0) # (13, 0)
+    sw $0 56($v0) # (14, 0)
+    sw $0 60($v0) # (15, 0)
+    sw $0 512($v0) # (0, 1)
+    sw $0 516($v0) # (1, 1)
+    sw $0 520($v0) # (2, 1)
+    sw $0 524($v0) # (3, 1)
+    sw $0 528($v0) # (4, 1)
+    sw $0 532($v0) # (5, 1)
+    sw $0 536($v0) # (6, 1)
+    sw $0 540($v0) # (7, 1)
+    sw $0 544($v0) # (8, 1)
+    sw $0 548($v0) # (9, 1)
+    sw $0 552($v0) # (10, 1)
+    sw $0 556($v0) # (11, 1)
+    sw $0 560($v0) # (12, 1)
+    sw $0 564($v0) # (13, 1)
+    sw $0 568($v0) # (14, 1)
+    sw $0 572($v0) # (15, 1)
+    sw $0 1024($v0) # (0, 2)
+    sw $0 1028($v0) # (1, 2)
+    sw $0 1032($v0) # (2, 2)
+    sw $0 1036($v0) # (3, 2)
+    sw $0 1040($v0) # (4, 2)
+    sw $0 1044($v0) # (5, 2)
+    sw $0 1048($v0) # (6, 2)
+    sw $0 1052($v0) # (7, 2)
+    sw $0 1056($v0) # (8, 2)
+    sw $0 1060($v0) # (9, 2)
+    sw $0 1064($v0) # (10, 2)
+    sw $0 1068($v0) # (11, 2)
+    sw $0 1072($v0) # (12, 2)
+    sw $0 1076($v0) # (13, 2)
+    sw $0 1080($v0) # (14, 2)
+    sw $0 1084($v0) # (15, 2)
+    sw $0 1536($v0) # (0, 3)
+    sw $0 1540($v0) # (1, 3)
+    sw $0 1544($v0) # (2, 3)
+    sw $0 1548($v0) # (3, 3)
+    sw $0 1552($v0) # (4, 3)
+    sw $0 1556($v0) # (5, 3)
+    sw $0 1560($v0) # (6, 3)
+    sw $0 1564($v0) # (7, 3)
+    sw $0 1568($v0) # (8, 3)
+    sw $0 1572($v0) # (9, 3)
+    sw $0 1576($v0) # (10, 3)
+    sw $0 1580($v0) # (11, 3)
+    sw $0 1584($v0) # (12, 3)
+    sw $0 1588($v0) # (13, 3)
+    sw $0 1592($v0) # (14, 3)
+    sw $0 1596($v0) # (15, 3)
+    sw $0 2048($v0) # (0, 4)
+    sw $0 2052($v0) # (1, 4)
+    sw $0 2056($v0) # (2, 4)
+    sw $0 2060($v0) # (3, 4)
+    sw $0 2064($v0) # (4, 4)
+    sw $0 2068($v0) # (5, 4)
+    sw $0 2072($v0) # (6, 4)
+    sw $0 2076($v0) # (7, 4)
+    sw $0 2080($v0) # (8, 4)
+    sw $0 2084($v0) # (9, 4)
+    sw $0 2088($v0) # (10, 4)
+    sw $0 2092($v0) # (11, 4)
+    sw $0 2096($v0) # (12, 4)
+    sw $0 2100($v0) # (13, 4)
+    sw $0 2104($v0) # (14, 4)
+    sw $0 2108($v0) # (15, 4)
+    sw $0 2560($v0) # (0, 5)
+    sw $0 2564($v0) # (1, 5)
+    sw $0 2568($v0) # (2, 5)
+    sw $0 2572($v0) # (3, 5)
+    sw $0 2576($v0) # (4, 5)
+    sw $0 2580($v0) # (5, 5)
+    sw $0 2584($v0) # (6, 5)
+    sw $0 2588($v0) # (7, 5)
+    sw $0 2592($v0) # (8, 5)
+    sw $0 2596($v0) # (9, 5)
+    sw $0 2600($v0) # (10, 5)
+    sw $0 2604($v0) # (11, 5)
+    sw $0 2608($v0) # (12, 5)
+    sw $0 2612($v0) # (13, 5)
+    sw $0 2616($v0) # (14, 5)
+    sw $0 2620($v0) # (15, 5)
+    sw $0 3072($v0) # (0, 6)
+    sw $0 3076($v0) # (1, 6)
+    sw $0 3080($v0) # (2, 6)
+    sw $0 3084($v0) # (3, 6)
+    sw $0 3088($v0) # (4, 6)
+    sw $0 3092($v0) # (5, 6)
+    sw $0 3096($v0) # (6, 6)
+    sw $0 3100($v0) # (7, 6)
+    sw $0 3104($v0) # (8, 6)
+    sw $0 3108($v0) # (9, 6)
+    sw $0 3112($v0) # (10, 6)
+    sw $0 3116($v0) # (11, 6)
+    sw $0 3120($v0) # (12, 6)
+    sw $0 3124($v0) # (13, 6)
+    sw $0 3128($v0) # (14, 6)
+    sw $0 3132($v0) # (15, 6)
+    sw $0 3584($v0) # (0, 7)
+    sw $0 3588($v0) # (1, 7)
+    sw $0 3592($v0) # (2, 7)
+    sw $0 3596($v0) # (3, 7)
+    sw $0 3600($v0) # (4, 7)
+    sw $0 3604($v0) # (5, 7)
+    sw $0 3608($v0) # (6, 7)
+    sw $0 3612($v0) # (7, 7)
+    sw $0 3616($v0) # (8, 7)
+    sw $0 3620($v0) # (9, 7)
+    sw $0 3624($v0) # (10, 7)
+    sw $0 3628($v0) # (11, 7)
+    sw $0 3632($v0) # (12, 7)
+    sw $0 3636($v0) # (13, 7)
+    sw $0 3640($v0) # (14, 7)
+    sw $0 3644($v0) # (15, 7)
+    sw $0 4096($v0) # (0, 8)
+    sw $0 4100($v0) # (1, 8)
+    sw $0 4104($v0) # (2, 8)
+    sw $0 4108($v0) # (3, 8)
+    sw $0 4112($v0) # (4, 8)
+    sw $0 4116($v0) # (5, 8)
+    sw $0 4120($v0) # (6, 8)
+    sw $0 4124($v0) # (7, 8)
+    sw $0 4128($v0) # (8, 8)
+    sw $0 4132($v0) # (9, 8)
+    sw $0 4136($v0) # (10, 8)
+    sw $0 4140($v0) # (11, 8)
+    sw $0 4144($v0) # (12, 8)
+    sw $0 4148($v0) # (13, 8)
+    sw $0 4152($v0) # (14, 8)
+    sw $0 4156($v0) # (15, 8)
+    sw $0 4608($v0) # (0, 9)
+    sw $0 4612($v0) # (1, 9)
+    sw $0 4616($v0) # (2, 9)
+    sw $0 4620($v0) # (3, 9)
+    sw $0 4624($v0) # (4, 9)
+    sw $0 4628($v0) # (5, 9)
+    sw $0 4632($v0) # (6, 9)
+    sw $0 4636($v0) # (7, 9)
+    sw $0 4640($v0) # (8, 9)
+    sw $0 4644($v0) # (9, 9)
+    sw $0 4648($v0) # (10, 9)
+    sw $0 4652($v0) # (11, 9)
+    sw $0 4656($v0) # (12, 9)
+    sw $0 4660($v0) # (13, 9)
+    sw $0 4664($v0) # (14, 9)
+    sw $0 4668($v0) # (15, 9)
+    sw $0 5120($v0) # (0, 10)
+    sw $0 5124($v0) # (1, 10)
+    sw $0 5128($v0) # (2, 10)
+    sw $0 5132($v0) # (3, 10)
+    sw $0 5136($v0) # (4, 10)
+    sw $0 5140($v0) # (5, 10)
+    sw $0 5144($v0) # (6, 10)
+    sw $0 5148($v0) # (7, 10)
+    sw $0 5152($v0) # (8, 10)
+    sw $0 5156($v0) # (9, 10)
+    sw $0 5160($v0) # (10, 10)
+    sw $0 5164($v0) # (11, 10)
+    sw $0 5168($v0) # (12, 10)
+    sw $0 5172($v0) # (13, 10)
+    sw $0 5176($v0) # (14, 10)
+    sw $0 5180($v0) # (15, 10)
+    sw $0 5632($v0) # (0, 11)
+    sw $0 5636($v0) # (1, 11)
+    sw $0 5640($v0) # (2, 11)
+    sw $0 5644($v0) # (3, 11)
+    sw $0 5648($v0) # (4, 11)
+    sw $0 5652($v0) # (5, 11)
+    sw $0 5656($v0) # (6, 11)
+    sw $0 5660($v0) # (7, 11)
+    sw $0 5664($v0) # (8, 11)
+    sw $0 5668($v0) # (9, 11)
+    sw $0 5672($v0) # (10, 11)
+    sw $0 5676($v0) # (11, 11)
+    sw $0 5680($v0) # (12, 11)
+    sw $0 5684($v0) # (13, 11)
+    sw $0 5688($v0) # (14, 11)
+    sw $0 5692($v0) # (15, 11)
+    sw $0 6144($v0) # (0, 12)
+    sw $0 6148($v0) # (1, 12)
+    sw $0 6152($v0) # (2, 12)
+    sw $0 6156($v0) # (3, 12)
+    sw $0 6160($v0) # (4, 12)
+    sw $0 6164($v0) # (5, 12)
+    sw $0 6168($v0) # (6, 12)
+    sw $0 6172($v0) # (7, 12)
+    sw $0 6176($v0) # (8, 12)
+    sw $0 6180($v0) # (9, 12)
+    sw $0 6184($v0) # (10, 12)
+    sw $0 6188($v0) # (11, 12)
+    sw $0 6192($v0) # (12, 12)
+    sw $0 6196($v0) # (13, 12)
+    sw $0 6200($v0) # (14, 12)
+    sw $0 6204($v0) # (15, 12)
+    sw $0 6656($v0) # (0, 13)
+    sw $0 6660($v0) # (1, 13)
+    sw $0 6664($v0) # (2, 13)
+    sw $0 6668($v0) # (3, 13)
+    sw $0 6672($v0) # (4, 13)
+    sw $0 6676($v0) # (5, 13)
+    sw $0 6680($v0) # (6, 13)
+    sw $0 6684($v0) # (7, 13)
+    sw $0 6688($v0) # (8, 13)
+    sw $0 6692($v0) # (9, 13)
+    sw $0 6696($v0) # (10, 13)
+    sw $0 6700($v0) # (11, 13)
+    sw $0 6704($v0) # (12, 13)
+    sw $0 6708($v0) # (13, 13)
+    sw $0 6712($v0) # (14, 13)
+    sw $0 6716($v0) # (15, 13)
+    sw $0 7168($v0) # (0, 14)
+    sw $0 7172($v0) # (1, 14)
+    sw $0 7176($v0) # (2, 14)
+    sw $0 7180($v0) # (3, 14)
+    sw $0 7184($v0) # (4, 14)
+    sw $0 7188($v0) # (5, 14)
+    sw $0 7192($v0) # (6, 14)
+    sw $0 7196($v0) # (7, 14)
+    sw $0 7200($v0) # (8, 14)
+    sw $0 7204($v0) # (9, 14)
+    sw $0 7208($v0) # (10, 14)
+    sw $0 7212($v0) # (11, 14)
+    sw $0 7216($v0) # (12, 14)
+    sw $0 7220($v0) # (13, 14)
+    sw $0 7224($v0) # (14, 14)
+    sw $0 7228($v0) # (15, 14)
+    sw $0 7680($v0) # (0, 15)
+    sw $0 7684($v0) # (1, 15)
+    sw $0 7688($v0) # (2, 15)
+    sw $0 7692($v0) # (3, 15)
+    sw $0 7696($v0) # (4, 15)
+    sw $0 7700($v0) # (5, 15)
+    sw $0 7704($v0) # (6, 15)
+    sw $0 7708($v0) # (7, 15)
+    sw $0 7712($v0) # (8, 15)
+    sw $0 7716($v0) # (9, 15)
+    sw $0 7720($v0) # (10, 15)
+    sw $0 7724($v0) # (11, 15)
+    sw $0 7728($v0) # (12, 15)
+    sw $0 7732($v0) # (13, 15)
+    sw $0 7736($v0) # (14, 15)
+    sw $0 7740($v0) # (15, 15)
     jr $ra
 
 draw_doll_00: # start at v0, use t4
@@ -11377,125 +11376,125 @@ draw_doll_21: # start at v0, use t4
     sw $t4 5656($v0)
     jr $ra
 clear_doll: # start at v0, use t4
-    sw BACKGROUND 0($v0)
-    sw BACKGROUND 4($v0)
-    sw BACKGROUND 8($v0)
-    sw BACKGROUND 12($v0)
-    sw BACKGROUND 16($v0)
-    sw BACKGROUND 20($v0)
-    sw BACKGROUND 24($v0)
-    sw BACKGROUND 28($v0)
-    sw BACKGROUND 32($v0)
-    sw BACKGROUND 36($v0)
-    sw BACKGROUND 512($v0)
-    sw BACKGROUND 516($v0)
-    sw BACKGROUND 520($v0)
-    sw BACKGROUND 524($v0)
-    sw BACKGROUND 528($v0)
-    sw BACKGROUND 532($v0)
-    sw BACKGROUND 536($v0)
-    sw BACKGROUND 540($v0)
-    sw BACKGROUND 544($v0)
-    sw BACKGROUND 548($v0)
-    sw BACKGROUND 1024($v0)
-    sw BACKGROUND 1028($v0)
-    sw BACKGROUND 1032($v0)
-    sw BACKGROUND 1036($v0)
-    sw BACKGROUND 1040($v0)
-    sw BACKGROUND 1044($v0)
-    sw BACKGROUND 1048($v0)
-    sw BACKGROUND 1052($v0)
-    sw BACKGROUND 1056($v0)
-    sw BACKGROUND 1060($v0)
-    sw BACKGROUND 1536($v0)
-    sw BACKGROUND 1540($v0)
-    sw BACKGROUND 1544($v0)
-    sw BACKGROUND 1548($v0)
-    sw BACKGROUND 1552($v0)
-    sw BACKGROUND 1556($v0)
-    sw BACKGROUND 1560($v0)
-    sw BACKGROUND 1564($v0)
-    sw BACKGROUND 1568($v0)
-    sw BACKGROUND 1572($v0)
-    sw BACKGROUND 2048($v0)
-    sw BACKGROUND 2052($v0)
-    sw BACKGROUND 2056($v0)
-    sw BACKGROUND 2060($v0)
-    sw BACKGROUND 2064($v0)
-    sw BACKGROUND 2068($v0)
-    sw BACKGROUND 2072($v0)
-    sw BACKGROUND 2076($v0)
-    sw BACKGROUND 2080($v0)
-    sw BACKGROUND 2084($v0)
-    sw BACKGROUND 2560($v0)
-    sw BACKGROUND 2564($v0)
-    sw BACKGROUND 2568($v0)
-    sw BACKGROUND 2572($v0)
-    sw BACKGROUND 2576($v0)
-    sw BACKGROUND 2580($v0)
-    sw BACKGROUND 2584($v0)
-    sw BACKGROUND 2588($v0)
-    sw BACKGROUND 2592($v0)
-    sw BACKGROUND 2596($v0)
-    sw BACKGROUND 3072($v0)
-    sw BACKGROUND 3076($v0)
-    sw BACKGROUND 3080($v0)
-    sw BACKGROUND 3084($v0)
-    sw BACKGROUND 3088($v0)
-    sw BACKGROUND 3092($v0)
-    sw BACKGROUND 3096($v0)
-    sw BACKGROUND 3100($v0)
-    sw BACKGROUND 3104($v0)
-    sw BACKGROUND 3108($v0)
-    sw BACKGROUND 3584($v0)
-    sw BACKGROUND 3588($v0)
-    sw BACKGROUND 3592($v0)
-    sw BACKGROUND 3596($v0)
-    sw BACKGROUND 3600($v0)
-    sw BACKGROUND 3604($v0)
-    sw BACKGROUND 3608($v0)
-    sw BACKGROUND 3612($v0)
-    sw BACKGROUND 3616($v0)
-    sw BACKGROUND 3620($v0)
-    sw BACKGROUND 4096($v0)
-    sw BACKGROUND 4100($v0)
-    sw BACKGROUND 4104($v0)
-    sw BACKGROUND 4108($v0)
-    sw BACKGROUND 4112($v0)
-    sw BACKGROUND 4116($v0)
-    sw BACKGROUND 4120($v0)
-    sw BACKGROUND 4124($v0)
-    sw BACKGROUND 4128($v0)
-    sw BACKGROUND 4132($v0)
-    sw BACKGROUND 4608($v0)
-    sw BACKGROUND 4612($v0)
-    sw BACKGROUND 4616($v0)
-    sw BACKGROUND 4620($v0)
-    sw BACKGROUND 4624($v0)
-    sw BACKGROUND 4628($v0)
-    sw BACKGROUND 4632($v0)
-    sw BACKGROUND 4636($v0)
-    sw BACKGROUND 4640($v0)
-    sw BACKGROUND 4644($v0)
-    sw BACKGROUND 5120($v0)
-    sw BACKGROUND 5124($v0)
-    sw BACKGROUND 5128($v0)
-    sw BACKGROUND 5132($v0)
-    sw BACKGROUND 5136($v0)
-    sw BACKGROUND 5140($v0)
-    sw BACKGROUND 5144($v0)
-    sw BACKGROUND 5148($v0)
-    sw BACKGROUND 5152($v0)
-    sw BACKGROUND 5156($v0)
-    sw BACKGROUND 5632($v0)
-    sw BACKGROUND 5636($v0)
-    sw BACKGROUND 5640($v0)
-    sw BACKGROUND 5644($v0)
-    sw BACKGROUND 5648($v0)
-    sw BACKGROUND 5652($v0)
-    sw BACKGROUND 5656($v0)
-    sw BACKGROUND 5660($v0)
-    sw BACKGROUND 5664($v0)
-    sw BACKGROUND 5668($v0)
+    sw $0 0($v0)
+    sw $0 4($v0)
+    sw $0 8($v0)
+    sw $0 12($v0)
+    sw $0 16($v0)
+    sw $0 20($v0)
+    sw $0 24($v0)
+    sw $0 28($v0)
+    sw $0 32($v0)
+    sw $0 36($v0)
+    sw $0 512($v0)
+    sw $0 516($v0)
+    sw $0 520($v0)
+    sw $0 524($v0)
+    sw $0 528($v0)
+    sw $0 532($v0)
+    sw $0 536($v0)
+    sw $0 540($v0)
+    sw $0 544($v0)
+    sw $0 548($v0)
+    sw $0 1024($v0)
+    sw $0 1028($v0)
+    sw $0 1032($v0)
+    sw $0 1036($v0)
+    sw $0 1040($v0)
+    sw $0 1044($v0)
+    sw $0 1048($v0)
+    sw $0 1052($v0)
+    sw $0 1056($v0)
+    sw $0 1060($v0)
+    sw $0 1536($v0)
+    sw $0 1540($v0)
+    sw $0 1544($v0)
+    sw $0 1548($v0)
+    sw $0 1552($v0)
+    sw $0 1556($v0)
+    sw $0 1560($v0)
+    sw $0 1564($v0)
+    sw $0 1568($v0)
+    sw $0 1572($v0)
+    sw $0 2048($v0)
+    sw $0 2052($v0)
+    sw $0 2056($v0)
+    sw $0 2060($v0)
+    sw $0 2064($v0)
+    sw $0 2068($v0)
+    sw $0 2072($v0)
+    sw $0 2076($v0)
+    sw $0 2080($v0)
+    sw $0 2084($v0)
+    sw $0 2560($v0)
+    sw $0 2564($v0)
+    sw $0 2568($v0)
+    sw $0 2572($v0)
+    sw $0 2576($v0)
+    sw $0 2580($v0)
+    sw $0 2584($v0)
+    sw $0 2588($v0)
+    sw $0 2592($v0)
+    sw $0 2596($v0)
+    sw $0 3072($v0)
+    sw $0 3076($v0)
+    sw $0 3080($v0)
+    sw $0 3084($v0)
+    sw $0 3088($v0)
+    sw $0 3092($v0)
+    sw $0 3096($v0)
+    sw $0 3100($v0)
+    sw $0 3104($v0)
+    sw $0 3108($v0)
+    sw $0 3584($v0)
+    sw $0 3588($v0)
+    sw $0 3592($v0)
+    sw $0 3596($v0)
+    sw $0 3600($v0)
+    sw $0 3604($v0)
+    sw $0 3608($v0)
+    sw $0 3612($v0)
+    sw $0 3616($v0)
+    sw $0 3620($v0)
+    sw $0 4096($v0)
+    sw $0 4100($v0)
+    sw $0 4104($v0)
+    sw $0 4108($v0)
+    sw $0 4112($v0)
+    sw $0 4116($v0)
+    sw $0 4120($v0)
+    sw $0 4124($v0)
+    sw $0 4128($v0)
+    sw $0 4132($v0)
+    sw $0 4608($v0)
+    sw $0 4612($v0)
+    sw $0 4616($v0)
+    sw $0 4620($v0)
+    sw $0 4624($v0)
+    sw $0 4628($v0)
+    sw $0 4632($v0)
+    sw $0 4636($v0)
+    sw $0 4640($v0)
+    sw $0 4644($v0)
+    sw $0 5120($v0)
+    sw $0 5124($v0)
+    sw $0 5128($v0)
+    sw $0 5132($v0)
+    sw $0 5136($v0)
+    sw $0 5140($v0)
+    sw $0 5144($v0)
+    sw $0 5148($v0)
+    sw $0 5152($v0)
+    sw $0 5156($v0)
+    sw $0 5632($v0)
+    sw $0 5636($v0)
+    sw $0 5640($v0)
+    sw $0 5644($v0)
+    sw $0 5648($v0)
+    sw $0 5652($v0)
+    sw $0 5656($v0)
+    sw $0 5660($v0)
+    sw $0 5664($v0)
+    sw $0 5668($v0)
     jr $ra
 
