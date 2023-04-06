@@ -130,7 +130,9 @@ main:
     # draw current doll frame
     andi $t4 $s5 4 # check door_unlocked
     bnez $t4 refresh # doll not on screen
-    rem $t4 $s7 DOLLS_FRAME # current time mod
+    andi $t4 $s7 1 # every 2 frames
+    srl $t4 $s7 1
+    rem $t4 $t4 DOLLS_FRAME
     sll $t4 $t4 2 # in words
     la $t5 dolls
     add $t5 $t5 $t4 # address to doll frame
