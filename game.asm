@@ -57,7 +57,7 @@
     door_address:   .word 0 # address on screen
     alice: .word draw_alice_00 draw_alice_01 draw_alice_02
         draw_alice_03 draw_alice_04 draw_alice_05
-    stage:          .word 0 # stage counter * 4
+    stage:          .word 8 # stage counter * 4
     # stage gravity (Δx, Δy) for each stage
     stage_gravity:  .half 0 4 0 -4 -4 0 4 0 4 0
 
@@ -365,7 +365,7 @@ stage_2: # stage 2 gimmick
     flatten($s0, $s1, $v0)
     jal clear_alice
     li $s0 400
-    li $s1 256
+    li $s1 296
     li $s6 0
     j main # return
 stage_3: # stage 3 gimmick
