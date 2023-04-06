@@ -2171,36 +2171,37 @@ draw_alice_00:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 0)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (2, 0)
+    li $t4 0x030302 # load color
+    sw $t4 0($v0) # store color (2, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2f1c14 # load color
+    li $t4 0x3c231b # load color
     sw $t4 0($v0) # store color (3, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x945138 # load color
+    li $t4 0xa46249 # load color
     sw $t4 0($v0) # store color (4, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf0af8f # load color
+    li $t4 0xeaa891 # load color
     sw $t4 0($v0) # store color (5, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcfa0a8 # load color
+    li $t4 0xd0a4af # load color
     sw $t4 0($v0) # store color (6, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc0889e # load color
+    li $t4 0xc68fa1 # load color
     sw $t4 0($v0) # store color (7, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd295a0 # load color
+    li $t4 0xd198a1 # load color
     sw $t4 0($v0) # store color (8, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbf808d # load color
+    li $t4 0xc58993 # load color
     sw $t4 0($v0) # store color (9, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcd9bae # load color
+    li $t4 0xc7a3b2 # load color
     sw $t4 0($v0) # store color (10, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x999198 # load color
+    li $t4 0x7f7778 # load color
     sw $t4 0($v0) # store color (11, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x382d1f # load color
+    li $t4 0x261911 # load color
     sw $t4 0($v0) # store color (12, 0)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (13, 0)
@@ -2213,490 +2214,490 @@ draw_alice_00:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0b0705 # load color
+    li $t4 0x120a07 # load color
     sw $t4 0($v0) # store color (1, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x593122 # load color
+    li $t4 0x6d3f2d # load color
     sw $t4 0($v0) # store color (2, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd1815e # load color
+    li $t4 0xd68969 # load color
     sw $t4 0($v0) # store color (3, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf6cec0 # load color
+    li $t4 0xe7bcb6 # load color
     sw $t4 0($v0) # store color (4, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbc788c # load color
+    li $t4 0xb96a7d # load color
     sw $t4 0($v0) # store color (5, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa33e5a # load color
+    li $t4 0xaa4e63 # load color
     sw $t4 0($v0) # store color (6, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbf7b86 # load color
+    li $t4 0xc98a8f # load color
     sw $t4 0($v0) # store color (7, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe09d9a # load color
+    li $t4 0xe3a49e # load color
     sw $t4 0($v0) # store color (8, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe19e9b # load color
+    li $t4 0xdea09c # load color
     sw $t4 0($v0) # store color (9, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xba757f # load color
+    li $t4 0xbc7781 # load color
     sw $t4 0($v0) # store color (10, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcb748b # load color
+    li $t4 0xce7c8c # load color
     sw $t4 0($v0) # store color (11, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd1958d # load color
+    li $t4 0xbf9084 # load color
     sw $t4 0($v0) # store color (12, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x65493f # load color
+    li $t4 0x49352c # load color
     sw $t4 0($v0) # store color (13, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x040303 # load color
+    li $t4 0x040201 # load color
     sw $t4 0($v0) # store color (14, 1)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (15, 1)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    sw $0 0($v0) # store background (0, 2)
+    li $t4 0x030201 # load color
+    sw $t4 0($v0) # store color (0, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x724330 # load color
+    li $t4 0x854d37 # load color
     sw $t4 0($v0) # store color (1, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc16c4d # load color
+    li $t4 0xc87556 # load color
     sw $t4 0($v0) # store color (2, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdaa29a # load color
+    li $t4 0xdaa59e # load color
     sw $t4 0($v0) # store color (3, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb56c80 # load color
+    li $t4 0xb76476 # load color
     sw $t4 0($v0) # store color (4, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xab465c # load color
+    li $t4 0xb7626e # load color
     sw $t4 0($v0) # store color (5, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe7b895 # load color
+    li $t4 0xeab990 # load color
     sw $t4 0($v0) # store color (6, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf9cb7c # load color
+    li $t4 0xf6c374 # load color
     sw $t4 0($v0) # store color (7, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf6c871 # load color
+    li $t4 0xf5c370 # load color
     sw $t4 0($v0) # store color (8, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf7c870 # load color
+    li $t4 0xf6c26e # load color
     sw $t4 0($v0) # store color (9, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf8c57d # load color
+    li $t4 0xf2bd82 # load color
     sw $t4 0($v0) # store color (10, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe1b8a6 # load color
+    li $t4 0xe1b7ab # load color
     sw $t4 0($v0) # store color (11, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdc9e9e # load color
+    li $t4 0xe2a197 # load color
     sw $t4 0($v0) # store color (12, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xebb284 # load color
+    li $t4 0xd7a474 # load color
     sw $t4 0($v0) # store color (13, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x825838 # load color
+    li $t4 0x614029 # load color
     sw $t4 0($v0) # store color (14, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x050004 # load color
+    li $t4 0x000001 # load color
     sw $t4 0($v0) # store color (15, 2)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x331e15 # load color
+    li $t4 0x4c2c20 # load color
     sw $t4 0($v0) # store color (0, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb96c4e # load color
+    li $t4 0xbb7151 # load color
     sw $t4 0($v0) # store color (1, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd59b65 # load color
+    li $t4 0xdca16b # load color
     sw $t4 0($v0) # store color (2, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd1907a # load color
+    li $t4 0xcb8877 # load color
     sw $t4 0($v0) # store color (3, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb35b69 # load color
+    li $t4 0xc17172 # load color
     sw $t4 0($v0) # store color (4, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xedc094 # load color
+    li $t4 0xf1c58e # load color
     sw $t4 0($v0) # store color (5, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffdc7c # load color
+    li $t4 0xfed97c # load color
     sw $t4 0($v0) # store color (6, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffde75 # load color
+    li $t4 0xfbdb75 # load color
     sw $t4 0($v0) # store color (7, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbe686 # load color
+    li $t4 0xfce488 # load color
     sw $t4 0($v0) # store color (8, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe690 # load color
+    li $t4 0xffe389 # load color
     sw $t4 0($v0) # store color (9, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfcdb76 # load color
+    li $t4 0xfad677 # load color
     sw $t4 0($v0) # store color (10, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffdf86 # load color
+    li $t4 0xffe092 # load color
     sw $t4 0($v0) # store color (11, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe9b9 # load color
+    li $t4 0xfcdeac # load color
     sw $t4 0($v0) # store color (12, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfcd280 # load color
+    li $t4 0xf6ce78 # load color
     sw $t4 0($v0) # store color (13, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xeec76d # load color
+    li $t4 0xcea95e # load color
     sw $t4 0($v0) # store color (14, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3d2a1c # load color
+    li $t4 0x261a12 # load color
     sw $t4 0($v0) # store color (15, 3)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x9e5c43 # load color
+    li $t4 0xa55f46 # load color
     sw $t4 0($v0) # store color (0, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbc6e50 # load color
+    li $t4 0xc47b55 # load color
     sw $t4 0($v0) # store color (1, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf6c372 # load color
+    li $t4 0xf7c873 # load color
     sw $t4 0($v0) # store color (2, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbd67c # load color
+    li $t4 0xf7cd7b # load color
     sw $t4 0($v0) # store color (3, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xeab374 # load color
+    li $t4 0xeab377 # load color
     sw $t4 0($v0) # store color (4, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe1a3 # load color
+    li $t4 0xfcdfa7 # load color
     sw $t4 0($v0) # store color (5, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf7d7b2 # load color
+    li $t4 0xedc39c # load color
     sw $t4 0($v0) # store color (6, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xda9e63 # load color
+    li $t4 0xe0ac6b # load color
     sw $t4 0($v0) # store color (7, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfeeaa4 # load color
+    li $t4 0xfeebab # load color
     sw $t4 0($v0) # store color (8, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffeabe # load color
+    li $t4 0xf9dbac # load color
     sw $t4 0($v0) # store color (9, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xde9e64 # load color
+    li $t4 0xdca063 # load color
     sw $t4 0($v0) # store color (10, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfedf9e # load color
+    li $t4 0xfce0a5 # load color
     sw $t4 0($v0) # store color (11, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf9d69a # load color
+    li $t4 0xf7ca8b # load color
     sw $t4 0($v0) # store color (12, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xeeae6b # load color
+    li $t4 0xefb76f # load color
     sw $t4 0($v0) # store color (13, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfede7b # load color
+    li $t4 0xf7d473 # load color
     sw $t4 0($v0) # store color (14, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb4914f # load color
+    li $t4 0x937241 # load color
     sw $t4 0($v0) # store color (15, 4)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xbc6c4f # load color
+    li $t4 0xbe6f50 # load color
     sw $t4 0($v0) # store color (0, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xda935f # load color
+    li $t4 0xe09e65 # load color
     sw $t4 0($v0) # store color (1, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfad278 # load color
+    li $t4 0xfad378 # load color
     sw $t4 0($v0) # store color (2, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf9d177 # load color
+    li $t4 0xfacc77 # load color
     sw $t4 0($v0) # store color (3, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf7b873 # load color
+    li $t4 0xf2b672 # load color
     sw $t4 0($v0) # store color (4, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf4c672 # load color
+    li $t4 0xe7b36a # load color
     sw $t4 0($v0) # store color (5, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xba6844 # load color
+    li $t4 0xb46643 # load color
     sw $t4 0($v0) # store color (6, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc17e50 # load color
+    li $t4 0xcf955c # load color
     sw $t4 0($v0) # store color (7, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe67a # load color
+    li $t4 0xfddb76 # load color
     sw $t4 0($v0) # store color (8, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe3a358 # load color
+    li $t4 0xd69355 # load color
     sw $t4 0($v0) # store color (9, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8e4025 # load color
+    li $t4 0x8d482d # load color
     sw $t4 0($v0) # store color (10, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xac6943 # load color
+    li $t4 0xc38254 # load color
     sw $t4 0($v0) # store color (11, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfdd27b # load color
+    li $t4 0xfbd178 # load color
     sw $t4 0($v0) # store color (12, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdca468 # load color
+    li $t4 0xd99b64 # load color
     sw $t4 0($v0) # store color (13, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf4b371 # load color
+    li $t4 0xf5c073 # load color
     sw $t4 0($v0) # store color (14, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd7be68 # load color
+    li $t4 0xb39f56 # load color
     sw $t4 0($v0) # store color (15, 5)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xbb6a4e # load color
+    li $t4 0xbe6f4f # load color
     sw $t4 0($v0) # store color (0, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe2a968 # load color
+    li $t4 0xe7b06a # load color
     sw $t4 0($v0) # store color (1, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xebbc6e # load color
+    li $t4 0xeaba6d # load color
     sw $t4 0($v0) # store color (2, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfdd279 # load color
+    li $t4 0xfbcd79 # load color
     sw $t4 0($v0) # store color (3, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcc855d # load color
+    li $t4 0xbc7955 # load color
     sw $t4 0($v0) # store color (4, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x744737 # load color
+    li $t4 0x764b3c # load color
     sw $t4 0($v0) # store color (5, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x6f2e21 # load color
+    li $t4 0x733b2c # load color
     sw $t4 0($v0) # store color (6, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa27757 # load color
+    li $t4 0xb78b66 # load color
     sw $t4 0($v0) # store color (7, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf1b571 # load color
+    li $t4 0xecad75 # load color
     sw $t4 0($v0) # store color (8, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd08470 # load color
+    li $t4 0xc48374 # load color
     sw $t4 0($v0) # store color (9, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x60525a # load color
+    li $t4 0x62585f # load color
     sw $t4 0($v0) # store color (10, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x956261 # load color
+    li $t4 0xb2705f # load color
     sw $t4 0($v0) # store color (11, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbb968 # load color
+    li $t4 0xf6c06c # load color
     sw $t4 0($v0) # store color (12, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc69c58 # load color
+    li $t4 0xb7814d # load color
     sw $t4 0($v0) # store color (13, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb66a4c # load color
+    li $t4 0xbd7d54 # load color
     sw $t4 0($v0) # store color (14, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xccae67 # load color
+    li $t4 0xac9857 # load color
     sw $t4 0($v0) # store color (15, 6)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xce7a57 # load color
+    li $t4 0xcf7d58 # load color
     sw $t4 0($v0) # store color (0, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe29f65 # load color
+    li $t4 0xe09d64 # load color
     sw $t4 0($v0) # store color (1, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd38a5b # load color
+    li $t4 0xd5915d # load color
     sw $t4 0($v0) # store color (2, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffdc7e # load color
+    li $t4 0xfcd27a # load color
     sw $t4 0($v0) # store color (3, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc08e56 # load color
+    li $t4 0xb8885c # load color
     sw $t4 0($v0) # store color (4, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa6959a # load color
+    li $t4 0xa69da1 # load color
     sw $t4 0($v0) # store color (5, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x618389 # load color
+    li $t4 0x5f7f83 # load color
     sw $t4 0($v0) # store color (6, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbfada4 # load color
+    li $t4 0xddbdb0 # load color
     sw $t4 0($v0) # store color (7, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfcc9b8 # load color
+    li $t4 0xfbcfbf # load color
     sw $t4 0($v0) # store color (8, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf5e1da # load color
+    li $t4 0xe2d7d2 # load color
     sw $t4 0($v0) # store color (9, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x64acbd # load color
+    li $t4 0x74a7b4 # load color
     sw $t4 0($v0) # store color (10, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc99c8e # load color
+    li $t4 0xcb8b70 # load color
     sw $t4 0($v0) # store color (11, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd08c48 # load color
+    li $t4 0xd19251 # load color
     sw $t4 0($v0) # store color (12, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb57a49 # load color
+    li $t4 0x975f3a # load color
     sw $t4 0($v0) # store color (13, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x432519 # load color
+    li $t4 0x3e2b1a # load color
     sw $t4 0($v0) # store color (14, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x57522d # load color
+    li $t4 0x524c2b # load color
     sw $t4 0($v0) # store color (15, 7)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xd07b58 # load color
+    li $t4 0xcd7a57 # load color
     sw $t4 0($v0) # store color (0, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdc855e # load color
+    li $t4 0xd9835c # load color
     sw $t4 0($v0) # store color (1, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc2754f # load color
+    li $t4 0xc37950 # load color
     sw $t4 0($v0) # store color (2, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe9a66a # load color
+    li $t4 0xe8a569 # load color
     sw $t4 0($v0) # store color (3, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe8a764 # load color
+    li $t4 0xd9a16a # load color
     sw $t4 0($v0) # store color (4, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc2b7b4 # load color
+    li $t4 0xaab3b6 # load color
     sw $t4 0($v0) # store color (5, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2c98ac # load color
+    li $t4 0x3c96a7 # load color
     sw $t4 0($v0) # store color (6, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd7dad6 # load color
+    li $t4 0xeee2db # load color
     sw $t4 0($v0) # store color (7, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffefe6 # load color
+    li $t4 0xffebe2 # load color
     sw $t4 0($v0) # store color (8, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf8ebe2 # load color
+    li $t4 0xf1e6df # load color
     sw $t4 0($v0) # store color (9, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbed2cf # load color
+    li $t4 0xbfc1bb # load color
     sw $t4 0($v0) # store color (10, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc9876d # load color
+    li $t4 0xc7785c # load color
     sw $t4 0($v0) # store color (11, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdc7350 # load color
+    li $t4 0xd67453 # load color
     sw $t4 0($v0) # store color (12, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7a4331 # load color
+    li $t4 0x562e21 # load color
     sw $t4 0($v0) # store color (13, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x060302 # load color
+    li $t4 0x020101 # load color
     sw $t4 0($v0) # store color (14, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x000202 # load color
+    li $t4 0x020303 # load color
     sw $t4 0($v0) # store color (15, 8)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x734333 # load color
+    li $t4 0x7d4938 # load color
     sw $t4 0($v0) # store color (0, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdc8260 # load color
+    li $t4 0xce7958 # load color
     sw $t4 0($v0) # store color (1, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7c432d # load color
+    li $t4 0x6e3c27 # load color
     sw $t4 0($v0) # store color (2, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x794631 # load color
+    li $t4 0x8e543a # load color
     sw $t4 0($v0) # store color (3, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xda7f51 # load color
+    li $t4 0xcb7850 # load color
     sw $t4 0($v0) # store color (4, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbf816e # load color
+    li $t4 0xce9487 # load color
     sw $t4 0($v0) # store color (5, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xddbbc1 # load color
+    li $t4 0xe4c2c7 # load color
     sw $t4 0($v0) # store color (6, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfad9d5 # load color
+    li $t4 0xfbd5cf # load color
     sw $t4 0($v0) # store color (7, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe2d8 # load color
+    li $t4 0xfed5ce # load color
     sw $t4 0($v0) # store color (8, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfed9d3 # load color
+    li $t4 0xf6cbc5 # load color
     sw $t4 0($v0) # store color (9, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcf9486 # load color
+    li $t4 0xc78a79 # load color
     sw $t4 0($v0) # store color (10, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcb734f # load color
+    li $t4 0xcd7451 # load color
     sw $t4 0($v0) # store color (11, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcd724d # load color
+    li $t4 0xb36343 # load color
     sw $t4 0($v0) # store color (12, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x4d2b1f # load color
+    li $t4 0x2d1912 # load color
     sw $t4 0($v0) # store color (13, 9)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x010101 # load color
-    sw $t4 0($v0) # store color (15, 9)
+    sw $0 0($v0) # store background (15, 9)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x000001 # load color
+    li $t4 0x0b0506 # load color
     sw $t4 0($v0) # store color (0, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x724233 # load color
+    li $t4 0x683c2f # load color
     sw $t4 0($v0) # store color (1, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x43251d # load color
+    li $t4 0x2e1913 # load color
     sw $t4 0($v0) # store color (2, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1a0f08 # load color
+    li $t4 0x261409 # load color
     sw $t4 0($v0) # store color (3, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8c4a2a # load color
+    li $t4 0x96573a # load color
     sw $t4 0($v0) # store color (4, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdea89a # load color
+    li $t4 0xdeb2ad # load color
     sw $t4 0($v0) # store color (5, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffd9e0 # load color
+    li $t4 0xf7d2d8 # load color
     sw $t4 0($v0) # store color (6, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf4bfbb # load color
+    li $t4 0xe2a9aa # load color
     sw $t4 0($v0) # store color (7, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbd4e59 # load color
+    li $t4 0xc05c68 # load color
     sw $t4 0($v0) # store color (8, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdca6ae # load color
+    li $t4 0xdab3b8 # load color
     sw $t4 0($v0) # store color (9, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcaacae # load color
+    li $t4 0xbd979a # load color
     sw $t4 0($v0) # store color (10, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb46259 # load color
+    li $t4 0x914e44 # load color
     sw $t4 0($v0) # store color (11, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2c1309 # load color
+    li $t4 0x1d0b04 # load color
     sw $t4 0($v0) # store color (12, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0b0604 # load color
+    li $t4 0x060302 # load color
     sw $t4 0($v0) # store color (13, 10)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 10)
@@ -2709,37 +2710,41 @@ draw_alice_00:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 11)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (2, 11)
+    li $t4 0x020508 # load color
+    sw $t4 0($v0) # store color (2, 11)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (3, 11)
+    li $t4 0x151e2d # load color
+    sw $t4 0($v0) # store color (3, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x110700 # load color
+    li $t4 0x302b30 # load color
     sw $t4 0($v0) # store color (4, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x85757d # load color
+    li $t4 0x897c89 # load color
     sw $t4 0($v0) # store color (5, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb6a3b8 # load color
+    li $t4 0xac93a7 # load color
     sw $t4 0($v0) # store color (6, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb68a95 # load color
+    li $t4 0xbb939f # load color
     sw $t4 0($v0) # store color (7, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xca9ca2 # load color
+    li $t4 0xc9a1a7 # load color
     sw $t4 0($v0) # store color (8, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc2949b # load color
+    li $t4 0xbd99a0 # load color
     sw $t4 0($v0) # store color (9, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x92889b # load color
+    li $t4 0x736a82 # load color
     sw $t4 0($v0) # store color (10, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x312840 # load color
+    li $t4 0x25253a # load color
     sw $t4 0($v0) # store color (11, 11)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (12, 11)
+    li $t4 0x1e2d49 # load color
+    sw $t4 0($v0) # store color (12, 11)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (13, 11)
+    li $t4 0x04060a # load color
+    sw $t4 0($v0) # store color (13, 11)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 11)
     add $v0 $v0 $t0 # shift x
@@ -2751,42 +2756,43 @@ draw_alice_00:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 12)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (2, 12)
+    li $t4 0x1d2636 # load color
+    sw $t4 0($v0) # store color (2, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x040508 # load color
+    li $t4 0x2d3d5a # load color
     sw $t4 0($v0) # store color (3, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x162c4a # load color
+    li $t4 0x284167 # load color
     sw $t4 0($v0) # store color (4, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x25406d # load color
+    li $t4 0x2e4169 # load color
     sw $t4 0($v0) # store color (5, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x303454 # load color
+    li $t4 0x3a3f5e # load color
     sw $t4 0($v0) # store color (6, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7180a3 # load color
+    li $t4 0x7d87a7 # load color
     sw $t4 0($v0) # store color (7, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8591a7 # load color
+    li $t4 0x898ea0 # load color
     sw $t4 0($v0) # store color (8, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x778090 # load color
+    li $t4 0x71788b # load color
     sw $t4 0($v0) # store color (9, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2c3756 # load color
+    li $t4 0x303959 # load color
     sw $t4 0($v0) # store color (10, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x202c4d # load color
+    li $t4 0x2b3553 # load color
     sw $t4 0($v0) # store color (11, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x212332 # load color
+    li $t4 0x3b5586 # load color
     sw $t4 0($v0) # store color (12, 12)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (13, 12)
+    li $t4 0x1f2d46 # load color
+    sw $t4 0($v0) # store color (13, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x010102 # load color
-    sw $t4 0($v0) # store color (14, 12)
+    sw $0 0($v0) # store background (14, 12)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (15, 12)
     add $v0 $v0 $t0 # shift x
@@ -2794,44 +2800,46 @@ draw_alice_00:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 13)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (1, 13)
+    li $t4 0x07090d # load color
+    sw $t4 0($v0) # store color (1, 13)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (2, 13)
+    li $t4 0x35415e # load color
+    sw $t4 0($v0) # store color (2, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3f414d # load color
+    li $t4 0x384c74 # load color
     sw $t4 0($v0) # store color (3, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x5d6e90 # load color
+    li $t4 0x425883 # load color
     sw $t4 0($v0) # store color (4, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x333d5e # load color
+    li $t4 0x384061 # load color
     sw $t4 0($v0) # store color (5, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2b345c # load color
+    li $t4 0x3e466e # load color
     sw $t4 0($v0) # store color (6, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa9a8c3 # load color
+    li $t4 0xb4b4cc # load color
     sw $t4 0($v0) # store color (7, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf0ecf6 # load color
+    li $t4 0xdfdeeb # load color
     sw $t4 0($v0) # store color (8, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe8e5f2 # load color
+    li $t4 0xd6d5e6 # load color
     sw $t4 0($v0) # store color (9, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8c95b5 # load color
+    li $t4 0x7881a0 # load color
     sw $t4 0($v0) # store color (10, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x58586f # load color
+    li $t4 0x5d6586 # load color
     sw $t4 0($v0) # store color (11, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x171619 # load color
+    li $t4 0x304870 # load color
     sw $t4 0($v0) # store color (12, 13)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (13, 13)
+    li $t4 0x080c13 # load color
+    sw $t4 0($v0) # store color (13, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x010101 # load color
-    sw $t4 0($v0) # store color (14, 13)
+    sw $0 0($v0) # store background (14, 13)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (15, 13)
     add $v0 $v0 $t0 # shift x
@@ -2841,36 +2849,38 @@ draw_alice_00:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 14)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (2, 14)
+    li $t4 0x1b1f2a # load color
+    sw $t4 0($v0) # store color (2, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0b0b0a # load color
+    li $t4 0x475373 # load color
     sw $t4 0($v0) # store color (3, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x4d4d5a # load color
+    li $t4 0x454c67 # load color
     sw $t4 0($v0) # store color (4, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x757998 # load color
+    li $t4 0x7e82a0 # load color
     sw $t4 0($v0) # store color (5, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa5b0c6 # load color
+    li $t4 0xa4adc3 # load color
     sw $t4 0($v0) # store color (6, 14)
     add $v0 $v0 $t0 # shift x
     li $t4 0x717897 # load color
     sw $t4 0($v0) # store color (7, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x6f7e9b # load color
+    li $t4 0x7383a0 # load color
     sw $t4 0($v0) # store color (8, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa3abc4 # load color
+    li $t4 0xa2a8c1 # load color
     sw $t4 0($v0) # store color (9, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8986a0 # load color
+    li $t4 0x69677e # load color
     sw $t4 0($v0) # store color (10, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1b191d # load color
+    li $t4 0x283754 # load color
     sw $t4 0($v0) # store color (11, 14)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (12, 14)
+    li $t4 0x070b11 # load color
+    sw $t4 0($v0) # store color (12, 14)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (13, 14)
     add $v0 $v0 $t0 # shift x
@@ -2886,33 +2896,33 @@ draw_alice_00:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (2, 15)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (3, 15)
+    li $t4 0x040506 # load color
+    sw $t4 0($v0) # store color (3, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0a0c10 # load color
+    li $t4 0x21222b # load color
     sw $t4 0($v0) # store color (4, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x676e8f # load color
+    li $t4 0x6a7094 # load color
     sw $t4 0($v0) # store color (5, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7e82a6 # load color
+    li $t4 0x71779b # load color
     sw $t4 0($v0) # store color (6, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x4a4d62 # load color
+    li $t4 0x383c4f # load color
     sw $t4 0($v0) # store color (7, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x262d42 # load color
+    li $t4 0x292f41 # load color
     sw $t4 0($v0) # store color (8, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x4b5376 # load color
+    li $t4 0x4d5779 # load color
     sw $t4 0($v0) # store color (9, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x48516d # load color
+    li $t4 0x353b51 # load color
     sw $t4 0($v0) # store color (10, 15)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (11, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x010101 # load color
-    sw $t4 0($v0) # store color (12, 15)
+    sw $0 0($v0) # store background (12, 15)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (13, 15)
     add $v0 $v0 $t0 # shift x
@@ -2926,36 +2936,37 @@ draw_alice_01:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 0)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (2, 0)
+    li $t4 0x020201 # load color
+    sw $t4 0($v0) # store color (2, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x281812 # load color
+    li $t4 0x382119 # load color
     sw $t4 0($v0) # store color (3, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8c503b # load color
+    li $t4 0x9e5d46 # load color
     sw $t4 0($v0) # store color (4, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xeca485 # load color
+    li $t4 0xeaa78d # load color
     sw $t4 0($v0) # store color (5, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd7b1b8 # load color
+    li $t4 0xd2a7b0 # load color
     sw $t4 0($v0) # store color (6, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc89cae # load color
+    li $t4 0xc590a2 # load color
     sw $t4 0($v0) # store color (7, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd8a7b0 # load color
+    li $t4 0xd39ba4 # load color
     sw $t4 0($v0) # store color (8, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc7959e # load color
+    li $t4 0xc58a94 # load color
     sw $t4 0($v0) # store color (9, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xccaab8 # load color
+    li $t4 0xc99fae # load color
     sw $t4 0($v0) # store color (10, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7d7a7d # load color
+    li $t4 0x8a8588 # load color
     sw $t4 0($v0) # store color (11, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x22160e # load color
+    li $t4 0x302016 # load color
     sw $t4 0($v0) # store color (12, 0)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (13, 0)
@@ -2968,442 +2979,442 @@ draw_alice_01:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x090504 # load color
+    li $t4 0x0f0906 # load color
     sw $t4 0($v0) # store color (1, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x502e21 # load color
+    li $t4 0x663b2a # load color
     sw $t4 0($v0) # store color (2, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc77b5b # load color
+    li $t4 0xd28564 # load color
     sw $t4 0($v0) # store color (3, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xebb9ad # load color
+    li $t4 0xe9bcb5 # load color
     sw $t4 0($v0) # store color (4, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc37f8e # load color
+    li $t4 0xbc7184 # load color
     sw $t4 0($v0) # store color (5, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa7455d # load color
+    li $t4 0xa94960 # load color
     sw $t4 0($v0) # store color (6, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc07b87 # load color
+    li $t4 0xc4848c # load color
     sw $t4 0($v0) # store color (7, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xde9b9a # load color
+    li $t4 0xe2a39e # load color
     sw $t4 0($v0) # store color (8, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdb9898 # load color
+    li $t4 0xdfa19d # load color
     sw $t4 0($v0) # store color (9, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xba737f # load color
+    li $t4 0xbd7982 # load color
     sw $t4 0($v0) # store color (10, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcc7b8c # load color
+    li $t4 0xca7688 # load color
     sw $t4 0($v0) # store color (11, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc19286 # load color
+    li $t4 0xc9958b # load color
     sw $t4 0($v0) # store color (12, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x47332b # load color
+    li $t4 0x563f35 # load color
     sw $t4 0($v0) # store color (13, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x020101 # load color
+    li $t4 0x060303 # load color
     sw $t4 0($v0) # store color (14, 1)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (15, 1)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x010000 # load color
+    li $t4 0x020101 # load color
     sw $t4 0($v0) # store color (0, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x6c3f2d # load color
+    li $t4 0x804b36 # load color
     sw $t4 0($v0) # store color (1, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc06f50 # load color
+    li $t4 0xc67354 # load color
     sw $t4 0($v0) # store color (2, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdea396 # load color
+    li $t4 0xdca69d # load color
     sw $t4 0($v0) # store color (3, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbe7786 # load color
+    li $t4 0xb86a7b # load color
     sw $t4 0($v0) # store color (4, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb05265 # load color
+    li $t4 0xb35a6a # load color
     sw $t4 0($v0) # store color (5, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe2af94 # load color
+    li $t4 0xe6b692 # load color
     sw $t4 0($v0) # store color (6, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf4c07b # load color
+    li $t4 0xf5c277 # load color
     sw $t4 0($v0) # store color (7, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf4c173 # load color
+    li $t4 0xf5c271 # load color
     sw $t4 0($v0) # store color (8, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf5c172 # load color
+    li $t4 0xf6c26f # load color
     sw $t4 0($v0) # store color (9, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf1bb81 # load color
+    li $t4 0xf2bd7f # load color
     sw $t4 0($v0) # store color (10, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdeb2a9 # load color
+    li $t4 0xe2b8a9 # load color
     sw $t4 0($v0) # store color (11, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xde9894 # load color
+    li $t4 0xe09d99 # load color
     sw $t4 0($v0) # store color (12, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd7a378 # load color
+    li $t4 0xdda97b # load color
     sw $t4 0($v0) # store color (13, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x62412a # load color
+    li $t4 0x734e32 # load color
     sw $t4 0($v0) # store color (14, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x010002 # load color
+    li $t4 0x050204 # load color
     sw $t4 0($v0) # store color (15, 2)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x351f17 # load color
+    li $t4 0x472a1e # load color
     sw $t4 0($v0) # store color (0, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb46b4e # load color
+    li $t4 0xba6f50 # load color
     sw $t4 0($v0) # store color (1, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd69765 # load color
+    li $t4 0xda9e69 # load color
     sw $t4 0($v0) # store color (2, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcf8e7b # load color
+    li $t4 0xcc8978 # load color
     sw $t4 0($v0) # store color (3, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xba656c # load color
+    li $t4 0xbe6b6f # load color
     sw $t4 0($v0) # store color (4, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe9b98d # load color
+    li $t4 0xedbf8e # load color
     sw $t4 0($v0) # store color (5, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfed67a # load color
+    li $t4 0xfed87b # load color
     sw $t4 0($v0) # store color (6, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfddb75 # load color
+    li $t4 0xfcdb75 # load color
     sw $t4 0($v0) # store color (7, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfce382 # load color
+    li $t4 0xfce384 # load color
     sw $t4 0($v0) # store color (8, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe386 # load color
+    li $t4 0xffe388 # load color
     sw $t4 0($v0) # store color (9, 3)
     add $v0 $v0 $t0 # shift x
     li $t4 0xfbd777 # load color
     sw $t4 0($v0) # store color (10, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfedd8c # load color
+    li $t4 0xfedd8a # load color
     sw $t4 0($v0) # store color (11, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfee3b3 # load color
+    li $t4 0xfee3b2 # load color
     sw $t4 0($v0) # store color (12, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf7cd7c # load color
+    li $t4 0xf7cd7d # load color
     sw $t4 0($v0) # store color (13, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd5ad61 # load color
+    li $t4 0xdfb766 # load color
     sw $t4 0($v0) # store color (14, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2a1d14 # load color
+    li $t4 0x362719 # load color
     sw $t4 0($v0) # store color (15, 3)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x9b5b42 # load color
+    li $t4 0xa25d45 # load color
     sw $t4 0($v0) # store color (0, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbf7452 # load color
+    li $t4 0xc37954 # load color
     sw $t4 0($v0) # store color (1, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf4c171 # load color
+    li $t4 0xf7c673 # load color
     sw $t4 0($v0) # store color (2, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf7ce7b # load color
+    li $t4 0xf7cd7c # load color
     sw $t4 0($v0) # store color (3, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe8b077 # load color
+    li $t4 0xe9b177 # load color
     sw $t4 0($v0) # store color (4, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbdba2 # load color
+    li $t4 0xfbdda5 # load color
     sw $t4 0($v0) # store color (5, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf4d1a7 # load color
+    li $t4 0xf1cca4 # load color
     sw $t4 0($v0) # store color (6, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe1ab6d # load color
+    li $t4 0xe0aa6b # load color
     sw $t4 0($v0) # store color (7, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfee9a7 # load color
+    li $t4 0xfee9a8 # load color
     sw $t4 0($v0) # store color (8, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfce2b4 # load color
+    li $t4 0xfce2b3 # load color
     sw $t4 0($v0) # store color (9, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdfa668 # load color
+    li $t4 0xdea367 # load color
     sw $t4 0($v0) # store color (10, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfcdfa1 # load color
+    li $t4 0xfbdd9f # load color
     sw $t4 0($v0) # store color (11, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf8ce92 # load color
+    li $t4 0xf9d195 # load color
     sw $t4 0($v0) # store color (12, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xefb76f # load color
+    li $t4 0xefb46e # load color
     sw $t4 0($v0) # store color (13, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf8d675 # load color
+    li $t4 0xf9d675 # load color
     sw $t4 0($v0) # store color (14, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x997744 # load color
+    li $t4 0xa68349 # load color
     sw $t4 0($v0) # store color (15, 4)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xbe6f51 # load color
+    li $t4 0xbe6e50 # load color
     sw $t4 0($v0) # store color (0, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdb9361 # load color
+    li $t4 0xdf9a63 # load color
     sw $t4 0($v0) # store color (1, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf9cf77 # load color
+    li $t4 0xfad278 # load color
     sw $t4 0($v0) # store color (2, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfad178 # load color
+    li $t4 0xf9ce77 # load color
     sw $t4 0($v0) # store color (3, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf3b672 # load color
+    li $t4 0xf3b772 # load color
     sw $t4 0($v0) # store color (4, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf0c172 # load color
+    li $t4 0xedbd6f # load color
     sw $t4 0($v0) # store color (5, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbe714c # load color
+    li $t4 0xba6d49 # load color
     sw $t4 0($v0) # store color (6, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xca8a56 # load color
+    li $t4 0xcb8d58 # load color
     sw $t4 0($v0) # store color (7, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe07a # load color
+    li $t4 0xffdf79 # load color
     sw $t4 0($v0) # store color (8, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe0a35e # load color
+    li $t4 0xe0a25d # load color
     sw $t4 0($v0) # store color (9, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x964d2f # load color
+    li $t4 0x954c2f # load color
     sw $t4 0($v0) # store color (10, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc08053 # load color
+    li $t4 0xbd7d51 # load color
     sw $t4 0($v0) # store color (11, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbd27a # load color
+    li $t4 0xfbd17a # load color
     sw $t4 0($v0) # store color (12, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdea167 # load color
+    li $t4 0xdea267 # load color
     sw $t4 0($v0) # store color (13, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf3bd72 # load color
+    li $t4 0xf0b870 # load color
     sw $t4 0($v0) # store color (14, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc0aa5c # load color
+    li $t4 0xcab160 # load color
     sw $t4 0($v0) # store color (15, 5)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xbe704f # load color
+    li $t4 0xbd6f4f # load color
     sw $t4 0($v0) # store color (0, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe2a867 # load color
+    li $t4 0xe6ae6a # load color
     sw $t4 0($v0) # store color (1, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xebbc6e # load color
+    li $t4 0xebbc6f # load color
     sw $t4 0($v0) # store color (2, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfcd179 # load color
+    li $t4 0xfccf79 # load color
     sw $t4 0($v0) # store color (3, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcb855c # load color
+    li $t4 0xc58059 # load color
     sw $t4 0($v0) # store color (4, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7f513e # load color
+    li $t4 0x7c4f3c # load color
     sw $t4 0($v0) # store color (5, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x753a29 # load color
+    li $t4 0x753929 # load color
     sw $t4 0($v0) # store color (6, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xac805e # load color
+    li $t4 0xae825f # load color
     sw $t4 0($v0) # store color (7, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xefb473 # load color
+    li $t4 0xeeb273 # load color
     sw $t4 0($v0) # store color (8, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xca836f # load color
+    li $t4 0xca8370 # load color
     sw $t4 0($v0) # store color (9, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x655356 # load color
+    li $t4 0x665356 # load color
     sw $t4 0($v0) # store color (10, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa56a5e # load color
+    li $t4 0xa36a5e # load color
     sw $t4 0($v0) # store color (11, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf6bb6b # load color
+    li $t4 0xf6b96b # load color
     sw $t4 0($v0) # store color (12, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc08d52 # load color
+    li $t4 0xc29154 # load color
     sw $t4 0($v0) # store color (13, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbf7a53 # load color
+    li $t4 0xbb7550 # load color
     sw $t4 0($v0) # store color (14, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb8a15d # load color
+    li $t4 0xc0a560 # load color
     sw $t4 0($v0) # store color (15, 6)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xcc7956 # load color
+    li $t4 0xcf7c58 # load color
     sw $t4 0($v0) # store color (0, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe19e65 # load color
+    li $t4 0xe19f65 # load color
     sw $t4 0($v0) # store color (1, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd48d5c # load color
+    li $t4 0xd5915d # load color
     sw $t4 0($v0) # store color (2, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfcd379 # load color
+    li $t4 0xfdd57a # load color
     sw $t4 0($v0) # store color (3, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbe8d5a # load color
+    li $t4 0xb8875a # load color
     sw $t4 0($v0) # store color (4, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa19195 # load color
+    li $t4 0xa19498 # load color
     sw $t4 0($v0) # store color (5, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x647c7f # load color
+    li $t4 0x61797d # load color
     sw $t4 0($v0) # store color (6, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xccb3a7 # load color
+    li $t4 0xd0b5a9 # load color
     sw $t4 0($v0) # store color (7, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbc8b6 # load color
+    li $t4 0xfac8b6 # load color
     sw $t4 0($v0) # store color (8, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xedd9d3 # load color
+    li $t4 0xeddad3 # load color
     sw $t4 0($v0) # store color (9, 7)
     add $v0 $v0 $t0 # shift x
     li $t4 0x6ea5b2 # load color
     sw $t4 0($v0) # store color (10, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc9917c # load color
+    li $t4 0xc9937f # load color
     sw $t4 0($v0) # store color (11, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd39551 # load color
+    li $t4 0xd49451 # load color
     sw $t4 0($v0) # store color (12, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa46c40 # load color
+    li $t4 0xa87042 # load color
     sw $t4 0($v0) # store color (13, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x462c1c # load color
+    li $t4 0x482c1b # load color
     sw $t4 0($v0) # store color (14, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x5d552f # load color
+    li $t4 0x5e5630 # load color
     sw $t4 0($v0) # store color (15, 7)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xcb7856 # load color
+    li $t4 0xd07b58 # load color
     sw $t4 0($v0) # store color (0, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdc865e # load color
+    li $t4 0xda855d # load color
     sw $t4 0($v0) # store color (1, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc67952 # load color
+    li $t4 0xc97d54 # load color
     sw $t4 0($v0) # store color (2, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe9a669 # load color
+    li $t4 0xedaa6c # load color
     sw $t4 0($v0) # store color (3, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdea568 # load color
+    li $t4 0xdba46a # load color
     sw $t4 0($v0) # store color (4, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb7b3b3 # load color
+    li $t4 0xb0b4b6 # load color
     sw $t4 0($v0) # store color (5, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3594a6 # load color
+    li $t4 0x3092a4 # load color
     sw $t4 0($v0) # store color (6, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdfdbd7 # load color
+    li $t4 0xe4ded8 # load color
     sw $t4 0($v0) # store color (7, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffebe2 # load color
+    li $t4 0xffeae2 # load color
     sw $t4 0($v0) # store color (8, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf6e9e0 # load color
+    li $t4 0xf6e8e0 # load color
     sw $t4 0($v0) # store color (9, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb6c5c1 # load color
+    li $t4 0xb4c4c1 # load color
     sw $t4 0($v0) # store color (10, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc98166 # load color
+    li $t4 0xc98369 # load color
     sw $t4 0($v0) # store color (11, 8)
     add $v0 $v0 $t0 # shift x
     li $t4 0xd77452 # load color
     sw $t4 0($v0) # store color (12, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x673928 # load color
+    li $t4 0x6e3c2a # load color
     sw $t4 0($v0) # store color (13, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x050302 # load color
+    li $t4 0x070403 # load color
     sw $t4 0($v0) # store color (14, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x040504 # load color
+    li $t4 0x040503 # load color
     sw $t4 0($v0) # store color (15, 8)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x7f4a38 # load color
+    li $t4 0x864f3c # load color
     sw $t4 0($v0) # store color (0, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcd7959 # load color
+    li $t4 0xd17b5a # load color
     sw $t4 0($v0) # store color (1, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7f462f # load color
+    li $t4 0x74402b # load color
     sw $t4 0($v0) # store color (2, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x844e36 # load color
+    li $t4 0x91563b # load color
     sw $t4 0($v0) # store color (3, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcf7c51 # load color
+    li $t4 0xcf7d52 # load color
     sw $t4 0($v0) # store color (4, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc9907f # load color
+    li $t4 0xcb9485 # load color
     sw $t4 0($v0) # store color (5, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd8bdc3 # load color
+    li $t4 0xd5bec4 # load color
     sw $t4 0($v0) # store color (6, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf9d6d1 # load color
+    li $t4 0xf9d7d2 # load color
     sw $t4 0($v0) # store color (7, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffdbd3 # load color
+    li $t4 0xffddd4 # load color
     sw $t4 0($v0) # store color (8, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfad1cb # load color
+    li $t4 0xfbd3cd # load color
     sw $t4 0($v0) # store color (9, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcf9686 # load color
+    li $t4 0xd19788 # load color
     sw $t4 0($v0) # store color (10, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcb7452 # load color
+    li $t4 0xcb7552 # load color
     sw $t4 0($v0) # store color (11, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc26b4a # load color
+    li $t4 0xc86e4c # load color
     sw $t4 0($v0) # store color (12, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3d2318 # load color
+    li $t4 0x43251b # load color
     sw $t4 0($v0) # store color (13, 9)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 9)
@@ -3412,46 +3423,46 @@ draw_alice_01:
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x0a0506 # load color
+    li $t4 0x100809 # load color
     sw $t4 0($v0) # store color (0, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x6c3f31 # load color
+    li $t4 0x7a4737 # load color
     sw $t4 0($v0) # store color (1, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x41231b # load color
+    li $t4 0x3c1f18 # load color
     sw $t4 0($v0) # store color (2, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x24140b # load color
+    li $t4 0x2c170b # load color
     sw $t4 0($v0) # store color (3, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x935435 # load color
+    li $t4 0x9c5939 # load color
     sw $t4 0($v0) # store color (4, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd8a79d # load color
+    li $t4 0xd9a8a0 # load color
     sw $t4 0($v0) # store color (5, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf7d0d7 # load color
+    li $t4 0xf8d0d7 # load color
     sw $t4 0($v0) # store color (6, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xeab7b7 # load color
+    li $t4 0xeab8b8 # load color
     sw $t4 0($v0) # store color (7, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc15e69 # load color
+    li $t4 0xc3626d # load color
     sw $t4 0($v0) # store color (8, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdaadb4 # load color
+    li $t4 0xdbb0b6 # load color
     sw $t4 0($v0) # store color (9, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbd9a9c # load color
+    li $t4 0xbc9899 # load color
     sw $t4 0($v0) # store color (10, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa3594f # load color
+    li $t4 0xaa5d51 # load color
     sw $t4 0($v0) # store color (11, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2c150d # load color
+    li $t4 0x311609 # load color
     sw $t4 0($v0) # store color (12, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0a0604 # load color
+    li $t4 0x0c0604 # load color
     sw $t4 0($v0) # store color (13, 10)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 10)
@@ -3464,37 +3475,41 @@ draw_alice_01:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 11)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (2, 11)
+    li $t4 0x000204 # load color
+    sw $t4 0($v0) # store color (2, 11)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (3, 11)
+    li $t4 0x101723 # load color
+    sw $t4 0($v0) # store color (3, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1d120b # load color
+    li $t4 0x362b2b # load color
     sw $t4 0($v0) # store color (4, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x897780 # load color
+    li $t4 0x98838b # load color
     sw $t4 0($v0) # store color (5, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb69fb2 # load color
+    li $t4 0xbfa5b6 # load color
     sw $t4 0($v0) # store color (6, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbf939d # load color
+    li $t4 0xc6959d # load color
     sw $t4 0($v0) # store color (7, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcea0a4 # load color
+    li $t4 0xd29da2 # load color
     sw $t4 0($v0) # store color (8, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc599a0 # load color
+    li $t4 0xcb9ba2 # load color
     sw $t4 0($v0) # store color (9, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x857b8f # load color
+    li $t4 0x8e8296 # load color
     sw $t4 0($v0) # store color (10, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2c2537 # load color
+    li $t4 0x352d3f # load color
     sw $t4 0($v0) # store color (11, 11)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (12, 11)
+    li $t4 0x15233a # load color
+    sw $t4 0($v0) # store color (12, 11)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (13, 11)
+    li $t4 0x03060a # load color
+    sw $t4 0($v0) # store color (13, 11)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 11)
     add $v0 $v0 $t0 # shift x
@@ -3506,39 +3521,41 @@ draw_alice_01:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 12)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (2, 12)
+    li $t4 0x1a2230 # load color
+    sw $t4 0($v0) # store color (2, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x05070a # load color
+    li $t4 0x2d3c58 # load color
     sw $t4 0($v0) # store color (3, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1f324e # load color
+    li $t4 0x263d60 # load color
     sw $t4 0($v0) # store color (4, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2f446e # load color
+    li $t4 0x2f436c # load color
     sw $t4 0($v0) # store color (5, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x393e5d # load color
+    li $t4 0x3a405e # load color
     sw $t4 0($v0) # store color (6, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x757fa0 # load color
+    li $t4 0x727c9e # load color
     sw $t4 0($v0) # store color (7, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x878ea2 # load color
+    li $t4 0x82899d # load color
     sw $t4 0($v0) # store color (8, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x767c8e # load color
+    li $t4 0x707789 # load color
     sw $t4 0($v0) # store color (9, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x343c5b # load color
+    li $t4 0x323958 # load color
     sw $t4 0($v0) # store color (10, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x262f4e # load color
+    li $t4 0x26304e # load color
     sw $t4 0($v0) # store color (11, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x181924 # load color
+    li $t4 0x395382 # load color
     sw $t4 0($v0) # store color (12, 12)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (13, 12)
+    li $t4 0x243553 # load color
+    sw $t4 0($v0) # store color (13, 12)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 12)
     add $v0 $v0 $t0 # shift x
@@ -3548,42 +3565,44 @@ draw_alice_01:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 13)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (1, 13)
+    li $t4 0x07090c # load color
+    sw $t4 0($v0) # store color (1, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x010102 # load color
+    li $t4 0x323f5b # load color
     sw $t4 0($v0) # store color (2, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3c3f4c # load color
+    li $t4 0x354970 # load color
     sw $t4 0($v0) # store color (3, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x556689 # load color
+    li $t4 0x3f5682 # load color
     sw $t4 0($v0) # store color (4, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x363f61 # load color
+    li $t4 0x333c5e # load color
     sw $t4 0($v0) # store color (5, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x373e65 # load color
+    li $t4 0x363c63 # load color
     sw $t4 0($v0) # store color (6, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xacacc6 # load color
+    li $t4 0xb4b3cc # load color
     sw $t4 0($v0) # store color (7, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe1dfec # load color
+    li $t4 0xe0deec # load color
     sw $t4 0($v0) # store color (8, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd9d8e8 # load color
+    li $t4 0xd9d8e7 # load color
     sw $t4 0($v0) # store color (9, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7e87a5 # load color
+    li $t4 0x7b85a4 # load color
     sw $t4 0($v0) # store color (10, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x535468 # load color
+    li $t4 0x5c617f # load color
     sw $t4 0($v0) # store color (11, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0e0e10 # load color
+    li $t4 0x3b5381 # load color
     sw $t4 0($v0) # store color (12, 13)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (13, 13)
+    li $t4 0x101826 # load color
+    sw $t4 0($v0) # store color (13, 13)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 13)
     add $v0 $v0 $t0 # shift x
@@ -3593,38 +3612,41 @@ draw_alice_01:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 14)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (1, 14)
+    li $t4 0x010101 # load color
+    sw $t4 0($v0) # store color (1, 14)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (2, 14)
+    li $t4 0x202633 # load color
+    sw $t4 0($v0) # store color (2, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0d0d0c # load color
+    li $t4 0x4a597c # load color
     sw $t4 0($v0) # store color (3, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x4f5160 # load color
+    li $t4 0x495271 # load color
     sw $t4 0($v0) # store color (4, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x767b98 # load color
+    li $t4 0x747998 # load color
     sw $t4 0($v0) # store color (5, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa1abc1 # load color
+    li $t4 0x99a3bb # load color
     sw $t4 0($v0) # store color (6, 14)
     add $v0 $v0 $t0 # shift x
     li $t4 0x757b9b # load color
     sw $t4 0($v0) # store color (7, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7787a2 # load color
+    li $t4 0x8290ab # load color
     sw $t4 0($v0) # store color (8, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa4aac3 # load color
+    li $t4 0xacb1c9 # load color
     sw $t4 0($v0) # store color (9, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x78778f # load color
+    li $t4 0x7b7a93 # load color
     sw $t4 0($v0) # store color (10, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x141316 # load color
+    li $t4 0x384666 # load color
     sw $t4 0($v0) # store color (11, 14)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (12, 14)
+    li $t4 0x111a2a # load color
+    sw $t4 0($v0) # store color (12, 14)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (13, 14)
     add $v0 $v0 $t0 # shift x
@@ -3640,30 +3662,32 @@ draw_alice_01:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (2, 15)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (3, 15)
+    li $t4 0x0d0e12 # load color
+    sw $t4 0($v0) # store color (3, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x16171e # load color
+    li $t4 0x20212a # load color
     sw $t4 0($v0) # store color (4, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x666d8e # load color
+    li $t4 0x6d7395 # load color
     sw $t4 0($v0) # store color (5, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x777ea1 # load color
+    li $t4 0x8286a8 # load color
     sw $t4 0($v0) # store color (6, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x41465b # load color
+    li $t4 0x4b5067 # load color
     sw $t4 0($v0) # store color (7, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x292f42 # load color
+    li $t4 0x30384f # load color
     sw $t4 0($v0) # store color (8, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x4d5578 # load color
+    li $t4 0x535c7e # load color
     sw $t4 0($v0) # store color (9, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3e465e # load color
+    li $t4 0x434962 # load color
     sw $t4 0($v0) # store color (10, 15)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (11, 15)
+    li $t4 0x000104 # load color
+    sw $t4 0($v0) # store color (11, 15)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (12, 15)
     add $v0 $v0 $t0 # shift x
@@ -3681,34 +3705,34 @@ draw_alice_02:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (2, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x140c09 # load color
+    li $t4 0x2f1c14 # load color
     sw $t4 0($v0) # store color (3, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x794330 # load color
+    li $t4 0x93543d # load color
     sw $t4 0($v0) # store color (4, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xee9d78 # load color
+    li $t4 0xeda88a # load color
     sw $t4 0($v0) # store color (5, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe1c2c4 # load color
+    li $t4 0xd5a9af # load color
     sw $t4 0($v0) # store color (6, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xceb2c4 # load color
+    li $t4 0xc490a5 # load color
     sw $t4 0($v0) # store color (7, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe2c3ca # load color
+    li $t4 0xd69ea8 # load color
     sw $t4 0($v0) # store color (8, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcbabb5 # load color
+    li $t4 0xc38b97 # load color
     sw $t4 0($v0) # store color (9, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd5bbc7 # load color
+    li $t4 0xc999a9 # load color
     sw $t4 0($v0) # store color (10, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x83858a # load color
+    li $t4 0x9c98a0 # load color
     sw $t4 0($v0) # store color (11, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x170f09 # load color
+    li $t4 0x3a2a20 # load color
     sw $t4 0($v0) # store color (12, 0)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (13, 0)
@@ -3721,45 +3745,47 @@ draw_alice_02:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 1)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (1, 1)
+    li $t4 0x0c0705 # load color
+    sw $t4 0($v0) # store color (1, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3b2219 # load color
+    li $t4 0x5d3627 # load color
     sw $t4 0($v0) # store color (2, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb87050 # load color
+    li $t4 0xcd805f # load color
     sw $t4 0($v0) # store color (3, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xebb19f # load color
+    li $t4 0xeabcb1 # load color
     sw $t4 0($v0) # store color (4, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xce959e # load color
+    li $t4 0xc27d8d # load color
     sw $t4 0($v0) # store color (5, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa53f58 # load color
+    li $t4 0xa7445c # load color
     sw $t4 0($v0) # store color (6, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb5657a # load color
+    li $t4 0xbe7c87 # load color
     sw $t4 0($v0) # store color (7, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd4878f # load color
+    li $t4 0xe0a19e # load color
     sw $t4 0($v0) # store color (8, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd3858d # load color
+    li $t4 0xdfa09e # load color
     sw $t4 0($v0) # store color (9, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb6697a # load color
+    li $t4 0xbf7e86 # load color
     sw $t4 0($v0) # store color (10, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc77a8e # load color
+    li $t4 0xc36d82 # load color
     sw $t4 0($v0) # store color (11, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc39889 # load color
+    li $t4 0xd09992 # load color
     sw $t4 0($v0) # store color (12, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3e3028 # load color
+    li $t4 0x6a5044 # load color
     sw $t4 0($v0) # store color (13, 1)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (14, 1)
+    li $t4 0x0c0706 # load color
+    sw $t4 0($v0) # store color (14, 1)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (15, 1)
     add $v0 $v0 $t0 # shift x
@@ -3767,393 +3793,393 @@ draw_alice_02:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x623928 # load color
+    li $t4 0x7a4833 # load color
     sw $t4 0($v0) # store color (1, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbb6b4c # load color
+    li $t4 0xc47152 # load color
     sw $t4 0($v0) # store color (2, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe2a592 # load color
+    li $t4 0xdda59a # load color
     sw $t4 0($v0) # store color (3, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc78e99 # load color
+    li $t4 0xbd7484 # load color
     sw $t4 0($v0) # store color (4, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xab4a60 # load color
+    li $t4 0xae4f64 # load color
     sw $t4 0($v0) # store color (5, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd5a096 # load color
+    li $t4 0xe1ae94 # load color
     sw $t4 0($v0) # store color (6, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xecb886 # load color
+    li $t4 0xf4c17b # load color
     sw $t4 0($v0) # store color (7, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf3be7f # load color
+    li $t4 0xf4c170 # load color
     sw $t4 0($v0) # store color (8, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf3be80 # load color
+    li $t4 0xf5c071 # load color
     sw $t4 0($v0) # store color (9, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe9b485 # load color
+    li $t4 0xf2bc7a # load color
     sw $t4 0($v0) # store color (10, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd7a6a4 # load color
+    li $t4 0xe3b8a8 # load color
     sw $t4 0($v0) # store color (11, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd28789 # load color
+    li $t4 0xda9a98 # load color
     sw $t4 0($v0) # store color (12, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd39b7b # load color
+    li $t4 0xe4aa85 # load color
     sw $t4 0($v0) # store color (13, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x64462d # load color
+    li $t4 0x8c623f # load color
     sw $t4 0($v0) # store color (14, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x080404 # load color
+    li $t4 0x100908 # load color
     sw $t4 0($v0) # store color (15, 2)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x2d1a13 # load color
+    li $t4 0x41261c # load color
     sw $t4 0($v0) # store color (0, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xae674b # load color
+    li $t4 0xb76d4e # load color
     sw $t4 0($v0) # store color (1, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd28e63 # load color
+    li $t4 0xd89967 # load color
     sw $t4 0($v0) # store color (2, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xca8881 # load color
+    li $t4 0xcc8b7a # load color
     sw $t4 0($v0) # store color (3, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb35564 # load color
+    li $t4 0xb9636b # load color
     sw $t4 0($v0) # store color (4, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdda689 # load color
+    li $t4 0xe8b78e # load color
     sw $t4 0($v0) # store color (5, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbcd72 # load color
+    li $t4 0xfed67a # load color
     sw $t4 0($v0) # store color (6, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfedc72 # load color
+    li $t4 0xfddb74 # load color
     sw $t4 0($v0) # store color (7, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbe179 # load color
+    li $t4 0xfbe380 # load color
     sw $t4 0($v0) # store color (8, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe07c # load color
+    li $t4 0xffe387 # load color
     sw $t4 0($v0) # store color (9, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfed876 # load color
+    li $t4 0xfdda79 # load color
     sw $t4 0($v0) # store color (10, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbd384 # load color
+    li $t4 0xfdd881 # load color
     sw $t4 0($v0) # store color (11, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe8be # load color
+    li $t4 0xffe7b4 # load color
     sw $t4 0($v0) # store color (12, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf7cd88 # load color
+    li $t4 0xf8cf88 # load color
     sw $t4 0($v0) # store color (13, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe1b365 # load color
+    li $t4 0xf1c86e # load color
     sw $t4 0($v0) # store color (14, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x39291b # load color
+    li $t4 0x543f26 # load color
     sw $t4 0($v0) # store color (15, 3)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x874e39 # load color
+    li $t4 0x9d5b43 # load color
     sw $t4 0($v0) # store color (0, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbf7553 # load color
+    li $t4 0xc07653 # load color
     sw $t4 0($v0) # store color (1, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf1bd70 # load color
+    li $t4 0xf6c372 # load color
     sw $t4 0($v0) # store color (2, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf0c37b # load color
+    li $t4 0xf6cd7b # load color
     sw $t4 0($v0) # store color (3, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdea57a # load color
+    li $t4 0xe7af78 # load color
     sw $t4 0($v0) # store color (4, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfad7a1 # load color
+    li $t4 0xfadaa3 # load color
     sw $t4 0($v0) # store color (5, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfce2ae # load color
+    li $t4 0xf7d8ad # load color
     sw $t4 0($v0) # store color (6, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xebb973 # load color
+    li $t4 0xe1aa6d # load color
     sw $t4 0($v0) # store color (7, 4)
     add $v0 $v0 $t0 # shift x
     li $t4 0xfde6a2 # load color
     sw $t4 0($v0) # store color (8, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe8b8 # load color
+    li $t4 0xfee8ba # load color
     sw $t4 0($v0) # store color (9, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xebbb77 # load color
+    li $t4 0xe2ab70 # load color
     sw $t4 0($v0) # store color (10, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe39b # load color
+    li $t4 0xf9d994 # load color
     sw $t4 0($v0) # store color (11, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfad69f # load color
+    li $t4 0xfbdaa2 # load color
     sw $t4 0($v0) # store color (12, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf1ba70 # load color
+    li $t4 0xefb36d # load color
     sw $t4 0($v0) # store color (13, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfcdc79 # load color
+    li $t4 0xfbd678 # load color
     sw $t4 0($v0) # store color (14, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa17e47 # load color
+    li $t4 0xbe9955 # load color
     sw $t4 0($v0) # store color (15, 4)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xbb6d4f # load color
+    li $t4 0xbd6e50 # load color
     sw $t4 0($v0) # store color (0, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd68d5d # load color
+    li $t4 0xdc9562 # load color
     sw $t4 0($v0) # store color (1, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf9ce77 # load color
+    li $t4 0xf9d177 # load color
     sw $t4 0($v0) # store color (2, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbd278 # load color
+    li $t4 0xfad178 # load color
     sw $t4 0($v0) # store color (3, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf2b770 # load color
+    li $t4 0xf3b771 # load color
     sw $t4 0($v0) # store color (4, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf8d182 # load color
+    li $t4 0xf6c977 # load color
     sw $t4 0($v0) # store color (5, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd08b64 # load color
+    li $t4 0xc57a52 # load color
     sw $t4 0($v0) # store color (6, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc78655 # load color
+    li $t4 0xc58152 # load color
     sw $t4 0($v0) # store color (7, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe484 # load color
+    li $t4 0xffe27c # load color
     sw $t4 0($v0) # store color (8, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf0c278 # load color
+    li $t4 0xe9b366 # load color
     sw $t4 0($v0) # store color (9, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xad633f # load color
+    li $t4 0xa15635 # load color
     sw $t4 0($v0) # store color (10, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcb8e5c # load color
+    li $t4 0xb57349 # load color
     sw $t4 0($v0) # store color (11, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbd483 # load color
+    li $t4 0xf9cc7a # load color
     sw $t4 0($v0) # store color (12, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe7ad6d # load color
+    li $t4 0xe6b16d # load color
     sw $t4 0($v0) # store color (13, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xedb76f # load color
+    li $t4 0xe8ac6c # load color
     sw $t4 0($v0) # store color (14, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdcbf66 # load color
+    li $t4 0xe5c76d # load color
     sw $t4 0($v0) # store color (15, 5)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xbb6e4e # load color
+    li $t4 0xbc6e4f # load color
     sw $t4 0($v0) # store color (0, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe4aa68 # load color
+    li $t4 0xe6ae6a # load color
     sw $t4 0($v0) # store color (1, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf1c572 # load color
+    li $t4 0xedbf6f # load color
     sw $t4 0($v0) # store color (2, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbd079 # load color
+    li $t4 0xfcd079 # load color
     sw $t4 0($v0) # store color (3, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdb9564 # load color
+    li $t4 0xd0895e # load color
     sw $t4 0($v0) # store color (4, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x9b6942 # load color
+    li $t4 0x86573e # load color
     sw $t4 0($v0) # store color (5, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x853f28 # load color
+    li $t4 0x793a27 # load color
     sw $t4 0($v0) # store color (6, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xab7753 # load color
+    li $t4 0xa47656 # load color
     sw $t4 0($v0) # store color (7, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf3c270 # load color
+    li $t4 0xf0ba72 # load color
     sw $t4 0($v0) # store color (8, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcb7e5a # load color
+    li $t4 0xce8469 # load color
     sw $t4 0($v0) # store color (9, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x72443b # load color
+    li $t4 0x704e4b # load color
     sw $t4 0($v0) # store color (10, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8a564d # load color
+    li $t4 0x8b5e5a # load color
     sw $t4 0($v0) # store color (11, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf0ad68 # load color
+    li $t4 0xeea765 # load color
     sw $t4 0($v0) # store color (12, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd3a55f # load color
+    li $t4 0xd3a75e # load color
     sw $t4 0($v0) # store color (13, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc97e57 # load color
+    li $t4 0xb76d4c # load color
     sw $t4 0($v0) # store color (14, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd8b56b # load color
+    li $t4 0xd7b06a # load color
     sw $t4 0($v0) # store color (15, 6)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xca7856 # load color
+    li $t4 0xce7b57 # load color
     sw $t4 0($v0) # store color (0, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe5a768 # load color
+    li $t4 0xe3a366 # load color
     sw $t4 0($v0) # store color (1, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd99961 # load color
+    li $t4 0xd6915e # load color
     sw $t4 0($v0) # store color (2, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfed77a # load color
+    li $t4 0xfed67b # load color
     sw $t4 0($v0) # store color (3, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb47e54 # load color
+    li $t4 0xb98657 # load color
     sw $t4 0($v0) # store color (4, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x876e72 # load color
+    li $t4 0x988588 # load color
     sw $t4 0($v0) # store color (5, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x6a5e5c # load color
+    li $t4 0x697274 # load color
     sw $t4 0($v0) # store color (6, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb49889 # load color
+    li $t4 0xbca69b # load color
     sw $t4 0($v0) # store color (7, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf6b89a # load color
+    li $t4 0xf9bfa9 # load color
     sw $t4 0($v0) # store color (8, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xedc9c1 # load color
+    li $t4 0xf5d8d0 # load color
     sw $t4 0($v0) # store color (9, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x6790a0 # load color
+    li $t4 0x6c9fac # load color
     sw $t4 0($v0) # store color (10, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbb938d # load color
+    li $t4 0xbf9c94 # load color
     sw $t4 0($v0) # store color (11, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdc9f56 # load color
+    li $t4 0xd49250 # load color
     sw $t4 0($v0) # store color (12, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc28e51 # load color
+    li $t4 0xbf884e # load color
     sw $t4 0($v0) # store color (13, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x683b28 # load color
+    li $t4 0x5b3322 # load color
     sw $t4 0($v0) # store color (14, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x897945 # load color
+    li $t4 0x6d6036 # load color
     sw $t4 0($v0) # store color (15, 7)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xcf7a57 # load color
+    li $t4 0xd07b58 # load color
     sw $t4 0($v0) # store color (0, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdd8c5f # load color
+    li $t4 0xdc895e # load color
     sw $t4 0($v0) # store color (1, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd08457 # load color
+    li $t4 0xce8056 # load color
     sw $t4 0($v0) # store color (2, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf4bb72 # load color
+    li $t4 0xf1b26f # load color
     sw $t4 0($v0) # store color (3, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd9a668 # load color
+    li $t4 0xdda769 # load color
     sw $t4 0($v0) # store color (4, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbbb5b5 # load color
+    li $t4 0xbab5b5 # load color
     sw $t4 0($v0) # store color (5, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3a94a4 # load color
+    li $t4 0x2f92a3 # load color
     sw $t4 0($v0) # store color (6, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd2d1cd # load color
+    li $t4 0xd3d5d1 # load color
     sw $t4 0($v0) # store color (7, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe3da # load color
+    li $t4 0xffe8df # load color
     sw $t4 0($v0) # store color (8, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbe8e1 # load color
+    li $t4 0xfdeae2 # load color
     sw $t4 0($v0) # store color (9, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x93bdbf # load color
+    li $t4 0xa5c5c4 # load color
     sw $t4 0($v0) # store color (10, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcb9783 # load color
+    li $t4 0xcb9682 # load color
     sw $t4 0($v0) # store color (11, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc96f4a # load color
+    li $t4 0xcf6f4d # load color
     sw $t4 0($v0) # store color (12, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x915437 # load color
+    li $t4 0x905137 # load color
     sw $t4 0($v0) # store color (13, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1d0f0a # load color
+    li $t4 0x190d09 # load color
     sw $t4 0($v0) # store color (14, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x10120a # load color
+    li $t4 0x070805 # load color
     sw $t4 0($v0) # store color (15, 8)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xa66248 # load color
+    li $t4 0x955741 # load color
     sw $t4 0($v0) # store color (0, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd67d5b # load color
+    li $t4 0xd57d5b # load color
     sw $t4 0($v0) # store color (1, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8d5036 # load color
+    li $t4 0x804730 # load color
     sw $t4 0($v0) # store color (2, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa86748 # load color
+    li $t4 0x975b3f # load color
     sw $t4 0($v0) # store color (3, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd98d5b # load color
+    li $t4 0xd58456 # load color
     sw $t4 0($v0) # store color (4, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc79e91 # load color
+    li $t4 0xc99586 # load color
     sw $t4 0($v0) # store color (5, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x9cb0bb # load color
+    li $t4 0xbdb8bf # load color
     sw $t4 0($v0) # store color (6, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xecdbd7 # load color
+    li $t4 0xf3d8d4 # load color
     sw $t4 0($v0) # store color (7, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffece4 # load color
+    li $t4 0xffe6dd # load color
     sw $t4 0($v0) # store color (8, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfee2da # load color
+    li $t4 0xfedbd3 # load color
     sw $t4 0($v0) # store color (9, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe4baae # load color
+    li $t4 0xdfafa2 # load color
     sw $t4 0($v0) # store color (10, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc97958 # load color
+    li $t4 0xc77756 # load color
     sw $t4 0($v0) # store color (11, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xde7a56 # load color
+    li $t4 0xd87853 # load color
     sw $t4 0($v0) # store color (12, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x6a3b2b # load color
+    li $t4 0x6b3c2b # load color
     sw $t4 0($v0) # store color (13, 9)
     add $v0 $v0 $t0 # shift x
     li $t4 0x000001 # load color
@@ -4163,46 +4189,46 @@ draw_alice_02:
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x291614 # load color
+    li $t4 0x1a0d0d # load color
     sw $t4 0($v0) # store color (0, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa66249 # load color
+    li $t4 0x935641 # load color
     sw $t4 0($v0) # store color (1, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x5d3122 # load color
+    li $t4 0x4d291e # load color
     sw $t4 0($v0) # store color (2, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x472817 # load color
+    li $t4 0x361e0f # load color
     sw $t4 0($v0) # store color (3, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb36440 # load color
+    li $t4 0xa65c3b # load color
     sw $t4 0($v0) # store color (4, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcb8d7f # load color
+    li $t4 0xd0988c # load color
     sw $t4 0($v0) # store color (5, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfdc7ce # load color
+    li $t4 0xf8c9d1 # load color
     sw $t4 0($v0) # store color (6, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfcd0cd # load color
+    li $t4 0xf5c9c7 # load color
     sw $t4 0($v0) # store color (7, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdf8f92 # load color
+    li $t4 0xcd7179 # load color
     sw $t4 0($v0) # store color (8, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xeab9bd # load color
+    li $t4 0xdeacb3 # load color
     sw $t4 0($v0) # store color (9, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb88e87 # load color
+    li $t4 0xbc9895 # load color
     sw $t4 0($v0) # store color (10, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc26c5a # load color
+    li $t4 0xbe6b5f # load color
     sw $t4 0($v0) # store color (11, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x703922 # load color
+    li $t4 0x572a18 # load color
     sw $t4 0($v0) # store color (12, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x26130b # load color
+    li $t4 0x1c0f08 # load color
     sw $t4 0($v0) # store color (13, 10)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 10)
@@ -4213,43 +4239,43 @@ draw_alice_02:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x140b09 # load color
+    li $t4 0x060303 # load color
     sw $t4 0($v0) # store color (1, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0f0e13 # load color
+    li $t4 0x020203 # load color
     sw $t4 0($v0) # store color (2, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x192231 # load color
+    li $t4 0x0b0f18 # load color
     sw $t4 0($v0) # store color (3, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x4e352a # load color
+    li $t4 0x3d2c26 # load color
     sw $t4 0($v0) # store color (4, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc2a2a1 # load color
+    li $t4 0xaa8d8c # load color
     sw $t4 0($v0) # store color (5, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcab0b8 # load color
+    li $t4 0xd3b8c6 # load color
     sw $t4 0($v0) # store color (6, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb87e86 # load color
+    li $t4 0xd49ca0 # load color
     sw $t4 0($v0) # store color (7, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x994451 # load color
+    li $t4 0xd59094 # load color
     sw $t4 0($v0) # store color (8, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa76a74 # load color
+    li $t4 0xd3979e # load color
     sw $t4 0($v0) # store color (9, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb29fac # load color
+    li $t4 0xb0a2b0 # load color
     sw $t4 0($v0) # store color (10, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x77525f # load color
+    li $t4 0x5b4151 # load color
     sw $t4 0($v0) # store color (11, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x263759 # load color
+    li $t4 0x0e1726 # load color
     sw $t4 0($v0) # store color (12, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0f1828 # load color
+    li $t4 0x04070d # load color
     sw $t4 0($v0) # store color (13, 11)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 11)
@@ -4262,43 +4288,43 @@ draw_alice_02:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1d2637 # load color
+    li $t4 0x141b26 # load color
     sw $t4 0($v0) # store color (2, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2c3d5b # load color
+    li $t4 0x2b3a53 # load color
     sw $t4 0($v0) # store color (3, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2a456d # load color
+    li $t4 0x213553 # load color
     sw $t4 0($v0) # store color (4, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2d426b # load color
+    li $t4 0x2f446b # load color
     sw $t4 0($v0) # store color (5, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x323554 # load color
+    li $t4 0x414564 # load color
     sw $t4 0($v0) # store color (6, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8387a5 # load color
+    li $t4 0x697394 # load color
     sw $t4 0($v0) # store color (7, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x989bb1 # load color
+    li $t4 0x818b9f # load color
     sw $t4 0($v0) # store color (8, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8d8e9e # load color
+    li $t4 0x727687 # load color
     sw $t4 0($v0) # store color (9, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x454e6e # load color
+    li $t4 0x363d58 # load color
     sw $t4 0($v0) # store color (10, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2e3551 # load color
+    li $t4 0x1d2746 # load color
     sw $t4 0($v0) # store color (11, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3b5483 # load color
+    li $t4 0x354d7a # load color
     sw $t4 0($v0) # store color (12, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2e436b # load color
+    li $t4 0x2b3f64 # load color
     sw $t4 0($v0) # store color (13, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x000001 # load color
+    li $t4 0x010203 # load color
     sw $t4 0($v0) # store color (14, 12)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (15, 12)
@@ -4310,43 +4336,44 @@ draw_alice_02:
     li $t4 0x05070a # load color
     sw $t4 0($v0) # store color (1, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x333e58 # load color
+    li $t4 0x2d3852 # load color
     sw $t4 0($v0) # store color (2, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3b4e76 # load color
+    li $t4 0x32456a # load color
     sw $t4 0($v0) # store color (3, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x455984 # load color
+    li $t4 0x3a5481 # load color
     sw $t4 0($v0) # store color (4, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x414969 # load color
+    li $t4 0x2f3c5e # load color
     sw $t4 0($v0) # store color (5, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3d486e # load color
+    li $t4 0x2f3459 # load color
     sw $t4 0($v0) # store color (6, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x9497b5 # load color
+    li $t4 0xadacc6 # load color
     sw $t4 0($v0) # store color (7, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd9d9e6 # load color
+    li $t4 0xdcdae8 # load color
     sw $t4 0($v0) # store color (8, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd6d6e6 # load color
+    li $t4 0xd3d2df # load color
     sw $t4 0($v0) # store color (9, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x9095b3 # load color
+    li $t4 0x7f88a6 # load color
     sw $t4 0($v0) # store color (10, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x646b8c # load color
+    li $t4 0x525571 # load color
     sw $t4 0($v0) # store color (11, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x394e76 # load color
+    li $t4 0x415784 # load color
     sw $t4 0($v0) # store color (12, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0b121c # load color
+    li $t4 0x21314d # load color
     sw $t4 0($v0) # store color (13, 13)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (14, 13)
+    li $t4 0x010101 # load color
+    sw $t4 0($v0) # store color (14, 13)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (15, 13)
     add $v0 $v0 $t0 # shift x
@@ -4354,42 +4381,44 @@ draw_alice_02:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 14)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (1, 14)
+    li $t4 0x020203 # load color
+    sw $t4 0($v0) # store color (1, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x101218 # load color
+    li $t4 0x282f40 # load color
     sw $t4 0($v0) # store color (2, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x414d69 # load color
+    li $t4 0x49597f # load color
     sw $t4 0($v0) # store color (3, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3b4159 # load color
+    li $t4 0x4b587c # load color
     sw $t4 0($v0) # store color (4, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x777b98 # load color
+    li $t4 0x646988 # load color
     sw $t4 0($v0) # store color (5, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xaeb5cb # load color
+    li $t4 0x7a88a5 # load color
     sw $t4 0($v0) # store color (6, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x797e9b # load color
+    li $t4 0x777e9f # load color
     sw $t4 0($v0) # store color (7, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x617291 # load color
+    li $t4 0x9da7bd # load color
     sw $t4 0($v0) # store color (8, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8c94b0 # load color
+    li $t4 0xb7bbd0 # load color
     sw $t4 0($v0) # store color (9, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7c7a91 # load color
+    li $t4 0x908faa # load color
     sw $t4 0($v0) # store color (10, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x232d43 # load color
+    li $t4 0x505a7b # load color
     sw $t4 0($v0) # store color (11, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0b121d # load color
+    li $t4 0x23324e # load color
     sw $t4 0($v0) # store color (12, 14)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (13, 14)
+    li $t4 0x010102 # load color
+    sw $t4 0($v0) # store color (13, 14)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 14)
     add $v0 $v0 $t0 # shift x
@@ -4401,34 +4430,38 @@ draw_alice_02:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 15)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (2, 15)
+    li $t4 0x010101 # load color
+    sw $t4 0($v0) # store color (2, 15)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (3, 15)
+    li $t4 0x1b2029 # load color
+    sw $t4 0($v0) # store color (3, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x18181e # load color
+    li $t4 0x21232d # load color
     sw $t4 0($v0) # store color (4, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x61688a # load color
+    li $t4 0x6f7494 # load color
     sw $t4 0($v0) # store color (5, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x6b7198 # load color
+    li $t4 0x9a9cba # load color
     sw $t4 0($v0) # store color (6, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x35394c # load color
+    li $t4 0x676a86 # load color
     sw $t4 0($v0) # store color (7, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1f2331 # load color
+    li $t4 0x3b4865 # load color
     sw $t4 0($v0) # store color (8, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x404665 # load color
+    li $t4 0x5a6384 # load color
     sw $t4 0($v0) # store color (9, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x424c6a # load color
+    li $t4 0x5c617b # load color
     sw $t4 0($v0) # store color (10, 15)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (11, 15)
+    li $t4 0x04070e # load color
+    sw $t4 0($v0) # store color (11, 15)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (12, 15)
+    li $t4 0x010202 # load color
+    sw $t4 0($v0) # store color (12, 15)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (13, 15)
     add $v0 $v0 $t0 # shift x
@@ -4444,42 +4477,41 @@ draw_alice_03:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (2, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x150d0a # load color
+    li $t4 0x130c09 # load color
     sw $t4 0($v0) # store color (3, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x703825 # load color
+    li $t4 0x6e3c2b # load color
     sw $t4 0($v0) # store color (4, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf1a079 # load color
+    li $t4 0xed9973 # load color
     sw $t4 0($v0) # store color (5, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdebcbb # load color
+    li $t4 0xe2c0c0 # load color
     sw $t4 0($v0) # store color (6, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc8a3b7 # load color
+    li $t4 0xcdb2c5 # load color
     sw $t4 0($v0) # store color (7, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdbaeb7 # load color
+    li $t4 0xe4c4cb # load color
     sw $t4 0($v0) # store color (8, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc497a1 # load color
+    li $t4 0xcaaab3 # load color
     sw $t4 0($v0) # store color (9, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd7aebc # load color
+    li $t4 0xd5b7c3 # load color
     sw $t4 0($v0) # store color (10, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x999ca4 # load color
+    li $t4 0x999ba2 # load color
     sw $t4 0($v0) # store color (11, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x261d14 # load color
+    li $t4 0x1e150f # load color
     sw $t4 0($v0) # store color (12, 0)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (13, 0)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x010000 # load color
-    sw $t4 0($v0) # store color (15, 0)
+    sw $0 0($v0) # store background (15, 0)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
@@ -4487,43 +4519,44 @@ draw_alice_03:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x371f17 # load color
+    li $t4 0x341e16 # load color
     sw $t4 0($v0) # store color (2, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbb6e4d # load color
+    li $t4 0xb46d4d # load color
     sw $t4 0($v0) # store color (3, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf8c2ac # load color
+    li $t4 0xebaf9a # load color
     sw $t4 0($v0) # store color (4, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcd9aa6 # load color
+    li $t4 0xd29ea5 # load color
     sw $t4 0($v0) # store color (5, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa03553 # load color
+    li $t4 0xa74159 # load color
     sw $t4 0($v0) # store color (6, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb16078 # load color
+    li $t4 0xb06075 # load color
     sw $t4 0($v0) # store color (7, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd58a92 # load color
+    li $t4 0xd3868e # load color
     sw $t4 0($v0) # store color (8, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd98b92 # load color
+    li $t4 0xd4868e # load color
     sw $t4 0($v0) # store color (9, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb66b7b # load color
+    li $t4 0xb86b7b # load color
     sw $t4 0($v0) # store color (10, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc06d87 # load color
+    li $t4 0xc07189 # load color
     sw $t4 0($v0) # store color (11, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd79e95 # load color
+    li $t4 0xd09f93 # load color
     sw $t4 0($v0) # store color (12, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x59453c # load color
+    li $t4 0x4d3f35 # load color
     sw $t4 0($v0) # store color (13, 1)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (14, 1)
+    li $t4 0x020001 # load color
+    sw $t4 0($v0) # store color (14, 1)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (15, 1)
     add $v0 $v0 $t0 # shift x
@@ -4531,441 +4564,442 @@ draw_alice_03:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x5b3526 # load color
+    li $t4 0x5c3626 # load color
     sw $t4 0($v0) # store color (1, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb76546 # load color
+    li $t4 0xb7694a # load color
     sw $t4 0($v0) # store color (2, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe3a492 # load color
+    li $t4 0xe2a28d # load color
     sw $t4 0($v0) # store color (3, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc4909d # load color
+    li $t4 0xcb969f # load color
     sw $t4 0($v0) # store color (4, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa33854 # load color
+    li $t4 0xaa475e # load color
     sw $t4 0($v0) # store color (5, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd69f96 # load color
+    li $t4 0xd29a94 # load color
     sw $t4 0($v0) # store color (6, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf2c38a # load color
+    li $t4 0xebb889 # load color
     sw $t4 0($v0) # store color (7, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf6c57d # load color
+    li $t4 0xf2bd7e # load color
     sw $t4 0($v0) # store color (8, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf6c67f # load color
+    li $t4 0xf3bd80 # load color
     sw $t4 0($v0) # store color (9, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf1bf81 # load color
+    li $t4 0xeab582 # load color
     sw $t4 0($v0) # store color (10, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdbaba2 # load color
+    li $t4 0xdba9a3 # load color
     sw $t4 0($v0) # store color (11, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd08c94 # load color
+    li $t4 0xcf878c # load color
     sw $t4 0($v0) # store color (12, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe5a685 # load color
+    li $t4 0xd99a7f # load color
     sw $t4 0($v0) # store color (13, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x805b3c # load color
+    li $t4 0x78563a # load color
     sw $t4 0($v0) # store color (14, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0b0506 # load color
+    li $t4 0x0e0707 # load color
     sw $t4 0($v0) # store color (15, 2)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x22140e # load color
+    li $t4 0x281711 # load color
     sw $t4 0($v0) # store color (0, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb1684a # load color
+    li $t4 0xac6548 # load color
     sw $t4 0($v0) # store color (1, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xce8d5f # load color
+    li $t4 0xcf8a60 # load color
     sw $t4 0($v0) # store color (2, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcd8e81 # load color
+    li $t4 0xcb8b82 # load color
     sw $t4 0($v0) # store color (3, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xab485f # load color
+    li $t4 0xb15263 # load color
     sw $t4 0($v0) # store color (4, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdfa78c # load color
+    li $t4 0xd99d88 # load color
     sw $t4 0($v0) # store color (5, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfdd173 # load color
+    li $t4 0xfac971 # load color
     sw $t4 0($v0) # store color (6, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffdd70 # load color
+    li $t4 0xffdb72 # load color
     sw $t4 0($v0) # store color (7, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbe278 # load color
+    li $t4 0xfbe177 # load color
     sw $t4 0($v0) # store color (8, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfee07e # load color
+    li $t4 0xffe07c # load color
     sw $t4 0($v0) # store color (9, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfedc74 # load color
+    li $t4 0xffdb76 # load color
     sw $t4 0($v0) # store color (10, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfdd57c # load color
+    li $t4 0xfacf7d # load color
     sw $t4 0($v0) # store color (11, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffeebf # load color
+    li $t4 0xffe9bd # load color
     sw $t4 0($v0) # store color (12, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf8d28e # load color
+    li $t4 0xf8cf93 # load color
     sw $t4 0($v0) # store color (13, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf5c76c # load color
+    li $t4 0xe9bc69 # load color
     sw $t4 0($v0) # store color (14, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x4e3825 # load color
+    li $t4 0x543c26 # load color
     sw $t4 0($v0) # store color (15, 3)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x89503a # load color
+    li $t4 0x824c37 # load color
     sw $t4 0($v0) # store color (0, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb96c4f # load color
+    li $t4 0xbd7352 # load color
     sw $t4 0($v0) # store color (1, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xefbb6d # load color
+    li $t4 0xf0ba6e # load color
     sw $t4 0($v0) # store color (2, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf7ce7b # load color
+    li $t4 0xf1c47b # load color
     sw $t4 0($v0) # store color (3, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe0a778 # load color
+    li $t4 0xdda37a # load color
     sw $t4 0($v0) # store color (4, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfad59e # load color
+    li $t4 0xf8d29d # load color
     sw $t4 0($v0) # store color (5, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffebbd # load color
+    li $t4 0xfee6b1 # load color
     sw $t4 0($v0) # store color (6, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe4ae6f # load color
+    li $t4 0xecb976 # load color
     sw $t4 0($v0) # store color (7, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbe19a # load color
+    li $t4 0xfce39a # load color
     sw $t4 0($v0) # store color (8, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffefc8 # load color
+    li $t4 0xffeabb # load color
     sw $t4 0($v0) # store color (9, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe9b778 # load color
+    li $t4 0xecbf7e # load color
     sw $t4 0($v0) # store color (10, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfee095 # load color
+    li $t4 0xfcde91 # load color
     sw $t4 0($v0) # store color (11, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbdda8 # load color
+    li $t4 0xfcdea8 # load color
     sw $t4 0($v0) # store color (12, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xefb16b # load color
+    li $t4 0xf1b870 # load color
     sw $t4 0($v0) # store color (13, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfedf7d # load color
+    li $t4 0xfbd879 # load color
     sw $t4 0($v0) # store color (14, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbb9752 # load color
+    li $t4 0xb79351 # load color
     sw $t4 0($v0) # store color (15, 4)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xbd6e4f # load color
+    li $t4 0xbb6c4f # load color
     sw $t4 0($v0) # store color (0, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd3865b # load color
+    li $t4 0xd3885c # load color
     sw $t4 0($v0) # store color (1, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf9cd77 # load color
+    li $t4 0xf8cc76 # load color
     sw $t4 0($v0) # store color (2, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfcd679 # load color
+    li $t4 0xfcd478 # load color
     sw $t4 0($v0) # store color (3, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf6b86f # load color
+    li $t4 0xf2b670 # load color
     sw $t4 0($v0) # store color (4, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffda84 # load color
+    li $t4 0xfbd684 # load color
     sw $t4 0($v0) # store color (5, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd28b62 # load color
+    li $t4 0xd8986c # load color
     sw $t4 0($v0) # store color (6, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbe754d # load color
+    li $t4 0xc27d52 # load color
     sw $t4 0($v0) # store color (7, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe681 # load color
+    li $t4 0xfee183 # load color
     sw $t4 0($v0) # store color (8, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf5c976 # load color
+    li $t4 0xf6cd80 # load color
     sw $t4 0($v0) # store color (9, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa95a37 # load color
+    li $t4 0xb66c46 # load color
     sw $t4 0($v0) # store color (10, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb77349 # load color
+    li $t4 0xc58455 # load color
     sw $t4 0($v0) # store color (11, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbd684 # load color
+    li $t4 0xfad487 # load color
     sw $t4 0($v0) # store color (12, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe8b16e # load color
+    li $t4 0xecb671 # load color
     sw $t4 0($v0) # store color (13, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe9ac6d # load color
+    li $t4 0xe5ac6c # load color
     sw $t4 0($v0) # store color (14, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xefd170 # load color
+    li $t4 0xeece6f # load color
     sw $t4 0($v0) # store color (15, 5)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xb8694c # load color
+    li $t4 0xba6c4e # load color
     sw $t4 0($v0) # store color (0, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe1a667 # load color
+    li $t4 0xe2a867 # load color
     sw $t4 0($v0) # store color (1, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf1c773 # load color
+    li $t4 0xf2c673 # load color
     sw $t4 0($v0) # store color (2, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbd179 # load color
+    li $t4 0xfbd279 # load color
     sw $t4 0($v0) # store color (3, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdf9668 # load color
+    li $t4 0xe29a68 # load color
     sw $t4 0($v0) # store color (4, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x915e3c # load color
+    li $t4 0xa67348 # load color
     sw $t4 0($v0) # store color (5, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7b311b # load color
+    li $t4 0x8a442b # load color
     sw $t4 0($v0) # store color (6, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x9e694a # load color
+    li $t4 0xa56d4d # load color
     sw $t4 0($v0) # store color (7, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf2c16e # load color
+    li $t4 0xf4c772 # load color
     sw $t4 0($v0) # store color (8, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd37f5a # load color
+    li $t4 0xd18559 # load color
     sw $t4 0($v0) # store color (9, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x71433e # load color
+    li $t4 0x7d463a # load color
     sw $t4 0($v0) # store color (10, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x764a4b # load color
+    li $t4 0x7b4d47 # load color
     sw $t4 0($v0) # store color (11, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf4a866 # load color
+    li $t4 0xe99f62 # load color
     sw $t4 0($v0) # store color (12, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdbb664 # load color
+    li $t4 0xdeb566 # load color
     sw $t4 0($v0) # store color (13, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbe6e4f # load color
+    li $t4 0xc27952 # load color
     sw $t4 0($v0) # store color (14, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe9be73 # load color
+    li $t4 0xe9bc71 # load color
     sw $t4 0($v0) # store color (15, 6)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xc87554 # load color
+    li $t4 0xc87654 # load color
     sw $t4 0($v0) # store color (0, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe4a567 # load color
+    li $t4 0xe5a768 # load color
     sw $t4 0($v0) # store color (1, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd4905d # load color
+    li $t4 0xda9a61 # load color
     sw $t4 0($v0) # store color (2, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffdb7d # load color
+    li $t4 0xfed67a # load color
     sw $t4 0($v0) # store color (3, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbe8854 # load color
+    li $t4 0xba8356 # load color
     sw $t4 0($v0) # store color (4, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8b7276 # load color
+    li $t4 0x816668 # load color
     sw $t4 0($v0) # store color (5, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x716d6d # load color
+    li $t4 0x715c58 # load color
     sw $t4 0($v0) # store color (6, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa49287 # load color
+    li $t4 0xa58d80 # load color
     sw $t4 0($v0) # store color (7, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf7b99d # load color
+    li $t4 0xf4b592 # load color
     sw $t4 0($v0) # store color (8, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf9d3ca # load color
+    li $t4 0xf0c6bb # load color
     sw $t4 0($v0) # store color (9, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x689cac # load color
+    li $t4 0x6f8f9b # load color
     sw $t4 0($v0) # store color (10, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb09899 # load color
+    li $t4 0xac9496 # load color
     sw $t4 0($v0) # store color (11, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdb964f # load color
+    li $t4 0xdd9a56 # load color
     sw $t4 0($v0) # store color (12, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcd9a58 # load color
+    li $t4 0xcf9f58 # load color
     sw $t4 0($v0) # store color (13, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x633324 # load color
+    li $t4 0x75422d # load color
     sw $t4 0($v0) # store color (14, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7b6c3d # load color
+    li $t4 0x8f7946 # load color
     sw $t4 0($v0) # store color (15, 7)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xd07b58 # load color
+    li $t4 0xce7a57 # load color
     sw $t4 0($v0) # store color (0, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdd8b5f # load color
+    li $t4 0xde8f61 # load color
     sw $t4 0($v0) # store color (1, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcc7d55 # load color
+    li $t4 0xd08357 # load color
     sw $t4 0($v0) # store color (2, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf7bb74 # load color
+    li $t4 0xf6be74 # load color
     sw $t4 0($v0) # store color (3, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe3aa63 # load color
+    li $t4 0xdba866 # load color
     sw $t4 0($v0) # store color (4, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xccbbb7 # load color
+    li $t4 0xc1b2b0 # load color
     sw $t4 0($v0) # store color (5, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2c99ae # load color
+    li $t4 0x4498a6 # load color
     sw $t4 0($v0) # store color (6, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbecccb # load color
+    li $t4 0xc2cac7 # load color
     sw $t4 0($v0) # store color (7, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe8de # load color
+    li $t4 0xffe1d6 # load color
     sw $t4 0($v0) # store color (8, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfeede4 # load color
+    li $t4 0xffeae2 # load color
     sw $t4 0($v0) # store color (9, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x9fccce # load color
+    li $t4 0x8fbdbf # load color
     sw $t4 0($v0) # store color (10, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc69e8d # load color
+    li $t4 0xc7a596 # load color
     sw $t4 0($v0) # store color (11, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xca6945 # load color
+    li $t4 0xc76d48 # load color
     sw $t4 0($v0) # store color (12, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x9d5a3f # load color
+    li $t4 0xa5613f # load color
     sw $t4 0($v0) # store color (13, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1c0e09 # load color
+    li $t4 0x301910 # load color
     sw $t4 0($v0) # store color (14, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x050705 # load color
+    li $t4 0x12130a # load color
     sw $t4 0($v0) # store color (15, 8)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x955841 # load color
+    li $t4 0xac664a # load color
     sw $t4 0($v0) # store color (0, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe18461 # load color
+    li $t4 0xd67e5c # load color
     sw $t4 0($v0) # store color (1, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8f4f36 # load color
+    li $t4 0x96553a # load color
     sw $t4 0($v0) # store color (2, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x93583d # load color
+    li $t4 0xaa6948 # load color
     sw $t4 0($v0) # store color (3, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe48d58 # load color
+    li $t4 0xdc905c # load color
     sw $t4 0($v0) # store color (4, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc38e7b # load color
+    li $t4 0xc89e8f # load color
     sw $t4 0($v0) # store color (5, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa9b0b9 # load color
+    li $t4 0x8fadb9 # load color
     sw $t4 0($v0) # store color (6, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe8d4d1 # load color
+    li $t4 0xe1d7d5 # load color
     sw $t4 0($v0) # store color (7, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfff2e7 # load color
+    li $t4 0xffeee5 # load color
     sw $t4 0($v0) # store color (8, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe5dc # load color
+    li $t4 0xffe7de # load color
     sw $t4 0($v0) # store color (9, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe9baaf # load color
+    li $t4 0xeac9bf # load color
     sw $t4 0($v0) # store color (10, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc67757 # load color
+    li $t4 0xca8163 # load color
     sw $t4 0($v0) # store color (11, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xee845a # load color
+    li $t4 0xe17b55 # load color
     sw $t4 0($v0) # store color (12, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x76422f # load color
+    li $t4 0x854935 # load color
     sw $t4 0($v0) # store color (13, 9)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (14, 9)
+    li $t4 0x050304 # load color
+    sw $t4 0($v0) # store color (14, 9)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (15, 9)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x140a0b # load color
+    li $t4 0x301a17 # load color
     sw $t4 0($v0) # store color (0, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x9e5d47 # load color
+    li $t4 0xae674d # load color
     sw $t4 0($v0) # store color (1, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x633425 # load color
+    li $t4 0x693828 # load color
     sw $t4 0($v0) # store color (2, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2b170c # load color
+    li $t4 0x492919 # load color
     sw $t4 0($v0) # store color (3, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xac5b35 # load color
+    li $t4 0xb56542 # load color
     sw $t4 0($v0) # store color (4, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcc8a78 # load color
+    li $t4 0xc18271 # load color
     sw $t4 0($v0) # store color (5, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffcfd6 # load color
+    li $t4 0xf4bcc3 # load color
     sw $t4 0($v0) # store color (6, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffdfd9 # load color
+    li $t4 0xfad1cf # load color
     sw $t4 0($v0) # store color (7, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdf8589 # load color
+    li $t4 0xe39b9c # load color
     sw $t4 0($v0) # store color (8, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf2babf # load color
+    li $t4 0xe9b6ba # load color
     sw $t4 0($v0) # store color (9, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc29f9c # load color
+    li $t4 0xbc918a # load color
     sw $t4 0($v0) # store color (10, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc26b5c # load color
+    li $t4 0xbf6e5e # load color
     sw $t4 0($v0) # store color (11, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x713921 # load color
+    li $t4 0x8c492e # load color
     sw $t4 0($v0) # store color (12, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x211006 # load color
+    li $t4 0x391f13 # load color
     sw $t4 0($v0) # store color (13, 10)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 10)
@@ -4976,192 +5010,186 @@ draw_alice_03:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x070303 # load color
+    li $t4 0x1a0e0c # load color
     sw $t4 0($v0) # store color (1, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0b0a0e # load color
+    li $t4 0x120d10 # load color
     sw $t4 0($v0) # store color (2, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x172537 # load color
+    li $t4 0x161e2c # load color
     sw $t4 0($v0) # store color (3, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x34231c # load color
+    li $t4 0x4e3123 # load color
     sw $t4 0($v0) # store color (4, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb99b9c # load color
+    li $t4 0xc9a29c # load color
     sw $t4 0($v0) # store color (5, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc0b0b9 # load color
+    li $t4 0xd8bdc4 # load color
     sw $t4 0($v0) # store color (6, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xaa757f # load color
+    li $t4 0xca9195 # load color
     sw $t4 0($v0) # store color (7, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x863546 # load color
+    li $t4 0xa24451 # load color
     sw $t4 0($v0) # store color (8, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x92545f # load color
+    li $t4 0xae6873 # load color
     sw $t4 0($v0) # store color (9, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xaf9fad # load color
+    li $t4 0xc0aeb7 # load color
     sw $t4 0($v0) # store color (10, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x785364 # load color
+    li $t4 0x905f6b # load color
     sw $t4 0($v0) # store color (11, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1f365b # load color
+    li $t4 0x29334f # load color
     sw $t4 0($v0) # store color (12, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x16233a # load color
+    li $t4 0x111a2b # load color
     sw $t4 0($v0) # store color (13, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x010102 # load color
-    sw $t4 0($v0) # store color (14, 11)
+    sw $0 0($v0) # store background (14, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x000101 # load color
-    sw $t4 0($v0) # store color (15, 11)
+    sw $0 0($v0) # store background (15, 11)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x010101 # load color
-    sw $t4 0($v0) # store color (0, 12)
+    sw $0 0($v0) # store background (0, 12)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1b2333 # load color
+    li $t4 0x17202e # load color
     sw $t4 0($v0) # store color (2, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2f3e5c # load color
+    li $t4 0x2c3c58 # load color
     sw $t4 0($v0) # store color (3, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x294771 # load color
+    li $t4 0x283f63 # load color
     sw $t4 0($v0) # store color (4, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x233c68 # load color
+    li $t4 0x344971 # load color
     sw $t4 0($v0) # store color (5, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x232545 # load color
+    li $t4 0x373956 # load color
     sw $t4 0($v0) # store color (6, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8186a6 # load color
+    li $t4 0x757694 # load color
     sw $t4 0($v0) # store color (7, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa4acc2 # load color
+    li $t4 0x8989a2 # load color
     sw $t4 0($v0) # store color (8, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x9b9fab # load color
+    li $t4 0x84828f # load color
     sw $t4 0($v0) # store color (9, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x4b5474 # load color
+    li $t4 0x484e6d # load color
     sw $t4 0($v0) # store color (10, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2a324d # load color
+    li $t4 0x2d334e # load color
     sw $t4 0($v0) # store color (11, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3f5582 # load color
+    li $t4 0x384f7c # load color
     sw $t4 0($v0) # store color (12, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x37507e # load color
+    li $t4 0x364f7c # load color
     sw $t4 0($v0) # store color (13, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x020204 # load color
+    li $t4 0x05070b # load color
     sw $t4 0($v0) # store color (14, 12)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (15, 12)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x010101 # load color
-    sw $t4 0($v0) # store color (0, 13)
+    sw $0 0($v0) # store background (0, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x030405 # load color
+    li $t4 0x050609 # load color
     sw $t4 0($v0) # store color (1, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x323c54 # load color
+    li $t4 0x313b56 # load color
     sw $t4 0($v0) # store color (2, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3d4f77 # load color
+    li $t4 0x394c73 # load color
     sw $t4 0($v0) # store color (3, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x475c88 # load color
+    li $t4 0x415985 # load color
     sw $t4 0($v0) # store color (4, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x484e6d # load color
+    li $t4 0x3b4465 # load color
     sw $t4 0($v0) # store color (5, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3c496f # load color
+    li $t4 0x363f66 # load color
     sw $t4 0($v0) # store color (6, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x888cad # load color
+    li $t4 0x9194b3 # load color
     sw $t4 0($v0) # store color (7, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe0dfeb # load color
+    li $t4 0xdfdeec # load color
     sw $t4 0($v0) # store color (8, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe6e4f3 # load color
+    li $t4 0xdbdbea # load color
     sw $t4 0($v0) # store color (9, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa5a8c4 # load color
+    li $t4 0x9ca1bc # load color
     sw $t4 0($v0) # store color (10, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x676d8e # load color
+    li $t4 0x646a89 # load color
     sw $t4 0($v0) # store color (11, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x415580 # load color
+    li $t4 0x445783 # load color
     sw $t4 0($v0) # store color (12, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x09111c # load color
+    li $t4 0x152033 # load color
     sw $t4 0($v0) # store color (13, 13)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (14, 13)
+    li $t4 0x010102 # load color
+    sw $t4 0($v0) # store color (14, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x000101 # load color
-    sw $t4 0($v0) # store color (15, 13)
+    sw $0 0($v0) # store background (15, 13)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x000001 # load color
-    sw $t4 0($v0) # store color (0, 14)
+    sw $0 0($v0) # store background (0, 14)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x070809 # load color
+    li $t4 0x13161d # load color
     sw $t4 0($v0) # store color (2, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3f4962 # load color
+    li $t4 0x475373 # load color
     sw $t4 0($v0) # store color (3, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x31374c # load color
+    li $t4 0x3f4863 # load color
     sw $t4 0($v0) # store color (4, 14)
     add $v0 $v0 $t0 # shift x
     li $t4 0x717492 # load color
     sw $t4 0($v0) # store color (5, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb6bdd3 # load color
+    li $t4 0xa7b0c6 # load color
     sw $t4 0($v0) # store color (6, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7b809d # load color
+    li $t4 0x7c829f # load color
     sw $t4 0($v0) # store color (7, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x516384 # load color
+    li $t4 0x6b7b98 # load color
     sw $t4 0($v0) # store color (8, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x808ba9 # load color
+    li $t4 0x929cb7 # load color
     sw $t4 0($v0) # store color (9, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x84829a # load color
+    li $t4 0x908ea7 # load color
     sw $t4 0($v0) # store color (10, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1e263a # load color
+    li $t4 0x353c55 # load color
     sw $t4 0($v0) # store color (11, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0b1421 # load color
+    li $t4 0x152135 # load color
     sw $t4 0($v0) # store color (12, 14)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (13, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x000101 # load color
-    sw $t4 0($v0) # store color (14, 14)
+    sw $0 0($v0) # store background (14, 14)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (15, 14)
     add $v0 $v0 $t0 # shift x
@@ -5173,35 +5201,36 @@ draw_alice_03:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (2, 15)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (3, 15)
+    li $t4 0x050506 # load color
+    sw $t4 0($v0) # store color (3, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0b0b0b # load color
+    li $t4 0x141419 # load color
     sw $t4 0($v0) # store color (4, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x5c6383 # load color
+    li $t4 0x616787 # load color
     sw $t4 0($v0) # store color (5, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x656d94 # load color
+    li $t4 0x757ba0 # load color
     sw $t4 0($v0) # store color (6, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x34384b # load color
+    li $t4 0x484c64 # load color
     sw $t4 0($v0) # store color (7, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1a1d28 # load color
+    li $t4 0x292f40 # load color
     sw $t4 0($v0) # store color (8, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x393e5d # load color
+    li $t4 0x424969 # load color
     sw $t4 0($v0) # store color (9, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x495477 # load color
+    li $t4 0x4e5879 # load color
     sw $t4 0($v0) # store color (10, 15)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (11, 15)
+    li $t4 0x020305 # load color
+    sw $t4 0($v0) # store color (11, 15)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (12, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x000101 # load color
-    sw $t4 0($v0) # store color (13, 15)
+    sw $0 0($v0) # store background (13, 15)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 15)
     add $v0 $v0 $t0 # shift x
@@ -5215,34 +5244,34 @@ draw_alice_04:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (2, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2e1c13 # load color
+    li $t4 0x150c0a # load color
     sw $t4 0($v0) # store color (3, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x935038 # load color
+    li $t4 0x7a4431 # load color
     sw $t4 0($v0) # store color (4, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf0ae8e # load color
+    li $t4 0xee9d79 # load color
     sw $t4 0($v0) # store color (5, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd0a1a8 # load color
+    li $t4 0xe1c2c4 # load color
     sw $t4 0($v0) # store color (6, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc0889e # load color
+    li $t4 0xceb1c3 # load color
     sw $t4 0($v0) # store color (7, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd295a0 # load color
+    li $t4 0xe1c2c8 # load color
     sw $t4 0($v0) # store color (8, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbf818d # load color
+    li $t4 0xccabb4 # load color
     sw $t4 0($v0) # store color (9, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xce9bad # load color
+    li $t4 0xd4bac7 # load color
     sw $t4 0($v0) # store color (10, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x9a939a # load color
+    li $t4 0x7d8084 # load color
     sw $t4 0($v0) # store color (11, 0)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3a2d20 # load color
+    li $t4 0x160e08 # load color
     sw $t4 0($v0) # store color (12, 0)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (13, 0)
@@ -5255,47 +5284,45 @@ draw_alice_04:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0b0705 # load color
-    sw $t4 0($v0) # store color (1, 1)
+    sw $0 0($v0) # store background (1, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x583122 # load color
+    li $t4 0x3d231a # load color
     sw $t4 0($v0) # store color (2, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd1815e # load color
+    li $t4 0xba7152 # load color
     sw $t4 0($v0) # store color (3, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf7cec0 # load color
+    li $t4 0xebb3a1 # load color
     sw $t4 0($v0) # store color (4, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbd798d # load color
+    li $t4 0xcc929d # load color
     sw $t4 0($v0) # store color (5, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa33d5a # load color
+    li $t4 0xa53e57 # load color
     sw $t4 0($v0) # store color (6, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbf7a86 # load color
+    li $t4 0xb6687b # load color
     sw $t4 0($v0) # store color (7, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe09d99 # load color
+    li $t4 0xd58a90 # load color
     sw $t4 0($v0) # store color (8, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe19d9b # load color
+    li $t4 0xd3878f # load color
     sw $t4 0($v0) # store color (9, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbb7680 # load color
+    li $t4 0xb56a7a # load color
     sw $t4 0($v0) # store color (10, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xca738b # load color
+    li $t4 0xc87a8e # load color
     sw $t4 0($v0) # store color (11, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd2968e # load color
+    li $t4 0xc29789 # load color
     sw $t4 0($v0) # store color (12, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x674c41 # load color
+    li $t4 0x3d2e27 # load color
     sw $t4 0($v0) # store color (13, 1)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x050303 # load color
-    sw $t4 0($v0) # store color (14, 1)
+    sw $0 0($v0) # store background (14, 1)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (15, 1)
     add $v0 $v0 $t0 # shift x
@@ -5303,1168 +5330,393 @@ draw_alice_04:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x714230 # load color
+    li $t4 0x633a29 # load color
     sw $t4 0($v0) # store color (1, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc16c4c # load color
+    li $t4 0xbb6b4c # load color
     sw $t4 0($v0) # store color (2, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdca29a # load color
+    li $t4 0xe2a693 # load color
     sw $t4 0($v0) # store color (3, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb66c81 # load color
+    li $t4 0xc68c98 # load color
     sw $t4 0($v0) # store color (4, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xaa455c # load color
+    li $t4 0xac4a60 # load color
     sw $t4 0($v0) # store color (5, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe6b795 # load color
+    li $t4 0xd7a397 # load color
     sw $t4 0($v0) # store color (6, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf9ca7d # load color
+    li $t4 0xedb984 # load color
     sw $t4 0($v0) # store color (7, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf6c872 # load color
+    li $t4 0xf3be7d # load color
     sw $t4 0($v0) # store color (8, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf8c871 # load color
+    li $t4 0xf3be7e # load color
     sw $t4 0($v0) # store color (9, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf8c57c # load color
+    li $t4 0xebb584 # load color
     sw $t4 0($v0) # store color (10, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe1b8a5 # load color
+    li $t4 0xd8a7a5 # load color
     sw $t4 0($v0) # store color (11, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdc9e9e # load color
+    li $t4 0xd38888 # load color
     sw $t4 0($v0) # store color (12, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xecb285 # load color
+    li $t4 0xd39c7b # load color
     sw $t4 0($v0) # store color (13, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x835a38 # load color
+    li $t4 0x62442b # load color
     sw $t4 0($v0) # store color (14, 2)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x050104 # load color
+    li $t4 0x070304 # load color
     sw $t4 0($v0) # store color (15, 2)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x321d15 # load color
+    li $t4 0x2d1a13 # load color
     sw $t4 0($v0) # store color (0, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb96c4e # load color
+    li $t4 0xaf684b # load color
     sw $t4 0($v0) # store color (1, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd59a65 # load color
+    li $t4 0xd28f63 # load color
     sw $t4 0($v0) # store color (2, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd1917a # load color
+    li $t4 0xca8980 # load color
     sw $t4 0($v0) # store color (3, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb35a69 # load color
+    li $t4 0xb35665 # load color
     sw $t4 0($v0) # store color (4, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xedbf94 # load color
+    li $t4 0xdfa889 # load color
     sw $t4 0($v0) # store color (5, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffdc7d # load color
+    li $t4 0xfcce72 # load color
     sw $t4 0($v0) # store color (6, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffde76 # load color
+    li $t4 0xfedc72 # load color
     sw $t4 0($v0) # store color (7, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbe685 # load color
+    li $t4 0xfbe17a # load color
     sw $t4 0($v0) # store color (8, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe690 # load color
+    li $t4 0xffe17d # load color
     sw $t4 0($v0) # store color (9, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfcdc76 # load color
+    li $t4 0xfed876 # load color
     sw $t4 0($v0) # store color (10, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffdf85 # load color
+    li $t4 0xfcd586 # load color
     sw $t4 0($v0) # store color (11, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffeab9 # load color
+    li $t4 0xfee7bd # load color
     sw $t4 0($v0) # store color (12, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfcd281 # load color
+    li $t4 0xf7cd85 # load color
     sw $t4 0($v0) # store color (13, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xefc86d # load color
+    li $t4 0xdeb164 # load color
     sw $t4 0($v0) # store color (14, 3)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3f2c1d # load color
+    li $t4 0x332419 # load color
     sw $t4 0($v0) # store color (15, 3)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x9e5c43 # load color
+    li $t4 0x884f3a # load color
     sw $t4 0($v0) # store color (0, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbc6e50 # load color
+    li $t4 0xbf7553 # load color
     sw $t4 0($v0) # store color (1, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf6c371 # load color
+    li $t4 0xf2be70 # load color
     sw $t4 0($v0) # store color (2, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfbd67c # load color
+    li $t4 0xf1c57b # load color
     sw $t4 0($v0) # store color (3, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xeab374 # load color
+    li $t4 0xe0a77a # load color
     sw $t4 0($v0) # store color (4, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe0a2 # load color
+    li $t4 0xfad8a2 # load color
     sw $t4 0($v0) # store color (5, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf8d8b4 # load color
+    li $t4 0xfce1af # load color
     sw $t4 0($v0) # store color (6, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xda9e64 # load color
+    li $t4 0xeab873 # load color
     sw $t4 0($v0) # store color (7, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfee9a3 # load color
+    li $t4 0xfde7a3 # load color
     sw $t4 0($v0) # store color (8, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffeabf # load color
+    li $t4 0xfee7b8 # load color
     sw $t4 0($v0) # store color (9, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xde9f65 # load color
+    li $t4 0xe9b874 # load color
     sw $t4 0($v0) # store color (10, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfddd9c # load color
+    li $t4 0xffe39e # load color
     sw $t4 0($v0) # store color (11, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf9d79b # load color
+    li $t4 0xf9d59c # load color
     sw $t4 0($v0) # store color (12, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xeeae6a # load color
+    li $t4 0xf2ba70 # load color
     sw $t4 0($v0) # store color (13, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfedf7c # load color
+    li $t4 0xfbdb78 # load color
     sw $t4 0($v0) # store color (14, 4)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb79351 # load color
+    li $t4 0x9c7b44 # load color
     sw $t4 0($v0) # store color (15, 4)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xbc6c4f # load color
+    li $t4 0xbc6d4f # load color
     sw $t4 0($v0) # store color (0, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xda935f # load color
+    li $t4 0xd78e5e # load color
     sw $t4 0($v0) # store color (1, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf9d178 # load color
+    li $t4 0xf9ce77 # load color
     sw $t4 0($v0) # store color (2, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfad177 # load color
+    li $t4 0xfbd278 # load color
     sw $t4 0($v0) # store color (3, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf7b773 # load color
+    li $t4 0xf2b770 # load color
     sw $t4 0($v0) # store color (4, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf4c672 # load color
+    li $t4 0xf7d080 # load color
     sw $t4 0($v0) # store color (5, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xba6a45 # load color
+    li $t4 0xcd8760 # load color
     sw $t4 0($v0) # store color (6, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc07d50 # load color
+    li $t4 0xc78655 # load color
     sw $t4 0($v0) # store color (7, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe67b # load color
+    li $t4 0xffe483 # load color
     sw $t4 0($v0) # store color (8, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe4a55a # load color
+    li $t4 0xedbd75 # load color
     sw $t4 0($v0) # store color (9, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x904126 # load color
+    li $t4 0xaa5f3d # load color
     sw $t4 0($v0) # store color (10, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xab6842 # load color
+    li $t4 0xca8d5c # load color
     sw $t4 0($v0) # store color (11, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfdd17b # load color
+    li $t4 0xfbd481 # load color
     sw $t4 0($v0) # store color (12, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdda568 # load color
+    li $t4 0xe5ab6c # load color
     sw $t4 0($v0) # store color (13, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf2b170 # load color
+    li $t4 0xeeb970 # load color
     sw $t4 0($v0) # store color (14, 5)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd8bf68 # load color
+    li $t4 0xd6ba64 # load color
     sw $t4 0($v0) # store color (15, 5)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xbc6b4e # load color
+    li $t4 0xba6c4e # load color
     sw $t4 0($v0) # store color (0, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe2a968 # load color
+    li $t4 0xe4aa68 # load color
     sw $t4 0($v0) # store color (1, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xebbd6e # load color
+    li $t4 0xf0c471 # load color
     sw $t4 0($v0) # store color (2, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfdd279 # load color
+    li $t4 0xfbd079 # load color
     sw $t4 0($v0) # store color (3, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcc865e # load color
+    li $t4 0xd99263 # load color
     sw $t4 0($v0) # store color (4, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x754737 # load color
+    li $t4 0x966441 # load color
     sw $t4 0($v0) # store color (5, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x6e2d1f # load color
+    li $t4 0x823d28 # load color
     sw $t4 0($v0) # store color (6, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa17657 # load color
+    li $t4 0xab7854 # load color
     sw $t4 0($v0) # store color (7, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf1b571 # load color
+    li $t4 0xf2bf70 # load color
     sw $t4 0($v0) # store color (8, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd0836f # load color
+    li $t4 0xc97d5c # load color
     sw $t4 0($v0) # store color (9, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x615158 # load color
+    li $t4 0x6f463f # load color
     sw $t4 0($v0) # store color (10, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x916060 # load color
+    li $t4 0x8f5a50 # load color
     sw $t4 0($v0) # store color (11, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfab768 # load color
+    li $t4 0xf1af69 # load color
     sw $t4 0($v0) # store color (12, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc89d59 # load color
+    li $t4 0xcfa05c # load color
     sw $t4 0($v0) # store color (13, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb5694c # load color
+    li $t4 0xc97e57 # load color
     sw $t4 0($v0) # store color (14, 6)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xceaf67 # load color
+    li $t4 0xd2b168 # load color
     sw $t4 0($v0) # store color (15, 6)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xce7a56 # load color
+    li $t4 0xca7855 # load color
     sw $t4 0($v0) # store color (0, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe29f65 # load color
+    li $t4 0xe5a668 # load color
     sw $t4 0($v0) # store color (1, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd38a5b # load color
+    li $t4 0xd8965f # load color
     sw $t4 0($v0) # store color (2, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffdc7e # load color
+    li $t4 0xfed77a # load color
     sw $t4 0($v0) # store color (3, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc18e56 # load color
+    li $t4 0xb48055 # load color
     sw $t4 0($v0) # store color (4, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa49498 # load color
+    li $t4 0x8b7477 # load color
     sw $t4 0($v0) # store color (5, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x628388 # load color
+    li $t4 0x6a6362 # load color
     sw $t4 0($v0) # store color (6, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbeaca3 # load color
+    li $t4 0xb89c8f # load color
     sw $t4 0($v0) # store color (7, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfcc8b6 # load color
+    li $t4 0xf6ba9e # load color
     sw $t4 0($v0) # store color (8, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf6e1d9 # load color
+    li $t4 0xeecdc6 # load color
     sw $t4 0($v0) # store color (9, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x64acbd # load color
+    li $t4 0x6794a3 # load color
     sw $t4 0($v0) # store color (10, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc79d91 # load color
+    li $t4 0xc0938a # load color
     sw $t4 0($v0) # store color (11, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd08c49 # load color
+    li $t4 0xda9e55 # load color
     sw $t4 0($v0) # store color (12, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xb77b4a # load color
+    li $t4 0xbc874e # load color
     sw $t4 0($v0) # store color (13, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x442519 # load color
+    li $t4 0x623826 # load color
     sw $t4 0($v0) # store color (14, 7)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x58522d # load color
+    li $t4 0x827341 # load color
     sw $t4 0($v0) # store color (15, 7)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0xd17b58 # load color
+    li $t4 0xce7a57 # load color
     sw $t4 0($v0) # store color (0, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdd855e # load color
+    li $t4 0xdd8c5f # load color
     sw $t4 0($v0) # store color (1, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc37650 # load color
+    li $t4 0xcf8256 # load color
     sw $t4 0($v0) # store color (2, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xeaa86b # load color
+    li $t4 0xf3b971 # load color
     sw $t4 0($v0) # store color (3, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe8a864 # load color
+    li $t4 0xdaa668 # load color
     sw $t4 0($v0) # store color (4, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc1b7b4 # load color
+    li $t4 0xbab5b4 # load color
     sw $t4 0($v0) # store color (5, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2997ab # load color
+    li $t4 0x3793a3 # load color
     sw $t4 0($v0) # store color (6, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd5d9d5 # load color
+    li $t4 0xd4d2ce # load color
     sw $t4 0($v0) # store color (7, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffefe5 # load color
+    li $t4 0xffe4db # load color
     sw $t4 0($v0) # store color (8, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf8ebe2 # load color
+    li $t4 0xfae8e0 # load color
     sw $t4 0($v0) # store color (9, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbcd1cf # load color
+    li $t4 0x96bebe # load color
     sw $t4 0($v0) # store color (10, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xc98970 # load color
+    li $t4 0xca917c # load color
     sw $t4 0($v0) # store color (11, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdb7250 # load color
+    li $t4 0xcb704b # load color
     sw $t4 0($v0) # store color (12, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7d4532 # load color
+    li $t4 0x8a4e34 # load color
     sw $t4 0($v0) # store color (13, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x070302 # load color
+    li $t4 0x180c08 # load color
     sw $t4 0($v0) # store color (14, 8)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x000202 # load color
+    li $t4 0x0e1009 # load color
     sw $t4 0($v0) # store color (15, 8)
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x744334 # load color
+    li $t4 0xa05e45 # load color
     sw $t4 0($v0) # store color (0, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdc8260 # load color
+    li $t4 0xd57d5b # load color
     sw $t4 0($v0) # store color (1, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7d432e # load color
+    li $t4 0x894d35 # load color
     sw $t4 0($v0) # store color (2, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x794732 # load color
+    li $t4 0xa16344 # load color
     sw $t4 0($v0) # store color (3, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xda7f51 # load color
+    li $t4 0xd88a59 # load color
     sw $t4 0($v0) # store color (4, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbf826e # load color
+    li $t4 0xc79c8e # load color
     sw $t4 0($v0) # store color (5, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdbbac1 # load color
+    li $t4 0xa6b3bc # load color
     sw $t4 0($v0) # store color (6, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf9d8d5 # load color
+    li $t4 0xefdad7 # load color
     sw $t4 0($v0) # store color (7, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xffe2d9 # load color
+    li $t4 0xffeae1 # load color
     sw $t4 0($v0) # store color (8, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xfed9d3 # load color
+    li $t4 0xfedfd7 # load color
     sw $t4 0($v0) # store color (9, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd09688 # load color
+    li $t4 0xe1b5a8 # load color
     sw $t4 0($v0) # store color (10, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xca7250 # load color
+    li $t4 0xc97755 # load color
     sw $t4 0($v0) # store color (11, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xcd734f # load color
+    li $t4 0xdb7954 # load color
     sw $t4 0($v0) # store color (12, 9)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x4f2c20 # load color
-    sw $t4 0($v0) # store color (13, 9)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (14, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x010000 # load color
-    sw $t4 0($v0) # store color (15, 9)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    li $t4 0x010001 # load color
-    sw $t4 0($v0) # store color (0, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x734434 # load color
-    sw $t4 0($v0) # store color (1, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x44241c # load color
-    sw $t4 0($v0) # store color (2, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x160900 # load color
-    sw $t4 0($v0) # store color (3, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x8f4927 # load color
-    sw $t4 0($v0) # store color (4, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xdea698 # load color
-    sw $t4 0($v0) # store color (5, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xffdae1 # load color
-    sw $t4 0($v0) # store color (6, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf5c1bc # load color
-    sw $t4 0($v0) # store color (7, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xbe4f5a # load color
-    sw $t4 0($v0) # store color (8, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xdca5ad # load color
-    sw $t4 0($v0) # store color (9, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xcaacae # load color
-    sw $t4 0($v0) # store color (10, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xb7645b # load color
-    sw $t4 0($v0) # store color (11, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x2b0f00 # load color
-    sw $t4 0($v0) # store color (12, 10)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x090300 # load color
-    sw $t4 0($v0) # store color (13, 10)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (14, 10)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (15, 10)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    sw $0 0($v0) # store background (0, 11)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (1, 11)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (2, 11)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x111926 # load color
-    sw $t4 0($v0) # store color (3, 11)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x201c1d # load color
-    sw $t4 0($v0) # store color (4, 11)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x88777e # load color
-    sw $t4 0($v0) # store color (5, 11)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xbaa8bc # load color
-    sw $t4 0($v0) # store color (6, 11)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xb88b95 # load color
-    sw $t4 0($v0) # store color (7, 11)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xca9ba0 # load color
-    sw $t4 0($v0) # store color (8, 11)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc4959c # load color
-    sw $t4 0($v0) # store color (9, 11)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x968c9e # load color
-    sw $t4 0($v0) # store color (10, 11)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x352b42 # load color
-    sw $t4 0($v0) # store color (11, 11)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x16253d # load color
-    sw $t4 0($v0) # store color (12, 11)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x070b13 # load color
-    sw $t4 0($v0) # store color (13, 11)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (14, 11)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x000101 # load color
-    sw $t4 0($v0) # store color (15, 11)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    li $t4 0x010101 # load color
-    sw $t4 0($v0) # store color (0, 12)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (1, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x161c26 # load color
-    sw $t4 0($v0) # store color (2, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x2f3d59 # load color
-    sw $t4 0($v0) # store color (3, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x253e61 # load color
-    sw $t4 0($v0) # store color (4, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x263f6b # load color
-    sw $t4 0($v0) # store color (5, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x323554 # load color
-    sw $t4 0($v0) # store color (6, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x707ea1 # load color
-    sw $t4 0($v0) # store color (7, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x8590a6 # load color
-    sw $t4 0($v0) # store color (8, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x767f8f # load color
-    sw $t4 0($v0) # store color (9, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x2d3755 # load color
-    sw $t4 0($v0) # store color (10, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x202944 # load color
-    sw $t4 0($v0) # store color (11, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x3a537f # load color
-    sw $t4 0($v0) # store color (12, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x2f436a # load color
-    sw $t4 0($v0) # store color (13, 12)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (14, 12)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x000001 # load color
-    sw $t4 0($v0) # store color (15, 12)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    li $t4 0x000101 # load color
-    sw $t4 0($v0) # store color (0, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x030506 # load color
-    sw $t4 0($v0) # store color (1, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x323d58 # load color
-    sw $t4 0($v0) # store color (2, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x35486f # load color
-    sw $t4 0($v0) # store color (3, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x425b8a # load color
-    sw $t4 0($v0) # store color (4, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x374060 # load color
-    sw $t4 0($v0) # store color (5, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x293059 # load color
-    sw $t4 0($v0) # store color (6, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xa9a7c3 # load color
-    sw $t4 0($v0) # store color (7, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf0ebf6 # load color
-    sw $t4 0($v0) # store color (8, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xe9e5f2 # load color
-    sw $t4 0($v0) # store color (9, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x8c94b2 # load color
-    sw $t4 0($v0) # store color (10, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x616583 # load color
-    sw $t4 0($v0) # store color (11, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x415886 # load color
-    sw $t4 0($v0) # store color (12, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x111b2b # load color
-    sw $t4 0($v0) # store color (13, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x000001 # load color
-    sw $t4 0($v0) # store color (14, 13)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x000101 # load color
-    sw $t4 0($v0) # store color (15, 13)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    li $t4 0x000001 # load color
-    sw $t4 0($v0) # store color (0, 14)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (1, 14)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x161922 # load color
-    sw $t4 0($v0) # store color (2, 14)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x4c597c # load color
-    sw $t4 0($v0) # store color (3, 14)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x414968 # load color
-    sw $t4 0($v0) # store color (4, 14)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x737693 # load color
-    sw $t4 0($v0) # store color (5, 14)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xa4afc5 # load color
-    sw $t4 0($v0) # store color (6, 14)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x727897 # load color
-    sw $t4 0($v0) # store color (7, 14)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x70809c # load color
-    sw $t4 0($v0) # store color (8, 14)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xa4acc5 # load color
-    sw $t4 0($v0) # store color (9, 14)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x8a869d # load color
-    sw $t4 0($v0) # store color (10, 14)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x344160 # load color
-    sw $t4 0($v0) # store color (11, 14)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x121d2e # load color
-    sw $t4 0($v0) # store color (12, 14)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (13, 14)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x010102 # load color
-    sw $t4 0($v0) # store color (14, 14)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (15, 14)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    sw $0 0($v0) # store background (0, 15)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (1, 15)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (2, 15)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x08090b # load color
-    sw $t4 0($v0) # store color (3, 15)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x121216 # load color
-    sw $t4 0($v0) # store color (4, 15)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x666c8e # load color
-    sw $t4 0($v0) # store color (5, 15)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x8185a8 # load color
-    sw $t4 0($v0) # store color (6, 15)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x4b4f65 # load color
-    sw $t4 0($v0) # store color (7, 15)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x272e43 # load color
-    sw $t4 0($v0) # store color (8, 15)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x4b5376 # load color
-    sw $t4 0($v0) # store color (9, 15)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x4b526e # load color
-    sw $t4 0($v0) # store color (10, 15)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (11, 15)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (12, 15)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x000101 # load color
-    sw $t4 0($v0) # store color (13, 15)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (14, 15)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (15, 15)
-    add $v0 $v0 $t0 # shift x
-    jr $ra
-draw_alice_05:
-    sw $0 0($v0) # store background (0, 0)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (1, 0)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x020201 # load color
-    sw $t4 0($v0) # store color (2, 0)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x3c241b # load color
-    sw $t4 0($v0) # store color (3, 0)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x9f5f48 # load color
-    sw $t4 0($v0) # store color (4, 0)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xeaa790 # load color
-    sw $t4 0($v0) # store color (5, 0)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xcfa1aa # load color
-    sw $t4 0($v0) # store color (6, 0)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc58c9e # load color
-    sw $t4 0($v0) # store color (7, 0)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xd1949e # load color
-    sw $t4 0($v0) # store color (8, 0)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc58690 # load color
-    sw $t4 0($v0) # store color (9, 0)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc79eae # load color
-    sw $t4 0($v0) # store color (10, 0)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x857b7d # load color
-    sw $t4 0($v0) # store color (11, 0)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x2b1d14 # load color
-    sw $t4 0($v0) # store color (12, 0)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x010000 # load color
-    sw $t4 0($v0) # store color (13, 0)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (14, 0)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (15, 0)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    sw $0 0($v0) # store background (0, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x120b07 # load color
-    sw $t4 0($v0) # store color (1, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x663a2a # load color
-    sw $t4 0($v0) # store color (2, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xd28666 # load color
-    sw $t4 0($v0) # store color (3, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xe7bbb4 # load color
-    sw $t4 0($v0) # store color (4, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xba6e80 # load color
-    sw $t4 0($v0) # store color (5, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xac5065 # load color
-    sw $t4 0($v0) # store color (6, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc98c8f # load color
-    sw $t4 0($v0) # store color (7, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xe4a89f # load color
-    sw $t4 0($v0) # store color (8, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xe0a49d # load color
-    sw $t4 0($v0) # store color (9, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xbf7b83 # load color
-    sw $t4 0($v0) # store color (10, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xcc7b8b # load color
-    sw $t4 0($v0) # store color (11, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc28f83 # load color
-    sw $t4 0($v0) # store color (12, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x4f3a30 # load color
-    sw $t4 0($v0) # store color (13, 1)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x060302 # load color
-    sw $t4 0($v0) # store color (14, 1)
-    add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (15, 1)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    li $t4 0x050302 # load color
-    sw $t4 0($v0) # store color (0, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x7b4834 # load color
-    sw $t4 0($v0) # store color (1, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc47353 # load color
-    sw $t4 0($v0) # store color (2, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xd9a098 # load color
-    sw $t4 0($v0) # store color (3, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xb86778 # load color
-    sw $t4 0($v0) # store color (4, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xb7626d # load color
-    sw $t4 0($v0) # store color (5, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xeab88d # load color
-    sw $t4 0($v0) # store color (6, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf6c574 # load color
-    sw $t4 0($v0) # store color (7, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf6c56f # load color
-    sw $t4 0($v0) # store color (8, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf7c56e # load color
-    sw $t4 0($v0) # store color (9, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf3bf80 # load color
-    sw $t4 0($v0) # store color (10, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xe4bba9 # load color
-    sw $t4 0($v0) # store color (11, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xe5a79c # load color
-    sw $t4 0($v0) # store color (12, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xdaa774 # load color
-    sw $t4 0($v0) # store color (13, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x66442c # load color
-    sw $t4 0($v0) # store color (14, 2)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x000002 # load color
-    sw $t4 0($v0) # store color (15, 2)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    li $t4 0x3d241a # load color
-    sw $t4 0($v0) # store color (0, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xba6f50 # load color
-    sw $t4 0($v0) # store color (1, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xda9f68 # load color
-    sw $t4 0($v0) # store color (2, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xd09078 # load color
-    sw $t4 0($v0) # store color (3, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc07072 # load color
-    sw $t4 0($v0) # store color (4, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf1c491 # load color
-    sw $t4 0($v0) # store color (5, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xffdd83 # load color
-    sw $t4 0($v0) # store color (6, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfcdc77 # load color
-    sw $t4 0($v0) # store color (7, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfce48b # load color
-    sw $t4 0($v0) # store color (8, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xffe48f # load color
-    sw $t4 0($v0) # store color (9, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfcd979 # load color
-    sw $t4 0($v0) # store color (10, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xffe394 # load color
-    sw $t4 0($v0) # store color (11, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfcdca9 # load color
-    sw $t4 0($v0) # store color (12, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf8cf79 # load color
-    sw $t4 0($v0) # store color (13, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xcdaa5e # load color
-    sw $t4 0($v0) # store color (14, 3)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x271a12 # load color
-    sw $t4 0($v0) # store color (15, 3)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    li $t4 0xa66246 # load color
-    sw $t4 0($v0) # store color (0, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc27753 # load color
-    sw $t4 0($v0) # store color (1, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf5c472 # load color
-    sw $t4 0($v0) # store color (2, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf9d17b # load color
-    sw $t4 0($v0) # store color (3, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xecb475 # load color
-    sw $t4 0($v0) # store color (4, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfbdba1 # load color
-    sw $t4 0($v0) # store color (5, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xebc09b # load color
-    sw $t4 0($v0) # store color (6, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xdda769 # load color
-    sw $t4 0($v0) # store color (7, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xffeaa6 # load color
-    sw $t4 0($v0) # store color (8, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf8d8a8 # load color
-    sw $t4 0($v0) # store color (9, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xd7995f # load color
-    sw $t4 0($v0) # store color (10, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfada9f # load color
-    sw $t4 0($v0) # store color (11, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf7cc8a # load color
-    sw $t4 0($v0) # store color (12, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xedb46e # load color
-    sw $t4 0($v0) # store color (13, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf7d273 # load color
-    sw $t4 0($v0) # store color (14, 4)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x967643 # load color
-    sw $t4 0($v0) # store color (15, 4)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    li $t4 0xbd6f50 # load color
-    sw $t4 0($v0) # store color (0, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xde9b62 # load color
-    sw $t4 0($v0) # store color (1, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf8cf77 # load color
-    sw $t4 0($v0) # store color (2, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfad078 # load color
-    sw $t4 0($v0) # store color (3, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf1b271 # load color
-    sw $t4 0($v0) # store color (4, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xe2af67 # load color
-    sw $t4 0($v0) # store color (5, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xb06240 # load color
-    sw $t4 0($v0) # store color (6, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xcb905a # load color
-    sw $t4 0($v0) # store color (7, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfcd974 # load color
-    sw $t4 0($v0) # store color (8, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xd48e53 # load color
-    sw $t4 0($v0) # store color (9, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x88452d # load color
-    sw $t4 0($v0) # store color (10, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xbd7b50 # load color
-    sw $t4 0($v0) # store color (11, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfbcf77 # load color
-    sw $t4 0($v0) # store color (12, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xd69962 # load color
-    sw $t4 0($v0) # store color (13, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf3bd72 # load color
-    sw $t4 0($v0) # store color (14, 5)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xaf9c56 # load color
-    sw $t4 0($v0) # store color (15, 5)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    li $t4 0xbf7151 # load color
-    sw $t4 0($v0) # store color (0, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xe3a967 # load color
-    sw $t4 0($v0) # store color (1, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xe8b66c # load color
-    sw $t4 0($v0) # store color (2, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfdd179 # load color
-    sw $t4 0($v0) # store color (3, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xbd7b56 # load color
-    sw $t4 0($v0) # store color (4, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x73493d # load color
-    sw $t4 0($v0) # store color (5, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x70382a # load color
-    sw $t4 0($v0) # store color (6, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xb08663 # load color
-    sw $t4 0($v0) # store color (7, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xecad76 # load color
-    sw $t4 0($v0) # store color (8, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc7897b # load color
-    sw $t4 0($v0) # store color (9, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x625d66 # load color
-    sw $t4 0($v0) # store color (10, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xb47563 # load color
-    sw $t4 0($v0) # store color (11, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf6c26c # load color
-    sw $t4 0($v0) # store color (12, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xb7814d # load color
-    sw $t4 0($v0) # store color (13, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xb77a51 # load color
-    sw $t4 0($v0) # store color (14, 6)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xaa9756 # load color
-    sw $t4 0($v0) # store color (15, 6)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    li $t4 0xcd7956 # load color
-    sw $t4 0($v0) # store color (0, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xe19b64 # load color
-    sw $t4 0($v0) # store color (1, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xd28a5b # load color
-    sw $t4 0($v0) # store color (2, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfacf78 # load color
-    sw $t4 0($v0) # store color (3, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc3935e # load color
-    sw $t4 0($v0) # store color (4, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xaba2a5 # load color
-    sw $t4 0($v0) # store color (5, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x5d878e # load color
-    sw $t4 0($v0) # store color (6, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xd9c0b5 # load color
-    sw $t4 0($v0) # store color (7, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfdd2c4 # load color
-    sw $t4 0($v0) # store color (8, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xe6dbd6 # load color
-    sw $t4 0($v0) # store color (9, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x78acb6 # load color
-    sw $t4 0($v0) # store color (10, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xca8b71 # load color
-    sw $t4 0($v0) # store color (11, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xce8a4f # load color
-    sw $t4 0($v0) # store color (12, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x905937 # load color
-    sw $t4 0($v0) # store color (13, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x362517 # load color
-    sw $t4 0($v0) # store color (14, 7)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x454023 # load color
-    sw $t4 0($v0) # store color (15, 7)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    li $t4 0xc67555 # load color
-    sw $t4 0($v0) # store color (0, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xd9825d # load color
-    sw $t4 0($v0) # store color (1, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xba704c # load color
-    sw $t4 0($v0) # store color (2, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xdc9862 # load color
-    sw $t4 0($v0) # store color (3, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xdca067 # load color
-    sw $t4 0($v0) # store color (4, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xb4b0b0 # load color
-    sw $t4 0($v0) # store color (5, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x4599aa # load color
-    sw $t4 0($v0) # store color (6, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xe8e0da # load color
-    sw $t4 0($v0) # store color (7, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xffebe3 # load color
-    sw $t4 0($v0) # store color (8, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf5e7e0 # load color
-    sw $t4 0($v0) # store color (9, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc8c1ba # load color
-    sw $t4 0($v0) # store color (10, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc8785b # load color
-    sw $t4 0($v0) # store color (11, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xd67453 # load color
-    sw $t4 0($v0) # store color (12, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x4f2b1f # load color
-    sw $t4 0($v0) # store color (13, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x010001 # load color
-    sw $t4 0($v0) # store color (14, 8)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x000202 # load color
-    sw $t4 0($v0) # store color (15, 8)
-    add $v0 $v0 $t0 # shift x
-    add $t2 $t2 $t1 # shift y
-    move $v0 $t2 # carriage return
-    li $t4 0x683c2f # load color
-    sw $t4 0($v0) # store color (0, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc87657 # load color
-    sw $t4 0($v0) # store color (1, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x76402c # load color
-    sw $t4 0($v0) # store color (2, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x78462f # load color
-    sw $t4 0($v0) # store color (3, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xcb764e # load color
-    sw $t4 0($v0) # store color (4, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xca8b7a # load color
-    sw $t4 0($v0) # store color (5, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xefc2c6 # load color
-    sw $t4 0($v0) # store color (6, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfcd4cf # load color
-    sw $t4 0($v0) # store color (7, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xfccdc7 # load color
-    sw $t4 0($v0) # store color (8, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xf5c7c3 # load color
-    sw $t4 0($v0) # store color (9, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xc08272 # load color
-    sw $t4 0($v0) # store color (10, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xcc7351 # load color
-    sw $t4 0($v0) # store color (11, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0xa35a3c # load color
-    sw $t4 0($v0) # store color (12, 9)
-    add $v0 $v0 $t0 # shift x
-    li $t4 0x291710 # load color
+    li $t4 0x603527 # load color
     sw $t4 0($v0) # store color (13, 9)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 9)
@@ -6473,46 +5725,46 @@ draw_alice_05:
     add $v0 $v0 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v0 $t2 # carriage return
-    li $t4 0x030102 # load color
+    li $t4 0x211111 # load color
     sw $t4 0($v0) # store color (0, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x4c2c23 # load color
+    li $t4 0xa05d47 # load color
     sw $t4 0($v0) # store color (1, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2c1714 # load color
+    li $t4 0x5a2f21 # load color
     sw $t4 0($v0) # store color (2, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x160b06 # load color
+    li $t4 0x412416 # load color
     sw $t4 0($v0) # store color (3, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x814b30 # load color
+    li $t4 0xb0623e # load color
     sw $t4 0($v0) # store color (4, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xdcb1aa # load color
+    li $t4 0xce9183 # load color
     sw $t4 0($v0) # store color (5, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xf3d2d8 # load color
+    li $t4 0xfecad0 # load color
     sw $t4 0($v0) # store color (6, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xe0a6a8 # load color
+    li $t4 0xfbcfcc # load color
     sw $t4 0($v0) # store color (7, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbd5764 # load color
+    li $t4 0xdc888b # load color
     sw $t4 0($v0) # store color (8, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd7acb3 # load color
+    li $t4 0xe9b8bd # load color
     sw $t4 0($v0) # store color (9, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbf9da3 # load color
+    li $t4 0xb88f89 # load color
     sw $t4 0($v0) # store color (10, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x834843 # load color
+    li $t4 0xc06958 # load color
     sw $t4 0($v0) # store color (11, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x110702 # load color
+    li $t4 0x65331f # load color
     sw $t4 0($v0) # store color (12, 10)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x030201 # load color
+    li $t4 0x1f1008 # load color
     sw $t4 0($v0) # store color (13, 10)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 10)
@@ -6523,42 +5775,43 @@ draw_alice_05:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 11)
     add $v0 $v0 $t0 # shift x
-    sw $0 0($v0) # store background (1, 11)
+    li $t4 0x0d0706 # load color
+    sw $t4 0($v0) # store color (1, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x04070b # load color
+    li $t4 0x0e0e14 # load color
     sw $t4 0($v0) # store color (2, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x12161e # load color
+    li $t4 0x1a2535 # load color
     sw $t4 0($v0) # store color (3, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1b1d25 # load color
+    li $t4 0x47332c # load color
     sw $t4 0($v0) # store color (4, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x6c6679 # load color
+    li $t4 0xb89b9e # load color
     sw $t4 0($v0) # store color (5, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x94839b # load color
+    li $t4 0xbea6ae # load color
     sw $t4 0($v0) # store color (6, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa98f9e # load color
+    li $t4 0xad7580 # load color
     sw $t4 0($v0) # store color (7, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xbda3aa # load color
+    li $t4 0x934452 # load color
     sw $t4 0($v0) # store color (8, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xac919a # load color
+    li $t4 0x9e656f # load color
     sw $t4 0($v0) # store color (9, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x615d76 # load color
+    li $t4 0xa996a5 # load color
     sw $t4 0($v0) # store color (10, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x22273f # load color
+    li $t4 0x6a4c5e # load color
     sw $t4 0($v0) # store color (11, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1a2438 # load color
+    li $t4 0x273c61 # load color
     sw $t4 0($v0) # store color (12, 11)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x080b13 # load color
+    li $t4 0x111a2b # load color
     sw $t4 0($v0) # store color (13, 11)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 11)
@@ -6571,40 +5824,40 @@ draw_alice_05:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x131821 # load color
+    li $t4 0x1e2739 # load color
     sw $t4 0($v0) # store color (2, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1a2130 # load color
+    li $t4 0x2d3f5c # load color
     sw $t4 0($v0) # store color (3, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2c456d # load color
+    li $t4 0x2b4770 # load color
     sw $t4 0($v0) # store color (4, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x2c4069 # load color
+    li $t4 0x2b3f69 # load color
     sw $t4 0($v0) # store color (5, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x353a5a # load color
+    li $t4 0x313555 # load color
     sw $t4 0($v0) # store color (6, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x8890ae # load color
+    li $t4 0x8b8fad # load color
     sw $t4 0($v0) # store color (7, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x979cae # load color
+    li $t4 0xa1a5b9 # load color
     sw $t4 0($v0) # store color (8, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x83889b # load color
+    li $t4 0x9498a7 # load color
     sw $t4 0($v0) # store color (9, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x394362 # load color
+    li $t4 0x485271 # load color
     sw $t4 0($v0) # store color (10, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x323a59 # load color
+    li $t4 0x313753 # load color
     sw $t4 0($v0) # store color (11, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3b5686 # load color
+    li $t4 0x3c5584 # load color
     sw $t4 0($v0) # store color (12, 12)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x171f2f # load color
+    li $t4 0x2b3f63 # load color
     sw $t4 0($v0) # store color (13, 12)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 12)
@@ -6615,43 +5868,43 @@ draw_alice_05:
     move $v0 $t2 # carriage return
     sw $0 0($v0) # store background (0, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x050609 # load color
+    li $t4 0x050709 # load color
     sw $t4 0($v0) # store color (1, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x181d27 # load color
+    li $t4 0x343f5a # load color
     sw $t4 0($v0) # store color (2, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x3c4f77 # load color
+    li $t4 0x3d5078 # load color
     sw $t4 0($v0) # store color (3, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x455983 # load color
+    li $t4 0x465a84 # load color
     sw $t4 0($v0) # store color (4, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x414969 # load color
+    li $t4 0x444b6b # load color
     sw $t4 0($v0) # store color (5, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x414c73 # load color
+    li $t4 0x3f4c72 # load color
     sw $t4 0($v0) # store color (6, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xa2a4bf # load color
+    li $t4 0x9295b3 # load color
     sw $t4 0($v0) # store color (7, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd8d8e6 # load color
+    li $t4 0xd7d8e6 # load color
     sw $t4 0($v0) # store color (8, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xd3d3e5 # load color
+    li $t4 0xd7d7e8 # load color
     sw $t4 0($v0) # store color (9, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7e85a4 # load color
+    li $t4 0x9196b3 # load color
     sw $t4 0($v0) # store color (10, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x5e678b # load color
+    li $t4 0x646c8e # load color
     sw $t4 0($v0) # store color (11, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1d293e # load color
+    li $t4 0x364b74 # load color
     sw $t4 0($v0) # store color (12, 13)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x05070b # load color
+    li $t4 0x080d14 # load color
     sw $t4 0($v0) # store color (13, 13)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (14, 13)
@@ -6664,37 +5917,37 @@ draw_alice_05:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (1, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x0e1015 # load color
+    li $t4 0x0d0e13 # load color
     sw $t4 0($v0) # store color (2, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1f2531 # load color
+    li $t4 0x3d4760 # load color
     sw $t4 0($v0) # store color (3, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x252937 # load color
+    li $t4 0x373d52 # load color
     sw $t4 0($v0) # store color (4, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x7c809e # load color
+    li $t4 0x777b99 # load color
     sw $t4 0($v0) # store color (5, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0xacb2c8 # load color
+    li $t4 0xb0b5cb # load color
     sw $t4 0($v0) # store color (6, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x717896 # load color
+    li $t4 0x787d9b # load color
     sw $t4 0($v0) # store color (7, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x627292 # load color
+    li $t4 0x5b6c8c # load color
     sw $t4 0($v0) # store color (8, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x9298b3 # load color
+    li $t4 0x868eab # load color
     sw $t4 0($v0) # store color (9, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x605f74 # load color
+    li $t4 0x74738b # load color
     sw $t4 0($v0) # store color (10, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x172133 # load color
+    li $t4 0x1c263a # load color
     sw $t4 0($v0) # store color (11, 14)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x030509 # load color
+    li $t4 0x080d16 # load color
     sw $t4 0($v0) # store color (12, 14)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (13, 14)
@@ -6713,25 +5966,786 @@ draw_alice_05:
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (3, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1b1c22 # load color
+    li $t4 0x17181d # load color
     sw $t4 0($v0) # store color (4, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x62698c # load color
+    li $t4 0x606788 # load color
     sw $t4 0($v0) # store color (5, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x666e94 # load color
+    li $t4 0x666d94 # load color
     sw $t4 0($v0) # store color (6, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x292d3c # load color
+    li $t4 0x2d3142 # load color
     sw $t4 0($v0) # store color (7, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x1d202d # load color
+    li $t4 0x1b1e28 # load color
+    sw $t4 0($v0) # store color (8, 15)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x3d4464 # load color
+    sw $t4 0($v0) # store color (9, 15)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x404966 # load color
+    sw $t4 0($v0) # store color (10, 15)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (11, 15)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (12, 15)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (13, 15)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (14, 15)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (15, 15)
+    add $v0 $v0 $t0 # shift x
+    jr $ra
+draw_alice_05:
+    sw $0 0($v0) # store background (0, 0)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (1, 0)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (2, 0)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x1c100e # load color
+    sw $t4 0($v0) # store color (3, 0)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x93553d # load color
+    sw $t4 0($v0) # store color (4, 0)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xeda587 # load color
+    sw $t4 0($v0) # store color (5, 0)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xdabfc8 # load color
+    sw $t4 0($v0) # store color (6, 0)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd1b0bf # load color
+    sw $t4 0($v0) # store color (7, 0)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd8b5bd # load color
+    sw $t4 0($v0) # store color (8, 0)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xcda9b1 # load color
+    sw $t4 0($v0) # store color (9, 0)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xcfbfcd # load color
+    sw $t4 0($v0) # store color (10, 0)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x4b4946 # load color
+    sw $t4 0($v0) # store color (11, 0)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x070200 # load color
+    sw $t4 0($v0) # store color (12, 0)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (13, 0)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (14, 0)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (15, 0)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    sw $0 0($v0) # store background (0, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x040201 # load color
+    sw $t4 0($v0) # store color (1, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x4e2e22 # load color
+    sw $t4 0($v0) # store color (2, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xc67b5b # load color
+    sw $t4 0($v0) # store color (3, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe9b6aa # load color
+    sw $t4 0($v0) # store color (4, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xc17b89 # load color
+    sw $t4 0($v0) # store color (5, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xa5445d # load color
+    sw $t4 0($v0) # store color (6, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xc27886 # load color
+    sw $t4 0($v0) # store color (7, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd88d91 # load color
+    sw $t4 0($v0) # store color (8, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd0858c # load color
+    sw $t4 0($v0) # store color (9, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xb2677b # load color
+    sw $t4 0($v0) # store color (10, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd48e96 # load color
+    sw $t4 0($v0) # store color (11, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x977869 # load color
+    sw $t4 0($v0) # store color (12, 1)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x1e1411 # load color
+    sw $t4 0($v0) # store color (13, 1)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (14, 1)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (15, 1)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    li $t4 0x010000 # load color
+    sw $t4 0($v0) # store color (0, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x70412e # load color
+    sw $t4 0($v0) # store color (1, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xc37253 # load color
+    sw $t4 0($v0) # store color (2, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe0aa9d # load color
+    sw $t4 0($v0) # store color (3, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xbd7585 # load color
+    sw $t4 0($v0) # store color (4, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xb45d6b # load color
+    sw $t4 0($v0) # store color (5, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe3b296 # load color
+    sw $t4 0($v0) # store color (6, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf1be7c # load color
+    sw $t4 0($v0) # store color (7, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf4c17c # load color
+    sw $t4 0($v0) # store color (8, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf3bf7a # load color
+    sw $t4 0($v0) # store color (9, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xeab68e # load color
+    sw $t4 0($v0) # store color (10, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd5a3a3 # load color
+    sw $t4 0($v0) # store color (11, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xdd9588 # load color
+    sw $t4 0($v0) # store color (12, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xbc8f64 # load color
+    sw $t4 0($v0) # store color (13, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x352116 # load color
+    sw $t4 0($v0) # store color (14, 2)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x000001 # load color
+    sw $t4 0($v0) # store color (15, 2)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    li $t4 0x382118 # load color
+    sw $t4 0($v0) # store color (0, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xb46b4e # load color
+    sw $t4 0($v0) # store color (1, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd79869 # load color
+    sw $t4 0($v0) # store color (2, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xc7827a # load color
+    sw $t4 0($v0) # store color (3, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xbc666d # load color
+    sw $t4 0($v0) # store color (4, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xebbb89 # load color
+    sw $t4 0($v0) # store color (5, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfed575 # load color
+    sw $t4 0($v0) # store color (6, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfdde74 # load color
+    sw $t4 0($v0) # store color (7, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfde181 # load color
+    sw $t4 0($v0) # store color (8, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xffe17f # load color
+    sw $t4 0($v0) # store color (9, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfbd374 # load color
+    sw $t4 0($v0) # store color (10, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xffe19c # load color
+    sw $t4 0($v0) # store color (11, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfbdbac # load color
+    sw $t4 0($v0) # store color (12, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfbd076 # load color
+    sw $t4 0($v0) # store color (13, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xa4804b # load color
+    sw $t4 0($v0) # store color (14, 3)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x100a09 # load color
+    sw $t4 0($v0) # store color (15, 3)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    li $t4 0x975840 # load color
+    sw $t4 0($v0) # store color (0, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xc27954 # load color
+    sw $t4 0($v0) # store color (1, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf6c672 # load color
+    sw $t4 0($v0) # store color (2, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf2c77b # load color
+    sw $t4 0($v0) # store color (3, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe7af7a # load color
+    sw $t4 0($v0) # store color (4, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfde0a9 # load color
+    sw $t4 0($v0) # store color (5, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf0ca9e # load color
+    sw $t4 0($v0) # store color (6, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe8b971 # load color
+    sw $t4 0($v0) # store color (7, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfeebb0 # load color
+    sw $t4 0($v0) # store color (8, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf6d7a7 # load color
+    sw $t4 0($v0) # store color (9, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe6b069 # load color
+    sw $t4 0($v0) # store color (10, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xffe7ae # load color
+    sw $t4 0($v0) # store color (11, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf4c181 # load color
+    sw $t4 0($v0) # store color (12, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf5c474 # load color
+    sw $t4 0($v0) # store color (13, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe8c66a # load color
+    sw $t4 0($v0) # store color (14, 4)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x705231 # load color
+    sw $t4 0($v0) # store color (15, 4)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    li $t4 0xbe6f50 # load color
+    sw $t4 0($v0) # store color (0, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xdc9761 # load color
+    sw $t4 0($v0) # store color (1, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfad378 # load color
+    sw $t4 0($v0) # store color (2, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf9cc77 # load color
+    sw $t4 0($v0) # store color (3, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf4bb73 # load color
+    sw $t4 0($v0) # store color (4, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xedbc73 # load color
+    sw $t4 0($v0) # store color (5, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xba6d4b # load color
+    sw $t4 0($v0) # store color (6, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd7a060 # load color
+    sw $t4 0($v0) # store color (7, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfddc7a # load color
+    sw $t4 0($v0) # store color (8, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd49358 # load color
+    sw $t4 0($v0) # store color (9, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x954c2f # load color
+    sw $t4 0($v0) # store color (10, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd99f66 # load color
+    sw $t4 0($v0) # store color (11, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf9cf79 # load color
+    sw $t4 0($v0) # store color (12, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xda9864 # load color
+    sw $t4 0($v0) # store color (13, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf9ce76 # load color
+    sw $t4 0($v0) # store color (14, 5)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x988649 # load color
+    sw $t4 0($v0) # store color (15, 5)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    li $t4 0xbd6f4f # load color
+    sw $t4 0($v0) # store color (0, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe6ad6a # load color
+    sw $t4 0($v0) # store color (1, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xedbe6f # load color
+    sw $t4 0($v0) # store color (2, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfacb78 # load color
+    sw $t4 0($v0) # store color (3, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xc17e58 # load color
+    sw $t4 0($v0) # store color (4, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x7e503a # load color
+    sw $t4 0($v0) # store color (5, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x7a3d2c # load color
+    sw $t4 0($v0) # store color (6, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xc09466 # load color
+    sw $t4 0($v0) # store color (7, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe9aa6f # load color
+    sw $t4 0($v0) # store color (8, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xb77565 # load color
+    sw $t4 0($v0) # store color (9, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x604f56 # load color
+    sw $t4 0($v0) # store color (10, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xbe755a # load color
+    sw $t4 0($v0) # store color (11, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf3c36d # load color
+    sw $t4 0($v0) # store color (12, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xb07348 # load color
+    sw $t4 0($v0) # store color (13, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd29661 # load color
+    sw $t4 0($v0) # store color (14, 6)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x96874d # load color
+    sw $t4 0($v0) # store color (15, 6)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    li $t4 0xcd7b57 # load color
+    sw $t4 0($v0) # store color (0, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe19e65 # load color
+    sw $t4 0($v0) # store color (1, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd7945f # load color
+    sw $t4 0($v0) # store color (2, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfbd279 # load color
+    sw $t4 0($v0) # store color (3, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xb18159 # load color
+    sw $t4 0($v0) # store color (4, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x9e9498 # load color
+    sw $t4 0($v0) # store color (5, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x63797c # load color
+    sw $t4 0($v0) # store color (6, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe0baaa # load color
+    sw $t4 0($v0) # store color (7, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf8ccbc # load color
+    sw $t4 0($v0) # store color (8, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xcecbc8 # load color
+    sw $t4 0($v0) # store color (9, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x79a5b3 # load color
+    sw $t4 0($v0) # store color (10, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xcd8764 # load color
+    sw $t4 0($v0) # store color (11, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd19854 # load color
+    sw $t4 0($v0) # store color (12, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x885132 # load color
+    sw $t4 0($v0) # store color (13, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x4d3b23 # load color
+    sw $t4 0($v0) # store color (14, 7)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x544d2a # load color
+    sw $t4 0($v0) # store color (15, 7)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    li $t4 0xcf7b57 # load color
+    sw $t4 0($v0) # store color (0, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xda845d # load color
+    sw $t4 0($v0) # store color (1, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xc87e54 # load color
+    sw $t4 0($v0) # store color (2, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xecaa6b # load color
+    sw $t4 0($v0) # store color (3, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xd8a36c # load color
+    sw $t4 0($v0) # store color (4, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xa3b4b9 # load color
+    sw $t4 0($v0) # store color (5, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x4098a8 # load color
+    sw $t4 0($v0) # store color (6, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf5e4dc # load color
+    sw $t4 0($v0) # store color (7, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xffeae2 # load color
+    sw $t4 0($v0) # store color (8, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe5e1da # load color
+    sw $t4 0($v0) # store color (9, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xbabdb7 # load color
+    sw $t4 0($v0) # store color (10, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xc77355 # load color
+    sw $t4 0($v0) # store color (11, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xc96f4f # load color
+    sw $t4 0($v0) # store color (12, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x44241a # load color
+    sw $t4 0($v0) # store color (13, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x020202 # load color
+    sw $t4 0($v0) # store color (14, 8)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x050604 # load color
+    sw $t4 0($v0) # store color (15, 8)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    li $t4 0x824c39 # load color
+    sw $t4 0($v0) # store color (0, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xce7958 # load color
+    sw $t4 0($v0) # store color (1, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x723f2a # load color
+    sw $t4 0($v0) # store color (2, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x96593d # load color
+    sw $t4 0($v0) # store color (3, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xcc7b52 # load color
+    sw $t4 0($v0) # store color (4, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xcd998d # load color
+    sw $t4 0($v0) # store color (5, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xdcc2c7 # load color
+    sw $t4 0($v0) # store color (6, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfdd8d2 # load color
+    sw $t4 0($v0) # store color (7, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xffd9d1 # load color
+    sw $t4 0($v0) # store color (8, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xf4c8c2 # load color
+    sw $t4 0($v0) # store color (9, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xc68774 # load color
+    sw $t4 0($v0) # store color (10, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xce7450 # load color
+    sw $t4 0($v0) # store color (11, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xa85d40 # load color
+    sw $t4 0($v0) # store color (12, 9)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x1c100d # load color
+    sw $t4 0($v0) # store color (13, 9)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (14, 9)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (15, 9)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    li $t4 0x0d0607 # load color
+    sw $t4 0($v0) # store color (0, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x6d3f31 # load color
+    sw $t4 0($v0) # store color (1, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x341c17 # load color
+    sw $t4 0($v0) # store color (2, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x332018 # load color
+    sw $t4 0($v0) # store color (3, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x9d5b3d # load color
+    sw $t4 0($v0) # store color (4, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe0b2ad # load color
+    sw $t4 0($v0) # store color (5, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xfed7db # load color
+    sw $t4 0($v0) # store color (6, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xe5a8a9 # load color
+    sw $t4 0($v0) # store color (7, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xcb6c77 # load color
+    sw $t4 0($v0) # store color (8, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xdfbcc0 # load color
+    sw $t4 0($v0) # store color (9, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xbd8d8e # load color
+    sw $t4 0($v0) # store color (10, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x86493f # load color
+    sw $t4 0($v0) # store color (11, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x261a1a # load color
+    sw $t4 0($v0) # store color (12, 10)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x030100 # load color
+    sw $t4 0($v0) # store color (13, 10)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (14, 10)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (15, 10)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    sw $0 0($v0) # store background (0, 11)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (1, 11)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x111823 # load color
+    sw $t4 0($v0) # store color (2, 11)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x202f45 # load color
+    sw $t4 0($v0) # store color (3, 11)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x3b3a47 # load color
+    sw $t4 0($v0) # store color (4, 11)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x827b8e # load color
+    sw $t4 0($v0) # store color (5, 11)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x816d7c # load color
+    sw $t4 0($v0) # store color (6, 11)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x7d566e # load color
+    sw $t4 0($v0) # store color (7, 11)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x7a505f # load color
+    sw $t4 0($v0) # store color (8, 11)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x755a69 # load color
+    sw $t4 0($v0) # store color (9, 11)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x6f6178 # load color
+    sw $t4 0($v0) # store color (10, 11)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x343c5e # load color
+    sw $t4 0($v0) # store color (11, 11)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x314a78 # load color
+    sw $t4 0($v0) # store color (12, 11)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x0f1522 # load color
+    sw $t4 0($v0) # store color (13, 11)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (14, 11)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (15, 11)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    sw $0 0($v0) # store background (0, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x050608 # load color
+    sw $t4 0($v0) # store color (1, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x2a364e # load color
+    sw $t4 0($v0) # store color (2, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x32466b # load color
+    sw $t4 0($v0) # store color (3, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x354f7c # load color
+    sw $t4 0($v0) # store color (4, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x2a375c # load color
+    sw $t4 0($v0) # store color (5, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x42476b # load color
+    sw $t4 0($v0) # store color (6, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xbcc0d8 # load color
+    sw $t4 0($v0) # store color (7, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xcccfdd # load color
+    sw $t4 0($v0) # store color (8, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xb3b8cc # load color
+    sw $t4 0($v0) # store color (9, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x4e5978 # load color
+    sw $t4 0($v0) # store color (10, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x495172 # load color
+    sw $t4 0($v0) # store color (11, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x354f7d # load color
+    sw $t4 0($v0) # store color (12, 12)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x0d141f # load color
+    sw $t4 0($v0) # store color (13, 12)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (14, 12)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (15, 12)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    sw $0 0($v0) # store background (0, 13)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x030305 # load color
+    sw $t4 0($v0) # store color (1, 13)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x2d354a # load color
+    sw $t4 0($v0) # store color (2, 13)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x47577e # load color
+    sw $t4 0($v0) # store color (3, 13)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x4e5a7e # load color
+    sw $t4 0($v0) # store color (4, 13)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x656b89 # load color
+    sw $t4 0($v0) # store color (5, 13)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x73809f # load color
+    sw $t4 0($v0) # store color (6, 13)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x868ca9 # load color
+    sw $t4 0($v0) # store color (7, 13)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xabb4c8 # load color
+    sw $t4 0($v0) # store color (8, 13)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0xbcbdd3 # load color
+    sw $t4 0($v0) # store color (9, 13)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x737490 # load color
+    sw $t4 0($v0) # store color (10, 13)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x44557a # load color
+    sw $t4 0($v0) # store color (11, 13)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x0f1827 # load color
+    sw $t4 0($v0) # store color (12, 13)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (13, 13)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (14, 13)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (15, 13)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    sw $0 0($v0) # store background (0, 14)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (1, 14)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x030304 # load color
+    sw $t4 0($v0) # store color (2, 14)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x1d222c # load color
+    sw $t4 0($v0) # store color (3, 14)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x2b2d3a # load color
+    sw $t4 0($v0) # store color (4, 14)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x7d81a2 # load color
+    sw $t4 0($v0) # store color (5, 14)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x989ab7 # load color
+    sw $t4 0($v0) # store color (6, 14)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x555c77 # load color
+    sw $t4 0($v0) # store color (7, 14)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x3f4c6a # load color
+    sw $t4 0($v0) # store color (8, 14)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x6b7392 # load color
+    sw $t4 0($v0) # store color (9, 14)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x36394a # load color
+    sw $t4 0($v0) # store color (10, 14)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x04080f # load color
+    sw $t4 0($v0) # store color (11, 14)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (12, 14)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (13, 14)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (14, 14)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (15, 14)
+    add $v0 $v0 $t0 # shift x
+    add $t2 $t2 $t1 # shift y
+    move $v0 $t2 # carriage return
+    sw $0 0($v0) # store background (0, 15)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (1, 15)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (2, 15)
+    add $v0 $v0 $t0 # shift x
+    sw $0 0($v0) # store background (3, 15)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x25262f # load color
+    sw $t4 0($v0) # store color (4, 15)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x5d668a # load color
+    sw $t4 0($v0) # store color (5, 15)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x4f587c # load color
+    sw $t4 0($v0) # store color (6, 15)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x050507 # load color
+    sw $t4 0($v0) # store color (7, 15)
+    add $v0 $v0 $t0 # shift x
+    li $t4 0x0b0b12 # load color
     sw $t4 0($v0) # store color (8, 15)
     add $v0 $v0 $t0 # shift x
     li $t4 0x454e71 # load color
     sw $t4 0($v0) # store color (9, 15)
     add $v0 $v0 $t0 # shift x
-    li $t4 0x323a51 # load color
+    li $t4 0x282d40 # load color
     sw $t4 0($v0) # store color (10, 15)
     add $v0 $v0 $t0 # shift x
     sw $0 0($v0) # store background (11, 15)
