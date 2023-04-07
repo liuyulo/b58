@@ -104,7 +104,21 @@
 init_stage:
     # if all stage completed
     lw $t0 stage
-    bge $t0 STAGE_COUNT terminate
+    bge $t0 STAGE_COUNT game_clear
+
+    # li $s0 PLAYER_INIT # player x
+    # li $s1 PLAYER_INIT # player y
+    li $s4 1 # face east
+    # li $s5 2 # door locked, not landed, can double jump
+    li $s6 0 # jump distance remaining
+
+cheat:
+    li $s0 352
+    li $s1 384
+    li $s5 5
+    li $t0 16
+    sw $t0 stage
+
     # new gravity
     lh $s2 stage_gravity($t0) # gravity x
     addi $t0 $t0 2
@@ -116,12 +130,6 @@ init_stage:
         sw $0 0($t0)
         addi $t0 $t0 4
         ble $t0 $t1 clear_screen_loop
-
-    li $s0 PLAYER_INIT # player x
-    li $s1 PLAYER_INIT # player y
-    li $s4 1 # face east
-    li $s5 2 # door locked, not landed, can double jump
-    li $s6 0 # jump distance remaining
     # get current position to v0
     flatten($s0, $s1, $v0)
     li $a0 0
@@ -153,10 +161,6 @@ main:
     li $v0 32
     syscall
     j main
-terminate: # terminate the program gracefully
-    li $v0 10
-    syscall
-
 keypress: # check keypress, return dx dy as a0 a1
     li $t1 0xffff0000 # check keypress
     lw $t0 0($t1)
@@ -356,6 +360,12 @@ stage_3: # stage 3 gimmick
     lw $t1 8($sp)
     addi $sp $sp 12
     jr $ra
+
+game_clear:
+
+terminate: # terminate the program gracefully
+    li $v0 10
+    syscall
 
 draw_stage: # use t\d
     lw $t9 stage
@@ -7011,10 +7021,6 @@ clear_alice: # start at v0
     sw $0 3616($v1) # clear (8, 7)
     sw $0 4124($v1) # clear (7, 8)
     sw $0 4128($v1) # clear (8, 8)
-    li $a0 REFRESH_RATE
-    li $v0 32
-    syscall
-
     jr $ra
 
 draw_doll:
