@@ -212,11 +212,11 @@ main_init:
     move $s6 $0 # jump distance remaining
 
 cheat: # skip to final stage and tp to exit
-    li $s0 352
-    li $s1 384
-    li $s5 7
-    li $t0 16
-    sw $t0 stage
+    #li $s0 352
+    #li $s1 384
+    #li $s5 7
+    #li $t0 16
+    #sw $t0 stage
 
     # new gravity
     lh $s2 stage_gravity($t0) # gravity x
@@ -305,6 +305,7 @@ ui_keypress:
 
 keypress: # check ingame keypress, return dx dy as a0 a1
     check_keypress()
+    beq $v0 0x70 init_pre # p
     beq $v0 0x20 keypress_spc
     # the rest are movements
     beq $v0 0x77 keypress_w
