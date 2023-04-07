@@ -151,10 +151,10 @@ main_init:
     lw $t0 stage
     bge $t0 STAGE_COUNT post_init
 
-    # li $s0 PLAYER_INIT # player x
-    # li $s1 PLAYER_INIT # player y
+    li $s0 PLAYER_INIT # player x
+    li $s1 PLAYER_INIT # player y
     li $s4 1 # face east
-    # li $s5 2 # door locked, not landed, can double jump
+    li $s5 2 # door locked, not landed, can double jump
     li $s6 0 # jump distance remaining
 
 cheat:
@@ -209,7 +209,7 @@ main:
 keypress: # check keypress, return dx dy as a0 a1
     li $t1 0xffff0000 # check keypress
     lw $t0 0($t1)
-    beqz $t0 keypress_end # handle keypress
+    beqz $t0 jrra # handle keypress
     lw $t0 4($t1)
     beq $t0 0x20 keypress_spc
     # the rest are movements
@@ -217,13 +217,13 @@ keypress: # check keypress, return dx dy as a0 a1
     beq $t0 0x73 keypress_s
 
     # a or d pressed
-    bnez $s2 keypress_end # can't move top/bottom
+    bnez $s2 jrra # can't move top/bottom
     beq $t0 0x61 keypress_a
     beq $t0 0x64 keypress_d
 
     keypress_spc:
         andi $t0 $s5 3 # take double jump, landed
-        beqz $t0 keypress_end # can't jump
+        beqz $t0 jrra # can't jump
         li $s6 JUMP_HEIGHT
         andi $s5 $s5 0xfffc # reset last 2 bits
 
@@ -232,21 +232,19 @@ keypress: # check keypress, return dx dy as a0 a1
         or $s5 $s5 $t0 # double jump iff not landed
         jr $ra
     keypress_w:
-    bnez $s3 keypress_end # can't move up
+    bnez $s3 jrra # can't move up
     movement(0,-4)
     keypress_s:
-    bnez $s3 keypress_end # can't move up
+    bnez $s3 jrra # can't move up
     movement(0,4)
     keypress_a:
     movement(-4,0)
     keypress_d:
     movement(4,0)
-    keypress_end:
-    jr $ra
 gravity:
     move $a2 $s2 # update player position
     move $a3 $s3
-    beq $s6 0 gravity_end
+    beq $s6 0 jrra
     # jumping
     neg $a2 $a2 # reverse gravity
     neg $a3 $a3
@@ -254,7 +252,6 @@ gravity:
     sub $s6 $s6 $t0 # update jump distance, assume s2 == 0 or s3 == 0
     abs $t0 $s3
     sub $s6 $s6 $t0
-    gravity_end:
     jr $ra
 check_move: # possibly a0 += a2 and a1 += a3 but ensure no collision
     # get new coordinates
@@ -307,10 +304,9 @@ check_move: # possibly a0 += a2 and a1 += a3 but ensure no collision
         li $s6 0 # reset jump distance
         player_bonk_end:
         # consider landed if Δs == gravity
-        bne $a2 $s2 has_collision
-        bne $a3 $s3 has_collision
+        bne $a2 $s2 jrra
+        bne $a3 $s3 jrra
         ori $s5 $s5 0x3 # landed (and can double jump)
-    has_collision:
         jr $ra
     no_collision:
         add $a0 $a0 $a2
@@ -3513,7 +3509,7 @@ draw_stage: # use v1 t0-t9
     sw $t6 65524($v1)
     sw $t8 65528($v1)
     sw $t0 65532($v1)
-    beq $t9 0 draw_stage_end # end of stage 0
+    beq $t9 0 jrra # end of stage 0
     sw $t0 0($v1)
     sw $t5 4($v1)
     sw $t6 8($v1)
@@ -3754,7 +3750,7 @@ draw_stage: # use v1 t0-t9
     sw $t8 30228($v1)
     sw $t3 30232($v1)
     sw $t6 30236($v1)
-    beq $t9 4 draw_stage_end # end of stage 1
+    beq $t9 4 jrra # end of stage 1
     sw $t6 4112($v1)
     sw $t2 4116($v1)
     sw $t3 4120($v1)
@@ -3899,7 +3895,7 @@ draw_stage: # use v1 t0-t9
     sw $t6 57060($v1)
     sw $t1 57064($v1)
     sw $t3 57068($v1)
-    beq $t9 8 draw_stage_end # end of stage 2
+    beq $t9 8 jrra # end of stage 2
     sw $t7 14544($v1)
     sw $t0 14548($v1)
     sw $t5 14552($v1)
@@ -4108,7 +4104,7 @@ draw_stage: # use v1 t0-t9
     sw $t5 40660($v1)
     sw $t0 40664($v1)
     sw $t1 40668($v1)
-    beq $t9 12 draw_stage_end # end of stage 3
+    beq $t9 12 jrra # end of stage 3
     sw $t4 57568($v1)
     sw $t0 57572($v1)
     sw $t2 57576($v1)
@@ -4301,8 +4297,6 @@ draw_stage: # use v1 t0-t9
     sw $t0 53044($v1)
     sw $t0 53048($v1)
     sw $t3 53052($v1)
-
-    draw_stage_end:
     jr $ra # return
 
 draw_door: # start at v1, use t4
@@ -20312,6 +20306,7 @@ draw_doll:
         sw $t4 5656($v1)
         jr $ra
     clear_doll: # start at v1, use t4
+        lw $v1 doll_address
         draw64($0, 0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 512, 516, 520, 524, 528, 532, 536, 540, 544, 548, 1024, 1028, 1032, 1036, 1040, 1044, 1048, 1052, 1056, 1060, 1536, 1540, 1544, 1548, 1552, 1556, 1560, 1564, 1568, 1572, 2048, 2052, 2056, 2060, 2064, 2068, 2072, 2076, 2080, 2084, 2560, 2564, 2568, 2572, 2576, 2580, 2584, 2588, 2592, 2596, 3072, 3076, 3080, 3084)
         draw16($0, 3088, 3092, 3096, 3100, 3104, 3108, 3584, 3588, 3592, 3596, 3600, 3604, 3608, 3612, 3616, 3620)
         draw16($0, 4096, 4100, 4104, 4108, 4112, 4116, 4120, 4124, 4128, 4132, 4608, 4612, 4616, 4620, 4624, 4628)
@@ -20861,4 +20856,5 @@ draw_border: # start at v1, use t4
     draw64($t4, 63196, 63200, 63204, 63208, 63212, 63216, 63220, 63224, 63228, 63232, 63236, 63240, 63244, 63248, 63252, 63256, 63260, 63264, 63268, 63272, 63276, 63280, 63284, 63288, 63292, 63296, 63300, 63304, 63308, 63312, 63316, 63320, 63324, 63328, 63332, 63336, 63340, 63344, 63348, 63352, 63356, 63360, 63364, 63368, 63372, 63376, 63380, 63384, 63388, 63392, 63396, 63400, 63404, 63408, 63412, 63416, 63420, 63424, 63428, 63432, 63436, 63440, 63444, 63448)
     draw64($t4, 63452, 63456, 63460, 63464, 63468, 63472, 63500, 63504, 63508, 63512, 63516, 63520, 63524, 63528, 63532, 63536, 63540, 63544, 63548, 63552, 63556, 63560, 63564, 63568, 63572, 63576, 63580, 63584, 63588, 63592, 63596, 63600, 63604, 63608, 63612, 63616, 63620, 63624, 63628, 63632, 63636, 63640, 63644, 63648, 63652, 63656, 63660, 63664, 63668, 63672, 63676, 63680, 63684, 63688, 63692, 63696, 63700, 63704, 63708, 63712, 63716, 63720, 63724, 63728)
     draw64($t4, 63732, 63736, 63740, 63744, 63748, 63752, 63756, 63760, 63764, 63768, 63772, 63776, 63780, 63784, 63788, 63792, 63796, 63800, 63804, 63808, 63812, 63816, 63820, 63824, 63828, 63832, 63836, 63840, 63844, 63848, 63852, 63856, 63860, 63864, 63868, 63872, 63876, 63880, 63884, 63888, 63892, 63896, 63900, 63904, 63908, 63912, 63916, 63920, 63924, 63928, 63932, 63936, 63940, 63944, 63948, 63952, 63956, 63960, 63964, 63968, 63972, 63976, 63980, 63984)
+jrra:
     jr $ra
