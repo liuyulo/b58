@@ -101,7 +101,7 @@
 .text
     save(doll, doll_address)
     save(door, door_address)
-init:
+init_stage:
     # if all stage completed
     lw $t0 stage
     bge $t0 STAGE_COUNT terminate
@@ -217,21 +217,21 @@ check_move: # possibly a0 += a2 and a1 += a3 but ensure no collision
     li $v0 1
     # check on screen and get bbox t0 t1 t2 t3
     bgez $t0 player_bbox_1
-    bltz $s2 init # fell off screen
+    bltz $s2 init_stage # fell off screen
     j collision_end
     player_bbox_1:
         bgez $t1 player_bbox_2
-        bltz $s3 init # fell off screen
+        bltz $s3 init_stage # fell off screen
         j collision_end
     player_bbox_2:
         add $t2 $t0 PLAYER_SIZE
         ble $t2 SIZE player_bbox_3
-        bgtz $s2 init # fell off screen
+        bgtz $s2 init_stage # fell off screen
         j collision_end
     player_bbox_3:
         add $t3 $t1 PLAYER_SIZE
         ble $t3 SIZE player_bbox_end
-        bgtz $s3 init # fell off screen
+        bgtz $s3 init_stage # fell off screen
         j collision_end
     player_bbox_end:
 
@@ -325,7 +325,7 @@ next_stage: # prepare for next stage, then goto init
     lw $t0 stage
     addi $t0 $t0 4
     sw $t0 stage
-    j init
+    j init_stage
 
 stage_1: # stage 1 gimmick
     li $s2 0 # reset gravity
