@@ -211,12 +211,12 @@ main_init:
     li $s5 2 # door locked, not landed, can double jump
     move $s6 $0 # jump distance remaining
 
-    # cheat: # skip to final stage and tp to exit
-    # li $s0 352
-    # li $s1 384
-    # li $s5 5
-    # li $t0 16
-    # sw $t0 stage
+cheat: # skip to final stage and tp to exit
+    li $s0 352
+    li $s1 384
+    li $s5 7
+    li $t0 16
+    sw $t0 stage
 
     # new gravity
     lh $s2 stage_gravity($t0) # gravity x
@@ -501,8 +501,13 @@ init_post:
     li $a1 4 # clear outwards
     jal draw_clear
     jal draw_border
+    li $a0 REFRESH_RATE # sleep
+    li $v0 32
 post:
     bge $s7 POST_FRAME post_ui_end
+        # consume keypress
+        li $t0 0xffff0000
+        lw $t1 4($t0)
         # load frame addr from memory
         srl $t0 $s7 1
         andi $t0 $t0 0xfffc # unset last 2 bits to make word aligned
