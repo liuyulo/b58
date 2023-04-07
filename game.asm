@@ -173,6 +173,7 @@
     save(doll, doll_address)
     save(door, door_address)
 reset:
+start:
     move $s7 $0 # reset time
     sw $0 stage # reset stage
 main_init:
@@ -236,7 +237,49 @@ main:
     syscall
     j main
 
-keypress: # check keypress, return dx dy as a0 a1
+setup_color: # set up colors for UI
+    # this creates transitions, idk how to explain
+    andi $t1 $s7 0x7 # mod 8
+    li $t2 0x5e4e1f
+    li $t3 0x756127
+    slti $t0 $t1 1
+    movn $t3 $t2 $t0
+
+    li $t4 0x8b742e
+    slti $t0 $t1 2
+    movn $t4 $t3 $t0
+
+    li $t5 0xa98c38
+    slti $t0 $t1 3
+    movn $t5 $t4 $t0
+
+    li $t6 0xba9b3e
+    slti $t0 $t1 4
+    movn $t6 $t5 $t0
+
+    li $t7 0xd0ad45
+    slti $t0 $t1 5
+    movn $t7 $t6 $t0
+
+    li $t8 0xe6c04c
+    slti $t0 $t1 6
+    movn $t8 $t7 $t0
+
+    li $t9 0xfad053
+    slti $t0 $t1 7
+    movn $t9 $t8 $t0
+
+    li $t0 0x2d260f
+    li $t1 0x453917
+    jr $ra
+ui_keypress:
+    check_keypress()
+    beq $v0 0x71 terminate # q
+    beq $v0 0x73 start # s
+    beq $v0 0x70 reset # p
+    jr $ra
+
+keypress: # check ingame keypress, return dx dy as a0 a1
     check_keypress()
     beq $v0 0x20 keypress_spc
     # the rest are movements
@@ -399,7 +442,6 @@ next_stage: # prepare for next stage, then goto init
     addi $t0 $t0 4
     sw $t0 stage
     j main_init
-
 stage_1: # stage 1 gimmick
     li $s2 0 # reset gravity
     li $s3 4
@@ -458,48 +500,6 @@ post:
     li $v0 32
     syscall
     j post
-setup_color: # set up colors for UI
-    # this creates transitions, idk how to explain
-    andi $t1 $s7 0x7 # mod 8
-    li $t2 0x5e4e1f
-    li $t3 0x756127
-    slti $t0 $t1 1
-    movn $t3 $t2 $t0
-
-    li $t4 0x8b742e
-    slti $t0 $t1 2
-    movn $t4 $t3 $t0
-
-    li $t5 0xa98c38
-    slti $t0 $t1 3
-    movn $t5 $t4 $t0
-
-    li $t6 0xba9b3e
-    slti $t0 $t1 4
-    movn $t6 $t5 $t0
-
-    li $t7 0xd0ad45
-    slti $t0 $t1 5
-    movn $t7 $t6 $t0
-
-    li $t8 0xe6c04c
-    slti $t0 $t1 6
-    movn $t8 $t7 $t0
-
-    li $t9 0xfad053
-    slti $t0 $t1 7
-    movn $t9 $t8 $t0
-
-    li $t0 0x2d260f
-    li $t1 0x453917
-    jr $ra
-
-ui_keypress:
-    check_keypress()
-    beq $v0 0x71 terminate
-    #beq $v0 0x73 s
-    beq $v0 0x70 reset
-    jr $ra
 
 terminate: # terminate the program gracefully
     li $a1 -4
@@ -1772,7 +1772,6 @@ draw_stage: # use v1 t0-t9
     sw $t0 53048($v1)
     sw $t3 53052($v1)
     jr $ra # return
-
 draw_door: # start at v1, use t4
     li $t4 0x7d4400
     draw4($t4, 0, 44, 4608, 8748)
