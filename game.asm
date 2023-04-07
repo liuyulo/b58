@@ -377,8 +377,9 @@ post:
     andi $t0 $s7 0xfffc
     la $t1 postgame_frames
     add $t0 $t0 $t1
-    lw $t0 0($t0)
-    jalr $t0
+    lw $v0 0($t0)
+    jal post_setup_color
+    jalr $v0
     post_draw_doll:
 
     addi $s7 $s7 1 # increment time
@@ -386,12 +387,7 @@ post:
     li $v0 32
     syscall
     j post
-draw_game_clear: # use v0 v1 t0-t9
-    # set position to (13, 5 + s7)
-    sll $v1 $s7 9 # to (0, s7)
-    addi $v1 $v1 2612 # to (13, 13 + s7)
-    addi $v1 $v1 BASE_ADDRESS
-
+post_setup_color: # set up colors for
     # this creates transitions, idk how to explain
     li $t2 0x544b22
     li $t3 0x6c622b
@@ -424,6 +420,12 @@ draw_game_clear: # use v0 v1 t0-t9
 
     li $t0 0x24200e
     li $t1 0x3b3518
+    jr $ra
+draw_game_clear: # use v0 v1 t0-t9
+    # set position to (13, 5 + s7)
+    sll $v1 $s7 9 # to (0, s7)
+    addi $v1 $v1 2612 # to (13, 13 + s7)
+    addi $v1 $v1 BASE_ADDRESS
 
     sw $0 12($v1) # (3, 0)
     sw $0 16($v1) # (4, 0)
