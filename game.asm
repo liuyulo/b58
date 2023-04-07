@@ -1,17 +1,20 @@
-# s0 player x in bytes
-# s1 player y in bytes
-# s2 gravity x
-# s3 gravity y
-# s4 orientation (positive or negative)
-# s5 flag: door_unlocked double_jump landed
-# s6 jump distance remaining
-# s7 time
-
+# ingame
+#   s0 player x in bytes
+#   s1 player y in bytes
+#   s2 gravity x
+#   s3 gravity y
+#   s4 orientation (positive or negative)
+#   s5 flag: door_unlocked double_jump landed
+#   s6 jump distance remaining
+#   s7 time
+# postgame
+#   s5 constant 5
 # .eqv
     .eqv BASE_ADDRESS   0x10008000  # ($gp)
     .eqv SIZE           512         # screen width & height in bytes
     .eqv WIDTH_SHIFT    7           # 4 << WIDTH_SHIFT == SIZE
     .eqv REFRESH_RATE   40          # in miliseconds
+    .eqv POST_RATE      50
     .eqv PRE_FRAME      32          # frames to draw pre ui
     .eqv POST_FRAME     32          # frames to draw post ui
     .eqv CLEAR_FRAME    172         # 4 * num of frames for clear
@@ -81,6 +84,8 @@
         draw_clear_22 draw_clear_23 draw_clear_24 draw_clear_25 draw_clear_26 draw_clear_27 draw_clear_28
         draw_clear_29 draw_clear_30 draw_clear_31 draw_clear_32 draw_clear_33 draw_clear_34 draw_clear_35
         draw_clear_36 draw_clear_37 draw_clear_38 draw_clear_39 draw_clear_40 draw_clear_41 draw_clear_42
+    score: .word 70 82 65 77 63 75 61 73 58 70 61 73 63 75 65 77 # 16 pitches
+
 # .macro
     .macro flatten(%x, %y, %out) # flatten 2d coordinates to 1d
         sll %out %y WIDTH_SHIFT # add y
@@ -218,11 +223,11 @@ main_init:
     la $ra cheat # i.e. label to next line
     beqz $t0 draw_collect
 cheat: # skip to final stage and tp to exit
-    #li $s0 352
-    #li $s1 384
-    #li $s5 7
-    #li $t0 16
-    #sw $t0 stage
+    li $s0 352
+    li $s1 384
+    li $s5 7
+    li $t0 16
+    sw $t0 stage
 
     # new gravity
     lh $s2 stage_gravity($t0) # gravity x
@@ -513,6 +518,10 @@ init_post:
     jal draw_border
     li $a0 REFRESH_RATE # sleep
     li $v0 32
+    li $s5 5
+    li $s2 112 # instrument
+    li $s3 0x40 # max volume
+    li $a1 250 # duration
 post:
     bge $s7 POST_FRAME post_ui_end
         # consume keypress
@@ -530,12 +539,31 @@ post:
     jal ui_keypress
     # draw doll
     andi $t4 $s7 1 # every 2 frames
-    bnez $t4 post_refresh # skip
+    bnez $t4 post_doll_end # skip
     jal draw_post_doll
+    post_doll_end:
+
+    # music
+    div $s7 $s5
+    mfhi $t0
+    bnez $t0 post_refresh
+    mflo $t0
+    # mod 16
+    and $t0 $t0 0xf
+    sll $t0 $t0 2 # in bytes
+    la $t1 score
+    add $t0 $t0 $t1
+    lw $a0 0($t0) # load pitch
+    move $a2 $s2 # load instrument
+    move $a3 $s3 # load volume
+    slt $t0 $s7 $s3
+    movn $a3 $s7 $t0 # increasing volume
+    li $v0 31
+    syscall # midi
 
     post_refresh:
     addi $s7 $s7 1 # increment time
-    li $a0 REFRESH_RATE # sleep
+    li $a0 POST_RATE # sleep
     li $v0 32
     syscall
     j post
