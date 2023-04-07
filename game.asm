@@ -202,6 +202,9 @@ pre:
 start:
     move $s7 $0 # reset time
     sw $0 stage # reset stage
+main_clear:
+    li $a1 -4 # clear inw
+    jal draw_clear
 main_init:
     # if all stage completed
     lw $t0 stage
@@ -225,9 +228,6 @@ cheat: # skip to final stage and tp to exit
     addi $t0 $t0 2
     lh $s3 stage_gravity($t0) # gravity y
 
-    li $a1 -4 # clear inw
-    jal draw_clear
-
     #li $t0 BASE_ADDRESS
     #li $t1 0x10018000
     #clear_screen_loop:
@@ -235,11 +235,11 @@ cheat: # skip to final stage and tp to exit
     #    addi $t0 $t0 4
     #    ble $t0 $t1 clear_screen_loop
     # get current position to v0
+    jal draw_stage
     flatten($s0, $s1, $v1)
     li $a0 0
     li $a1 0
     jal draw_alice
-    jal draw_stage
 .globl main
 main:
     li $a0 0
@@ -364,21 +364,21 @@ check_move: # possibly a0 += a2 and a1 += a3 but ensure no collision
     li $v0 1
     # check on screen and get bbox t0 t1 t2 t3
     bgez $t0 player_bbox_1
-    bltz $s2 main_init # fell off screen
+    bltz $s2 main_clear # fell off screen
     j collision_end
     player_bbox_1:
         bgez $t1 player_bbox_2
-        bltz $s3 main_init # fell off screen
+        bltz $s3 main_clear # fell off screen
         j collision_end
     player_bbox_2:
         add $t2 $t0 PLAYER_SIZE
         ble $t2 SIZE player_bbox_3
-        bgtz $s2 main_init # fell off screen
+        bgtz $s2 main_clear # fell off screen
         j collision_end
     player_bbox_3:
         add $t3 $t1 PLAYER_SIZE
         ble $t3 SIZE player_bbox_end
-        bgtz $s3 main_init # fell off screen
+        bgtz $s3 main_clear # fell off screen
         j collision_end
     player_bbox_end:
 
@@ -471,7 +471,9 @@ next_stage: # prepare for next stage, then goto init
     lw $t0 stage
     addi $t0 $t0 4
     sw $t0 stage
-    j main_init
+    li $a1 4 # clear outw
+    la $ra main_init
+    j draw_clear
 stage_1: # stage 1 gimmick
     li $s2 0 # reset gravity
     li $s3 4
@@ -504,8 +506,6 @@ stage_3: # stage 3 gimmick
 
 init_post:
     li $s7 0 # reset time
-    li $a1 4 # clear outwards
-    jal draw_clear
     jal draw_border
     li $a0 REFRESH_RATE # sleep
     li $v0 32
