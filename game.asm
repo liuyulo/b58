@@ -19,8 +19,8 @@
     .eqv PLAYER_INIT    32          # initial position
     .eqv JUMP_HEIGHT    96          # in bytes
     .eqv STAGE_COUNT    20           # size of platforms_end
-    .eqv DOLLS_FRAME    22           # number of frames for doll animation
-    .eqv ALICE_FRAME    6          # number of frames for alice animation
+    .eqv DOLLS_FRAME    88           # 4*number of frames for doll animation
+    .eqv ALICE_FRAME    24          # 4 * number of frames for alice animation
 # .eqv for postgame
     .eqv POST_FRAME 32 # frames to draw ui
 .data
@@ -109,6 +109,20 @@
         and $v0 $v0 $v1
         slt $v1 $t5 $t3  # by1 < ay2
         and $v0 $v0 $v1
+    .end_macro
+    .macro frame(%n) # a2 = address to frames
+        andi $t4 $t4 0xfffc
+        rem $t4 $t4 %n
+        add $v0 $a2 $t4
+        lw $v0 0($v0)
+    .end_macro
+    .macro frame2(%n)  # rd = animation 2 frames per animation, rt = address of frames
+        sll $t4 $s7 1
+        frame(%n)
+    .end_macro
+    .macro frame4(%n) # jalr $v0 for 4 frames per animation
+        move $t4 $s7
+        frame(%n)
     .end_macro
 # .macros to reduce line number
     .macro draw4(%rd, %0, %1, %2, %3)
@@ -872,17 +886,11 @@ draw_post_doll:
     addi $sp $sp -4 # push ra to stack
     sw $ra 0($sp)
 
-    # t5 is address to array of frames
-    la $t5 postgame_doll # array of frames
-    # t4 frame index in words
-    srl $t4 $s7 1
-    rem $t4 $t4 DOLLS_FRAME
-    sll $t4 $t4 2
-    add $t5 $t5 $t4 # address to doll frame
-    lw $t5 0($t5) # get doll frame
+    la $a2 postgame_doll # array of frames
+    frame2(DOLLS_FRAME)
     li $v1 BASE_ADDRESS
     addi $v1 $v1 41308 # (87, 80)
-    jalr $t5
+    jalr $v0
 
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
@@ -4660,14 +4668,9 @@ draw_alice: # start at v1 with Δx Δy in a0 a1, previous position in a2
     # t2 is start, v1 is current
 
     # get frame index in words
-    srl $t4 $s7 2
-    rem $t4 $t4 ALICE_FRAME
-    sll $t4 $t4 2
-    la $t5 alice
-    add $t5 $t5 $t4
-    lw $t5 0($t5) # load frame index
-
-    jalr $t5 # draw frame
+    la $a2 alice
+    frame4(ALICE_FRAME)
+    jalr $v0 # draw frame
 
     # clean previously drawed
     beqz $a1 clear_row_end # no movement on y axis
@@ -9364,16 +9367,10 @@ draw_doll:
     lw $t4 stage # stage number * 4
     la $t5 dolls
     add $t5 $t5 $t4 # address to dolls
-    lw $t5 0($t5) # get doll (i.e. array of frames)
-    # t4 frame index in words
-    srl $t4 $s7 1
-    rem $t4 $t4 DOLLS_FRAME
-    sll $t4 $t4 2
-    add $t5 $t5 $t4 # address to doll frame
-    lw $t5 0($t5) # get doll frame
+    lw $a2 0($t5) # get doll (i.e. array of frames)
+    frame2(DOLLS_FRAME)
     lw $v1 doll_address
-
-    jalr $t5
+    jalr $v0
 
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
