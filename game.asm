@@ -392,11 +392,11 @@ main_init:
     beqz $t0 draw_collect
 
     cheat: # skip to final stage and tp to exit
-    li $s0 352
-    li $s1 384
-    li $s5 7
-    li $t0 16
-    sw $t0 stage
+    # li $s0 352
+    # li $s1 384
+    # li $s5 7
+    # li $t0 16
+    # sw $t0 stage
 
     # new gravity
     lh $s2 stage_gravity($t0) # gravity x
