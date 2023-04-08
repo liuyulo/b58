@@ -135,8 +135,7 @@
         jr $ra
     .end_macro
 
-    # check collision bbox with with bbox t0 t1 t2 t3 return at v0
-    .macro collision(%bbox)
+    .macro collision(%bbox) # check collision bbox with with bbox t0 t1 t2 t3 return at v0
         # get platform box (t4, t5, t6, t7)
         lw $t4 0(%bbox)
         lw $t5 4(%bbox)
@@ -151,20 +150,14 @@
         slt $v1 $t5 $t3  # by1 < ay2
         and $v0 $v0 $v1
     .end_macro
+
     .macro frame(%n) # a2 = address to frames
         andi $t4 $t4 0xfffc
         rem $t4 $t4 %n
         add $v0 $a2 $t4
         lw $v0 0($v0)
     .end_macro
-    .macro frame2(%n)  # rd = animation 2 frames per animation, rt = address of frames
-        sll $t4 $s7 1
-        frame(%n)
-    .end_macro
-    .macro frame4(%n) # jalr $v0 for 4 frames per animation
-        move $t4 $s7
-        frame(%n)
-    .end_macro
+
     .macro check_keypress() # break if key not pressed, othewise v0 is key
         li $v0 0xffff0000
         lw $t0 0($v0)
@@ -206,6 +199,13 @@
 
         li $t0 0x2d260f
         li $t1 0x453917
+    .end_macro
+
+    .macro jnez(%rs, %label) # if rs != 0, set rs to 0, syscall, and jump to label
+        beqz %rs jrra # return
+        syscall # (sleep)
+        move %rs $0
+        j %label
     .end_macro
 # .macro draw same color to different positions
     .macro draw4(%rs, %i0, %i1, %i2, %i3) # draw rs to i0(v1) i1(v1) i2(v1) i3(v1)
@@ -392,11 +392,11 @@ main_init:
     beqz $t0 draw_collect
 
     cheat: # skip to final stage and tp to exit
-    # li $s0 352
-    # li $s1 384
-    # li $s5 7
-    # li $t0 16
-    # sw $t0 stage
+    li $s0 352
+    li $s1 384
+    li $s5 7
+    li $t0 16
+    sw $t0 stage
 
     # new gravity
     lh $s2 stage_gravity($t0) # gravity x
@@ -2271,7 +2271,9 @@ draw_player: # start at v1 with Δx Δy in a0 a1, previous position in a2
 
     # get frame index in words
     la $a2 player
-    frame4(ALICE_FRAME)
+    # 4 frames per animation
+    move $t4 $s7
+    frame(ALICE_FRAME)
     jalr $v0 # draw frame
 
     # clean previously drawed
@@ -2323,160 +2325,160 @@ draw_player: # start at v1 with Δx Δy in a0 a1, previous position in a2
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
     jr $ra # return
-draw_player_00: # start at v1
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x030302, 0x3c231b, 0xa46249, 0xeaa891, 0xd0a4af, 0xc68fa1, 0xd198a1, 0xc58993, 0xc7a3b2, 0x7f7778, 0x261911, 0, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x120a07, 0x6d3f2d, 0xd68969, 0xe7bcb6, 0xb96a7d, 0xaa4e63, 0xc98a8f, 0xe3a49e, 0xdea09c, 0xbc7781, 0xce7c8c, 0xbf9084, 0x49352c, 0x040201, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0x030201, 0x854d37, 0xc87556, 0xdaa59e, 0xb76476, 0xb7626e, 0xeab990, 0xf6c374, 0xf5c370, 0xf6c26e, 0xf2bd82, 0xe1b7ab, 0xe2a197, 0xd7a474, 0x614029, 0x000001)
-    draw16x1($t4, $t0, $t2, $t1, 0x4c2c20, 0xbb7151, 0xdca16b, 0xcb8877, 0xc17172, 0xf1c58e, 0xfed97c, 0xfbdb75, 0xfce488, 0xffe389, 0xfad677, 0xffe092, 0xfcdeac, 0xf6ce78, 0xcea95e, 0x261a12)
-    draw16x1($t4, $t0, $t2, $t1, 0xa55f46, 0xc47b55, 0xf7c873, 0xf7cd7b, 0xeab377, 0xfcdfa7, 0xedc39c, 0xe0ac6b, 0xfeebab, 0xf9dbac, 0xdca063, 0xfce0a5, 0xf7ca8b, 0xefb76f, 0xf7d473, 0x937241)
-    draw16x1($t4, $t0, $t2, $t1, 0xbe6f50, 0xe09e65, 0xfad378, 0xfacc77, 0xf2b672, 0xe7b36a, 0xb46643, 0xcf955c, 0xfddb76, 0xd69355, 0x8d482d, 0xc38254, 0xfbd178, 0xd99b64, 0xf5c073, 0xb39f56)
-    draw16x1($t4, $t0, $t2, $t1, 0xbe6f4f, 0xe7b06a, 0xeaba6d, 0xfbcd79, 0xbc7955, 0x764b3c, 0x733b2c, 0xb78b66, 0xecad75, 0xc48374, 0x62585f, 0xb2705f, 0xf6c06c, 0xb7814d, 0xbd7d54, 0xac9857)
-    draw16x1($t4, $t0, $t2, $t1, 0xcf7d58, 0xe09d64, 0xd5915d, 0xfcd27a, 0xb8885c, 0xa69da1, 0x5f7f83, 0xddbdb0, 0xfbcfbf, 0xe2d7d2, 0x74a7b4, 0xcb8b70, 0xd19251, 0x975f3a, 0x3e2b1a, 0x524c2b)
-    draw16x1($t4, $t0, $t2, $t1, 0xcd7a57, 0xd9835c, 0xc37950, 0xe8a569, 0xd9a16a, 0xaab3b6, 0x3c96a7, 0xeee2db, 0xffebe2, 0xf1e6df, 0xbfc1bb, 0xc7785c, 0xd67453, 0x562e21, 0x020101, 0x020303)
-    draw16x1($t4, $t0, $t2, $t1, 0x7d4938, 0xce7958, 0x6e3c27, 0x8e543a, 0xcb7850, 0xce9487, 0xe4c2c7, 0xfbd5cf, 0xfed5ce, 0xf6cbc5, 0xc78a79, 0xcd7451, 0xb36343, 0x2d1912, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0x0b0506, 0x683c2f, 0x2e1913, 0x261409, 0x96573a, 0xdeb2ad, 0xf7d2d8, 0xe2a9aa, 0xc05c68, 0xdab3b8, 0xbd979a, 0x914e44, 0x1d0b04, 0x060302, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x020508, 0x151e2d, 0x302b30, 0x897c89, 0xac93a7, 0xbb939f, 0xc9a1a7, 0xbd99a0, 0x736a82, 0x25253a, 0x1e2d49, 0x04060a, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x1d2636, 0x2d3d5a, 0x284167, 0x2e4169, 0x3a3f5e, 0x7d87a7, 0x898ea0, 0x71788b, 0x303959, 0x2b3553, 0x3b5586, 0x1f2d46, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x07090d, 0x35415e, 0x384c74, 0x425883, 0x384061, 0x3e466e, 0xb4b4cc, 0xdfdeeb, 0xd6d5e6, 0x7881a0, 0x5d6586, 0x304870, 0x080c13, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x1b1f2a, 0x475373, 0x454c67, 0x7e82a0, 0xa4adc3, 0x717897, 0x7383a0, 0xa2a8c1, 0x69677e, 0x283754, 0x070b11, 0, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x040506, 0x21222b, 0x6a7094, 0x71779b, 0x383c4f, 0x292f41, 0x4d5779, 0x353b51, 0, 0, 0, 0, 0)
-    jr $ra # return
-draw_player_01: # start at v1
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x020201, 0x382119, 0x9e5d46, 0xeaa78d, 0xd2a7b0, 0xc590a2, 0xd39ba4, 0xc58a94, 0xc99fae, 0x8a8588, 0x302016, 0, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x0f0906, 0x663b2a, 0xd28564, 0xe9bcb5, 0xbc7184, 0xa94960, 0xc4848c, 0xe2a39e, 0xdfa19d, 0xbd7982, 0xca7688, 0xc9958b, 0x563f35, 0x060303, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0x020101, 0x804b36, 0xc67354, 0xdca69d, 0xb86a7b, 0xb35a6a, 0xe6b692, 0xf5c277, 0xf5c271, 0xf6c26f, 0xf2bd7f, 0xe2b8a9, 0xe09d99, 0xdda97b, 0x734e32, 0x050204)
-    draw16x1($t4, $t0, $t2, $t1, 0x472a1e, 0xba6f50, 0xda9e69, 0xcc8978, 0xbe6b6f, 0xedbf8e, 0xfed87b, 0xfcdb75, 0xfce384, 0xffe388, 0xfbd777, 0xfedd8a, 0xfee3b2, 0xf7cd7d, 0xdfb766, 0x362719)
-    draw16x1($t4, $t0, $t2, $t1, 0xa25d45, 0xc37954, 0xf7c673, 0xf7cd7c, 0xe9b177, 0xfbdda5, 0xf1cca4, 0xe0aa6b, 0xfee9a8, 0xfce2b3, 0xdea367, 0xfbdd9f, 0xf9d195, 0xefb46e, 0xf9d675, 0xa68349)
-    draw16x1($t4, $t0, $t2, $t1, 0xbe6e50, 0xdf9a63, 0xfad278, 0xf9ce77, 0xf3b772, 0xedbd6f, 0xba6d49, 0xcb8d58, 0xffdf79, 0xe0a25d, 0x954c2f, 0xbd7d51, 0xfbd17a, 0xdea267, 0xf0b870, 0xcab160)
-    draw16x1($t4, $t0, $t2, $t1, 0xbd6f4f, 0xe6ae6a, 0xebbc6f, 0xfccf79, 0xc58059, 0x7c4f3c, 0x753929, 0xae825f, 0xeeb273, 0xca8370, 0x665356, 0xa36a5e, 0xf6b96b, 0xc29154, 0xbb7550, 0xc0a560)
-    draw16x1($t4, $t0, $t2, $t1, 0xcf7c58, 0xe19f65, 0xd5915d, 0xfdd57a, 0xb8875a, 0xa19498, 0x61797d, 0xd0b5a9, 0xfac8b6, 0xeddad3, 0x6ea5b2, 0xc9937f, 0xd49451, 0xa87042, 0x482c1b, 0x5e5630)
-    draw16x1($t4, $t0, $t2, $t1, 0xd07b58, 0xda855d, 0xc97d54, 0xedaa6c, 0xdba46a, 0xb0b4b6, 0x3092a4, 0xe4ded8, 0xffeae2, 0xf6e8e0, 0xb4c4c1, 0xc98369, 0xd77452, 0x6e3c2a, 0x070403, 0x040503)
-    draw16x1($t4, $t0, $t2, $t1, 0x864f3c, 0xd17b5a, 0x74402b, 0x91563b, 0xcf7d52, 0xcb9485, 0xd5bec4, 0xf9d7d2, 0xffddd4, 0xfbd3cd, 0xd19788, 0xcb7552, 0xc86e4c, 0x43251b, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0x100809, 0x7a4737, 0x3c1f18, 0x2c170b, 0x9c5939, 0xd9a8a0, 0xf8d0d7, 0xeab8b8, 0xc3626d, 0xdbb0b6, 0xbc9899, 0xaa5d51, 0x311609, 0x0c0604, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x000204, 0x101723, 0x362b2b, 0x98838b, 0xbfa5b6, 0xc6959d, 0xd29da2, 0xcb9ba2, 0x8e8296, 0x352d3f, 0x15233a, 0x03060a, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x1a2230, 0x2d3c58, 0x263d60, 0x2f436c, 0x3a405e, 0x727c9e, 0x82899d, 0x707789, 0x323958, 0x26304e, 0x395382, 0x243553, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x07090c, 0x323f5b, 0x354970, 0x3f5682, 0x333c5e, 0x363c63, 0xb4b3cc, 0xe0deec, 0xd9d8e7, 0x7b85a4, 0x5c617f, 0x3b5381, 0x101826, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x010101, 0x202633, 0x4a597c, 0x495271, 0x747998, 0x99a3bb, 0x757b9b, 0x8290ab, 0xacb1c9, 0x7b7a93, 0x384666, 0x111a2a, 0, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x0d0e12, 0x20212a, 0x6d7395, 0x8286a8, 0x4b5067, 0x30384f, 0x535c7e, 0x434962, 0x000104, 0, 0, 0, 0)
-    jr $ra # return
-draw_player_02: # start at v1
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x2f1c14, 0x93543d, 0xeda88a, 0xd5a9af, 0xc490a5, 0xd69ea8, 0xc38b97, 0xc999a9, 0x9c98a0, 0x3a2a20, 0, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x0c0705, 0x5d3627, 0xcd805f, 0xeabcb1, 0xc27d8d, 0xa7445c, 0xbe7c87, 0xe0a19e, 0xdfa09e, 0xbf7e86, 0xc36d82, 0xd09992, 0x6a5044, 0x0c0706, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x7a4833, 0xc47152, 0xdda59a, 0xbd7484, 0xae4f64, 0xe1ae94, 0xf4c17b, 0xf4c170, 0xf5c071, 0xf2bc7a, 0xe3b8a8, 0xda9a98, 0xe4aa85, 0x8c623f, 0x100908)
-    draw16x1($t4, $t0, $t2, $t1, 0x41261c, 0xb76d4e, 0xd89967, 0xcc8b7a, 0xb9636b, 0xe8b78e, 0xfed67a, 0xfddb74, 0xfbe380, 0xffe387, 0xfdda79, 0xfdd881, 0xffe7b4, 0xf8cf88, 0xf1c86e, 0x543f26)
-    draw16x1($t4, $t0, $t2, $t1, 0x9d5b43, 0xc07653, 0xf6c372, 0xf6cd7b, 0xe7af78, 0xfadaa3, 0xf7d8ad, 0xe1aa6d, 0xfde6a2, 0xfee8ba, 0xe2ab70, 0xf9d994, 0xfbdaa2, 0xefb36d, 0xfbd678, 0xbe9955)
-    draw16x1($t4, $t0, $t2, $t1, 0xbd6e50, 0xdc9562, 0xf9d177, 0xfad178, 0xf3b771, 0xf6c977, 0xc57a52, 0xc58152, 0xffe27c, 0xe9b366, 0xa15635, 0xb57349, 0xf9cc7a, 0xe6b16d, 0xe8ac6c, 0xe5c76d)
-    draw16x1($t4, $t0, $t2, $t1, 0xbc6e4f, 0xe6ae6a, 0xedbf6f, 0xfcd079, 0xd0895e, 0x86573e, 0x793a27, 0xa47656, 0xf0ba72, 0xce8469, 0x704e4b, 0x8b5e5a, 0xeea765, 0xd3a75e, 0xb76d4c, 0xd7b06a)
-    draw16x1($t4, $t0, $t2, $t1, 0xce7b57, 0xe3a366, 0xd6915e, 0xfed67b, 0xb98657, 0x988588, 0x697274, 0xbca69b, 0xf9bfa9, 0xf5d8d0, 0x6c9fac, 0xbf9c94, 0xd49250, 0xbf884e, 0x5b3322, 0x6d6036)
-    draw16x1($t4, $t0, $t2, $t1, 0xd07b58, 0xdc895e, 0xce8056, 0xf1b26f, 0xdda769, 0xbab5b5, 0x2f92a3, 0xd3d5d1, 0xffe8df, 0xfdeae2, 0xa5c5c4, 0xcb9682, 0xcf6f4d, 0x905137, 0x190d09, 0x070805)
-    draw16x1($t4, $t0, $t2, $t1, 0x955741, 0xd57d5b, 0x804730, 0x975b3f, 0xd58456, 0xc99586, 0xbdb8bf, 0xf3d8d4, 0xffe6dd, 0xfedbd3, 0xdfafa2, 0xc77756, 0xd87853, 0x6b3c2b, 0x000001, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0x1a0d0d, 0x935641, 0x4d291e, 0x361e0f, 0xa65c3b, 0xd0988c, 0xf8c9d1, 0xf5c9c7, 0xcd7179, 0xdeacb3, 0xbc9895, 0xbe6b5f, 0x572a18, 0x1c0f08, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x060303, 0x020203, 0x0b0f18, 0x3d2c26, 0xaa8d8c, 0xd3b8c6, 0xd49ca0, 0xd59094, 0xd3979e, 0xb0a2b0, 0x5b4151, 0x0e1726, 0x04070d, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x141b26, 0x2b3a53, 0x213553, 0x2f446b, 0x414564, 0x697394, 0x818b9f, 0x727687, 0x363d58, 0x1d2746, 0x354d7a, 0x2b3f64, 0x010203, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x05070a, 0x2d3852, 0x32456a, 0x3a5481, 0x2f3c5e, 0x2f3459, 0xadacc6, 0xdcdae8, 0xd3d2df, 0x7f88a6, 0x525571, 0x415784, 0x21314d, 0x010101, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x020203, 0x282f40, 0x49597f, 0x4b587c, 0x646988, 0x7a88a5, 0x777e9f, 0x9da7bd, 0xb7bbd0, 0x908faa, 0x505a7b, 0x23324e, 0x010102, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x010101, 0x1b2029, 0x21232d, 0x6f7494, 0x9a9cba, 0x676a86, 0x3b4865, 0x5a6384, 0x5c617b, 0x04070e, 0x010202, 0, 0, 0)
-    jr $ra # return
-draw_player_03: # start at v1
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x130c09, 0x6e3c2b, 0xed9973, 0xe2c0c0, 0xcdb2c5, 0xe4c4cb, 0xcaaab3, 0xd5b7c3, 0x999ba2, 0x1e150f, 0, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x341e16, 0xb46d4d, 0xebaf9a, 0xd29ea5, 0xa74159, 0xb06075, 0xd3868e, 0xd4868e, 0xb86b7b, 0xc07189, 0xd09f93, 0x4d3f35, 0x020001, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x5c3626, 0xb7694a, 0xe2a28d, 0xcb969f, 0xaa475e, 0xd29a94, 0xebb889, 0xf2bd7e, 0xf3bd80, 0xeab582, 0xdba9a3, 0xcf878c, 0xd99a7f, 0x78563a, 0x0e0707)
-    draw16x1($t4, $t0, $t2, $t1, 0x281711, 0xac6548, 0xcf8a60, 0xcb8b82, 0xb15263, 0xd99d88, 0xfac971, 0xffdb72, 0xfbe177, 0xffe07c, 0xffdb76, 0xfacf7d, 0xffe9bd, 0xf8cf93, 0xe9bc69, 0x543c26)
-    draw16x1($t4, $t0, $t2, $t1, 0x824c37, 0xbd7352, 0xf0ba6e, 0xf1c47b, 0xdda37a, 0xf8d29d, 0xfee6b1, 0xecb976, 0xfce39a, 0xffeabb, 0xecbf7e, 0xfcde91, 0xfcdea8, 0xf1b870, 0xfbd879, 0xb79351)
-    draw16x1($t4, $t0, $t2, $t1, 0xbb6c4f, 0xd3885c, 0xf8cc76, 0xfcd478, 0xf2b670, 0xfbd684, 0xd8986c, 0xc27d52, 0xfee183, 0xf6cd80, 0xb66c46, 0xc58455, 0xfad487, 0xecb671, 0xe5ac6c, 0xeece6f)
-    draw16x1($t4, $t0, $t2, $t1, 0xba6c4e, 0xe2a867, 0xf2c673, 0xfbd279, 0xe29a68, 0xa67348, 0x8a442b, 0xa56d4d, 0xf4c772, 0xd18559, 0x7d463a, 0x7b4d47, 0xe99f62, 0xdeb566, 0xc27952, 0xe9bc71)
-    draw16x1($t4, $t0, $t2, $t1, 0xc87654, 0xe5a768, 0xda9a61, 0xfed67a, 0xba8356, 0x816668, 0x715c58, 0xa58d80, 0xf4b592, 0xf0c6bb, 0x6f8f9b, 0xac9496, 0xdd9a56, 0xcf9f58, 0x75422d, 0x8f7946)
-    draw16x1($t4, $t0, $t2, $t1, 0xce7a57, 0xde8f61, 0xd08357, 0xf6be74, 0xdba866, 0xc1b2b0, 0x4498a6, 0xc2cac7, 0xffe1d6, 0xffeae2, 0x8fbdbf, 0xc7a596, 0xc76d48, 0xa5613f, 0x301910, 0x12130a)
-    draw16x1($t4, $t0, $t2, $t1, 0xac664a, 0xd67e5c, 0x96553a, 0xaa6948, 0xdc905c, 0xc89e8f, 0x8fadb9, 0xe1d7d5, 0xffeee5, 0xffe7de, 0xeac9bf, 0xca8163, 0xe17b55, 0x854935, 0x050304, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0x301a17, 0xae674d, 0x693828, 0x492919, 0xb56542, 0xc18271, 0xf4bcc3, 0xfad1cf, 0xe39b9c, 0xe9b6ba, 0xbc918a, 0xbf6e5e, 0x8c492e, 0x391f13, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x1a0e0c, 0x120d10, 0x161e2c, 0x4e3123, 0xc9a29c, 0xd8bdc4, 0xca9195, 0xa24451, 0xae6873, 0xc0aeb7, 0x905f6b, 0x29334f, 0x111a2b, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x17202e, 0x2c3c58, 0x283f63, 0x344971, 0x373956, 0x757694, 0x8989a2, 0x84828f, 0x484e6d, 0x2d334e, 0x384f7c, 0x364f7c, 0x05070b, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x050609, 0x313b56, 0x394c73, 0x415985, 0x3b4465, 0x363f66, 0x9194b3, 0xdfdeec, 0xdbdbea, 0x9ca1bc, 0x646a89, 0x445783, 0x152033, 0x010102, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x13161d, 0x475373, 0x3f4863, 0x717492, 0xa7b0c6, 0x7c829f, 0x6b7b98, 0x929cb7, 0x908ea7, 0x353c55, 0x152135, 0, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x050506, 0x141419, 0x616787, 0x757ba0, 0x484c64, 0x292f40, 0x424969, 0x4e5879, 0x020305, 0, 0, 0, 0)
-    jr $ra # return
-draw_player_04: # start at v1
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x150c0a, 0x7a4431, 0xee9d79, 0xe1c2c4, 0xceb1c3, 0xe1c2c8, 0xccabb4, 0xd4bac7, 0x7d8084, 0x160e08, 0, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x3d231a, 0xba7152, 0xebb3a1, 0xcc929d, 0xa53e57, 0xb6687b, 0xd58a90, 0xd3878f, 0xb56a7a, 0xc87a8e, 0xc29789, 0x3d2e27, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x633a29, 0xbb6b4c, 0xe2a693, 0xc68c98, 0xac4a60, 0xd7a397, 0xedb984, 0xf3be7d, 0xf3be7e, 0xebb584, 0xd8a7a5, 0xd38888, 0xd39c7b, 0x62442b, 0x070304)
-    draw16x1($t4, $t0, $t2, $t1, 0x2d1a13, 0xaf684b, 0xd28f63, 0xca8980, 0xb35665, 0xdfa889, 0xfcce72, 0xfedc72, 0xfbe17a, 0xffe17d, 0xfed876, 0xfcd586, 0xfee7bd, 0xf7cd85, 0xdeb164, 0x332419)
-    draw16x1($t4, $t0, $t2, $t1, 0x884f3a, 0xbf7553, 0xf2be70, 0xf1c57b, 0xe0a77a, 0xfad8a2, 0xfce1af, 0xeab873, 0xfde7a3, 0xfee7b8, 0xe9b874, 0xffe39e, 0xf9d59c, 0xf2ba70, 0xfbdb78, 0x9c7b44)
-    draw16x1($t4, $t0, $t2, $t1, 0xbc6d4f, 0xd78e5e, 0xf9ce77, 0xfbd278, 0xf2b770, 0xf7d080, 0xcd8760, 0xc78655, 0xffe483, 0xedbd75, 0xaa5f3d, 0xca8d5c, 0xfbd481, 0xe5ab6c, 0xeeb970, 0xd6ba64)
-    draw16x1($t4, $t0, $t2, $t1, 0xba6c4e, 0xe4aa68, 0xf0c471, 0xfbd079, 0xd99263, 0x966441, 0x823d28, 0xab7854, 0xf2bf70, 0xc97d5c, 0x6f463f, 0x8f5a50, 0xf1af69, 0xcfa05c, 0xc97e57, 0xd2b168)
-    draw16x1($t4, $t0, $t2, $t1, 0xca7855, 0xe5a668, 0xd8965f, 0xfed77a, 0xb48055, 0x8b7477, 0x6a6362, 0xb89c8f, 0xf6ba9e, 0xeecdc6, 0x6794a3, 0xc0938a, 0xda9e55, 0xbc874e, 0x623826, 0x827341)
-    draw16x1($t4, $t0, $t2, $t1, 0xce7a57, 0xdd8c5f, 0xcf8256, 0xf3b971, 0xdaa668, 0xbab5b4, 0x3793a3, 0xd4d2ce, 0xffe4db, 0xfae8e0, 0x96bebe, 0xca917c, 0xcb704b, 0x8a4e34, 0x180c08, 0x0e1009)
-    draw16x1($t4, $t0, $t2, $t1, 0xa05e45, 0xd57d5b, 0x894d35, 0xa16344, 0xd88a59, 0xc79c8e, 0xa6b3bc, 0xefdad7, 0xffeae1, 0xfedfd7, 0xe1b5a8, 0xc97755, 0xdb7954, 0x603527, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0x211111, 0xa05d47, 0x5a2f21, 0x412416, 0xb0623e, 0xce9183, 0xfecad0, 0xfbcfcc, 0xdc888b, 0xe9b8bd, 0xb88f89, 0xc06958, 0x65331f, 0x1f1008, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x0d0706, 0x0e0e14, 0x1a2535, 0x47332c, 0xb89b9e, 0xbea6ae, 0xad7580, 0x934452, 0x9e656f, 0xa996a5, 0x6a4c5e, 0x273c61, 0x111a2b, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x1e2739, 0x2d3f5c, 0x2b4770, 0x2b3f69, 0x313555, 0x8b8fad, 0xa1a5b9, 0x9498a7, 0x485271, 0x313753, 0x3c5584, 0x2b3f63, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x050709, 0x343f5a, 0x3d5078, 0x465a84, 0x444b6b, 0x3f4c72, 0x9295b3, 0xd7d8e6, 0xd7d7e8, 0x9196b3, 0x646c8e, 0x364b74, 0x080d14, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x0d0e13, 0x3d4760, 0x373d52, 0x777b99, 0xb0b5cb, 0x787d9b, 0x5b6c8c, 0x868eab, 0x74738b, 0x1c263a, 0x080d16, 0, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0, 0x17181d, 0x606788, 0x666d94, 0x2d3142, 0x1b1e28, 0x3d4464, 0x404966, 0, 0, 0, 0, 0)
-    jr $ra # return
-draw_player_05: # start at v1
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x1c100e, 0x93553d, 0xeda587, 0xdabfc8, 0xd1b0bf, 0xd8b5bd, 0xcda9b1, 0xcfbfcd, 0x4b4946, 0x070200, 0, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x040201, 0x4e2e22, 0xc67b5b, 0xe9b6aa, 0xc17b89, 0xa5445d, 0xc27886, 0xd88d91, 0xd0858c, 0xb2677b, 0xd48e96, 0x977869, 0x1e1411, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0x010000, 0x70412e, 0xc37253, 0xe0aa9d, 0xbd7585, 0xb45d6b, 0xe3b296, 0xf1be7c, 0xf4c17c, 0xf3bf7a, 0xeab68e, 0xd5a3a3, 0xdd9588, 0xbc8f64, 0x352116, 0x000001)
-    draw16x1($t4, $t0, $t2, $t1, 0x382118, 0xb46b4e, 0xd79869, 0xc7827a, 0xbc666d, 0xebbb89, 0xfed575, 0xfdde74, 0xfde181, 0xffe17f, 0xfbd374, 0xffe19c, 0xfbdbac, 0xfbd076, 0xa4804b, 0x100a09)
-    draw16x1($t4, $t0, $t2, $t1, 0x975840, 0xc27954, 0xf6c672, 0xf2c77b, 0xe7af7a, 0xfde0a9, 0xf0ca9e, 0xe8b971, 0xfeebb0, 0xf6d7a7, 0xe6b069, 0xffe7ae, 0xf4c181, 0xf5c474, 0xe8c66a, 0x705231)
-    draw16x1($t4, $t0, $t2, $t1, 0xbe6f50, 0xdc9761, 0xfad378, 0xf9cc77, 0xf4bb73, 0xedbc73, 0xba6d4b, 0xd7a060, 0xfddc7a, 0xd49358, 0x954c2f, 0xd99f66, 0xf9cf79, 0xda9864, 0xf9ce76, 0x988649)
-    draw16x1($t4, $t0, $t2, $t1, 0xbd6f4f, 0xe6ad6a, 0xedbe6f, 0xfacb78, 0xc17e58, 0x7e503a, 0x7a3d2c, 0xc09466, 0xe9aa6f, 0xb77565, 0x604f56, 0xbe755a, 0xf3c36d, 0xb07348, 0xd29661, 0x96874d)
-    draw16x1($t4, $t0, $t2, $t1, 0xcd7b57, 0xe19e65, 0xd7945f, 0xfbd279, 0xb18159, 0x9e9498, 0x63797c, 0xe0baaa, 0xf8ccbc, 0xcecbc8, 0x79a5b3, 0xcd8764, 0xd19854, 0x885132, 0x4d3b23, 0x544d2a)
-    draw16x1($t4, $t0, $t2, $t1, 0xcf7b57, 0xda845d, 0xc87e54, 0xecaa6b, 0xd8a36c, 0xa3b4b9, 0x4098a8, 0xf5e4dc, 0xffeae2, 0xe5e1da, 0xbabdb7, 0xc77355, 0xc96f4f, 0x44241a, 0x020202, 0x050604)
-    draw16x1($t4, $t0, $t2, $t1, 0x824c39, 0xce7958, 0x723f2a, 0x96593d, 0xcc7b52, 0xcd998d, 0xdcc2c7, 0xfdd8d2, 0xffd9d1, 0xf4c8c2, 0xc68774, 0xce7450, 0xa85d40, 0x1c100d, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0x0d0607, 0x6d3f31, 0x341c17, 0x332018, 0x9d5b3d, 0xe0b2ad, 0xfed7db, 0xe5a8a9, 0xcb6c77, 0xdfbcc0, 0xbd8d8e, 0x86493f, 0x261a1a, 0x030100, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x111823, 0x202f45, 0x3b3a47, 0x827b8e, 0x816d7c, 0x7d566e, 0x7a505f, 0x755a69, 0x6f6178, 0x343c5e, 0x314a78, 0x0f1522, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x050608, 0x2a364e, 0x32466b, 0x354f7c, 0x2a375c, 0x42476b, 0xbcc0d8, 0xcccfdd, 0xb3b8cc, 0x4e5978, 0x495172, 0x354f7d, 0x0d141f, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0x030305, 0x2d354a, 0x47577e, 0x4e5a7e, 0x656b89, 0x73809f, 0x868ca9, 0xabb4c8, 0xbcbdd3, 0x737490, 0x44557a, 0x0f1827, 0, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x030304, 0x1d222c, 0x2b2d3a, 0x7d81a2, 0x989ab7, 0x555c77, 0x3f4c6a, 0x6b7392, 0x36394a, 0x04080f, 0, 0, 0, 0)
-    draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0, 0x25262f, 0x5d668a, 0x4f587c, 0x050507, 0x0b0b12, 0x454e71, 0x282d40, 0, 0, 0, 0, 0)
-    jr $ra # return
-clear_player: # start at v1
-    li $a0 REFRESH_RATE
-    li $v0 32
-    draw64($0, 0, 4, 8, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 512, 516, 520, 548, 552, 556, 560, 564, 568, 572, 1024, 1028, 1032, 1076, 1080, 1084, 1536, 1540, 1544, 2048, 2052, 2560, 2564, 2620, 3072, 3076, 3132, 3584, 3588, 3644, 4096, 4156, 4608, 4664, 4668, 5120, 5176, 5180, 5688, 5692, 6144, 6200, 6204, 6656, 6660, 6664, 6668, 6708, 6712, 6716, 7168)
-    draw16($0, 7172, 7176, 7180, 7184, 7188, 7192, 7196, 7220, 7224, 7228, 7680, 7684, 7688, 7692, 7696, 7700)
-    draw4($0, 7704, 7708, 7712, 7716)
-    draw4($0, 7720, 7724, 7732, 7736)
-    sw $0 7740($v1)
-    syscall
-    draw16($0, 12, 16, 20, 524, 528, 532, 540, 544, 1036, 1040, 1060, 1064, 1068, 1072, 1548, 1552)
-    draw16($0, 1580, 1584, 1588, 1592, 1596, 2056, 2060, 2100, 2104, 2108, 2568, 2616, 3080, 3640, 4100, 4152)
-    draw16($0, 4660, 5124, 5172, 5632, 5636, 5640, 5644, 5680, 5684, 6148, 6152, 6156, 6160, 6192, 6196, 6672)
-    draw4($0, 6676, 6680, 6700, 6704)
-    draw4($0, 7200, 7212, 7216, 7728)
-    syscall
-    draw16($0, 536, 1044, 1048, 1556, 1576, 2064, 2092, 2096, 2572, 2608, 2612, 3124, 3128, 4612, 4616, 5128)
-    draw4($0, 5132, 5168, 5648, 5676)
-    draw4($0, 6164, 6184, 6188, 6684)
-    draw4($0, 6692, 6696, 7204, 7208)
-    syscall
-    draw16($0, 1052, 1056, 1560, 1564, 2068, 2072, 2088, 2576, 2604, 3116, 3120, 3592, 3632, 3636, 4104, 4108)
-    draw4($0, 4148, 4620, 4624, 5136)
-    draw4($0, 5164, 5652, 5668, 5672)
-    sw $0 6176($v1)
-    sw $0 6180($v1)
-    sw $0 6688($v1)
-    syscall
-    draw4($0, 1568, 1572, 2076, 2080)
-    draw4($0, 3084, 3596, 3600, 3628)
-    draw4($0, 4112, 4144, 4656, 5660)
-    sw $0 5664($v1)
-    sw $0 6168($v1)
-    sw $0 6172($v1)
-    syscall
-    draw16($0, 2084, 2580, 2584, 2588, 2592, 2596, 2600, 3088, 3092, 3112, 3604, 3624, 4116, 4136, 4140, 4628)
-    draw4($0, 4648, 4652, 5140, 5144)
-    draw4($0, 5148, 5152, 5156, 5160)
-    sw $0 5656($v1)
-    syscall
-    draw4($0, 3096, 3100, 3108, 3620)
-    draw4($0, 4120, 4632, 4640, 4644)
-    syscall
-    draw4($0, 3104, 3608, 4132, 4636)
-    syscall
-    draw4($0, 3612, 3616, 4124, 4128)
-    jr $ra
+    draw_player_00: # start at v1
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x030302, 0x3c231b, 0xa46249, 0xeaa891, 0xd0a4af, 0xc68fa1, 0xd198a1, 0xc58993, 0xc7a3b2, 0x7f7778, 0x261911, 0, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x120a07, 0x6d3f2d, 0xd68969, 0xe7bcb6, 0xb96a7d, 0xaa4e63, 0xc98a8f, 0xe3a49e, 0xdea09c, 0xbc7781, 0xce7c8c, 0xbf9084, 0x49352c, 0x040201, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0x030201, 0x854d37, 0xc87556, 0xdaa59e, 0xb76476, 0xb7626e, 0xeab990, 0xf6c374, 0xf5c370, 0xf6c26e, 0xf2bd82, 0xe1b7ab, 0xe2a197, 0xd7a474, 0x614029, 0x000001)
+        draw16x1($t4, $t0, $t2, $t1, 0x4c2c20, 0xbb7151, 0xdca16b, 0xcb8877, 0xc17172, 0xf1c58e, 0xfed97c, 0xfbdb75, 0xfce488, 0xffe389, 0xfad677, 0xffe092, 0xfcdeac, 0xf6ce78, 0xcea95e, 0x261a12)
+        draw16x1($t4, $t0, $t2, $t1, 0xa55f46, 0xc47b55, 0xf7c873, 0xf7cd7b, 0xeab377, 0xfcdfa7, 0xedc39c, 0xe0ac6b, 0xfeebab, 0xf9dbac, 0xdca063, 0xfce0a5, 0xf7ca8b, 0xefb76f, 0xf7d473, 0x937241)
+        draw16x1($t4, $t0, $t2, $t1, 0xbe6f50, 0xe09e65, 0xfad378, 0xfacc77, 0xf2b672, 0xe7b36a, 0xb46643, 0xcf955c, 0xfddb76, 0xd69355, 0x8d482d, 0xc38254, 0xfbd178, 0xd99b64, 0xf5c073, 0xb39f56)
+        draw16x1($t4, $t0, $t2, $t1, 0xbe6f4f, 0xe7b06a, 0xeaba6d, 0xfbcd79, 0xbc7955, 0x764b3c, 0x733b2c, 0xb78b66, 0xecad75, 0xc48374, 0x62585f, 0xb2705f, 0xf6c06c, 0xb7814d, 0xbd7d54, 0xac9857)
+        draw16x1($t4, $t0, $t2, $t1, 0xcf7d58, 0xe09d64, 0xd5915d, 0xfcd27a, 0xb8885c, 0xa69da1, 0x5f7f83, 0xddbdb0, 0xfbcfbf, 0xe2d7d2, 0x74a7b4, 0xcb8b70, 0xd19251, 0x975f3a, 0x3e2b1a, 0x524c2b)
+        draw16x1($t4, $t0, $t2, $t1, 0xcd7a57, 0xd9835c, 0xc37950, 0xe8a569, 0xd9a16a, 0xaab3b6, 0x3c96a7, 0xeee2db, 0xffebe2, 0xf1e6df, 0xbfc1bb, 0xc7785c, 0xd67453, 0x562e21, 0x020101, 0x020303)
+        draw16x1($t4, $t0, $t2, $t1, 0x7d4938, 0xce7958, 0x6e3c27, 0x8e543a, 0xcb7850, 0xce9487, 0xe4c2c7, 0xfbd5cf, 0xfed5ce, 0xf6cbc5, 0xc78a79, 0xcd7451, 0xb36343, 0x2d1912, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0x0b0506, 0x683c2f, 0x2e1913, 0x261409, 0x96573a, 0xdeb2ad, 0xf7d2d8, 0xe2a9aa, 0xc05c68, 0xdab3b8, 0xbd979a, 0x914e44, 0x1d0b04, 0x060302, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x020508, 0x151e2d, 0x302b30, 0x897c89, 0xac93a7, 0xbb939f, 0xc9a1a7, 0xbd99a0, 0x736a82, 0x25253a, 0x1e2d49, 0x04060a, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x1d2636, 0x2d3d5a, 0x284167, 0x2e4169, 0x3a3f5e, 0x7d87a7, 0x898ea0, 0x71788b, 0x303959, 0x2b3553, 0x3b5586, 0x1f2d46, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x07090d, 0x35415e, 0x384c74, 0x425883, 0x384061, 0x3e466e, 0xb4b4cc, 0xdfdeeb, 0xd6d5e6, 0x7881a0, 0x5d6586, 0x304870, 0x080c13, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x1b1f2a, 0x475373, 0x454c67, 0x7e82a0, 0xa4adc3, 0x717897, 0x7383a0, 0xa2a8c1, 0x69677e, 0x283754, 0x070b11, 0, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x040506, 0x21222b, 0x6a7094, 0x71779b, 0x383c4f, 0x292f41, 0x4d5779, 0x353b51, 0, 0, 0, 0, 0)
+        jr $ra # return
+    draw_player_01: # start at v1
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x020201, 0x382119, 0x9e5d46, 0xeaa78d, 0xd2a7b0, 0xc590a2, 0xd39ba4, 0xc58a94, 0xc99fae, 0x8a8588, 0x302016, 0, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x0f0906, 0x663b2a, 0xd28564, 0xe9bcb5, 0xbc7184, 0xa94960, 0xc4848c, 0xe2a39e, 0xdfa19d, 0xbd7982, 0xca7688, 0xc9958b, 0x563f35, 0x060303, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0x020101, 0x804b36, 0xc67354, 0xdca69d, 0xb86a7b, 0xb35a6a, 0xe6b692, 0xf5c277, 0xf5c271, 0xf6c26f, 0xf2bd7f, 0xe2b8a9, 0xe09d99, 0xdda97b, 0x734e32, 0x050204)
+        draw16x1($t4, $t0, $t2, $t1, 0x472a1e, 0xba6f50, 0xda9e69, 0xcc8978, 0xbe6b6f, 0xedbf8e, 0xfed87b, 0xfcdb75, 0xfce384, 0xffe388, 0xfbd777, 0xfedd8a, 0xfee3b2, 0xf7cd7d, 0xdfb766, 0x362719)
+        draw16x1($t4, $t0, $t2, $t1, 0xa25d45, 0xc37954, 0xf7c673, 0xf7cd7c, 0xe9b177, 0xfbdda5, 0xf1cca4, 0xe0aa6b, 0xfee9a8, 0xfce2b3, 0xdea367, 0xfbdd9f, 0xf9d195, 0xefb46e, 0xf9d675, 0xa68349)
+        draw16x1($t4, $t0, $t2, $t1, 0xbe6e50, 0xdf9a63, 0xfad278, 0xf9ce77, 0xf3b772, 0xedbd6f, 0xba6d49, 0xcb8d58, 0xffdf79, 0xe0a25d, 0x954c2f, 0xbd7d51, 0xfbd17a, 0xdea267, 0xf0b870, 0xcab160)
+        draw16x1($t4, $t0, $t2, $t1, 0xbd6f4f, 0xe6ae6a, 0xebbc6f, 0xfccf79, 0xc58059, 0x7c4f3c, 0x753929, 0xae825f, 0xeeb273, 0xca8370, 0x665356, 0xa36a5e, 0xf6b96b, 0xc29154, 0xbb7550, 0xc0a560)
+        draw16x1($t4, $t0, $t2, $t1, 0xcf7c58, 0xe19f65, 0xd5915d, 0xfdd57a, 0xb8875a, 0xa19498, 0x61797d, 0xd0b5a9, 0xfac8b6, 0xeddad3, 0x6ea5b2, 0xc9937f, 0xd49451, 0xa87042, 0x482c1b, 0x5e5630)
+        draw16x1($t4, $t0, $t2, $t1, 0xd07b58, 0xda855d, 0xc97d54, 0xedaa6c, 0xdba46a, 0xb0b4b6, 0x3092a4, 0xe4ded8, 0xffeae2, 0xf6e8e0, 0xb4c4c1, 0xc98369, 0xd77452, 0x6e3c2a, 0x070403, 0x040503)
+        draw16x1($t4, $t0, $t2, $t1, 0x864f3c, 0xd17b5a, 0x74402b, 0x91563b, 0xcf7d52, 0xcb9485, 0xd5bec4, 0xf9d7d2, 0xffddd4, 0xfbd3cd, 0xd19788, 0xcb7552, 0xc86e4c, 0x43251b, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0x100809, 0x7a4737, 0x3c1f18, 0x2c170b, 0x9c5939, 0xd9a8a0, 0xf8d0d7, 0xeab8b8, 0xc3626d, 0xdbb0b6, 0xbc9899, 0xaa5d51, 0x311609, 0x0c0604, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x000204, 0x101723, 0x362b2b, 0x98838b, 0xbfa5b6, 0xc6959d, 0xd29da2, 0xcb9ba2, 0x8e8296, 0x352d3f, 0x15233a, 0x03060a, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x1a2230, 0x2d3c58, 0x263d60, 0x2f436c, 0x3a405e, 0x727c9e, 0x82899d, 0x707789, 0x323958, 0x26304e, 0x395382, 0x243553, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x07090c, 0x323f5b, 0x354970, 0x3f5682, 0x333c5e, 0x363c63, 0xb4b3cc, 0xe0deec, 0xd9d8e7, 0x7b85a4, 0x5c617f, 0x3b5381, 0x101826, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x010101, 0x202633, 0x4a597c, 0x495271, 0x747998, 0x99a3bb, 0x757b9b, 0x8290ab, 0xacb1c9, 0x7b7a93, 0x384666, 0x111a2a, 0, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x0d0e12, 0x20212a, 0x6d7395, 0x8286a8, 0x4b5067, 0x30384f, 0x535c7e, 0x434962, 0x000104, 0, 0, 0, 0)
+        jr $ra # return
+    draw_player_02: # start at v1
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x2f1c14, 0x93543d, 0xeda88a, 0xd5a9af, 0xc490a5, 0xd69ea8, 0xc38b97, 0xc999a9, 0x9c98a0, 0x3a2a20, 0, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x0c0705, 0x5d3627, 0xcd805f, 0xeabcb1, 0xc27d8d, 0xa7445c, 0xbe7c87, 0xe0a19e, 0xdfa09e, 0xbf7e86, 0xc36d82, 0xd09992, 0x6a5044, 0x0c0706, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x7a4833, 0xc47152, 0xdda59a, 0xbd7484, 0xae4f64, 0xe1ae94, 0xf4c17b, 0xf4c170, 0xf5c071, 0xf2bc7a, 0xe3b8a8, 0xda9a98, 0xe4aa85, 0x8c623f, 0x100908)
+        draw16x1($t4, $t0, $t2, $t1, 0x41261c, 0xb76d4e, 0xd89967, 0xcc8b7a, 0xb9636b, 0xe8b78e, 0xfed67a, 0xfddb74, 0xfbe380, 0xffe387, 0xfdda79, 0xfdd881, 0xffe7b4, 0xf8cf88, 0xf1c86e, 0x543f26)
+        draw16x1($t4, $t0, $t2, $t1, 0x9d5b43, 0xc07653, 0xf6c372, 0xf6cd7b, 0xe7af78, 0xfadaa3, 0xf7d8ad, 0xe1aa6d, 0xfde6a2, 0xfee8ba, 0xe2ab70, 0xf9d994, 0xfbdaa2, 0xefb36d, 0xfbd678, 0xbe9955)
+        draw16x1($t4, $t0, $t2, $t1, 0xbd6e50, 0xdc9562, 0xf9d177, 0xfad178, 0xf3b771, 0xf6c977, 0xc57a52, 0xc58152, 0xffe27c, 0xe9b366, 0xa15635, 0xb57349, 0xf9cc7a, 0xe6b16d, 0xe8ac6c, 0xe5c76d)
+        draw16x1($t4, $t0, $t2, $t1, 0xbc6e4f, 0xe6ae6a, 0xedbf6f, 0xfcd079, 0xd0895e, 0x86573e, 0x793a27, 0xa47656, 0xf0ba72, 0xce8469, 0x704e4b, 0x8b5e5a, 0xeea765, 0xd3a75e, 0xb76d4c, 0xd7b06a)
+        draw16x1($t4, $t0, $t2, $t1, 0xce7b57, 0xe3a366, 0xd6915e, 0xfed67b, 0xb98657, 0x988588, 0x697274, 0xbca69b, 0xf9bfa9, 0xf5d8d0, 0x6c9fac, 0xbf9c94, 0xd49250, 0xbf884e, 0x5b3322, 0x6d6036)
+        draw16x1($t4, $t0, $t2, $t1, 0xd07b58, 0xdc895e, 0xce8056, 0xf1b26f, 0xdda769, 0xbab5b5, 0x2f92a3, 0xd3d5d1, 0xffe8df, 0xfdeae2, 0xa5c5c4, 0xcb9682, 0xcf6f4d, 0x905137, 0x190d09, 0x070805)
+        draw16x1($t4, $t0, $t2, $t1, 0x955741, 0xd57d5b, 0x804730, 0x975b3f, 0xd58456, 0xc99586, 0xbdb8bf, 0xf3d8d4, 0xffe6dd, 0xfedbd3, 0xdfafa2, 0xc77756, 0xd87853, 0x6b3c2b, 0x000001, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0x1a0d0d, 0x935641, 0x4d291e, 0x361e0f, 0xa65c3b, 0xd0988c, 0xf8c9d1, 0xf5c9c7, 0xcd7179, 0xdeacb3, 0xbc9895, 0xbe6b5f, 0x572a18, 0x1c0f08, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x060303, 0x020203, 0x0b0f18, 0x3d2c26, 0xaa8d8c, 0xd3b8c6, 0xd49ca0, 0xd59094, 0xd3979e, 0xb0a2b0, 0x5b4151, 0x0e1726, 0x04070d, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x141b26, 0x2b3a53, 0x213553, 0x2f446b, 0x414564, 0x697394, 0x818b9f, 0x727687, 0x363d58, 0x1d2746, 0x354d7a, 0x2b3f64, 0x010203, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x05070a, 0x2d3852, 0x32456a, 0x3a5481, 0x2f3c5e, 0x2f3459, 0xadacc6, 0xdcdae8, 0xd3d2df, 0x7f88a6, 0x525571, 0x415784, 0x21314d, 0x010101, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x020203, 0x282f40, 0x49597f, 0x4b587c, 0x646988, 0x7a88a5, 0x777e9f, 0x9da7bd, 0xb7bbd0, 0x908faa, 0x505a7b, 0x23324e, 0x010102, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x010101, 0x1b2029, 0x21232d, 0x6f7494, 0x9a9cba, 0x676a86, 0x3b4865, 0x5a6384, 0x5c617b, 0x04070e, 0x010202, 0, 0, 0)
+        jr $ra # return
+    draw_player_03: # start at v1
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x130c09, 0x6e3c2b, 0xed9973, 0xe2c0c0, 0xcdb2c5, 0xe4c4cb, 0xcaaab3, 0xd5b7c3, 0x999ba2, 0x1e150f, 0, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x341e16, 0xb46d4d, 0xebaf9a, 0xd29ea5, 0xa74159, 0xb06075, 0xd3868e, 0xd4868e, 0xb86b7b, 0xc07189, 0xd09f93, 0x4d3f35, 0x020001, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x5c3626, 0xb7694a, 0xe2a28d, 0xcb969f, 0xaa475e, 0xd29a94, 0xebb889, 0xf2bd7e, 0xf3bd80, 0xeab582, 0xdba9a3, 0xcf878c, 0xd99a7f, 0x78563a, 0x0e0707)
+        draw16x1($t4, $t0, $t2, $t1, 0x281711, 0xac6548, 0xcf8a60, 0xcb8b82, 0xb15263, 0xd99d88, 0xfac971, 0xffdb72, 0xfbe177, 0xffe07c, 0xffdb76, 0xfacf7d, 0xffe9bd, 0xf8cf93, 0xe9bc69, 0x543c26)
+        draw16x1($t4, $t0, $t2, $t1, 0x824c37, 0xbd7352, 0xf0ba6e, 0xf1c47b, 0xdda37a, 0xf8d29d, 0xfee6b1, 0xecb976, 0xfce39a, 0xffeabb, 0xecbf7e, 0xfcde91, 0xfcdea8, 0xf1b870, 0xfbd879, 0xb79351)
+        draw16x1($t4, $t0, $t2, $t1, 0xbb6c4f, 0xd3885c, 0xf8cc76, 0xfcd478, 0xf2b670, 0xfbd684, 0xd8986c, 0xc27d52, 0xfee183, 0xf6cd80, 0xb66c46, 0xc58455, 0xfad487, 0xecb671, 0xe5ac6c, 0xeece6f)
+        draw16x1($t4, $t0, $t2, $t1, 0xba6c4e, 0xe2a867, 0xf2c673, 0xfbd279, 0xe29a68, 0xa67348, 0x8a442b, 0xa56d4d, 0xf4c772, 0xd18559, 0x7d463a, 0x7b4d47, 0xe99f62, 0xdeb566, 0xc27952, 0xe9bc71)
+        draw16x1($t4, $t0, $t2, $t1, 0xc87654, 0xe5a768, 0xda9a61, 0xfed67a, 0xba8356, 0x816668, 0x715c58, 0xa58d80, 0xf4b592, 0xf0c6bb, 0x6f8f9b, 0xac9496, 0xdd9a56, 0xcf9f58, 0x75422d, 0x8f7946)
+        draw16x1($t4, $t0, $t2, $t1, 0xce7a57, 0xde8f61, 0xd08357, 0xf6be74, 0xdba866, 0xc1b2b0, 0x4498a6, 0xc2cac7, 0xffe1d6, 0xffeae2, 0x8fbdbf, 0xc7a596, 0xc76d48, 0xa5613f, 0x301910, 0x12130a)
+        draw16x1($t4, $t0, $t2, $t1, 0xac664a, 0xd67e5c, 0x96553a, 0xaa6948, 0xdc905c, 0xc89e8f, 0x8fadb9, 0xe1d7d5, 0xffeee5, 0xffe7de, 0xeac9bf, 0xca8163, 0xe17b55, 0x854935, 0x050304, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0x301a17, 0xae674d, 0x693828, 0x492919, 0xb56542, 0xc18271, 0xf4bcc3, 0xfad1cf, 0xe39b9c, 0xe9b6ba, 0xbc918a, 0xbf6e5e, 0x8c492e, 0x391f13, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x1a0e0c, 0x120d10, 0x161e2c, 0x4e3123, 0xc9a29c, 0xd8bdc4, 0xca9195, 0xa24451, 0xae6873, 0xc0aeb7, 0x905f6b, 0x29334f, 0x111a2b, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x17202e, 0x2c3c58, 0x283f63, 0x344971, 0x373956, 0x757694, 0x8989a2, 0x84828f, 0x484e6d, 0x2d334e, 0x384f7c, 0x364f7c, 0x05070b, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x050609, 0x313b56, 0x394c73, 0x415985, 0x3b4465, 0x363f66, 0x9194b3, 0xdfdeec, 0xdbdbea, 0x9ca1bc, 0x646a89, 0x445783, 0x152033, 0x010102, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x13161d, 0x475373, 0x3f4863, 0x717492, 0xa7b0c6, 0x7c829f, 0x6b7b98, 0x929cb7, 0x908ea7, 0x353c55, 0x152135, 0, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x050506, 0x141419, 0x616787, 0x757ba0, 0x484c64, 0x292f40, 0x424969, 0x4e5879, 0x020305, 0, 0, 0, 0)
+        jr $ra # return
+    draw_player_04: # start at v1
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x150c0a, 0x7a4431, 0xee9d79, 0xe1c2c4, 0xceb1c3, 0xe1c2c8, 0xccabb4, 0xd4bac7, 0x7d8084, 0x160e08, 0, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x3d231a, 0xba7152, 0xebb3a1, 0xcc929d, 0xa53e57, 0xb6687b, 0xd58a90, 0xd3878f, 0xb56a7a, 0xc87a8e, 0xc29789, 0x3d2e27, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x633a29, 0xbb6b4c, 0xe2a693, 0xc68c98, 0xac4a60, 0xd7a397, 0xedb984, 0xf3be7d, 0xf3be7e, 0xebb584, 0xd8a7a5, 0xd38888, 0xd39c7b, 0x62442b, 0x070304)
+        draw16x1($t4, $t0, $t2, $t1, 0x2d1a13, 0xaf684b, 0xd28f63, 0xca8980, 0xb35665, 0xdfa889, 0xfcce72, 0xfedc72, 0xfbe17a, 0xffe17d, 0xfed876, 0xfcd586, 0xfee7bd, 0xf7cd85, 0xdeb164, 0x332419)
+        draw16x1($t4, $t0, $t2, $t1, 0x884f3a, 0xbf7553, 0xf2be70, 0xf1c57b, 0xe0a77a, 0xfad8a2, 0xfce1af, 0xeab873, 0xfde7a3, 0xfee7b8, 0xe9b874, 0xffe39e, 0xf9d59c, 0xf2ba70, 0xfbdb78, 0x9c7b44)
+        draw16x1($t4, $t0, $t2, $t1, 0xbc6d4f, 0xd78e5e, 0xf9ce77, 0xfbd278, 0xf2b770, 0xf7d080, 0xcd8760, 0xc78655, 0xffe483, 0xedbd75, 0xaa5f3d, 0xca8d5c, 0xfbd481, 0xe5ab6c, 0xeeb970, 0xd6ba64)
+        draw16x1($t4, $t0, $t2, $t1, 0xba6c4e, 0xe4aa68, 0xf0c471, 0xfbd079, 0xd99263, 0x966441, 0x823d28, 0xab7854, 0xf2bf70, 0xc97d5c, 0x6f463f, 0x8f5a50, 0xf1af69, 0xcfa05c, 0xc97e57, 0xd2b168)
+        draw16x1($t4, $t0, $t2, $t1, 0xca7855, 0xe5a668, 0xd8965f, 0xfed77a, 0xb48055, 0x8b7477, 0x6a6362, 0xb89c8f, 0xf6ba9e, 0xeecdc6, 0x6794a3, 0xc0938a, 0xda9e55, 0xbc874e, 0x623826, 0x827341)
+        draw16x1($t4, $t0, $t2, $t1, 0xce7a57, 0xdd8c5f, 0xcf8256, 0xf3b971, 0xdaa668, 0xbab5b4, 0x3793a3, 0xd4d2ce, 0xffe4db, 0xfae8e0, 0x96bebe, 0xca917c, 0xcb704b, 0x8a4e34, 0x180c08, 0x0e1009)
+        draw16x1($t4, $t0, $t2, $t1, 0xa05e45, 0xd57d5b, 0x894d35, 0xa16344, 0xd88a59, 0xc79c8e, 0xa6b3bc, 0xefdad7, 0xffeae1, 0xfedfd7, 0xe1b5a8, 0xc97755, 0xdb7954, 0x603527, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0x211111, 0xa05d47, 0x5a2f21, 0x412416, 0xb0623e, 0xce9183, 0xfecad0, 0xfbcfcc, 0xdc888b, 0xe9b8bd, 0xb88f89, 0xc06958, 0x65331f, 0x1f1008, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x0d0706, 0x0e0e14, 0x1a2535, 0x47332c, 0xb89b9e, 0xbea6ae, 0xad7580, 0x934452, 0x9e656f, 0xa996a5, 0x6a4c5e, 0x273c61, 0x111a2b, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x1e2739, 0x2d3f5c, 0x2b4770, 0x2b3f69, 0x313555, 0x8b8fad, 0xa1a5b9, 0x9498a7, 0x485271, 0x313753, 0x3c5584, 0x2b3f63, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x050709, 0x343f5a, 0x3d5078, 0x465a84, 0x444b6b, 0x3f4c72, 0x9295b3, 0xd7d8e6, 0xd7d7e8, 0x9196b3, 0x646c8e, 0x364b74, 0x080d14, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x0d0e13, 0x3d4760, 0x373d52, 0x777b99, 0xb0b5cb, 0x787d9b, 0x5b6c8c, 0x868eab, 0x74738b, 0x1c263a, 0x080d16, 0, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0, 0x17181d, 0x606788, 0x666d94, 0x2d3142, 0x1b1e28, 0x3d4464, 0x404966, 0, 0, 0, 0, 0)
+        jr $ra # return
+    draw_player_05: # start at v1
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0x1c100e, 0x93553d, 0xeda587, 0xdabfc8, 0xd1b0bf, 0xd8b5bd, 0xcda9b1, 0xcfbfcd, 0x4b4946, 0x070200, 0, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x040201, 0x4e2e22, 0xc67b5b, 0xe9b6aa, 0xc17b89, 0xa5445d, 0xc27886, 0xd88d91, 0xd0858c, 0xb2677b, 0xd48e96, 0x977869, 0x1e1411, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0x010000, 0x70412e, 0xc37253, 0xe0aa9d, 0xbd7585, 0xb45d6b, 0xe3b296, 0xf1be7c, 0xf4c17c, 0xf3bf7a, 0xeab68e, 0xd5a3a3, 0xdd9588, 0xbc8f64, 0x352116, 0x000001)
+        draw16x1($t4, $t0, $t2, $t1, 0x382118, 0xb46b4e, 0xd79869, 0xc7827a, 0xbc666d, 0xebbb89, 0xfed575, 0xfdde74, 0xfde181, 0xffe17f, 0xfbd374, 0xffe19c, 0xfbdbac, 0xfbd076, 0xa4804b, 0x100a09)
+        draw16x1($t4, $t0, $t2, $t1, 0x975840, 0xc27954, 0xf6c672, 0xf2c77b, 0xe7af7a, 0xfde0a9, 0xf0ca9e, 0xe8b971, 0xfeebb0, 0xf6d7a7, 0xe6b069, 0xffe7ae, 0xf4c181, 0xf5c474, 0xe8c66a, 0x705231)
+        draw16x1($t4, $t0, $t2, $t1, 0xbe6f50, 0xdc9761, 0xfad378, 0xf9cc77, 0xf4bb73, 0xedbc73, 0xba6d4b, 0xd7a060, 0xfddc7a, 0xd49358, 0x954c2f, 0xd99f66, 0xf9cf79, 0xda9864, 0xf9ce76, 0x988649)
+        draw16x1($t4, $t0, $t2, $t1, 0xbd6f4f, 0xe6ad6a, 0xedbe6f, 0xfacb78, 0xc17e58, 0x7e503a, 0x7a3d2c, 0xc09466, 0xe9aa6f, 0xb77565, 0x604f56, 0xbe755a, 0xf3c36d, 0xb07348, 0xd29661, 0x96874d)
+        draw16x1($t4, $t0, $t2, $t1, 0xcd7b57, 0xe19e65, 0xd7945f, 0xfbd279, 0xb18159, 0x9e9498, 0x63797c, 0xe0baaa, 0xf8ccbc, 0xcecbc8, 0x79a5b3, 0xcd8764, 0xd19854, 0x885132, 0x4d3b23, 0x544d2a)
+        draw16x1($t4, $t0, $t2, $t1, 0xcf7b57, 0xda845d, 0xc87e54, 0xecaa6b, 0xd8a36c, 0xa3b4b9, 0x4098a8, 0xf5e4dc, 0xffeae2, 0xe5e1da, 0xbabdb7, 0xc77355, 0xc96f4f, 0x44241a, 0x020202, 0x050604)
+        draw16x1($t4, $t0, $t2, $t1, 0x824c39, 0xce7958, 0x723f2a, 0x96593d, 0xcc7b52, 0xcd998d, 0xdcc2c7, 0xfdd8d2, 0xffd9d1, 0xf4c8c2, 0xc68774, 0xce7450, 0xa85d40, 0x1c100d, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0x0d0607, 0x6d3f31, 0x341c17, 0x332018, 0x9d5b3d, 0xe0b2ad, 0xfed7db, 0xe5a8a9, 0xcb6c77, 0xdfbcc0, 0xbd8d8e, 0x86493f, 0x261a1a, 0x030100, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x111823, 0x202f45, 0x3b3a47, 0x827b8e, 0x816d7c, 0x7d566e, 0x7a505f, 0x755a69, 0x6f6178, 0x343c5e, 0x314a78, 0x0f1522, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x050608, 0x2a364e, 0x32466b, 0x354f7c, 0x2a375c, 0x42476b, 0xbcc0d8, 0xcccfdd, 0xb3b8cc, 0x4e5978, 0x495172, 0x354f7d, 0x0d141f, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0x030305, 0x2d354a, 0x47577e, 0x4e5a7e, 0x656b89, 0x73809f, 0x868ca9, 0xabb4c8, 0xbcbdd3, 0x737490, 0x44557a, 0x0f1827, 0, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0x030304, 0x1d222c, 0x2b2d3a, 0x7d81a2, 0x989ab7, 0x555c77, 0x3f4c6a, 0x6b7392, 0x36394a, 0x04080f, 0, 0, 0, 0)
+        draw16x1($t4, $t0, $t2, $t1, 0, 0, 0, 0, 0x25262f, 0x5d668a, 0x4f587c, 0x050507, 0x0b0b12, 0x454e71, 0x282d40, 0, 0, 0, 0, 0)
+        jr $ra # return
+    clear_player: # start at v1
+        li $a0 REFRESH_RATE
+        li $v0 32
+        draw64($0, 0, 4, 8, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 512, 516, 520, 548, 552, 556, 560, 564, 568, 572, 1024, 1028, 1032, 1076, 1080, 1084, 1536, 1540, 1544, 2048, 2052, 2560, 2564, 2620, 3072, 3076, 3132, 3584, 3588, 3644, 4096, 4156, 4608, 4664, 4668, 5120, 5176, 5180, 5688, 5692, 6144, 6200, 6204, 6656, 6660, 6664, 6668, 6708, 6712, 6716, 7168)
+        draw16($0, 7172, 7176, 7180, 7184, 7188, 7192, 7196, 7220, 7224, 7228, 7680, 7684, 7688, 7692, 7696, 7700)
+        draw4($0, 7704, 7708, 7712, 7716)
+        draw4($0, 7720, 7724, 7732, 7736)
+        sw $0 7740($v1)
+        syscall
+        draw16($0, 12, 16, 20, 524, 528, 532, 540, 544, 1036, 1040, 1060, 1064, 1068, 1072, 1548, 1552)
+        draw16($0, 1580, 1584, 1588, 1592, 1596, 2056, 2060, 2100, 2104, 2108, 2568, 2616, 3080, 3640, 4100, 4152)
+        draw16($0, 4660, 5124, 5172, 5632, 5636, 5640, 5644, 5680, 5684, 6148, 6152, 6156, 6160, 6192, 6196, 6672)
+        draw4($0, 6676, 6680, 6700, 6704)
+        draw4($0, 7200, 7212, 7216, 7728)
+        syscall
+        draw16($0, 536, 1044, 1048, 1556, 1576, 2064, 2092, 2096, 2572, 2608, 2612, 3124, 3128, 4612, 4616, 5128)
+        draw4($0, 5132, 5168, 5648, 5676)
+        draw4($0, 6164, 6184, 6188, 6684)
+        draw4($0, 6692, 6696, 7204, 7208)
+        syscall
+        draw16($0, 1052, 1056, 1560, 1564, 2068, 2072, 2088, 2576, 2604, 3116, 3120, 3592, 3632, 3636, 4104, 4108)
+        draw4($0, 4148, 4620, 4624, 5136)
+        draw4($0, 5164, 5652, 5668, 5672)
+        sw $0 6176($v1)
+        sw $0 6180($v1)
+        sw $0 6688($v1)
+        syscall
+        draw4($0, 1568, 1572, 2076, 2080)
+        draw4($0, 3084, 3596, 3600, 3628)
+        draw4($0, 4112, 4144, 4656, 5660)
+        sw $0 5664($v1)
+        sw $0 6168($v1)
+        sw $0 6172($v1)
+        syscall
+        draw16($0, 2084, 2580, 2584, 2588, 2592, 2596, 2600, 3088, 3092, 3112, 3604, 3624, 4116, 4136, 4140, 4628)
+        draw4($0, 4648, 4652, 5140, 5144)
+        draw4($0, 5148, 5152, 5156, 5160)
+        sw $0 5656($v1)
+        syscall
+        draw4($0, 3096, 3100, 3108, 3620)
+        draw4($0, 4120, 4632, 4640, 4644)
+        syscall
+        draw4($0, 3104, 3608, 4132, 4636)
+        syscall
+        draw4($0, 3612, 3616, 4124, 4128)
+        jr $ra
 draw_doll:
     addi $sp $sp -4 # push ra to stack
     sw $ra 0($sp)
@@ -2485,7 +2487,8 @@ draw_doll:
     la $t5 dolls
     add $t5 $t5 $t4 # address to dolls
     lw $a2 0($t5) # get doll (i.e. array of frames)
-    frame2(DOLLS_FRAME)
+    sll $t4 $s7 1
+    frame(DOLLS_FRAME)
     lw $v1 doll_address
     jalr $v0
 
@@ -4364,48 +4367,30 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         sw $t4 32512($v1)
         sw $t4 33020($v1)
         sw $t4 33024($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_00
+        jnez($t4, draw_clear_00)
     draw_clear_01: # draw t4, sleep, draw 0
         sw $t4 32508($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_01
+        jnez($t4, draw_clear_01)
     draw_clear_02: # draw t4, sleep, draw 0
         draw4($t4, 31992, 31996, 32000, 32504)
         sw $t4 33016($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_02
+        jnez($t4, draw_clear_02)
     draw_clear_03: # draw t4, sleep, draw 0
         draw4($t4, 31484, 32516, 32520, 33012)
         draw4($t4, 33028, 33532, 33536, 34048)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_03
+        jnez($t4, draw_clear_03)
     draw_clear_04: # draw t4, sleep, draw 0
         draw4($t4, 30976, 31492, 32008, 32524)
         draw4($t4, 33008, 33032, 33036, 33524)
         draw4($t4, 33540, 33544, 34040, 34052)
         sw $t4 34556($v1)
         sw $t4 34560($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_04
+        jnez($t4, draw_clear_04)
     draw_clear_05: # draw t4, sleep, draw 0
         draw4($t4, 30972, 31480, 31488, 31988)
         draw4($t4, 32004, 32496, 32500, 33528)
         sw $t4 34044($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_05
+        jnez($t4, draw_clear_05)
     draw_clear_06: # draw t4, sleep, draw 0
         draw4($t4, 30464, 30980, 31496, 32012)
         draw4($t4, 32528, 33004, 33040, 33520)
@@ -4413,56 +4398,35 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         sw $t4 34564($v1)
         sw $t4 35068($v1)
         sw $t4 35072($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_06
+        jnez($t4, draw_clear_06)
     draw_clear_07: # draw t4, sleep, draw 0
         draw4($t4, 30460, 30968, 31476, 31984)
         sw $t4 32492($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_07
+        jnez($t4, draw_clear_07)
     draw_clear_08: # draw t4, sleep, draw 0
         draw16($t4, 29444, 29956, 30472, 30988, 32016, 32532, 33000, 33552, 33556, 33560, 34060, 34064, 34544, 34568, 34572, 35060)
         draw4($t4, 35076, 35580, 35584, 36088)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_08
+        jnez($t4, draw_clear_08)
     draw_clear_09: # draw t4, sleep, draw 0
         draw16($t4, 29440, 29948, 29952, 30452, 30456, 30468, 30960, 30964, 30984, 31468, 31472, 31500, 31972, 31976, 31980, 32488)
         draw4($t4, 33044, 33516, 34032, 34548)
         sw $t4 35064($v1)
         sw $t4 35576($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_09
+        jnez($t4, draw_clear_09)
     draw_clear_10: # draw t4, sleep, draw 0
         draw16($t4, 28936, 29448, 29964, 30992, 32020, 33048, 34068, 34072, 34076, 34576, 34580, 35080, 35084, 35568, 35588, 36092)
         sw $t4 36596($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_10
+        jnez($t4, draw_clear_10)
     draw_clear_11: # draw t4, sleep, draw 0
         draw16($t4, 28932, 29436, 29940, 29944, 29960, 30444, 30448, 30476, 30952, 30956, 31456, 31460, 31464, 31504, 32484, 33512)
         draw4($t4, 34028, 34540, 35056, 35572)
         sw $t4 36084($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_11
+        jnez($t4, draw_clear_11)
     draw_clear_12: # draw t4, sleep, draw 0
         draw16($t4, 28428, 28432, 28944, 29456, 29928, 29968, 29972, 30428, 30484, 30996, 31512, 32024, 33052, 33564, 34020, 34588)
         draw16($t4, 34592, 35048, 35088, 35092, 35096, 35100, 35104, 35560, 35592, 35596, 35600, 35604, 36096, 36100, 36104, 36588)
         draw4($t4, 36600, 36604, 37100, 37104)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_12
+        jnez($t4, draw_clear_12)
     draw_clear_13: # draw t4, sleep, draw 0
         draw16($t4, 28424, 28924, 28928, 28940, 29428, 29432, 29452, 29932, 29936, 30432, 30436, 30440, 30480, 30940, 30944, 30948)
         draw4($t4, 31508, 31968, 32480, 32536)
@@ -4470,18 +4434,12 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw4($t4, 34584, 35052, 35564, 36076)
         sw $t4 36080($v1)
         sw $t4 36592($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_13
+        jnez($t4, draw_clear_13)
     draw_clear_14: # draw t4, sleep, draw 0
         draw16($t4, 27920, 28416, 28420, 28916, 28920, 29412, 29416, 29420, 29424, 29460, 29912, 29916, 29920, 29924, 31452, 31964)
         draw4($t4, 32992, 33504, 34532, 35044)
         draw4($t4, 35556, 36072, 36584, 37096)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_14
+        jnez($t4, draw_clear_14)
     draw_clear_15: # draw t4, sleep, draw 0
         draw16($t4, 27908, 27912, 27916, 27924, 28400, 28404, 28408, 28412, 28436, 28440, 28892, 28896, 28900, 28904, 28908, 28912)
         draw16($t4, 28948, 28952, 29400, 29404, 29408, 29464, 29976, 30424, 30488, 30936, 31000, 31004, 31448, 31516, 32028, 32476)
@@ -4491,72 +4449,48 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         sw $t4 36616($v1)
         sw $t4 37092($v1)
         sw $t4 37108($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_15
+        jnez($t4, draw_clear_15)
     draw_clear_16: # draw t4, sleep, draw 0
         draw64($t4, 27404, 27408, 27412, 27416, 27420, 27884, 27888, 27892, 27896, 27900, 27904, 27928, 27932, 28372, 28376, 28380, 28384, 28388, 28392, 28396, 28444, 28884, 28888, 28956, 29396, 29468, 29908, 29980, 30420, 30492, 30496, 31008, 31520, 31960, 32032, 32472, 32544, 32984, 33056, 33496, 34008, 34520, 34524, 34596, 35036, 35108, 35548, 35620, 36060, 36128, 36132, 36572, 36620, 36624, 36628, 36632, 36636, 36640, 36644, 37084, 37088, 37112, 37116, 37120)
         draw4($t4, 37124, 37128, 37132, 37596)
         draw4($t4, 37600, 37604, 37608, 37612)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_16
+        jnez($t4, draw_clear_16)
     draw_clear_17: # draw t4, sleep, draw 0
         draw64($t4, 26908, 26912, 27360, 27364, 27368, 27372, 27376, 27380, 27384, 27388, 27392, 27396, 27400, 27424, 27856, 27860, 27864, 27868, 27872, 27876, 27880, 27936, 28368, 28448, 28960, 28964, 29472, 29476, 29984, 29988, 30500, 30932, 31012, 31444, 31524, 31956, 32036, 32468, 32548, 32980, 33060, 33492, 33572, 34004, 34084, 34516, 35028, 35032, 35540, 35544, 36052, 36056, 36568, 36648, 37080, 37136, 37140, 37144, 37148, 37152, 37156, 37160, 37592, 37616)
         draw4($t4, 37620, 37624, 37628, 37632)
         draw4($t4, 37636, 37640, 37644, 37648)
         draw4($t4, 37652, 37656, 38104, 38108)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_17
+        jnez($t4, draw_clear_17)
     draw_clear_18: # draw t4, sleep, draw 0
         draw64($t4, 26832, 26836, 26840, 26844, 26848, 26852, 26856, 26860, 26864, 26868, 26872, 26876, 26880, 26884, 26888, 26892, 26896, 26900, 26904, 26916, 26920, 27344, 27348, 27352, 27356, 27428, 27432, 27940, 27944, 28452, 28456, 28880, 28968, 29392, 29480, 29904, 29992, 30416, 30504, 30928, 31016, 31440, 31528, 31952, 32040, 32464, 32552, 32976, 33064, 33488, 33576, 34000, 34088, 34512, 34600, 35024, 35112, 35536, 35624, 36048, 36136, 36560, 36564, 37072)
         draw16($t4, 37076, 37584, 37588, 37660, 37664, 37668, 37672, 38096, 38100, 38112, 38116, 38120, 38124, 38128, 38132, 38136)
         draw4($t4, 38140, 38144, 38148, 38152)
         draw4($t4, 38156, 38160, 38164, 38168)
         draw4($t4, 38172, 38176, 38180, 38184)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_18
+        jnez($t4, draw_clear_18)
     draw_clear_19: # draw t4, sleep, draw 0
         draw64($t4, 25808, 25812, 25816, 25820, 26320, 26324, 26328, 26332, 26336, 26340, 26344, 26348, 26352, 26356, 26360, 26364, 26368, 26372, 26376, 26380, 26384, 26388, 26392, 26396, 26924, 26928, 27436, 27440, 27948, 27952, 28364, 28460, 28464, 28876, 28972, 29388, 29484, 29900, 29996, 30412, 30508, 30924, 31020, 31436, 31532, 31948, 32044, 32460, 32556, 32972, 33068, 33484, 33580, 33996, 34092, 34508, 34604, 35020, 35116, 35532, 35628, 36044, 36140, 36552)
         draw16($t4, 36556, 36652, 37064, 37068, 37576, 37580, 38088, 38092, 38620, 38624, 38628, 38632, 38636, 38640, 38644, 38648)
         draw16($t4, 38652, 38656, 38660, 38664, 38668, 38672, 38676, 38680, 38684, 38688, 38692, 38696, 39196, 39200, 39204, 39208)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_19
+        jnez($t4, draw_clear_19)
     draw_clear_20: # draw t4, sleep, draw 0
         draw64($t4, 24784, 25296, 25300, 25304, 25308, 25312, 25316, 25320, 25324, 25328, 25824, 25828, 25832, 25836, 25840, 25844, 25848, 25852, 25856, 25860, 25864, 25868, 26316, 26400, 26404, 26408, 26412, 26828, 26932, 26936, 27340, 27444, 27852, 27956, 28468, 28976, 28980, 29488, 29492, 30000, 30004, 30408, 30512, 30516, 30920, 31024, 31028, 31432, 31536, 31944, 32048, 32456, 32560, 32968, 33072, 33480, 33584, 33988, 33992, 34096, 34500, 34504, 34608, 35012)
         draw16($t4, 35016, 35524, 35528, 36036, 36040, 36548, 37060, 37164, 37572, 37676, 38080, 38084, 38188, 38604, 38608, 38612)
         draw16($t4, 38616, 38700, 39148, 39152, 39156, 39160, 39164, 39168, 39172, 39176, 39180, 39184, 39188, 39192, 39688, 39692)
         draw4($t4, 39696, 39700, 39704, 39708)
         draw4($t4, 39712, 39716, 39720, 40232)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_20
+        jnez($t4, draw_clear_20)
     draw_clear_21: # draw t4, sleep, draw 0
         draw64($t4, 24272, 24276, 24280, 24284, 24288, 24788, 24792, 24796, 24800, 24804, 24808, 24812, 24816, 24820, 25332, 25336, 25340, 25344, 25348, 25352, 25804, 25872, 25876, 25880, 25884, 26416, 26940, 27448, 27452, 27960, 27964, 28360, 28472, 28476, 28872, 28984, 28988, 29384, 29496, 29896, 30008, 30520, 30916, 31032, 31428, 31540, 31544, 31940, 32052, 32452, 32564, 32964, 33076, 33472, 33476, 33588, 33984, 34100, 34496, 35008, 35120, 35520, 35632, 36028)
         draw16($t4, 36032, 36144, 36540, 36544, 36656, 37052, 37056, 37564, 37568, 38076, 38600, 39132, 39136, 39140, 39144, 39212)
         draw16($t4, 39664, 39668, 39672, 39676, 39680, 39684, 40196, 40200, 40204, 40208, 40212, 40216, 40220, 40224, 40228, 40728)
         draw4($t4, 40732, 40736, 40740, 40744)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_21
+        jnez($t4, draw_clear_21)
     draw_clear_22: # draw t4, sleep, draw 0
         draw64($t4, 23248, 23252, 23256, 23260, 23760, 23764, 23768, 23772, 23776, 23780, 23784, 23788, 24292, 24296, 24300, 24304, 24308, 24312, 24316, 24780, 24824, 24828, 24832, 24836, 24840, 25292, 25356, 25360, 25364, 25368, 25888, 25892, 25896, 26420, 26424, 26824, 26944, 26948, 27336, 27456, 27460, 27848, 27968, 27972, 28480, 28484, 28868, 28992, 29380, 29500, 29504, 29892, 30012, 30016, 30404, 30524, 30528, 30912, 31036, 31424, 31548, 31936, 32056, 32060)
         draw64($t4, 32444, 32448, 32568, 32572, 32956, 32960, 33080, 33468, 33592, 33980, 34104, 34488, 34492, 34612, 35000, 35004, 35124, 35512, 35516, 35636, 36024, 36148, 36532, 36536, 37044, 37048, 37168, 37556, 37560, 37680, 38068, 38072, 38192, 38592, 38596, 39120, 39124, 39128, 39648, 39652, 39656, 39660, 39724, 40176, 40180, 40184, 40188, 40192, 40236, 40700, 40704, 40708, 40712, 40716, 40720, 40724, 41228, 41232, 41236, 41240, 41244, 41248, 41252, 41256)
         draw4($t4, 41756, 41760, 41764, 41768)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_22
+        jnez($t4, draw_clear_22)
     draw_clear_23: # draw t4, sleep, draw 0
         draw64($t4, 21716, 22228, 22232, 22236, 22740, 22744, 22748, 22752, 22756, 22760, 23264, 23268, 23272, 23276, 23280, 23284, 23792, 23796, 23800, 23804, 23808, 24320, 24324, 24328, 24332, 24844, 24848, 24852, 24856, 25372, 25376, 25380, 25900, 25904, 26312, 26428, 26952, 27464, 27468, 27472, 27476, 27844, 27976, 27980, 27984, 28356, 28488, 28492, 28496, 28996, 29000, 29004, 29376, 29508, 29512, 29516, 29888, 30020, 30024, 30028, 30400, 30532, 30536, 30908)
         draw64($t4, 31040, 31044, 31048, 31420, 31552, 31556, 31560, 31932, 32064, 32068, 32440, 32576, 32580, 32952, 33084, 33088, 33092, 33464, 33596, 33600, 33972, 33976, 34108, 34112, 34484, 34616, 34620, 34624, 34996, 35128, 35132, 35504, 35508, 35640, 35644, 36016, 36020, 36152, 36156, 36528, 36660, 36664, 37036, 37040, 37172, 37176, 37548, 37552, 37684, 37688, 38056, 38060, 38064, 38196, 38580, 38584, 38588, 38704, 38708, 39104, 39108, 39112, 39116, 39216)
@@ -4568,10 +4502,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         sw $t4 43300($v1)
         sw $t4 43304($v1)
         sw $t4 43816($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_23
+        jnez($t4, draw_clear_23)
     draw_clear_24: # draw t4, sleep, draw 0
         draw64($t4, 20180, 20692, 20696, 20700, 21204, 21208, 21212, 21216, 21220, 21224, 21712, 21720, 21724, 21728, 21732, 21736, 21740, 21744, 22224, 22240, 22244, 22248, 22252, 22256, 22260, 22264, 22268, 22732, 22736, 22764, 22768, 22772, 22776, 22780, 22784, 22788, 23244, 23288, 23292, 23296, 23300, 23304, 23308, 23756, 23812, 23816, 23820, 23824, 23828, 23832, 24264, 24268, 24336, 24340, 24344, 24348, 24352, 24776, 24860, 24864, 24868, 24872, 24876, 25284)
         draw64($t4, 25288, 25384, 25388, 25392, 25396, 25796, 25800, 25908, 25912, 25916, 26304, 26308, 26432, 26436, 26440, 26816, 26820, 26956, 26960, 27328, 27332, 27480, 27484, 27836, 27840, 27988, 27992, 28348, 28352, 28500, 28504, 28856, 28860, 28864, 29008, 29012, 29368, 29372, 29520, 29524, 29880, 29884, 30032, 30036, 30388, 30392, 30396, 30540, 30544, 30900, 30904, 31052, 31056, 31408, 31412, 31416, 31564, 31920, 31924, 31928, 32072, 32076, 32428, 32432)
@@ -4582,10 +4513,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw4($t4, 43808, 43812, 44316, 44320)
         sw $t4 44324($v1)
         sw $t4 44836($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_24
+        jnez($t4, draw_clear_24)
     draw_clear_25: # draw t4, sleep, draw 0
         draw64($t4, 19672, 19676, 19680, 19684, 20184, 20188, 20192, 20196, 20200, 20204, 20704, 20708, 20712, 20716, 20720, 20724, 21228, 21232, 21236, 21240, 21244, 21748, 21752, 21756, 21760, 21764, 22272, 22276, 22280, 22284, 22792, 22796, 22800, 22804, 23312, 23316, 23320, 23324, 23752, 23836, 23840, 23844, 24356, 24360, 24364, 24772, 24880, 24884, 25400, 25404, 25792, 25920, 25924, 26444, 26812, 26964, 27324, 27832, 27996, 28000, 28004, 28344, 28508, 28512)
         draw64($t4, 28516, 28852, 29016, 29020, 29024, 29028, 29364, 29528, 29532, 29536, 29540, 29872, 29876, 30040, 30044, 30048, 30384, 30548, 30552, 30556, 30560, 30892, 30896, 31060, 31064, 31068, 31404, 31568, 31572, 31576, 31580, 31912, 31916, 32080, 32084, 32088, 32424, 32592, 32596, 32600, 32932, 32936, 33100, 33104, 33108, 33444, 33448, 33612, 33616, 33620, 33952, 33956, 34120, 34124, 34128, 34464, 34468, 34632, 34636, 34640, 34972, 34976, 35140, 35144)
@@ -4597,10 +4525,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         sw $t4 45852($v1)
         sw $t4 45856($v1)
         sw $t4 45860($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_25
+        jnez($t4, draw_clear_25)
     draw_clear_26: # draw t4, sleep, draw 0
         draw64($t4, 17628, 18140, 18144, 18148, 18648, 18652, 18656, 18660, 18664, 18668, 19160, 19164, 19168, 19172, 19176, 19180, 19184, 19668, 19688, 19692, 19696, 19700, 19704, 20208, 20212, 20216, 20220, 20224, 20688, 20728, 20732, 20736, 20740, 20744, 21196, 21200, 21248, 21252, 21256, 21260, 21708, 21768, 21772, 21776, 21780, 22216, 22220, 22288, 22292, 22296, 22300, 22728, 22808, 22812, 22816, 22820, 23236, 23240, 23328, 23332, 23336, 23744, 23748, 23848)
         draw64($t4, 23852, 23856, 24256, 24260, 24368, 24372, 24376, 24764, 24768, 24888, 24892, 24896, 25276, 25280, 25408, 25412, 25784, 25788, 25928, 25932, 26296, 26300, 26448, 26452, 26804, 26808, 26968, 27312, 27316, 27320, 27488, 27824, 27828, 28008, 28332, 28336, 28340, 28520, 28524, 28528, 28844, 28848, 29032, 29036, 29352, 29356, 29360, 29544, 29548, 29864, 29868, 30052, 30056, 30372, 30376, 30380, 30564, 30568, 30880, 30884, 30888, 31072, 31076, 31392)
@@ -4611,10 +4536,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw4($t4, 46364, 46368, 46868, 46872)
         sw $t4 46876($v1)
         sw $t4 47388($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_26
+        jnez($t4, draw_clear_26)
     draw_clear_27: # draw t4, sleep, draw 0
         draw256($t4, 16612, 17124, 17128, 17132, 17632, 17636, 17640, 17644, 17648, 18152, 18156, 18160, 18164, 18168, 18672, 18676, 18680, 18684, 19188, 19192, 19196, 19200, 19204, 19708, 19712, 19716, 19720, 20228, 20232, 20236, 20240, 20748, 20752, 20756, 21264, 21268, 21272, 21276, 21784, 21788, 21792, 22304, 22308, 22312, 22724, 22824, 22828, 23340, 23344, 23348, 23860, 23864, 24252, 24380, 24384, 24900, 25272, 25416, 25420, 25780, 25936, 26292, 26456, 26800, 26972, 27308, 27492, 27820, 28328, 28836, 28840, 29040, 29044, 29348, 29552, 29556, 29560, 29564, 29856, 29860, 30060, 30064, 30068, 30072, 30364, 30368, 30572, 30576, 30580, 30584, 30876, 31080, 31084, 31088, 31092, 31384, 31388, 31588, 31592, 31596, 31600, 31892, 31896, 32100, 32104, 32108, 32112, 32404, 32408, 32608, 32612, 32616, 32620, 32912, 32916, 33120, 33124, 33128, 33420, 33424, 33428, 33628, 33632, 33636, 33640, 33932, 33936, 34140, 34144, 34148, 34440, 34444, 34648, 34652, 34656, 34948, 34952, 34956, 35156, 35160, 35164, 35168, 35460, 35464, 35668, 35672, 35676, 35968, 35972, 35976, 36176, 36180, 36184, 36688, 36692, 36696, 37004, 37196, 37200, 37204, 37524, 37708, 37712, 38040, 38044, 38216, 38220, 38224, 38560, 38724, 38728, 38732, 39076, 39080, 39236, 39240, 39596, 39600, 39744, 39748, 39752, 40112, 40116, 40256, 40260, 40632, 40636, 40764, 40768, 41148, 41152, 41156, 41276, 41280, 41668, 41672, 41676, 41784, 41788, 42184, 42188, 42192, 42292, 42296, 42704, 42708, 42712, 42804, 42808, 43220, 43224, 43228, 43232, 43312, 43316, 43740, 43744, 43748, 43752, 43824, 44256, 44260, 44264, 44268, 44332, 44336, 44776, 44780, 44784, 44788, 44844, 45292, 45296, 45300, 45304, 45308, 45352, 45812, 45816, 45820, 45824, 45828, 45864, 46328, 46332, 46336, 46340, 46344, 46372, 46848, 46852, 46856, 46860, 46864, 46880, 47364)
         draw4($t4, 47368, 47372, 47376, 47380)
@@ -4623,10 +4545,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         sw $t4 48404($v1)
         sw $t4 48408($v1)
         sw $t4 48920($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_27
+        jnez($t4, draw_clear_27)
     draw_clear_28: # draw t4, sleep, draw 0
         draw256($t4, 15592, 15596, 15600, 16100, 16104, 16108, 16112, 16116, 16608, 16616, 16620, 16624, 16628, 16632, 17120, 17136, 17140, 17144, 17148, 17152, 17652, 17656, 17660, 17664, 17668, 18136, 18172, 18176, 18180, 18184, 18644, 18688, 18692, 18696, 18700, 18704, 19156, 19208, 19212, 19216, 19220, 19664, 19724, 19728, 19732, 19736, 20172, 20176, 20244, 20248, 20252, 20680, 20684, 20760, 20764, 20768, 20772, 21188, 21192, 21280, 21284, 21288, 21700, 21704, 21796, 21800, 21804, 22208, 22212, 22316, 22320, 22324, 22716, 22720, 22832, 22836, 22840, 23224, 23228, 23232, 23352, 23356, 23736, 23740, 23868, 23872, 23876, 24244, 24248, 24388, 24392, 24752, 24756, 24760, 24904, 24908, 25260, 25264, 25268, 25424, 25428, 25772, 25776, 25940, 25944, 26280, 26284, 26288, 26460, 26788, 26792, 26796, 26976, 27296, 27300, 27304, 27496, 27808, 27812, 27816, 28012, 28316, 28320, 28324, 28824, 28828, 28832, 29048, 29332, 29336, 29340, 29344, 29840, 29844, 29848, 29852, 30076, 30080, 30352, 30356, 30360, 30588, 30592, 30860, 30864, 30868, 30872, 31096, 31100, 31104, 31368, 31372, 31376, 31380, 31604, 31608, 31612, 31876, 31880, 31884, 31888, 32116, 32120, 32388, 32392, 32396, 32400, 32624, 32628, 32896, 32900, 32904, 32908, 33132, 33136, 33140, 33404, 33408, 33412, 33416, 33644, 33648, 33912, 33916, 33920, 33924, 33928, 34152, 34156, 34424, 34428, 34432, 34436, 34660, 34664, 34936, 34940, 34944, 35172, 35176, 35452, 35456, 35680, 35684, 36188, 36192, 36700, 37208, 37520, 37716, 37720, 38228, 38556, 38736, 39072, 39244, 39588, 39592, 39756, 40108, 40264, 40624, 40628, 40772, 41140, 41144, 41660, 41664, 41792, 42176, 42180, 42300, 42692, 42696, 42700, 43212, 43216, 43728, 43732, 43736, 43828, 44244, 44248, 44252, 44764, 44768, 44772, 45280, 45284, 45288, 45796, 45800, 45804, 45808, 46312, 46316)
         draw16($t4, 46320, 46324, 46832, 46836, 46840, 46844, 47348, 47352, 47356, 47360, 47864, 47868, 47872, 47876, 47880, 48384)
@@ -4635,20 +4554,14 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         sw $t4 49416($v1)
         sw $t4 49420($v1)
         sw $t4 49424($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_28
+        jnez($t4, draw_clear_28)
     draw_clear_29: # draw t4, sleep, draw 0
         draw256($t4, 13556, 14064, 14068, 14072, 14572, 14576, 14580, 14584, 14588, 15080, 15084, 15088, 15092, 15096, 15100, 15104, 15588, 15604, 15608, 15612, 15616, 15620, 16096, 16120, 16124, 16128, 16132, 16136, 16604, 16636, 16640, 16644, 16648, 16652, 17116, 17156, 17160, 17164, 17168, 17624, 17672, 17676, 17680, 17684, 17688, 18132, 18188, 18192, 18196, 18200, 18204, 18640, 18708, 18712, 18716, 18720, 19148, 19152, 19224, 19228, 19232, 19236, 19656, 19660, 19740, 19744, 19748, 19752, 20164, 20168, 20256, 20260, 20264, 20268, 20672, 20676, 20776, 20780, 20784, 21184, 21292, 21296, 21300, 21304, 21692, 21696, 21808, 21812, 21816, 21820, 22200, 22204, 22328, 22332, 22336, 22708, 22712, 22844, 22848, 22852, 23216, 23220, 23360, 23364, 23368, 23724, 23728, 23732, 23880, 23884, 24232, 24236, 24240, 24396, 24400, 24740, 24744, 24748, 24912, 24916, 24920, 25252, 25256, 25432, 25436, 25760, 25764, 25768, 25948, 25952, 26268, 26272, 26276, 26464, 26468, 26776, 26780, 26784, 26980, 26984, 27284, 27288, 27292, 27500, 27792, 27796, 27800, 27804, 28016, 28300, 28304, 28308, 28312, 28532, 28536, 28808, 28812, 28816, 28820, 29052, 29320, 29324, 29328, 29568, 29828, 29832, 29836, 30084, 30336, 30340, 30344, 30348, 30596, 30600, 30844, 30848, 30852, 30856, 31108, 31112, 31116, 31352, 31356, 31360, 31364, 31616, 31620, 31624, 31628, 31632, 31860, 31864, 31868, 31872, 32124, 32128, 32132, 32136, 32140, 32368, 32372, 32376, 32380, 32384, 32632, 32636, 32640, 32644, 32648, 32876, 32880, 32884, 32888, 32892, 33144, 33148, 33152, 33156, 33384, 33388, 33392, 33396, 33400, 33652, 33656, 33660, 33664, 33900, 33904, 33908, 34160, 34164, 34168, 34172, 34416, 34420, 34668, 34672, 34676, 34680, 34932, 35180, 35184, 35188, 35448, 35688, 35692, 35696, 35964, 36196, 36200, 36204, 36208, 36480, 36484, 36704)
         draw64($t4, 36708, 36712, 36716, 37000, 37212, 37216, 37220, 37224, 37516, 37724, 37728, 37732, 38032, 38036, 38232, 38236, 38240, 38548, 38552, 38740, 38744, 38748, 39064, 39068, 39248, 39252, 39256, 39580, 39584, 39760, 39764, 40096, 40100, 40104, 40268, 40272, 40276, 40616, 40620, 40776, 40780, 40784, 41132, 41136, 41284, 41288, 41292, 41648, 41652, 41656, 41796, 41800, 42164, 42168, 42172, 42304, 42308, 42680, 42684, 42688, 42812, 42816, 43196, 43200)
         draw64($t4, 43204, 43208, 43320, 43324, 43712, 43716, 43720, 43724, 43832, 44232, 44236, 44240, 44340, 44344, 44748, 44752, 44756, 44760, 44848, 44852, 45264, 45268, 45272, 45276, 45356, 45360, 45780, 45784, 45788, 45792, 45868, 46296, 46300, 46304, 46308, 46376, 46812, 46816, 46820, 46824, 46828, 46884, 47328, 47332, 47336, 47340, 47344, 47848, 47852, 47856, 47860, 48364, 48368, 48372, 48376, 48380, 48412, 48880, 48884, 48888, 48892, 48896, 49396, 49400)
         draw16($t4, 49404, 49408, 49412, 49428, 49912, 49916, 49920, 49924, 49928, 49932, 49936, 50428, 50432, 50436, 50440, 50444)
         draw4($t4, 50944, 50948, 50952, 51460)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_29
+        jnez($t4, draw_clear_29)
     draw_clear_30: # draw t4, sleep, draw 0
         draw256($t4, 12028, 12536, 12540, 12544, 13044, 13048, 13052, 13056, 13060, 13552, 13560, 13564, 13568, 13572, 13576, 14060, 14076, 14080, 14084, 14088, 14092, 14568, 14592, 14596, 14600, 14604, 14608, 15076, 15108, 15112, 15116, 15120, 15124, 15584, 15624, 15628, 15632, 15636, 15640, 16092, 16140, 16144, 16148, 16152, 16156, 16600, 16656, 16660, 16664, 16668, 16672, 17108, 17112, 17172, 17176, 17180, 17184, 17188, 17616, 17620, 17692, 17696, 17700, 17704, 18124, 18128, 18208, 18212, 18216, 18220, 18632, 18636, 18724, 18728, 18732, 18736, 19140, 19144, 19240, 19244, 19248, 19252, 19648, 19652, 19756, 19760, 19764, 19768, 20156, 20160, 20272, 20276, 20280, 20284, 20664, 20668, 20788, 20792, 20796, 20800, 21172, 21176, 21180, 21308, 21312, 21316, 21680, 21684, 21688, 21824, 21828, 21832, 22188, 22192, 22196, 22340, 22344, 22348, 22696, 22700, 22704, 22856, 22860, 22864, 23204, 23208, 23212, 23372, 23376, 23380, 23712, 23716, 23720, 23888, 23892, 23896, 24220, 24224, 24228, 24404, 24408, 24412, 24728, 24732, 24736, 24924, 24928, 25236, 25240, 25244, 25248, 25440, 25444, 25744, 25748, 25752, 25756, 25956, 25960, 26252, 26256, 26260, 26264, 26472, 26476, 26760, 26764, 26768, 26772, 26988, 26992, 27268, 27272, 27276, 27280, 27504, 27508, 27776, 27780, 27784, 27788, 28020, 28024, 28284, 28288, 28292, 28296, 28540, 28792, 28796, 28800, 28804, 29056, 29300, 29304, 29308, 29312, 29316, 29572, 29808, 29812, 29816, 29820, 29824, 30088, 30316, 30320, 30324, 30328, 30332, 30604, 30824, 30828, 30832, 30836, 30840, 31120, 31332, 31336, 31340, 31344, 31348, 31636, 31840, 31844, 31848, 31852, 31856, 32144, 32148, 32152, 32348, 32352, 32356, 32360, 32364, 32652, 32656, 32660, 32664, 32668, 32864, 32868, 32872, 33160, 33164, 33168, 33172, 33176, 33380, 33668, 33672, 33676, 33680, 33684, 33896)
         draw64($t4, 34176, 34180, 34184, 34188, 34192, 34412, 34684, 34688, 34692, 34696, 34700, 34928, 35192, 35196, 35200, 35204, 35208, 35444, 35700, 35704, 35708, 35712, 35716, 35960, 36212, 36216, 36220, 36224, 36476, 36720, 36724, 36728, 36732, 36992, 36996, 37228, 37232, 37236, 37240, 37508, 37512, 37736, 37740, 37744, 37748, 38024, 38028, 38244, 38248, 38252, 38256, 38540, 38544, 38752, 38756, 38760, 38764, 39056, 39060, 39260, 39264, 39268, 39272, 39572)
@@ -4657,10 +4570,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw16($t4, 50420, 50424, 50448, 50924, 50928, 50932, 50936, 50940, 50956, 51440, 51444, 51448, 51452, 51456, 51464, 51956)
         draw4($t4, 51960, 51964, 51968, 51972)
         draw4($t4, 52472, 52476, 52480, 52988)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_30
+        jnez($t4, draw_clear_30)
     draw_clear_31: # draw t4, sleep, draw 0
         draw256($t4, 11012, 11016, 11520, 11524, 11528, 11532, 12032, 12036, 12040, 12044, 12048, 12548, 12552, 12556, 12560, 12564, 13064, 13068, 13072, 13076, 13080, 13548, 13580, 13584, 13588, 13592, 13596, 14056, 14096, 14100, 14104, 14108, 14564, 14612, 14616, 14620, 14624, 15072, 15128, 15132, 15136, 15140, 15580, 15644, 15648, 15652, 15656, 16088, 16160, 16164, 16168, 16172, 16596, 16676, 16680, 16684, 16688, 17100, 17104, 17192, 17196, 17200, 17204, 17608, 17612, 17708, 17712, 17716, 17720, 18116, 18120, 18224, 18228, 18232, 18236, 18624, 18628, 18740, 18744, 18748, 19132, 19136, 19256, 19260, 19264, 19640, 19644, 19772, 19776, 19780, 20148, 20152, 20288, 20292, 20296, 20652, 20656, 20660, 20804, 20808, 20812, 21160, 21164, 21168, 21320, 21324, 21328, 21668, 21672, 21676, 21836, 21840, 21844, 22176, 22180, 22184, 22352, 22356, 22360, 22684, 22688, 22692, 22868, 22872, 23192, 23196, 23200, 23384, 23388, 23700, 23704, 23708, 23900, 23904, 24204, 24208, 24212, 24216, 24416, 24420, 24712, 24716, 24720, 24724, 24932, 24936, 25220, 25224, 25228, 25232, 25448, 25452, 25728, 25732, 25736, 25740, 25964, 25968, 26236, 26240, 26244, 26248, 26480, 26484, 26744, 26748, 26752, 26756, 26996, 27252, 27256, 27260, 27264, 27512, 27760, 27764, 27768, 27772, 28028, 28264, 28268, 28272, 28276, 28280, 28544, 28772, 28776, 28780, 28784, 28788, 29060, 29280, 29284, 29288, 29292, 29296, 29576, 29788, 29792, 29796, 29800, 29804, 30092, 30296, 30300, 30304, 30308, 30312, 30608, 30804, 30808, 30812, 30816, 30820, 31316, 31320, 31324, 31328, 31832, 31836, 33180, 33184, 33688, 33692, 33696, 33700, 34196, 34200, 34204, 34208, 34212, 34408, 34704, 34708, 34712, 34716, 34720, 34924, 35212, 35216, 35220, 35224, 35228, 35440, 35720, 35724, 35728, 35732, 35736, 35956, 36228, 36232, 36236, 36240, 36244, 36472)
         draw64($t4, 36736, 36740, 36744, 36748, 36752, 36988, 37244, 37248, 37252, 37256, 37504, 37752, 37756, 37760, 37764, 38020, 38260, 38264, 38268, 38272, 38532, 38536, 38768, 38772, 38776, 38780, 39048, 39052, 39276, 39280, 39284, 39288, 39564, 39568, 39784, 39788, 39792, 39796, 40080, 40084, 40292, 40296, 40300, 40304, 40596, 40600, 40800, 40804, 40808, 40812, 41112, 41116, 41308, 41312, 41316, 41628, 41632, 41816, 41820, 41824, 42144, 42148, 42324, 42328)
@@ -4670,10 +4580,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw16($t4, 51432, 51436, 51468, 51936, 51940, 51944, 51948, 51952, 52452, 52456, 52460, 52464, 52468, 52968, 52972, 52976)
         draw4($t4, 52980, 52984, 53484, 53488)
         draw4($t4, 53492, 53496, 54000, 54004)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_31
+        jnez($t4, draw_clear_31)
     draw_clear_32: # draw t4, sleep, draw 0
         draw256($t4, 9492, 9996, 10000, 10004, 10008, 10504, 10508, 10512, 10516, 10520, 11020, 11024, 11028, 11032, 11036, 11536, 11540, 11544, 11548, 11552, 12024, 12052, 12056, 12060, 12064, 12068, 12532, 12568, 12572, 12576, 12580, 12584, 13040, 13084, 13088, 13092, 13096, 13544, 13600, 13604, 13608, 13612, 14052, 14112, 14116, 14120, 14124, 14128, 14560, 14628, 14632, 14636, 14640, 14644, 15064, 15068, 15144, 15148, 15152, 15156, 15572, 15576, 15660, 15664, 15668, 15672, 16080, 16084, 16176, 16180, 16184, 16188, 16588, 16592, 16692, 16696, 16700, 16704, 17092, 17096, 17208, 17212, 17216, 17600, 17604, 17724, 17728, 17732, 18108, 18112, 18240, 18244, 18248, 18612, 18616, 18620, 18752, 18756, 18760, 18764, 19120, 19124, 19128, 19268, 19272, 19276, 19280, 19628, 19632, 19636, 19784, 19788, 19792, 20132, 20136, 20140, 20144, 20300, 20304, 20308, 20640, 20644, 20648, 20816, 20820, 20824, 21148, 21152, 21156, 21332, 21336, 21340, 21652, 21656, 21660, 21664, 21848, 21852, 22160, 22164, 22168, 22172, 22364, 22368, 22668, 22672, 22676, 22680, 22876, 22880, 22884, 23176, 23180, 23184, 23188, 23392, 23396, 23400, 23680, 23684, 23688, 23692, 23696, 23908, 23912, 24188, 24192, 24196, 24200, 24424, 24428, 24696, 24700, 24704, 24708, 24940, 24944, 25200, 25204, 25208, 25212, 25216, 25456, 25460, 25708, 25712, 25716, 25720, 25724, 25972, 26216, 26220, 26224, 26228, 26232, 26488, 26720, 26724, 26728, 26732, 26736, 26740, 27000, 27004, 27228, 27232, 27236, 27240, 27244, 27248, 27516, 27520, 27736, 27740, 27744, 27748, 27752, 27756, 28032, 28036, 28244, 28248, 28252, 28256, 28260, 28548, 28748, 28752, 28756, 28760, 28764, 28768, 29064, 29256, 29260, 29264, 29268, 29272, 29276, 29580, 29772, 29776, 29780, 29784, 30096, 30284, 30288, 30292, 30800, 31124, 31640, 32156, 32860, 33376, 33892, 34216)
         draw64($t4, 34724, 34728, 34732, 34920, 35232, 35236, 35240, 35244, 35436, 35740, 35744, 35748, 35752, 35756, 35760, 35952, 36248, 36252, 36256, 36260, 36264, 36268, 36468, 36756, 36760, 36764, 36768, 36772, 36980, 36984, 37260, 37264, 37268, 37272, 37276, 37280, 37496, 37500, 37768, 37772, 37776, 37780, 37784, 37788, 38012, 38016, 38276, 38280, 38284, 38288, 38292, 38296, 38528, 38784, 38788, 38792, 38796, 38800, 39044, 39292, 39296, 39300, 39304, 39308)
@@ -4684,10 +4591,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw16($t4, 52956, 52960, 52964, 52992, 53464, 53468, 53472, 53476, 53480, 53980, 53984, 53988, 53992, 53996, 54496, 54500)
         draw4($t4, 54504, 54508, 54512, 55008)
         draw4($t4, 55012, 55016, 55020, 55524)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_32
+        jnez($t4, draw_clear_32)
     draw_clear_33: # draw t4, sleep, draw 0
         draw256($t4, 8480, 8484, 8988, 8992, 8996, 9000, 9496, 9500, 9504, 9508, 9512, 9516, 10012, 10016, 10020, 10024, 10028, 10524, 10528, 10532, 10536, 10540, 10544, 11040, 11044, 11048, 11052, 11056, 11060, 11516, 11556, 11560, 11564, 11568, 11572, 12072, 12076, 12080, 12084, 12088, 12528, 12588, 12592, 12596, 12600, 12604, 13036, 13100, 13104, 13108, 13112, 13116, 13540, 13616, 13620, 13624, 13628, 13632, 14048, 14132, 14136, 14140, 14144, 14148, 14552, 14556, 14648, 14652, 14656, 14660, 15060, 15160, 15164, 15168, 15172, 15176, 15564, 15568, 15676, 15680, 15684, 15688, 15692, 16072, 16076, 16192, 16196, 16200, 16204, 16576, 16580, 16584, 16708, 16712, 16716, 16720, 17084, 17088, 17220, 17224, 17228, 17232, 17236, 17588, 17592, 17596, 17736, 17740, 17744, 17748, 18096, 18100, 18104, 18252, 18256, 18260, 18264, 18600, 18604, 18608, 18768, 18772, 18776, 18780, 19108, 19112, 19116, 19284, 19288, 19292, 19612, 19616, 19620, 19624, 19796, 19800, 19804, 19808, 20120, 20124, 20128, 20312, 20316, 20320, 20324, 20624, 20628, 20632, 20636, 20828, 20832, 20836, 21132, 21136, 21140, 21144, 21344, 21348, 21352, 21636, 21640, 21644, 21648, 21856, 21860, 21864, 21868, 22144, 22148, 22152, 22156, 22372, 22376, 22380, 22648, 22652, 22656, 22660, 22664, 22888, 22892, 22896, 23156, 23160, 23164, 23168, 23172, 23404, 23408, 23412, 23660, 23664, 23668, 23672, 23676, 23916, 23920, 23924, 24168, 24172, 24176, 24180, 24184, 24432, 24436, 24440, 24672, 24676, 24680, 24684, 24688, 24692, 24948, 24952, 24956, 25180, 25184, 25188, 25192, 25196, 25464, 25468, 25684, 25688, 25692, 25696, 25700, 25704, 25976, 25980, 25984, 26192, 26196, 26200, 26204, 26208, 26212, 26492, 26496, 26500, 26696, 26700, 26704, 26708, 26712, 26716, 27008, 27012, 27204, 27208, 27212, 27216, 27220, 27224, 27524, 27528)
         draw256($t4, 27712, 27716, 27720, 27724, 27728, 27732, 28040, 28044, 28224, 28228, 28232, 28236, 28240, 28552, 28556, 28740, 28744, 29068, 29072, 29584, 29588, 29768, 30100, 30612, 30616, 31128, 31132, 31312, 31644, 31828, 32160, 32344, 32672, 32676, 32856, 33188, 33372, 33704, 33888, 34220, 34400, 34404, 34916, 35248, 35432, 35764, 35944, 35948, 36272, 36276, 36460, 36464, 36776, 36780, 36784, 36788, 36792, 36976, 37284, 37288, 37292, 37296, 37300, 37304, 37308, 37488, 37492, 37792, 37796, 37800, 37804, 37808, 37812, 37816, 37820, 38004, 38008, 38300, 38304, 38308, 38312, 38316, 38320, 38324, 38328, 38520, 38524, 38804, 38808, 38812, 38816, 38820, 38824, 38828, 38832, 38836, 39032, 39036, 39040, 39312, 39316, 39320, 39324, 39328, 39332, 39336, 39340, 39548, 39552, 39820, 39824, 39828, 39832, 39836, 39840, 39844, 39848, 40064, 40068, 40324, 40328, 40332, 40336, 40340, 40344, 40348, 40352, 40576, 40580, 40584, 40832, 40836, 40840, 40844, 40848, 40852, 40856, 40860, 41092, 41096, 41100, 41340, 41344, 41348, 41352, 41356, 41360, 41364, 41608, 41612, 41844, 41848, 41852, 41856, 41860, 41864, 41868, 41872, 42120, 42124, 42128, 42352, 42356, 42360, 42364, 42368, 42372, 42376, 42636, 42640, 42644, 42860, 42864, 42868, 42872, 42876, 42880, 42884, 43152, 43156, 43160, 43368, 43372, 43376, 43380, 43384, 43388, 43664, 43668, 43672, 43872, 43876, 43880, 43884, 43888, 43892, 43896, 44180, 44184, 44188, 44380, 44384, 44388, 44392, 44396, 44400, 44696, 44700, 44704, 44888, 44892, 44896, 44900, 44904, 44908, 45208, 45212, 45216, 45220, 45392, 45396, 45400, 45404, 45408, 45412, 45724, 45728, 45732, 45900, 45904, 45908, 45912, 45916, 45920, 46240, 46244, 46248, 46408, 46412, 46416, 46420, 46424, 46752, 46756, 46760, 46764, 46912, 46916, 46920, 46924, 46928, 46932, 47268, 47272, 47276, 47280)
@@ -4695,10 +4599,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw64($t4, 50980, 51384, 51388, 51392, 51396, 51400, 51476, 51480, 51484, 51900, 51904, 51908, 51912, 51916, 51980, 51984, 51988, 51992, 52416, 52420, 52424, 52428, 52488, 52492, 52496, 52928, 52932, 52936, 52940, 52944, 52996, 53000, 53004, 53444, 53448, 53452, 53456, 53460, 53500, 53504, 53508, 53960, 53964, 53968, 53972, 53976, 54008, 54012, 54016, 54472, 54476, 54480, 54484, 54488, 54492, 54516, 54520, 54988, 54992, 54996, 55000, 55004, 55024, 55028)
         draw16($t4, 55504, 55508, 55512, 55516, 55520, 55528, 55532, 56016, 56020, 56024, 56028, 56032, 56036, 56040, 56532, 56536)
         draw4($t4, 56540, 56544, 57048, 57052)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_33
+        jnez($t4, draw_clear_33)
     draw_clear_34: # draw t4, sleep, draw 0
         draw256($t4, 6956, 6960, 6964, 7460, 7464, 7468, 7472, 7476, 7480, 7968, 7972, 7976, 7980, 7984, 7988, 7992, 8472, 8476, 8488, 8492, 8496, 8500, 8504, 8508, 8976, 8980, 8984, 9004, 9008, 9012, 9016, 9020, 9480, 9484, 9488, 9520, 9524, 9528, 9532, 9536, 9988, 9992, 10032, 10036, 10040, 10044, 10048, 10492, 10496, 10500, 10548, 10552, 10556, 10560, 10564, 10996, 11000, 11004, 11008, 11064, 11068, 11072, 11076, 11080, 11504, 11508, 11512, 11576, 11580, 11584, 11588, 11592, 12008, 12012, 12016, 12020, 12092, 12096, 12100, 12104, 12108, 12512, 12516, 12520, 12524, 12608, 12612, 12616, 12620, 13016, 13020, 13024, 13028, 13032, 13120, 13124, 13128, 13132, 13136, 13524, 13528, 13532, 13536, 13636, 13640, 13644, 13648, 14028, 14032, 14036, 14040, 14044, 14152, 14156, 14160, 14164, 14532, 14536, 14540, 14544, 14548, 14664, 14668, 14672, 14676, 14680, 15036, 15040, 15044, 15048, 15052, 15056, 15180, 15184, 15188, 15192, 15544, 15548, 15552, 15556, 15560, 15696, 15700, 15704, 15708, 16048, 16052, 16056, 16060, 16064, 16068, 16208, 16212, 16216, 16220, 16552, 16556, 16560, 16564, 16568, 16572, 16724, 16728, 16732, 16736, 17056, 17060, 17064, 17068, 17072, 17076, 17080, 17240, 17244, 17248, 17564, 17568, 17572, 17576, 17580, 17584, 17752, 17756, 17760, 17764, 18068, 18072, 18076, 18080, 18084, 18088, 18092, 18268, 18272, 18276, 18280, 18572, 18576, 18580, 18584, 18588, 18592, 18596, 18784, 18788, 18792, 19080, 19084, 19088, 19092, 19096, 19100, 19104, 19296, 19300, 19304, 19308, 19584, 19588, 19592, 19596, 19600, 19604, 19608, 19812, 19816, 19820, 20088, 20092, 20096, 20100, 20104, 20108, 20112, 20116, 20328, 20332, 20336, 20592, 20596, 20600, 20604, 20608, 20612, 20616, 20620, 20840, 20844, 20848, 20852, 21100, 21104, 21108, 21112, 21116, 21120)
         draw256($t4, 21124, 21128, 21356, 21360, 21364, 21604, 21608, 21612, 21616, 21620, 21624, 21628, 21632, 21872, 21876, 21880, 22108, 22112, 22116, 22120, 22124, 22128, 22132, 22136, 22140, 22384, 22388, 22392, 22612, 22616, 22620, 22624, 22628, 22632, 22636, 22640, 22644, 22900, 22904, 22908, 23120, 23124, 23128, 23132, 23136, 23140, 23144, 23148, 23152, 23416, 23420, 23624, 23628, 23632, 23636, 23640, 23644, 23648, 23652, 23656, 23928, 23932, 23936, 24128, 24132, 24136, 24140, 24144, 24148, 24152, 24156, 24160, 24164, 24444, 24448, 24452, 24632, 24636, 24640, 24644, 24648, 24652, 24656, 24660, 24664, 24668, 24960, 24964, 25140, 25144, 25148, 25152, 25156, 25160, 25164, 25168, 25172, 25176, 25472, 25476, 25480, 25652, 25656, 25660, 25664, 25668, 25672, 25676, 25680, 25988, 25992, 26164, 26168, 26172, 26176, 26180, 26184, 26188, 26504, 26508, 26680, 26684, 26688, 26692, 27016, 27020, 27192, 27196, 27200, 27532, 27536, 27708, 28048, 28052, 28560, 28564, 28736, 29076, 29080, 29252, 29592, 29764, 30104, 30108, 30280, 30620, 30792, 30796, 31136, 31308, 31648, 31652, 31824, 32164, 32336, 32340, 32680, 32852, 33192, 33364, 33368, 33708, 33880, 33884, 34224, 34396, 34736, 34908, 34912, 35252, 35424, 35428, 35936, 35940, 36280, 36452, 36456, 36964, 36968, 36972, 37480, 37484, 37824, 37996, 38000, 38332, 38336, 38508, 38512, 38516, 38840, 38844, 38848, 38852, 39024, 39028, 39344, 39348, 39352, 39356, 39360, 39364, 39536, 39540, 39544, 39852, 39856, 39860, 39864, 39868, 39872, 39876, 40052, 40056, 40060, 40356, 40360, 40364, 40368, 40372, 40376, 40380, 40384, 40564, 40568, 40572, 40864, 40868, 40872, 40876, 40880, 40884, 40888, 41080, 41084, 41088, 41368, 41372, 41376, 41380, 41384, 41388, 41392, 41596, 41600, 41604, 41876, 41880, 41884, 41888, 41892, 41896, 42108, 42112, 42116, 42380)
@@ -4709,20 +4610,14 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw16($t4, 56508, 56512, 56516, 56520, 56524, 56528, 57024, 57028, 57032, 57036, 57040, 57044, 57536, 57540, 57544, 57548)
         draw4($t4, 57552, 57556, 58052, 58056)
         sw $t4 58060($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_34
+        jnez($t4, draw_clear_34)
     draw_clear_35: # draw t4, sleep, draw 0
         draw256($t4, 5952, 5956, 5960, 6456, 6460, 6464, 6468, 6472, 6968, 6972, 6976, 6980, 6984, 6988, 7484, 7488, 7492, 7496, 7500, 7996, 8000, 8004, 8008, 8012, 8016, 8512, 8516, 8520, 8524, 8528, 9024, 9028, 9032, 9036, 9040, 9044, 9540, 9544, 9548, 9552, 9556, 9984, 10052, 10056, 10060, 10064, 10068, 10072, 10488, 10568, 10572, 10576, 10580, 10584, 10992, 11084, 11088, 11092, 11096, 11100, 11496, 11500, 11596, 11600, 11604, 11608, 11612, 12000, 12004, 12112, 12116, 12120, 12124, 12128, 12504, 12508, 12624, 12628, 12632, 12636, 12640, 13008, 13012, 13140, 13144, 13148, 13152, 13156, 13512, 13516, 13520, 13652, 13656, 13660, 13664, 13668, 14016, 14020, 14024, 14168, 14172, 14176, 14180, 14184, 14520, 14524, 14528, 14684, 14688, 14692, 14696, 15024, 15028, 15032, 15196, 15200, 15204, 15208, 15212, 15524, 15528, 15532, 15536, 15540, 15712, 15716, 15720, 15724, 16028, 16032, 16036, 16040, 16044, 16224, 16228, 16232, 16236, 16240, 16532, 16536, 16540, 16544, 16548, 16740, 16744, 16748, 16752, 17036, 17040, 17044, 17048, 17052, 17252, 17256, 17260, 17264, 17268, 17540, 17544, 17548, 17552, 17556, 17560, 17768, 17772, 17776, 17780, 18044, 18048, 18052, 18056, 18060, 18064, 18284, 18288, 18292, 18296, 18548, 18552, 18556, 18560, 18564, 18568, 18796, 18800, 18804, 18808, 19052, 19056, 19060, 19064, 19068, 19072, 19076, 19312, 19316, 19320, 19324, 19556, 19560, 19564, 19568, 19572, 19576, 19580, 19824, 19828, 19832, 19836, 20060, 20064, 20068, 20072, 20076, 20080, 20084, 20340, 20344, 20348, 20352, 20564, 20568, 20572, 20576, 20580, 20584, 20588, 20856, 20860, 20864, 21068, 21072, 21076, 21080, 21084, 21088, 21092, 21096, 21368, 21372, 21376, 21380, 21572, 21576, 21580, 21584, 21588, 21592, 21596, 21600, 21884, 21888, 21892, 22076, 22080, 22084)
         draw256($t4, 22088, 22092, 22096, 22100, 22104, 22396, 22400, 22404, 22580, 22584, 22588, 22592, 22596, 22600, 22604, 22608, 22912, 22916, 22920, 23084, 23088, 23092, 23096, 23100, 23104, 23108, 23112, 23116, 23424, 23428, 23432, 23596, 23600, 23604, 23608, 23612, 23616, 23620, 23940, 23944, 23948, 24108, 24112, 24116, 24120, 24124, 24456, 24460, 24624, 24628, 24968, 24972, 24976, 25136, 25484, 25488, 25996, 26000, 26004, 26512, 26516, 27024, 27028, 27032, 27540, 27544, 28056, 28060, 28220, 28568, 28572, 29084, 29088, 29248, 29596, 29600, 30112, 30116, 30276, 30624, 30628, 31140, 31144, 31304, 31656, 31820, 32168, 32172, 32332, 32684, 32848, 33196, 33200, 33360, 33712, 33876, 34228, 34388, 34392, 34740, 34904, 35256, 35416, 35420, 35768, 35932, 36284, 36444, 36448, 36796, 36960, 37312, 37472, 37476, 37988, 37992, 38340, 38500, 38504, 39016, 39020, 39368, 39528, 39532, 39880, 40044, 40048, 40388, 40392, 40396, 40556, 40560, 40892, 40896, 40900, 40904, 40908, 41072, 41076, 41396, 41400, 41404, 41408, 41412, 41416, 41420, 41424, 41584, 41588, 41592, 41900, 41904, 41908, 41912, 41916, 41920, 41924, 41928, 41932, 41936, 42100, 42104, 42408, 42412, 42416, 42420, 42424, 42428, 42432, 42436, 42440, 42444, 42448, 42612, 42616, 42620, 42912, 42916, 42920, 42924, 42928, 42932, 42936, 42940, 42944, 42948, 42952, 43128, 43132, 43416, 43420, 43424, 43428, 43432, 43436, 43440, 43444, 43448, 43452, 43456, 43640, 43644, 43648, 43920, 43924, 43928, 43932, 43936, 43940, 43944, 43948, 43952, 43956, 43960, 44152, 44156, 44160, 44428, 44432, 44436, 44440, 44444, 44448, 44452, 44456, 44460, 44464, 44668, 44672, 44676, 44932, 44936, 44940, 44944, 44948, 44952, 44956, 44960, 44964, 44968, 45180, 45184, 45188, 45192, 45436, 45440, 45444, 45448, 45452, 45456, 45460, 45464, 45468, 45472, 45696, 45700)
         draw256($t4, 45704, 45940, 45944, 45948, 45952, 45956, 45960, 45964, 45968, 45972, 45976, 46208, 46212, 46216, 46220, 46448, 46452, 46456, 46460, 46464, 46468, 46472, 46476, 46480, 46724, 46728, 46732, 46952, 46956, 46960, 46964, 46968, 46972, 46976, 46980, 46984, 47236, 47240, 47244, 47248, 47456, 47460, 47464, 47468, 47472, 47476, 47480, 47484, 47488, 47752, 47756, 47760, 47764, 47964, 47968, 47972, 47976, 47980, 47984, 47988, 47992, 48264, 48268, 48272, 48276, 48468, 48472, 48476, 48480, 48484, 48488, 48492, 48496, 48780, 48784, 48788, 48792, 48972, 48976, 48980, 48984, 48988, 48992, 48996, 49000, 49292, 49296, 49300, 49304, 49476, 49480, 49484, 49488, 49492, 49496, 49500, 49504, 49808, 49812, 49816, 49820, 49984, 49988, 49992, 49996, 50000, 50004, 50008, 50320, 50324, 50328, 50332, 50488, 50492, 50496, 50500, 50504, 50508, 50836, 50840, 50844, 50848, 50992, 50996, 51000, 51004, 51008, 51012, 51348, 51352, 51356, 51360, 51364, 51496, 51500, 51504, 51508, 51512, 51516, 51864, 51868, 51872, 51876, 52004, 52008, 52012, 52016, 52020, 52376, 52380, 52384, 52388, 52392, 52508, 52512, 52516, 52520, 52524, 52892, 52896, 52900, 52904, 53012, 53016, 53020, 53024, 53028, 53404, 53408, 53412, 53416, 53420, 53516, 53520, 53524, 53528, 53532, 53920, 53924, 53928, 53932, 54024, 54028, 54032, 54036, 54432, 54436, 54440, 54444, 54448, 54528, 54532, 54536, 54540, 54948, 54952, 54956, 54960, 54964, 55032, 55036, 55040, 55044, 55460, 55464, 55468, 55472, 55476, 55540, 55544, 55548, 55976, 55980, 55984, 55988, 55992, 56044, 56048, 56052, 56488, 56492, 56496, 56500, 56504, 56548, 56552, 56556, 57004, 57008, 57012, 57016, 57020, 57056, 57060, 57516, 57520, 57524, 57528, 57532, 57560, 57564, 58032, 58036, 58040, 58044, 58048, 58064, 58068, 58544, 58548, 58552, 58556, 58560, 58564, 58568, 58572)
         draw4($t4, 59060, 59064, 59068, 59072)
         draw4($t4, 59076, 59572, 59576, 59580)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_35
+        jnez($t4, draw_clear_35)
     draw_clear_36: # draw t4, sleep, draw 0
         draw256($t4, 4440, 4444, 4940, 4944, 4948, 4952, 4956, 5444, 5448, 5452, 5456, 5460, 5464, 5468, 5944, 5948, 5964, 5968, 5972, 5976, 5980, 5984, 6448, 6452, 6476, 6480, 6484, 6488, 6492, 6496, 6952, 6992, 6996, 7000, 7004, 7008, 7012, 7452, 7456, 7504, 7508, 7512, 7516, 7520, 7524, 7956, 7960, 7964, 8020, 8024, 8028, 8032, 8036, 8456, 8460, 8464, 8468, 8532, 8536, 8540, 8544, 8548, 8552, 8960, 8964, 8968, 8972, 9048, 9052, 9056, 9060, 9064, 9460, 9464, 9468, 9472, 9476, 9560, 9564, 9568, 9572, 9576, 9580, 9964, 9968, 9972, 9976, 9980, 10076, 10080, 10084, 10088, 10092, 10468, 10472, 10476, 10480, 10484, 10588, 10592, 10596, 10600, 10604, 10608, 10968, 10972, 10976, 10980, 10984, 10988, 11104, 11108, 11112, 11116, 11120, 11472, 11476, 11480, 11484, 11488, 11492, 11616, 11620, 11624, 11628, 11632, 11972, 11976, 11980, 11984, 11988, 11992, 11996, 12132, 12136, 12140, 12144, 12148, 12476, 12480, 12484, 12488, 12492, 12496, 12500, 12644, 12648, 12652, 12656, 12660, 12980, 12984, 12988, 12992, 12996, 13000, 13004, 13160, 13164, 13168, 13172, 13176, 13480, 13484, 13488, 13492, 13496, 13500, 13504, 13508, 13672, 13676, 13680, 13684, 13688, 13984, 13988, 13992, 13996, 14000, 14004, 14008, 14012, 14188, 14192, 14196, 14200, 14484, 14488, 14492, 14496, 14500, 14504, 14508, 14512, 14516, 14700, 14704, 14708, 14712, 14716, 14988, 14992, 14996, 15000, 15004, 15008, 15012, 15016, 15020, 15216, 15220, 15224, 15228, 15492, 15496, 15500, 15504, 15508, 15512, 15516, 15520, 15728, 15732, 15736, 15740, 15744, 15992, 15996, 16000, 16004, 16008, 16012, 16016, 16020, 16024, 16244, 16248, 16252, 16256, 16496, 16500, 16504, 16508, 16512, 16516, 16520, 16524, 16528, 16756, 16760, 16764, 16768, 16996, 17000, 17004)
         draw256($t4, 17008, 17012, 17016, 17020, 17024, 17028, 17032, 17272, 17276, 17280, 17284, 17500, 17504, 17508, 17512, 17516, 17520, 17524, 17528, 17532, 17536, 17784, 17788, 17792, 17796, 18000, 18004, 18008, 18012, 18016, 18020, 18024, 18028, 18032, 18036, 18040, 18300, 18304, 18308, 18312, 18504, 18508, 18512, 18516, 18520, 18524, 18528, 18532, 18536, 18540, 18544, 18812, 18816, 18820, 18824, 19008, 19012, 19016, 19020, 19024, 19028, 19032, 19036, 19040, 19044, 19048, 19328, 19332, 19336, 19340, 19508, 19512, 19516, 19520, 19524, 19528, 19532, 19536, 19540, 19544, 19548, 19552, 19840, 19844, 19848, 19852, 20012, 20016, 20020, 20024, 20028, 20032, 20036, 20040, 20044, 20048, 20052, 20056, 20356, 20360, 20364, 20512, 20516, 20520, 20524, 20528, 20532, 20536, 20540, 20544, 20548, 20552, 20556, 20560, 20868, 20872, 20876, 20880, 21024, 21028, 21032, 21036, 21040, 21044, 21048, 21052, 21056, 21060, 21064, 21384, 21388, 21392, 21540, 21544, 21548, 21552, 21556, 21560, 21564, 21568, 21896, 21900, 21904, 21908, 22052, 22056, 22060, 22064, 22068, 22072, 22408, 22412, 22416, 22420, 22564, 22568, 22572, 22576, 22924, 22928, 22932, 23080, 23436, 23440, 23444, 23448, 23592, 23952, 23956, 23960, 24464, 24468, 24472, 24476, 24620, 24980, 24984, 24988, 25132, 25492, 25496, 25500, 25504, 25648, 26008, 26012, 26016, 26160, 26520, 26524, 26528, 26676, 27036, 27040, 27044, 27188, 27548, 27552, 27556, 27704, 28064, 28068, 28072, 28216, 28576, 28580, 28584, 28728, 28732, 29092, 29096, 29244, 29604, 29608, 29612, 29756, 29760, 30120, 30124, 30272, 30632, 30636, 30640, 30784, 30788, 31148, 31152, 31296, 31300, 31660, 31664, 31668, 31812, 31816, 32176, 32180, 32324, 32328, 32688, 32692, 32840, 32844, 33204, 33208, 33352, 33356, 33716, 33720, 33864, 33868, 33872, 34232, 34236, 34380, 34384, 34744)
@@ -4734,10 +4629,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw16($t4, 59564, 59568, 59584, 59588, 60064, 60068, 60072, 60076, 60080, 60084, 60088, 60576, 60580, 60584, 60588, 60592)
         sw $t4 61088($v1)
         sw $t4 61092($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_36
+        jnez($t4, draw_clear_36)
     draw_clear_37: # draw t4, sleep, draw 0
         draw1024($t4, 3432, 3436, 3440, 3932, 3936, 3940, 3944, 3948, 3952, 4432, 4436, 4448, 4452, 4456, 4460, 4464, 4468, 4932, 4936, 4960, 4964, 4968, 4972, 4976, 4980, 5432, 5436, 5440, 5472, 5476, 5480, 5484, 5488, 5492, 5936, 5940, 5988, 5992, 5996, 6000, 6004, 6008, 6436, 6440, 6444, 6500, 6504, 6508, 6512, 6516, 6520, 6936, 6940, 6944, 6948, 7016, 7020, 7024, 7028, 7032, 7436, 7440, 7444, 7448, 7528, 7532, 7536, 7540, 7544, 7548, 7936, 7940, 7944, 7948, 7952, 8040, 8044, 8048, 8052, 8056, 8060, 8436, 8440, 8444, 8448, 8452, 8556, 8560, 8564, 8568, 8572, 8936, 8940, 8944, 8948, 8952, 8956, 9068, 9072, 9076, 9080, 9084, 9088, 9436, 9440, 9444, 9448, 9452, 9456, 9584, 9588, 9592, 9596, 9600, 9936, 9940, 9944, 9948, 9952, 9956, 9960, 10096, 10100, 10104, 10108, 10112, 10436, 10440, 10444, 10448, 10452, 10456, 10460, 10464, 10612, 10616, 10620, 10624, 10628, 10936, 10940, 10944, 10948, 10952, 10956, 10960, 10964, 11124, 11128, 11132, 11136, 11140, 11436, 11440, 11444, 11448, 11452, 11456, 11460, 11464, 11468, 11636, 11640, 11644, 11648, 11652, 11936, 11940, 11944, 11948, 11952, 11956, 11960, 11964, 11968, 12152, 12156, 12160, 12164, 12168, 12436, 12440, 12444, 12448, 12452, 12456, 12460, 12464, 12468, 12472, 12664, 12668, 12672, 12676, 12680, 12936, 12940, 12944, 12948, 12952, 12956, 12960, 12964, 12968, 12972, 12976, 13180, 13184, 13188, 13192, 13196, 13436, 13440, 13444, 13448, 13452, 13456, 13460, 13464, 13468, 13472, 13476, 13692, 13696, 13700, 13704, 13708, 13936, 13940, 13944, 13948, 13952, 13956, 13960, 13964, 13968, 13972, 13976, 13980, 14204, 14208, 14212, 14216, 14220, 14436, 14440, 14444, 14448, 14452, 14456, 14460, 14464, 14468, 14472, 14476, 14480, 14720, 14724, 14728, 14732, 14736, 14940, 14944, 14948, 14952, 14956, 14960, 14964, 14968, 14972, 14976, 14980, 14984, 15232, 15236, 15240, 15244, 15248, 15440, 15444, 15448, 15452, 15456, 15460, 15464, 15468, 15472, 15476, 15480, 15484, 15488, 15748, 15752, 15756, 15760, 15940, 15944, 15948, 15952, 15956, 15960, 15964, 15968, 15972, 15976, 15980, 15984, 15988, 16260, 16264, 16268, 16272, 16276, 16440, 16444, 16448, 16452, 16456, 16460, 16464, 16468, 16472, 16476, 16480, 16484, 16488, 16492, 16772, 16776, 16780, 16784, 16788, 16940, 16944, 16948, 16952, 16956, 16960, 16964, 16968, 16972, 16976, 16980, 16984, 16988, 16992, 17288, 17292, 17296, 17300, 17440, 17444, 17448, 17452, 17456, 17460, 17464, 17468, 17472, 17476, 17480, 17484, 17488, 17492, 17496, 17800, 17804, 17808, 17812, 17816, 17944, 17948, 17952, 17956, 17960, 17964, 17968, 17972, 17976, 17980, 17984, 17988, 17992, 17996, 18316, 18320, 18324, 18328, 18456, 18460, 18464, 18468, 18472, 18476, 18480, 18484, 18488, 18492, 18496, 18500, 18828, 18832, 18836, 18840, 18968, 18972, 18976, 18980, 18984, 18988, 18992, 18996, 19000, 19004, 19344, 19348, 19352, 19356, 19484, 19488, 19492, 19496, 19500, 19504, 19856, 19860, 19864, 19868, 19996, 20000, 20004, 20008, 20368, 20372, 20376, 20380, 20508, 20884, 20888, 20892, 20896, 21396, 21400, 21404, 21408, 21536, 21912, 21916, 21920, 22048, 22424, 22428, 22432, 22436, 22936, 22940, 22944, 22948, 23076, 23452, 23456, 23460, 23588, 23964, 23968, 23972, 23976, 24104, 24480, 24484, 24488, 24616, 24992, 24996, 25000, 25128, 25508, 25512, 25516, 25644, 26020, 26024, 26028, 26156, 26532, 26536, 26540, 26672, 27048, 27052, 27056, 27184, 27560, 27564, 27568, 27696, 27700, 28076, 28080, 28212, 28588, 28592, 28596, 28724, 29100, 29104, 29108, 29236, 29240, 29616, 29620, 29752, 30128, 30132, 30136, 30264, 30268, 30644, 30648, 30776, 30780, 31156, 31160, 31292, 31672, 31676, 31804, 31808, 32184, 32188, 32316, 32320, 32696, 32700, 32832, 32836, 33212, 33216, 33344, 33348, 33724, 33728, 33856, 33860, 34240, 34372, 34376, 34752, 34756, 34884, 34888, 35264, 35268, 35396, 35400, 35404, 35780, 35912, 35916, 36292, 36296, 36424, 36428, 36432, 36808, 36936, 36940, 36944, 37320, 37452, 37456, 37832, 37836, 37964, 37968, 37972, 38348, 38476, 38480, 38484, 38860, 38992, 38996, 39000, 39376, 39504, 39508, 39512, 39888, 40016, 40020, 40024, 40404, 40532, 40536, 40540, 40916, 41044, 41048, 41052, 41428, 41556, 41560, 41564, 41568, 41944, 42072, 42076, 42080, 42456, 42584, 42588, 42592, 42596, 43096, 43100, 43104, 43108, 43484, 43612, 43616, 43620, 43996, 44124, 44128, 44132, 44136, 44636, 44640, 44644, 44648, 45024, 45152, 45156, 45160, 45164, 45524, 45528, 45532, 45536, 45664, 45668, 45672, 45676, 46028, 46032, 46036, 46040, 46044, 46048, 46176, 46180, 46184, 46188, 46528, 46532, 46536, 46540, 46544, 46548, 46552, 46556, 46560, 46564, 46692, 46696, 46700, 46704, 47032, 47036, 47040, 47044, 47048, 47052, 47056, 47060, 47064, 47068, 47072, 47076, 47204, 47208, 47212, 47216, 47536, 47540, 47544, 47548, 47552, 47556, 47560, 47564, 47568, 47572, 47576, 47580, 47584, 47588, 47716, 47720, 47724, 47728, 47732, 48036, 48040, 48044, 48048, 48052, 48056, 48060, 48064, 48068, 48072, 48076, 48080, 48084, 48088, 48092, 48232, 48236, 48240, 48244, 48540, 48544, 48548, 48552, 48556, 48560, 48564, 48568, 48572, 48576, 48580, 48584, 48588, 48592, 48744, 48748, 48752, 48756, 48760, 49040, 49044, 49048, 49052, 49056, 49060, 49064, 49068, 49072, 49076, 49080, 49084, 49088, 49092, 49256, 49260, 49264, 49268, 49272, 49544, 49548, 49552, 49556, 49560, 49564, 49568, 49572, 49576, 49580, 49584, 49588, 49592, 49772, 49776, 49780, 49784, 50044, 50048, 50052, 50056, 50060, 50064, 50068, 50072, 50076, 50080, 50084, 50088, 50092, 50284, 50288, 50292, 50296, 50300, 50548, 50552, 50556, 50560, 50564, 50568, 50572, 50576, 50580, 50584, 50588, 50592, 50796, 50800, 50804, 50808, 50812, 51052, 51056, 51060, 51064, 51068, 51072, 51076, 51080, 51084, 51088, 51092, 51096, 51312, 51316, 51320, 51324, 51328, 51552, 51556, 51560, 51564, 51568, 51572, 51576, 51580, 51584, 51588, 51592, 51596, 51824, 51828, 51832, 51836, 51840, 52056, 52060, 52064, 52068, 52072, 52076, 52080, 52084, 52088, 52092, 52096, 52336, 52340, 52344, 52348, 52352, 52556, 52560, 52564, 52568, 52572, 52576, 52580, 52584, 52588, 52592, 52596, 52852, 52856, 52860, 52864, 52868, 53060, 53064, 53068, 53072, 53076, 53080, 53084, 53088, 53092, 53096, 53364, 53368, 53372, 53376, 53380, 53564, 53568, 53572, 53576, 53580, 53584, 53588, 53592, 53596, 53880, 53884, 53888, 53892, 53896, 54064, 54068, 54072, 54076, 54080, 54084, 54088, 54092, 54096, 54392, 54396, 54400, 54404, 54408, 54568, 54572, 54576, 54580, 54584, 54588, 54592, 54596, 54904, 54908, 54912, 54916, 54920, 55068, 55072, 55076, 55080, 55084, 55088, 55092, 55096, 55420, 55424, 55428, 55432, 55436, 55572, 55576, 55580, 55584, 55588, 55592, 55596, 55932, 55936, 55940, 55944, 55948, 56076, 56080, 56084, 56088, 56092, 56096, 56444, 56448, 56452, 56456, 56460, 56464, 56576, 56580, 56584, 56588, 56592, 56596, 56960, 56964, 56968, 56972, 56976, 57080, 57084, 57088, 57092, 57096, 57472, 57476, 57480, 57484, 57488, 57492, 57580, 57584, 57588, 57592, 57596, 57984, 57988, 57992, 57996, 58000, 58004, 58084, 58088, 58092, 58096, 58500, 58504, 58508, 58512, 58516, 58584, 58588, 58592, 58596, 59012, 59016, 59020, 59024, 59028, 59032, 59088)
         draw16($t4, 59092, 59096, 59524, 59528, 59532, 59536, 59540, 59544, 59592, 59596, 60040, 60044, 60048, 60052, 60056, 60060)
@@ -4745,10 +4637,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw4($t4, 61084, 61096, 61100, 61580)
         draw4($t4, 61584, 61588, 61592, 61596)
         draw4($t4, 61600, 62092, 62096, 62100)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_37
+        jnez($t4, draw_clear_37)
     draw_clear_38: # draw t4, sleep, draw 0
         draw1024($t4, 2436, 2440, 2932, 2936, 2940, 2944, 2948, 2952, 3428, 3444, 3448, 3452, 3456, 3460, 3464, 3928, 3956, 3960, 3964, 3968, 3972, 3976, 3980, 4424, 4428, 4472, 4476, 4480, 4484, 4488, 4492, 4920, 4924, 4928, 4984, 4988, 4992, 4996, 5000, 5004, 5416, 5420, 5424, 5428, 5496, 5500, 5504, 5508, 5512, 5516, 5916, 5920, 5924, 5928, 5932, 6012, 6016, 6020, 6024, 6028, 6032, 6412, 6416, 6420, 6424, 6428, 6432, 6524, 6528, 6532, 6536, 6540, 6544, 6908, 6912, 6916, 6920, 6924, 6928, 6932, 7036, 7040, 7044, 7048, 7052, 7056, 7404, 7408, 7412, 7416, 7420, 7424, 7428, 7432, 7552, 7556, 7560, 7564, 7568, 7904, 7908, 7912, 7916, 7920, 7924, 7928, 7932, 8064, 8068, 8072, 8076, 8080, 8084, 8400, 8404, 8408, 8412, 8416, 8420, 8424, 8428, 8432, 8576, 8580, 8584, 8588, 8592, 8596, 8896, 8900, 8904, 8908, 8912, 8916, 8920, 8924, 8928, 8932, 9092, 9096, 9100, 9104, 9108, 9392, 9396, 9400, 9404, 9408, 9412, 9416, 9420, 9424, 9428, 9432, 9604, 9608, 9612, 9616, 9620, 9624, 9892, 9896, 9900, 9904, 9908, 9912, 9916, 9920, 9924, 9928, 9932, 10116, 10120, 10124, 10128, 10132, 10136, 10388, 10392, 10396, 10400, 10404, 10408, 10412, 10416, 10420, 10424, 10428, 10432, 10632, 10636, 10640, 10644, 10648, 10884, 10888, 10892, 10896, 10900, 10904, 10908, 10912, 10916, 10920, 10924, 10928, 10932, 11144, 11148, 11152, 11156, 11160, 11384, 11388, 11392, 11396, 11400, 11404, 11408, 11412, 11416, 11420, 11424, 11428, 11432, 11656, 11660, 11664, 11668, 11672, 11676, 11880, 11884, 11888, 11892, 11896, 11900, 11904, 11908, 11912, 11916, 11920, 11924, 11928, 11932, 12172, 12176, 12180, 12184, 12188, 12376, 12380, 12384, 12388, 12392, 12396, 12400, 12404, 12408, 12412, 12416, 12420, 12424, 12428, 12432, 12684, 12688, 12692, 12696, 12700, 12872, 12876, 12880, 12884, 12888, 12892, 12896, 12900, 12904, 12908, 12912, 12916, 12920, 12924, 12928, 12932, 13200, 13204, 13208, 13212, 13372, 13376, 13380, 13384, 13388, 13392, 13396, 13400, 13404, 13408, 13412, 13416, 13420, 13424, 13428, 13432, 13712, 13716, 13720, 13724, 13728, 13868, 13872, 13876, 13880, 13884, 13888, 13892, 13896, 13900, 13904, 13908, 13912, 13916, 13920, 13924, 13928, 13932, 14224, 14228, 14232, 14236, 14240, 14364, 14368, 14372, 14376, 14380, 14384, 14388, 14392, 14396, 14400, 14404, 14408, 14412, 14416, 14420, 14424, 14428, 14432, 14740, 14744, 14748, 14752, 14864, 14868, 14872, 14876, 14880, 14884, 14888, 14892, 14896, 14900, 14904, 14908, 14912, 14916, 14920, 14924, 14928, 14932, 14936, 15252, 15256, 15260, 15264, 15376, 15380, 15384, 15388, 15392, 15396, 15400, 15404, 15408, 15412, 15416, 15420, 15424, 15428, 15432, 15436, 15764, 15768, 15772, 15776, 15780, 15892, 15896, 15900, 15904, 15908, 15912, 15916, 15920, 15924, 15928, 15932, 15936, 16280, 16284, 16288, 16292, 16404, 16408, 16412, 16416, 16420, 16424, 16428, 16432, 16436, 16792, 16796, 16800, 16804, 16916, 16920, 16924, 16928, 16932, 16936, 17304, 17308, 17312, 17316, 17320, 17428, 17432, 17436, 17820, 17824, 17828, 17832, 18332, 18336, 18340, 18344, 18844, 18848, 18852, 18856, 19360, 19364, 19368, 19372, 19480, 19872, 19876, 19880, 19884, 20384, 20388, 20392, 20396, 20900, 20904, 20908, 21020, 21412, 21416, 21420, 21424, 21924, 21928, 21932, 21936, 22440, 22444, 22448, 22560, 22952, 22956, 22960, 22964, 23072, 23464, 23468, 23472, 23476, 23980, 23984, 23988, 24100, 24492, 24496, 24500, 24612, 25004, 25008, 25012, 25016, 25124, 25520, 25524, 25528, 25640, 26032, 26036, 26040, 26152, 26544, 26548, 26552, 26664, 26668, 27060, 27064, 27068, 27176, 27180, 27572, 27576, 27580, 27692, 28084, 28088, 28092, 28204, 28208, 28600, 28604, 28716, 28720, 29112, 29116, 29120, 29232, 29624, 29628, 29632, 29744, 29748, 30140, 30144, 30256, 30260, 30652, 30656, 30660, 30768, 30772, 31164, 31168, 31172, 31284, 31288, 31680, 31684, 31796, 31800, 32192, 32196, 32308, 32312, 32704, 32708, 32712, 32820, 32824, 32828, 33220, 33224, 33336, 33340, 33732, 33736, 33848, 33852, 34244, 34248, 34360, 34364, 34368, 34760, 34764, 34872, 34876, 34880, 35272, 35276, 35388, 35392, 35784, 35788, 35900, 35904, 35908, 36300, 36412, 36416, 36420, 36812, 36816, 36928, 36932, 37324, 37328, 37440, 37444, 37448, 37840, 37952, 37956, 37960, 38352, 38356, 38464, 38468, 38472, 38864, 38868, 38980, 38984, 38988, 39380, 39492, 39496, 39500, 39892, 40004, 40008, 40012, 40408, 40516, 40520, 40524, 40528, 40920, 41032, 41036, 41040, 41432, 41544, 41548, 41552, 42056, 42060, 42064, 42068, 42460, 42568, 42572, 42576, 42580, 42972, 43084, 43088, 43092, 43596, 43600, 43604, 43608, 44108, 44112, 44116, 44120, 44512, 44624, 44628, 44632, 45136, 45140, 45144, 45148, 45648, 45652, 45656, 45660, 46052, 46160, 46164, 46168, 46172, 46676, 46680, 46684, 46688, 47188, 47192, 47196, 47200, 47700, 47704, 47708, 47712, 48096, 48100, 48104, 48212, 48216, 48220, 48224, 48228, 48596, 48600, 48604, 48608, 48612, 48616, 48728, 48732, 48736, 48740, 49096, 49100, 49104, 49108, 49112, 49116, 49120, 49124, 49128, 49240, 49244, 49248, 49252, 49596, 49600, 49604, 49608, 49612, 49616, 49620, 49624, 49628, 49632, 49636, 49640, 49752, 49756, 49760, 49764, 49768, 50096, 50100, 50104, 50108, 50112, 50116, 50120, 50124, 50128, 50132, 50136, 50140, 50144, 50148, 50152, 50156, 50268, 50272, 50276, 50280, 50596, 50600, 50604, 50608, 50612, 50616, 50620, 50624, 50628, 50632, 50636, 50640, 50644, 50648, 50652, 50656, 50660, 50664, 50668, 50780, 50784, 50788, 50792, 51100, 51104, 51108, 51112, 51116, 51120, 51124, 51128, 51132, 51136, 51140, 51144, 51148, 51152, 51156, 51160, 51164, 51168, 51292, 51296, 51300, 51304, 51308, 51600, 51604, 51608, 51612, 51616, 51620, 51624, 51628, 51632, 51636, 51640, 51644, 51648, 51652, 51656, 51660, 51664, 51804, 51808, 51812, 51816, 51820, 52100, 52104, 52108, 52112, 52116, 52120, 52124, 52128, 52132, 52136, 52140, 52144, 52148, 52152, 52156, 52160, 52320, 52324, 52328, 52332, 52600, 52604, 52608, 52612, 52616, 52620, 52624, 52628, 52632, 52636, 52640, 52644, 52648, 52652, 52656, 52660, 52832, 52836, 52840, 52844, 52848, 53100, 53104, 53108, 53112, 53116, 53120, 53124, 53128, 53132, 53136, 53140, 53144, 53148, 53152, 53156, 53344, 53348, 53352, 53356, 53360, 53600, 53604, 53608, 53612, 53616, 53620, 53624, 53628, 53632, 53636, 53640, 53644, 53648, 53652, 53856, 53860, 53864, 53868, 53872, 53876, 54100, 54104, 54108, 54112, 54116, 54120, 54124, 54128, 54132, 54136, 54140, 54144, 54148, 54372, 54376, 54380, 54384, 54388, 54600, 54604, 54608, 54612, 54616, 54620, 54624, 54628, 54632, 54636, 54640, 54644, 54648, 54884, 54888, 54892, 54896, 54900, 55100, 55104, 55108, 55112, 55116, 55120, 55124, 55128, 55132, 55136, 55140, 55144, 55396, 55400, 55404, 55408, 55412, 55416, 55600, 55604, 55608, 55612, 55616, 55620, 55624, 55628, 55632, 55636, 55640, 55908, 55912, 55916, 55920, 55924, 55928, 56100, 56104, 56108, 56112, 56116, 56120, 56124, 56128, 56132, 56136, 56140, 56424, 56428, 56432, 56436, 56440, 56600, 56604, 56608, 56612, 56616, 56620, 56624, 56628, 56632, 56636, 56936, 56940, 56944, 56948, 56952, 56956, 57100, 57104, 57108, 57112, 57116, 57120)
         draw64($t4, 57124, 57128, 57132, 57448, 57452, 57456, 57460, 57464, 57468, 57600, 57604, 57608, 57612, 57616, 57620, 57624, 57628, 57964, 57968, 57972, 57976, 57980, 58100, 58104, 58108, 58112, 58116, 58120, 58124, 58128, 58476, 58480, 58484, 58488, 58492, 58496, 58600, 58604, 58608, 58612, 58616, 58620, 58624, 58988, 58992, 58996, 59000, 59004, 59008, 59100, 59104, 59108, 59112, 59116, 59120, 59500, 59504, 59508, 59512, 59516, 59520, 59600, 59604, 59608)
@@ -4756,10 +4645,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw16($t4, 60544, 60548, 60604, 60608, 60612, 61040, 61044, 61048, 61052, 61056, 61060, 61104, 61108, 61552, 61556, 61560)
         draw16($t4, 61564, 61568, 61572, 61576, 61604, 62068, 62072, 62076, 62080, 62084, 62088, 62104, 62580, 62584, 62588, 62592)
         draw4($t4, 62596, 62600, 63092, 63096)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_38
+        jnez($t4, draw_clear_38)
     draw_clear_39: # draw t4, sleep, draw 0
         draw1024($t4, 1428, 1432, 1436, 1440, 1920, 1924, 1928, 1932, 1936, 1940, 1944, 1948, 1952, 2412, 2416, 2420, 2424, 2428, 2432, 2444, 2448, 2452, 2456, 2460, 2464, 2904, 2908, 2912, 2916, 2920, 2924, 2928, 2956, 2960, 2964, 2968, 2972, 2976, 3396, 3400, 3404, 3408, 3412, 3416, 3420, 3424, 3468, 3472, 3476, 3480, 3484, 3488, 3492, 3888, 3892, 3896, 3900, 3904, 3908, 3912, 3916, 3920, 3924, 3984, 3988, 3992, 3996, 4000, 4004, 4380, 4384, 4388, 4392, 4396, 4400, 4404, 4408, 4412, 4416, 4420, 4496, 4500, 4504, 4508, 4512, 4516, 4872, 4876, 4880, 4884, 4888, 4892, 4896, 4900, 4904, 4908, 4912, 4916, 5008, 5012, 5016, 5020, 5024, 5028, 5364, 5368, 5372, 5376, 5380, 5384, 5388, 5392, 5396, 5400, 5404, 5408, 5412, 5520, 5524, 5528, 5532, 5536, 5540, 5856, 5860, 5864, 5868, 5872, 5876, 5880, 5884, 5888, 5892, 5896, 5900, 5904, 5908, 5912, 6036, 6040, 6044, 6048, 6052, 6056, 6348, 6352, 6356, 6360, 6364, 6368, 6372, 6376, 6380, 6384, 6388, 6392, 6396, 6400, 6404, 6408, 6548, 6552, 6556, 6560, 6564, 6568, 6840, 6844, 6848, 6852, 6856, 6860, 6864, 6868, 6872, 6876, 6880, 6884, 6888, 6892, 6896, 6900, 6904, 7060, 7064, 7068, 7072, 7076, 7080, 7332, 7336, 7340, 7344, 7348, 7352, 7356, 7360, 7364, 7368, 7372, 7376, 7380, 7384, 7388, 7392, 7396, 7400, 7572, 7576, 7580, 7584, 7588, 7592, 7824, 7828, 7832, 7836, 7840, 7844, 7848, 7852, 7856, 7860, 7864, 7868, 7872, 7876, 7880, 7884, 7888, 7892, 7896, 7900, 8088, 8092, 8096, 8100, 8104, 8316, 8320, 8324, 8328, 8332, 8336, 8340, 8344, 8348, 8352, 8356, 8360, 8364, 8368, 8372, 8376, 8380, 8384, 8388, 8392, 8396, 8600, 8604, 8608, 8612, 8616, 8620, 8808, 8812, 8816, 8820, 8824, 8828, 8832, 8836, 8840, 8844, 8848, 8852, 8856, 8860, 8864, 8868, 8872, 8876, 8880, 8884, 8888, 8892, 9112, 9116, 9120, 9124, 9128, 9132, 9300, 9304, 9308, 9312, 9316, 9320, 9324, 9328, 9332, 9336, 9340, 9344, 9348, 9352, 9356, 9360, 9364, 9368, 9372, 9376, 9380, 9384, 9388, 9628, 9632, 9636, 9640, 9644, 9792, 9796, 9800, 9804, 9808, 9812, 9816, 9820, 9824, 9828, 9832, 9836, 9840, 9844, 9848, 9852, 9856, 9860, 9864, 9868, 9872, 9876, 9880, 9884, 9888, 10140, 10144, 10148, 10152, 10156, 10284, 10288, 10292, 10296, 10300, 10304, 10308, 10312, 10316, 10320, 10324, 10328, 10332, 10336, 10340, 10344, 10348, 10352, 10356, 10360, 10364, 10368, 10372, 10376, 10380, 10384, 10652, 10656, 10660, 10664, 10668, 10776, 10780, 10784, 10788, 10792, 10796, 10800, 10804, 10808, 10812, 10816, 10820, 10824, 10828, 10832, 10836, 10840, 10844, 10848, 10852, 10856, 10860, 10864, 10868, 10872, 10876, 10880, 11164, 11168, 11172, 11176, 11180, 11184, 11272, 11276, 11280, 11284, 11288, 11292, 11296, 11300, 11304, 11308, 11312, 11316, 11320, 11324, 11328, 11332, 11336, 11340, 11344, 11348, 11352, 11356, 11360, 11364, 11368, 11372, 11376, 11380, 11680, 11684, 11688, 11692, 11696, 11784, 11788, 11792, 11796, 11800, 11804, 11808, 11812, 11816, 11820, 11824, 11828, 11832, 11836, 11840, 11844, 11848, 11852, 11856, 11860, 11864, 11868, 11872, 11876, 12192, 12196, 12200, 12204, 12208, 12296, 12300, 12304, 12308, 12312, 12316, 12320, 12324, 12328, 12332, 12336, 12340, 12344, 12348, 12352, 12356, 12360, 12364, 12368, 12372, 12704, 12708, 12712, 12716, 12720, 12808, 12812, 12816, 12820, 12824, 12828, 12832, 12836, 12840, 12844, 12848, 12852, 12856, 12860, 12864, 12868, 13216, 13220, 13224, 13228, 13232, 13324, 13328, 13332, 13336, 13340, 13344, 13348, 13352, 13356, 13360, 13364, 13368, 13732, 13736, 13740, 13744, 13748, 13836, 13840, 13844, 13848, 13852, 13856, 13860, 13864, 14244, 14248, 14252, 14256, 14260, 14348, 14352, 14356, 14360, 14756, 14760, 14764, 14768, 14772, 14860, 15268, 15272, 15276, 15280, 15284, 15372, 15784, 15788, 15792, 15796, 15888, 16296, 16300, 16304, 16308, 16312, 16400, 16808, 16812, 16816, 16820, 16824, 16912, 17324, 17328, 17332, 17336, 17424, 17836, 17840, 17844, 17848, 17936, 17940, 18348, 18352, 18356, 18360, 18452, 18860, 18864, 18868, 18872, 18876, 18964, 19376, 19380, 19384, 19388, 19476, 19888, 19892, 19896, 19900, 19988, 19992, 20400, 20404, 20408, 20412, 20500, 20504, 20912, 20916, 20920, 20924, 21016, 21428, 21432, 21436, 21440, 21528, 21532, 21940, 21944, 21948, 21952, 22040, 22044, 22452, 22456, 22460, 22464, 22552, 22556, 22968, 22972, 22976, 23064, 23068, 23480, 23484, 23488, 23580, 23584, 23992, 23996, 24000, 24004, 24092, 24096, 24504, 24508, 24512, 24516, 24604, 24608, 25020, 25024, 25028, 25116, 25120, 25532, 25536, 25540, 25628, 25632, 25636, 26044, 26048, 26052, 26144, 26148, 26556, 26560, 26564, 26568, 26656, 26660, 27072, 27076, 27080, 27168, 27172, 27584, 27588, 27592, 27680, 27684, 27688, 28096, 28100, 28104, 28192, 28196, 28200, 28608, 28612, 28616, 28708, 28712, 29124, 29128, 29132, 29220, 29224, 29228, 29636, 29640, 29644, 29732, 29736, 29740, 30148, 30152, 30156, 30244, 30248, 30252, 30664, 30668, 30756, 30760, 30764, 31176, 31180, 31272, 31276, 31280, 31688, 31692, 31696, 31784, 31788, 31792, 32200, 32204, 32208, 32296, 32300, 32304, 32716, 32720, 32808, 32812, 32816, 33228, 33232, 33320, 33324, 33328, 33332, 33740, 33744, 33836, 33840, 33844, 34252, 34256, 34260, 34348, 34352, 34356, 34768, 34772, 34860, 34864, 34868, 35280, 35284, 35372, 35376, 35380, 35384, 35792, 35796, 35884, 35888, 35892, 35896, 36304, 36308, 36400, 36404, 36408, 36820, 36824, 36912, 36916, 36920, 36924, 37332, 37336, 37424, 37428, 37432, 37436, 37844, 37848, 37936, 37940, 37944, 37948, 38360, 38448, 38452, 38456, 38460, 38872, 38964, 38968, 38972, 38976, 39384, 39388, 39476, 39480, 39484, 39488, 39896, 39900, 39988, 39992, 39996, 40000, 40412, 40500, 40504, 40508, 40512, 40924, 41012, 41016, 41020, 41024, 41028, 41436, 41528, 41532, 41536, 41540, 41948, 41952, 42040, 42044, 42048, 42052, 42464, 42552, 42556, 42560, 42564, 42976, 43064, 43068, 43072, 43076, 43080, 43488, 43576, 43580, 43584, 43588, 43592, 44000, 44092, 44096, 44100, 44104, 44516, 44604, 44608, 44612, 44616, 44620, 45028, 45116, 45120, 45124, 45128, 45132, 45540, 45628, 45632, 45636, 45640, 45644, 46140, 46144, 46148, 46152, 46156, 46656, 46660, 46664, 46668, 46672, 47080, 47168, 47172, 47176, 47180, 47184, 47592, 47680, 47684, 47688, 47692, 47696, 48192, 48196, 48200, 48204, 48208, 48704, 48708, 48712, 48716, 48720, 48724, 49220, 49224, 49228, 49232, 49236, 49644, 49732, 49736, 49740, 49744, 49748, 50244, 50248, 50252, 50256, 50260, 50264, 50756, 50760, 50764, 50768, 50772, 50776, 51172, 51176, 51180, 51268, 51272, 51276, 51280, 51284, 51288, 51668, 51672, 51676, 51680, 51684, 51688, 51692, 51784, 51788, 51792, 51796, 51800, 52164, 52168, 52172, 52176, 52180, 52184, 52188, 52192, 52196, 52200, 52204, 52208, 52296, 52300, 52304, 52308, 52312, 52316, 52664, 52668, 52672, 52676, 52680, 52684, 52688, 52692, 52696, 52700, 52704, 52708, 52712, 52716, 52720, 52808, 52812, 52816, 52820, 52824, 52828, 53160, 53164, 53168, 53172, 53176, 53180, 53184, 53188)
         draw256($t4, 53192, 53196, 53200, 53204, 53208, 53212, 53216, 53220, 53224, 53228, 53232, 53320, 53324, 53328, 53332, 53336, 53340, 53656, 53660, 53664, 53668, 53672, 53676, 53680, 53684, 53688, 53692, 53696, 53700, 53704, 53708, 53712, 53716, 53720, 53724, 53728, 53732, 53736, 53740, 53744, 53832, 53836, 53840, 53844, 53848, 53852, 54152, 54156, 54160, 54164, 54168, 54172, 54176, 54180, 54184, 54188, 54192, 54196, 54200, 54204, 54208, 54212, 54216, 54220, 54224, 54228, 54232, 54236, 54240, 54348, 54352, 54356, 54360, 54364, 54368, 54652, 54656, 54660, 54664, 54668, 54672, 54676, 54680, 54684, 54688, 54692, 54696, 54700, 54704, 54708, 54712, 54716, 54720, 54724, 54728, 54732, 54860, 54864, 54868, 54872, 54876, 54880, 55148, 55152, 55156, 55160, 55164, 55168, 55172, 55176, 55180, 55184, 55188, 55192, 55196, 55200, 55204, 55208, 55212, 55216, 55220, 55224, 55372, 55376, 55380, 55384, 55388, 55392, 55644, 55648, 55652, 55656, 55660, 55664, 55668, 55672, 55676, 55680, 55684, 55688, 55692, 55696, 55700, 55704, 55708, 55712, 55716, 55884, 55888, 55892, 55896, 55900, 55904, 56144, 56148, 56152, 56156, 56160, 56164, 56168, 56172, 56176, 56180, 56184, 56188, 56192, 56196, 56200, 56204, 56208, 56396, 56400, 56404, 56408, 56412, 56416, 56420, 56640, 56644, 56648, 56652, 56656, 56660, 56664, 56668, 56672, 56676, 56680, 56684, 56688, 56692, 56696, 56700, 56912, 56916, 56920, 56924, 56928, 56932, 57136, 57140, 57144, 57148, 57152, 57156, 57160, 57164, 57168, 57172, 57176, 57180, 57184, 57188, 57192, 57424, 57428, 57432, 57436, 57440, 57444, 57632, 57636, 57640, 57644, 57648, 57652, 57656, 57660, 57664, 57668, 57672, 57676, 57680, 57684, 57936, 57940, 57944, 57948, 57952, 57956, 57960, 58132, 58136, 58140, 58144, 58148, 58152, 58156, 58160, 58164, 58168, 58172, 58176, 58448, 58452, 58456)
@@ -4771,10 +4657,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw4($t4, 63072, 63076, 63080, 63084)
         draw4($t4, 63088, 63576, 63580, 63584)
         sw $t4 63588($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_39
+        jnez($t4, draw_clear_39)
     draw_clear_40: # draw t4, sleep, draw 0
         draw1024($t4, 952, 956, 1444, 1448, 1452, 1456, 1460, 1464, 1468, 1916, 1956, 1960, 1964, 1968, 1972, 1976, 1980, 1984, 2396, 2400, 2404, 2408, 2468, 2472, 2476, 2480, 2484, 2488, 2492, 2496, 2876, 2880, 2884, 2888, 2892, 2896, 2900, 2980, 2984, 2988, 2992, 2996, 3000, 3004, 3008, 3360, 3364, 3368, 3372, 3376, 3380, 3384, 3388, 3392, 3496, 3500, 3504, 3508, 3512, 3516, 3520, 3840, 3844, 3848, 3852, 3856, 3860, 3864, 3868, 3872, 3876, 3880, 3884, 4008, 4012, 4016, 4020, 4024, 4028, 4032, 4324, 4328, 4332, 4336, 4340, 4344, 4348, 4352, 4356, 4360, 4364, 4368, 4372, 4376, 4520, 4524, 4528, 4532, 4536, 4540, 4544, 4804, 4808, 4812, 4816, 4820, 4824, 4828, 4832, 4836, 4840, 4844, 4848, 4852, 4856, 4860, 4864, 4868, 5032, 5036, 5040, 5044, 5048, 5052, 5056, 5284, 5288, 5292, 5296, 5300, 5304, 5308, 5312, 5316, 5320, 5324, 5328, 5332, 5336, 5340, 5344, 5348, 5352, 5356, 5360, 5544, 5548, 5552, 5556, 5560, 5564, 5568, 5768, 5772, 5776, 5780, 5784, 5788, 5792, 5796, 5800, 5804, 5808, 5812, 5816, 5820, 5824, 5828, 5832, 5836, 5840, 5844, 5848, 5852, 6060, 6064, 6068, 6072, 6076, 6080, 6084, 6248, 6252, 6256, 6260, 6264, 6268, 6272, 6276, 6280, 6284, 6288, 6292, 6296, 6300, 6304, 6308, 6312, 6316, 6320, 6324, 6328, 6332, 6336, 6340, 6344, 6572, 6576, 6580, 6584, 6588, 6592, 6596, 6732, 6736, 6740, 6744, 6748, 6752, 6756, 6760, 6764, 6768, 6772, 6776, 6780, 6784, 6788, 6792, 6796, 6800, 6804, 6808, 6812, 6816, 6820, 6824, 6828, 6832, 6836, 7084, 7088, 7092, 7096, 7100, 7104, 7108, 7212, 7216, 7220, 7224, 7228, 7232, 7236, 7240, 7244, 7248, 7252, 7256, 7260, 7264, 7268, 7272, 7276, 7280, 7284, 7288, 7292, 7296, 7300, 7304, 7308, 7312, 7316, 7320, 7324, 7328, 7596, 7600, 7604, 7608, 7612, 7616, 7620, 7692, 7696, 7700, 7704, 7708, 7712, 7716, 7720, 7724, 7728, 7732, 7736, 7740, 7744, 7748, 7752, 7756, 7760, 7764, 7768, 7772, 7776, 7780, 7784, 7788, 7792, 7796, 7800, 7804, 7808, 7812, 7816, 7820, 8108, 8112, 8116, 8120, 8124, 8128, 8132, 8196, 8200, 8204, 8208, 8212, 8216, 8220, 8224, 8228, 8232, 8236, 8240, 8244, 8248, 8252, 8256, 8260, 8264, 8268, 8272, 8276, 8280, 8284, 8288, 8292, 8296, 8300, 8304, 8308, 8312, 8624, 8628, 8632, 8636, 8640, 8644, 8708, 8712, 8716, 8720, 8724, 8728, 8732, 8736, 8740, 8744, 8748, 8752, 8756, 8760, 8764, 8768, 8772, 8776, 8780, 8784, 8788, 8792, 8796, 8800, 8804, 9136, 9140, 9144, 9148, 9152, 9156, 9224, 9228, 9232, 9236, 9240, 9244, 9248, 9252, 9256, 9260, 9264, 9268, 9272, 9276, 9280, 9284, 9288, 9292, 9296, 9648, 9652, 9656, 9660, 9664, 9668, 9736, 9740, 9744, 9748, 9752, 9756, 9760, 9764, 9768, 9772, 9776, 9780, 9784, 9788, 10160, 10164, 10168, 10172, 10176, 10180, 10184, 10248, 10252, 10256, 10260, 10264, 10268, 10272, 10276, 10280, 10672, 10676, 10680, 10684, 10688, 10692, 10696, 10760, 10764, 10768, 10772, 11188, 11192, 11196, 11200, 11204, 11208, 11700, 11704, 11708, 11712, 11716, 11720, 12212, 12216, 12220, 12224, 12228, 12232, 12724, 12728, 12732, 12736, 12740, 12744, 13236, 13240, 13244, 13248, 13252, 13256, 13752, 13756, 13760, 13764, 13768, 13772, 14264, 14268, 14272, 14276, 14280, 14284, 14776, 14780, 14784, 14788, 14792, 14796, 15288, 15292, 15296, 15300, 15304, 15308, 15800, 15804, 15808, 15812, 15816, 15820, 15884, 16316, 16320, 16324, 16328, 16332, 16396, 16828, 16832, 16836, 16840, 16844, 17340, 17344, 17348, 17352, 17356, 17852, 17856, 17860, 17864, 17868, 17872, 18364, 18368, 18372, 18376, 18380, 18384, 18448, 18880, 18884, 18888, 18892, 18896, 18960, 19392, 19396, 19400, 19404, 19408, 19472, 19904, 19908, 19912, 19916, 19920, 19984, 20416, 20420, 20424, 20428, 20432, 20496, 20928, 20932, 20936, 20940, 20944, 21012, 21444, 21448, 21452, 21456, 21460, 21524, 21956, 21960, 21964, 21968, 21972, 22036, 22468, 22472, 22476, 22480, 22484, 22548, 22980, 22984, 22988, 22992, 22996, 23060, 23492, 23496, 23500, 23504, 23508, 23572, 23576, 24008, 24012, 24016, 24020, 24084, 24088, 24520, 24524, 24528, 24532, 24596, 24600, 25032, 25036, 25040, 25044, 25112, 25544, 25548, 25552, 25556, 25560, 25624, 26056, 26060, 26064, 26068, 26072, 26136, 26140, 26572, 26576, 26580, 26584, 26648, 26652, 27084, 27088, 27092, 27096, 27160, 27164, 27596, 27600, 27604, 27608, 27672, 27676, 28108, 28112, 28116, 28120, 28184, 28188, 28620, 28624, 28628, 28632, 28700, 28704, 29136, 29140, 29144, 29212, 29216, 29648, 29652, 29656, 29660, 29724, 29728, 30160, 30164, 30168, 30172, 30236, 30240, 30672, 30676, 30680, 30684, 30748, 30752, 31184, 31188, 31192, 31196, 31260, 31264, 31268, 31700, 31704, 31708, 31772, 31776, 31780, 32212, 32216, 32220, 32284, 32288, 32292, 32724, 32728, 32732, 32800, 32804, 33236, 33240, 33244, 33248, 33312, 33316, 33748, 33752, 33756, 33760, 33824, 33828, 33832, 34264, 34268, 34272, 34336, 34340, 34344, 34776, 34780, 34784, 34848, 34852, 34856, 35288, 35292, 35296, 35360, 35364, 35368, 35800, 35804, 35808, 35872, 35876, 35880, 36312, 36316, 36320, 36388, 36392, 36396, 36828, 36832, 36900, 36904, 36908, 37340, 37344, 37348, 37412, 37416, 37420, 37852, 37856, 37860, 37924, 37928, 37932, 38364, 38368, 38372, 38436, 38440, 38444, 38876, 38880, 38884, 38948, 38952, 38956, 38960, 39392, 39396, 39460, 39464, 39468, 39472, 39904, 39908, 39972, 39976, 39980, 39984, 40416, 40420, 40488, 40492, 40496, 40928, 40932, 40936, 41000, 41004, 41008, 41440, 41444, 41448, 41512, 41516, 41520, 41524, 41956, 41960, 42024, 42028, 42032, 42036, 42468, 42472, 42536, 42540, 42544, 42548, 42980, 42984, 43048, 43052, 43056, 43060, 43492, 43496, 43560, 43564, 43568, 43572, 44004, 44008, 44072, 44076, 44080, 44084, 44088, 44520, 44588, 44592, 44596, 44600, 45032, 45036, 45100, 45104, 45108, 45112, 45544, 45548, 45612, 45616, 45620, 45624, 46056, 46060, 46124, 46128, 46132, 46136, 46568, 46572, 46636, 46640, 46644, 46648, 46652, 47084, 47148, 47152, 47156, 47160, 47164, 47596, 47660, 47664, 47668, 47672, 47676, 48108, 48176, 48180, 48184, 48188, 48620, 48688, 48692, 48696, 48700, 49132, 49136, 49200, 49204, 49208, 49212, 49216, 49648, 49712, 49716, 49720, 49724, 49728, 50160, 50224, 50228, 50232, 50236, 50240, 50672, 50736, 50740, 50744, 50748, 50752, 51184, 51248, 51252, 51256, 51260, 51264, 51696, 51760, 51764, 51768, 51772, 51776, 51780, 52276, 52280, 52284, 52288, 52292, 52724, 52788, 52792, 52796, 52800, 52804, 53236, 53300, 53304, 53308, 53312, 53316, 53748, 53812, 53816, 53820, 53824, 53828, 54244, 54248, 54252, 54256, 54260, 54324, 54328, 54332, 54336, 54340, 54344, 54736, 54740, 54744, 54748, 54752, 54756, 54760, 54764, 54768, 54772, 54836, 54840, 54844, 54848, 54852, 54856, 55228, 55232, 55236, 55240, 55244, 55248, 55252, 55256, 55260, 55264, 55268, 55272, 55276, 55280, 55284, 55348, 55352, 55356, 55360, 55364, 55368, 55720, 55724, 55728, 55732, 55736, 55740, 55744, 55748, 55752, 55756, 55760, 55764, 55768, 55772)
         draw256($t4, 55776, 55780, 55784, 55788, 55792, 55796, 55864, 55868, 55872, 55876, 55880, 56212, 56216, 56220, 56224, 56228, 56232, 56236, 56240, 56244, 56248, 56252, 56256, 56260, 56264, 56268, 56272, 56276, 56280, 56284, 56288, 56292, 56296, 56300, 56304, 56308, 56376, 56380, 56384, 56388, 56392, 56704, 56708, 56712, 56716, 56720, 56724, 56728, 56732, 56736, 56740, 56744, 56748, 56752, 56756, 56760, 56764, 56768, 56772, 56776, 56780, 56784, 56788, 56792, 56796, 56800, 56804, 56808, 56812, 56816, 56820, 56824, 56888, 56892, 56896, 56900, 56904, 56908, 57196, 57200, 57204, 57208, 57212, 57216, 57220, 57224, 57228, 57232, 57236, 57240, 57244, 57248, 57252, 57256, 57260, 57264, 57268, 57272, 57276, 57280, 57284, 57288, 57292, 57296, 57300, 57304, 57308, 57312, 57316, 57320, 57324, 57328, 57332, 57336, 57400, 57404, 57408, 57412, 57416, 57420, 57688, 57692, 57696, 57700, 57704, 57708, 57712, 57716, 57720, 57724, 57728, 57732, 57736, 57740, 57744, 57748, 57752, 57756, 57760, 57764, 57768, 57772, 57776, 57780, 57784, 57788, 57792, 57796, 57800, 57804, 57808, 57812, 57816, 57820, 57824, 57828, 57832, 57836, 57840, 57912, 57916, 57920, 57924, 57928, 57932, 58180, 58184, 58188, 58192, 58196, 58200, 58204, 58208, 58212, 58216, 58220, 58224, 58228, 58232, 58236, 58240, 58244, 58248, 58252, 58256, 58260, 58264, 58268, 58272, 58276, 58280, 58284, 58288, 58292, 58296, 58300, 58304, 58308, 58312, 58316, 58320, 58424, 58428, 58432, 58436, 58440, 58444, 58672, 58676, 58680, 58684, 58688, 58692, 58696, 58700, 58704, 58708, 58712, 58716, 58720, 58724, 58728, 58732, 58736, 58740, 58744, 58748, 58752, 58756, 58760, 58764, 58768, 58772, 58776, 58780, 58784, 58788, 58792, 58796, 58800, 58936, 58940, 58944, 58948, 58952, 58956, 59164, 59168, 59172, 59176, 59180, 59184, 59188, 59192, 59196, 59200)
@@ -4787,10 +4670,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw4($t4, 64064, 64068, 64072, 64076)
         draw4($t4, 64080, 64084, 64088, 64092)
         draw4($t4, 64096, 64100, 64576, 64580)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_40
+        jnez($t4, draw_clear_40)
     draw_clear_41: # draw t4, sleep, draw 0
         draw1024($t4, 460, 464, 468, 472, 476, 912, 916, 920, 924, 928, 932, 936, 940, 944, 948, 960, 964, 968, 972, 976, 980, 984, 988, 1364, 1368, 1372, 1376, 1380, 1384, 1388, 1392, 1396, 1400, 1404, 1408, 1412, 1416, 1420, 1424, 1472, 1476, 1480, 1484, 1488, 1492, 1496, 1500, 1816, 1820, 1824, 1828, 1832, 1836, 1840, 1844, 1848, 1852, 1856, 1860, 1864, 1868, 1872, 1876, 1880, 1884, 1888, 1892, 1896, 1900, 1904, 1908, 1912, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2264, 2268, 2272, 2276, 2280, 2284, 2288, 2292, 2296, 2300, 2304, 2308, 2312, 2316, 2320, 2324, 2328, 2332, 2336, 2340, 2344, 2348, 2352, 2356, 2360, 2364, 2368, 2372, 2376, 2380, 2384, 2388, 2392, 2500, 2504, 2508, 2512, 2516, 2520, 2524, 2716, 2720, 2724, 2728, 2732, 2736, 2740, 2744, 2748, 2752, 2756, 2760, 2764, 2768, 2772, 2776, 2780, 2784, 2788, 2792, 2796, 2800, 2804, 2808, 2812, 2816, 2820, 2824, 2828, 2832, 2836, 2840, 2844, 2848, 2852, 2856, 2860, 2864, 2868, 2872, 3012, 3016, 3020, 3024, 3028, 3032, 3036, 3168, 3172, 3176, 3180, 3184, 3188, 3192, 3196, 3200, 3204, 3208, 3212, 3216, 3220, 3224, 3228, 3232, 3236, 3240, 3244, 3248, 3252, 3256, 3260, 3264, 3268, 3272, 3276, 3280, 3284, 3288, 3292, 3296, 3300, 3304, 3308, 3312, 3316, 3320, 3324, 3328, 3332, 3336, 3340, 3344, 3348, 3352, 3356, 3524, 3528, 3532, 3536, 3540, 3544, 3548, 3620, 3624, 3628, 3632, 3636, 3640, 3644, 3648, 3652, 3656, 3660, 3664, 3668, 3672, 3676, 3680, 3684, 3688, 3692, 3696, 3700, 3704, 3708, 3712, 3716, 3720, 3724, 3728, 3732, 3736, 3740, 3744, 3748, 3752, 3756, 3760, 3764, 3768, 3772, 3776, 3780, 3784, 3788, 3792, 3796, 3800, 3804, 3808, 3812, 3816, 3820, 3824, 3828, 3832, 3836, 4036, 4040, 4044, 4048, 4052, 4056, 4060, 4096, 4100, 4104, 4108, 4112, 4116, 4120, 4124, 4128, 4132, 4136, 4140, 4144, 4148, 4152, 4156, 4160, 4164, 4168, 4172, 4176, 4180, 4184, 4188, 4192, 4196, 4200, 4204, 4208, 4212, 4216, 4220, 4224, 4228, 4232, 4236, 4240, 4244, 4248, 4252, 4256, 4260, 4264, 4268, 4272, 4276, 4280, 4284, 4288, 4292, 4296, 4300, 4304, 4308, 4312, 4316, 4320, 4548, 4552, 4556, 4560, 4564, 4568, 4572, 4608, 4612, 4616, 4620, 4624, 4628, 4632, 4636, 4640, 4644, 4648, 4652, 4656, 4660, 4664, 4668, 4672, 4676, 4680, 4684, 4688, 4692, 4696, 4700, 4704, 4708, 4712, 4716, 4720, 4724, 4728, 4732, 4736, 4740, 4744, 4748, 4752, 4756, 4760, 4764, 4768, 4772, 4776, 4780, 4784, 4788, 4792, 4796, 4800, 5060, 5064, 5068, 5072, 5076, 5080, 5084, 5088, 5120, 5124, 5128, 5132, 5136, 5140, 5144, 5148, 5152, 5156, 5160, 5164, 5168, 5172, 5176, 5180, 5184, 5188, 5192, 5196, 5200, 5204, 5208, 5212, 5216, 5220, 5224, 5228, 5232, 5236, 5240, 5244, 5248, 5252, 5256, 5260, 5264, 5268, 5272, 5276, 5280, 5572, 5576, 5580, 5584, 5588, 5592, 5596, 5600, 5632, 5636, 5640, 5644, 5648, 5652, 5656, 5660, 5664, 5668, 5672, 5676, 5680, 5684, 5688, 5692, 5696, 5700, 5704, 5708, 5712, 5716, 5720, 5724, 5728, 5732, 5736, 5740, 5744, 5748, 5752, 5756, 5760, 5764, 6088, 6092, 6096, 6100, 6104, 6108, 6112, 6144, 6148, 6152, 6156, 6160, 6164, 6168, 6172, 6176, 6180, 6184, 6188, 6192, 6196, 6200, 6204, 6208, 6212, 6216, 6220, 6224, 6228, 6232, 6236, 6240, 6244, 6600, 6604, 6608, 6612, 6616, 6620, 6624, 6660, 6664, 6668, 6672, 6676, 6680, 6684, 6688, 6692, 6696, 6700, 6704, 6708, 6712, 6716, 6720, 6724, 6728, 7112, 7116, 7120, 7124, 7128, 7132, 7136, 7172, 7176, 7180, 7184, 7188, 7192, 7196, 7200, 7204, 7208, 7624, 7628, 7632, 7636, 7640, 7644, 7648, 7684, 7688, 8136, 8140, 8144, 8148, 8152, 8156, 8160, 8648, 8652, 8656, 8660, 8664, 8668, 8672, 9160, 9164, 9168, 9172, 9176, 9180, 9184, 9220, 9672, 9676, 9680, 9684, 9688, 9692, 9696, 9732, 10188, 10192, 10196, 10200, 10204, 10208, 10244, 10700, 10704, 10708, 10712, 10716, 10720, 10756, 11212, 11216, 11220, 11224, 11228, 11232, 11268, 11724, 11728, 11732, 11736, 11740, 11744, 11780, 12236, 12240, 12244, 12248, 12252, 12256, 12292, 12748, 12752, 12756, 12760, 12764, 12768, 12772, 12804, 13260, 13264, 13268, 13272, 13276, 13280, 13284, 13316, 13320, 13776, 13780, 13784, 13788, 13792, 13796, 13828, 13832, 14288, 14292, 14296, 14300, 14304, 14308, 14344, 14800, 14804, 14808, 14812, 14816, 14820, 14856, 15312, 15316, 15320, 15324, 15328, 15332, 15368, 15824, 15828, 15832, 15836, 15840, 15844, 15880, 16336, 16340, 16344, 16348, 16352, 16356, 16392, 16848, 16852, 16856, 16860, 16864, 16868, 16904, 16908, 17360, 17364, 17368, 17372, 17376, 17380, 17416, 17420, 17876, 17880, 17884, 17888, 17892, 17928, 17932, 18388, 18392, 18396, 18400, 18404, 18440, 18444, 18900, 18904, 18908, 18912, 18916, 18952, 18956, 19412, 19416, 19420, 19424, 19428, 19464, 19468, 19924, 19928, 19932, 19936, 19940, 19976, 19980, 20436, 20440, 20444, 20448, 20452, 20456, 20488, 20492, 20948, 20952, 20956, 20960, 20964, 20968, 21000, 21004, 21008, 21464, 21468, 21472, 21476, 21480, 21512, 21516, 21520, 21976, 21980, 21984, 21988, 21992, 22028, 22032, 22488, 22492, 22496, 22500, 22504, 22540, 22544, 23000, 23004, 23008, 23012, 23016, 23052, 23056, 23512, 23516, 23520, 23524, 23528, 23564, 23568, 24024, 24028, 24032, 24036, 24040, 24076, 24080, 24536, 24540, 24544, 24548, 24552, 24588, 24592, 25048, 25052, 25056, 25060, 25064, 25100, 25104, 25108, 25564, 25568, 25572, 25576, 25612, 25616, 25620, 26076, 26080, 26084, 26088, 26124, 26128, 26132, 26588, 26592, 26596, 26600, 26636, 26640, 26644, 27100, 27104, 27108, 27112, 27148, 27152, 27156, 27612, 27616, 27620, 27624, 27660, 27664, 27668, 28124, 28128, 28132, 28136, 28140, 28172, 28176, 28180, 28636, 28640, 28644, 28648, 28652, 28684, 28688, 28692, 28696, 29148, 29152, 29156, 29160, 29164, 29196, 29200, 29204, 29208, 29664, 29668, 29672, 29676, 29712, 29716, 29720, 30176, 30180, 30184, 30188, 30224, 30228, 30232, 30688, 30692, 30696, 30700, 30736, 30740, 30744, 31200, 31204, 31208, 31212, 31248, 31252, 31256, 31712, 31716, 31720, 31724, 31760, 31764, 31768, 32224, 32228, 32232, 32236, 32272, 32276, 32280, 32736, 32740, 32744, 32748, 32784, 32788, 32792, 32796, 33252, 33256, 33260, 33296, 33300, 33304, 33308, 33764, 33768, 33772, 33808, 33812, 33816, 33820, 34276, 34280, 34284, 34320, 34324, 34328, 34332, 34788, 34792, 34796, 34832, 34836, 34840, 34844, 35300, 35304, 35308, 35344, 35348, 35352, 35356, 35812, 35816, 35820, 35856, 35860, 35864, 35868, 36324, 36328, 36332, 36336, 36368, 36372, 36376, 36380, 36384, 36836, 36840, 36844, 36848, 36880, 36884, 36888, 36892, 36896, 37352, 37356, 37360, 37392, 37396, 37400, 37404, 37408, 37864, 37868, 37872, 37908, 37912, 37916, 37920, 38376, 38380, 38384, 38420, 38424, 38428, 38432, 38888, 38892, 38896, 38932, 38936, 38940, 38944, 39400, 39404)
         draw256($t4, 39408, 39444, 39448, 39452, 39456, 39912, 39916, 39920, 39956, 39960, 39964, 39968, 40424, 40428, 40432, 40468, 40472, 40476, 40480, 40484, 40940, 40944, 40980, 40984, 40988, 40992, 40996, 41452, 41456, 41492, 41496, 41500, 41504, 41508, 41964, 41968, 42004, 42008, 42012, 42016, 42020, 42476, 42480, 42516, 42520, 42524, 42528, 42532, 42988, 42992, 43028, 43032, 43036, 43040, 43044, 43500, 43504, 43540, 43544, 43548, 43552, 43556, 44012, 44016, 44020, 44052, 44056, 44060, 44064, 44068, 44524, 44528, 44532, 44564, 44568, 44572, 44576, 44580, 44584, 45040, 45044, 45076, 45080, 45084, 45088, 45092, 45096, 45552, 45556, 45592, 45596, 45600, 45604, 45608, 46064, 46068, 46104, 46108, 46112, 46116, 46120, 46576, 46580, 46616, 46620, 46624, 46628, 46632, 47088, 47092, 47128, 47132, 47136, 47140, 47144, 47600, 47604, 47640, 47644, 47648, 47652, 47656, 48112, 48116, 48152, 48156, 48160, 48164, 48168, 48172, 48624, 48628, 48664, 48668, 48672, 48676, 48680, 48684, 49140, 49176, 49180, 49184, 49188, 49192, 49196, 49652, 49688, 49692, 49696, 49700, 49704, 49708, 50164, 50200, 50204, 50208, 50212, 50216, 50220, 50676, 50712, 50716, 50720, 50724, 50728, 50732, 51188, 51224, 51228, 51232, 51236, 51240, 51244, 51700, 51704, 51736, 51740, 51744, 51748, 51752, 51756, 52212, 52216, 52248, 52252, 52256, 52260, 52264, 52268, 52272, 52728, 52760, 52764, 52768, 52772, 52776, 52780, 52784, 53240, 53276, 53280, 53284, 53288, 53292, 53296, 53752, 53788, 53792, 53796, 53800, 53804, 53808, 54264, 54300, 54304, 54308, 54312, 54316, 54320, 54776, 54812, 54816, 54820, 54824, 54828, 54832, 55288, 55324, 55328, 55332, 55336, 55340, 55344, 55800, 55836, 55840, 55844, 55848, 55852, 55856, 55860, 56312, 56348, 56352, 56356, 56360, 56364, 56368, 56372, 56860, 56864, 56868, 56872, 56876, 56880, 56884)
@@ -4800,10 +4680,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         sw $t4 65064($v1)
         sw $t4 65068($v1)
         sw $t4 65072($v1)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_41
+        jnez($t4, draw_clear_41)
     draw_clear_42: # draw t4, sleep, draw 0
         draw1024($t4, 0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140, 144, 148, 152, 156, 160, 164, 168, 172, 176, 180, 184, 188, 192, 196, 200, 204, 208, 212, 216, 220, 224, 228, 232, 236, 240, 244, 248, 252, 256, 260, 264, 268, 272, 276, 280, 284, 288, 292, 296, 300, 304, 308, 312, 316, 320, 324, 328, 332, 336, 340, 344, 348, 352, 356, 360, 364, 368, 372, 376, 380, 384, 388, 392, 396, 400, 404, 408, 412, 416, 420, 424, 428, 432, 436, 440, 444, 448, 452, 456, 480, 484, 488, 492, 496, 500, 504, 508, 512, 516, 520, 524, 528, 532, 536, 540, 544, 548, 552, 556, 560, 564, 568, 572, 576, 580, 584, 588, 592, 596, 600, 604, 608, 612, 616, 620, 624, 628, 632, 636, 640, 644, 648, 652, 656, 660, 664, 668, 672, 676, 680, 684, 688, 692, 696, 700, 704, 708, 712, 716, 720, 724, 728, 732, 736, 740, 744, 748, 752, 756, 760, 764, 768, 772, 776, 780, 784, 788, 792, 796, 800, 804, 808, 812, 816, 820, 824, 828, 832, 836, 840, 844, 848, 852, 856, 860, 864, 868, 872, 876, 880, 884, 888, 892, 896, 900, 904, 908, 992, 996, 1000, 1004, 1008, 1012, 1016, 1020, 1024, 1028, 1032, 1036, 1040, 1044, 1048, 1052, 1056, 1060, 1064, 1068, 1072, 1076, 1080, 1084, 1088, 1092, 1096, 1100, 1104, 1108, 1112, 1116, 1120, 1124, 1128, 1132, 1136, 1140, 1144, 1148, 1152, 1156, 1160, 1164, 1168, 1172, 1176, 1180, 1184, 1188, 1192, 1196, 1200, 1204, 1208, 1212, 1216, 1220, 1224, 1228, 1232, 1236, 1240, 1244, 1248, 1252, 1256, 1260, 1264, 1268, 1272, 1276, 1280, 1284, 1288, 1292, 1296, 1300, 1304, 1308, 1312, 1316, 1320, 1324, 1328, 1332, 1336, 1340, 1344, 1348, 1352, 1356, 1360, 1504, 1508, 1512, 1516, 1520, 1524, 1528, 1532, 1536, 1540, 1544, 1548, 1552, 1556, 1560, 1564, 1568, 1572, 1576, 1580, 1584, 1588, 1592, 1596, 1600, 1604, 1608, 1612, 1616, 1620, 1624, 1628, 1632, 1636, 1640, 1644, 1648, 1652, 1656, 1660, 1664, 1668, 1672, 1676, 1680, 1684, 1688, 1692, 1696, 1700, 1704, 1708, 1712, 1716, 1720, 1724, 1728, 1732, 1736, 1740, 1744, 1748, 1752, 1756, 1760, 1764, 1768, 1772, 1776, 1780, 1784, 1788, 1792, 1796, 1800, 1804, 1808, 1812, 2016, 2020, 2024, 2028, 2032, 2036, 2040, 2044, 2048, 2052, 2056, 2060, 2064, 2068, 2072, 2076, 2080, 2084, 2088, 2092, 2096, 2100, 2104, 2108, 2112, 2116, 2120, 2124, 2128, 2132, 2136, 2140, 2144, 2148, 2152, 2156, 2160, 2164, 2168, 2172, 2176, 2180, 2184, 2188, 2192, 2196, 2200, 2204, 2208, 2212, 2216, 2220, 2224, 2228, 2232, 2236, 2240, 2244, 2248, 2252, 2256, 2260, 2528, 2532, 2536, 2540, 2544, 2548, 2552, 2556, 2560, 2564, 2568, 2572, 2576, 2580, 2584, 2588, 2592, 2596, 2600, 2604, 2608, 2612, 2616, 2620, 2624, 2628, 2632, 2636, 2640, 2644, 2648, 2652, 2656, 2660, 2664, 2668, 2672, 2676, 2680, 2684, 2688, 2692, 2696, 2700, 2704, 2708, 2712, 3040, 3044, 3048, 3052, 3056, 3060, 3064, 3068, 3072, 3076, 3080, 3084, 3088, 3092, 3096, 3100, 3104, 3108, 3112, 3116, 3120, 3124, 3128, 3132, 3136, 3140, 3144, 3148, 3152, 3156, 3160, 3164, 3552, 3556, 3560, 3564, 3568, 3572, 3576, 3580, 3584, 3588, 3592, 3596, 3600, 3604, 3608, 3612, 3616, 4064, 4068, 4072, 4076, 4080, 4084, 4088, 4092, 4576, 4580, 4584, 4588, 4592, 4596, 4600, 4604, 5092, 5096, 5100, 5104, 5108, 5112, 5116, 5604, 5608, 5612, 5616, 5620, 5624, 5628, 6116, 6120, 6124, 6128, 6132, 6136, 6140, 6628, 6632, 6636, 6640, 6644, 6648, 6652, 6656, 7140, 7144, 7148, 7152, 7156, 7160, 7164, 7168, 7652, 7656, 7660, 7664, 7668, 7672, 7676, 7680, 8164, 8168, 8172, 8176, 8180, 8184, 8188, 8192, 8676, 8680, 8684, 8688, 8692, 8696, 8700, 8704, 9188, 9192, 9196, 9200, 9204, 9208, 9212, 9216, 9700, 9704, 9708, 9712, 9716, 9720, 9724, 9728, 10212, 10216, 10220, 10224, 10228, 10232, 10236, 10240, 10724, 10728, 10732, 10736, 10740, 10744, 10748, 10752, 11236, 11240, 11244, 11248, 11252, 11256, 11260, 11264, 11748, 11752, 11756, 11760, 11764, 11768, 11772, 11776, 12260, 12264, 12268, 12272, 12276, 12280, 12284, 12288, 12776, 12780, 12784, 12788, 12792, 12796, 12800, 13288, 13292, 13296, 13300, 13304, 13308, 13312, 13800, 13804, 13808, 13812, 13816, 13820, 13824, 14312, 14316, 14320, 14324, 14328, 14332, 14336, 14340, 14824, 14828, 14832, 14836, 14840, 14844, 14848, 14852, 15336, 15340, 15344, 15348, 15352, 15356, 15360, 15364, 15848, 15852, 15856, 15860, 15864, 15868, 15872, 15876, 16360, 16364, 16368, 16372, 16376, 16380, 16384, 16388, 16872, 16876, 16880, 16884, 16888, 16892, 16896, 16900, 17384, 17388, 17392, 17396, 17400, 17404, 17408, 17412, 17896, 17900, 17904, 17908, 17912, 17916, 17920, 17924, 18408, 18412, 18416, 18420, 18424, 18428, 18432, 18436, 18920, 18924, 18928, 18932, 18936, 18940, 18944, 18948, 19432, 19436, 19440, 19444, 19448, 19452, 19456, 19460, 19944, 19948, 19952, 19956, 19960, 19964, 19968, 19972, 20460, 20464, 20468, 20472, 20476, 20480, 20484, 20972, 20976, 20980, 20984, 20988, 20992, 20996, 21484, 21488, 21492, 21496, 21500, 21504, 21508, 21996, 22000, 22004, 22008, 22012, 22016, 22020, 22024, 22508, 22512, 22516, 22520, 22524, 22528, 22532, 22536, 23020, 23024, 23028, 23032, 23036, 23040, 23044, 23048, 23532, 23536, 23540, 23544, 23548, 23552, 23556, 23560, 24044, 24048, 24052, 24056, 24060, 24064, 24068, 24072, 24556, 24560, 24564, 24568, 24572, 24576, 24580, 24584, 25068, 25072, 25076, 25080, 25084, 25088, 25092, 25096, 25580, 25584, 25588, 25592, 25596, 25600, 25604, 25608, 26092, 26096, 26100, 26104, 26108, 26112, 26116, 26120, 26604, 26608, 26612, 26616, 26620, 26624, 26628, 26632, 27116, 27120, 27124, 27128, 27132, 27136, 27140, 27144, 27628, 27632, 27636, 27640, 27644, 27648, 27652, 27656, 28144, 28148, 28152, 28156, 28160, 28164, 28168, 28656, 28660, 28664, 28668, 28672, 28676, 28680, 29168, 29172, 29176, 29180, 29184, 29188, 29192, 29680, 29684, 29688, 29692, 29696, 29700, 29704, 29708, 30192, 30196, 30200, 30204, 30208, 30212, 30216, 30220, 30704, 30708, 30712, 30716, 30720, 30724, 30728, 30732, 31216, 31220, 31224, 31228, 31232, 31236, 31240, 31244, 31728, 31732, 31736, 31740, 31744, 31748, 31752, 31756, 32240, 32244, 32248, 32252, 32256, 32260, 32264, 32268, 32752, 32756, 32760, 32764, 32768, 32772, 32776, 32780, 33264, 33268, 33272, 33276, 33280, 33284, 33288, 33292, 33776, 33780, 33784, 33788, 33792, 33796, 33800, 33804, 34288, 34292, 34296, 34300, 34304, 34308, 34312, 34316, 34800, 34804, 34808, 34812)
         draw256($t4, 34816, 34820, 34824, 34828, 35312, 35316, 35320, 35324, 35328, 35332, 35336, 35340, 35824, 35828, 35832, 35836, 35840, 35844, 35848, 35852, 36340, 36344, 36348, 36352, 36356, 36360, 36364, 36852, 36856, 36860, 36864, 36868, 36872, 36876, 37364, 37368, 37372, 37376, 37380, 37384, 37388, 37876, 37880, 37884, 37888, 37892, 37896, 37900, 37904, 38388, 38392, 38396, 38400, 38404, 38408, 38412, 38416, 38900, 38904, 38908, 38912, 38916, 38920, 38924, 38928, 39412, 39416, 39420, 39424, 39428, 39432, 39436, 39440, 39924, 39928, 39932, 39936, 39940, 39944, 39948, 39952, 40436, 40440, 40444, 40448, 40452, 40456, 40460, 40464, 40948, 40952, 40956, 40960, 40964, 40968, 40972, 40976, 41460, 41464, 41468, 41472, 41476, 41480, 41484, 41488, 41972, 41976, 41980, 41984, 41988, 41992, 41996, 42000, 42484, 42488, 42492, 42496, 42500, 42504, 42508, 42512, 42996, 43000, 43004, 43008, 43012, 43016, 43020, 43024, 43508, 43512, 43516, 43520, 43524, 43528, 43532, 43536, 44024, 44028, 44032, 44036, 44040, 44044, 44048, 44536, 44540, 44544, 44548, 44552, 44556, 44560, 45048, 45052, 45056, 45060, 45064, 45068, 45072, 45560, 45564, 45568, 45572, 45576, 45580, 45584, 45588, 46072, 46076, 46080, 46084, 46088, 46092, 46096, 46100, 46584, 46588, 46592, 46596, 46600, 46604, 46608, 46612, 47096, 47100, 47104, 47108, 47112, 47116, 47120, 47124, 47608, 47612, 47616, 47620, 47624, 47628, 47632, 47636, 48120, 48124, 48128, 48132, 48136, 48140, 48144, 48148, 48632, 48636, 48640, 48644, 48648, 48652, 48656, 48660, 49144, 49148, 49152, 49156, 49160, 49164, 49168, 49172, 49656, 49660, 49664, 49668, 49672, 49676, 49680, 49684, 50168, 50172, 50176, 50180, 50184, 50188, 50192, 50196, 50680, 50684, 50688, 50692, 50696, 50700, 50704, 50708, 51192, 51196, 51200, 51204, 51208, 51212, 51216, 51220, 51708, 51712)
@@ -4812,10 +4689,7 @@ draw_clear: # a1 == 4 for outwards, a1 == -4 for inwards, use v1 a0 t4
         draw64($t4, 64748, 64752, 64756, 64760, 64764, 64768, 64772, 64776, 64780, 64784, 64788, 64792, 64796, 64800, 64804, 64808, 64812, 64816, 64820, 64824, 64828, 64832, 64836, 64840, 64844, 64848, 64852, 64856, 64860, 64864, 64868, 64872, 64876, 64880, 64884, 64888, 64892, 64896, 64900, 64904, 64908, 64912, 64916, 64920, 64924, 64928, 64932, 64936, 64940, 64944, 64948, 64952, 64956, 64960, 64964, 64968, 64972, 64976, 64980, 64984, 64988, 64992, 64996, 65000)
         draw64($t4, 65004, 65008, 65012, 65016, 65020, 65024, 65028, 65032, 65036, 65040, 65044, 65048, 65052, 65076, 65080, 65084, 65088, 65092, 65096, 65100, 65104, 65108, 65112, 65116, 65120, 65124, 65128, 65132, 65136, 65140, 65144, 65148, 65152, 65156, 65160, 65164, 65168, 65172, 65176, 65180, 65184, 65188, 65192, 65196, 65200, 65204, 65208, 65212, 65216, 65220, 65224, 65228, 65232, 65236, 65240, 65244, 65248, 65252, 65256, 65260, 65264, 65268, 65272, 65276)
         draw64($t4, 65280, 65284, 65288, 65292, 65296, 65300, 65304, 65308, 65312, 65316, 65320, 65324, 65328, 65332, 65336, 65340, 65344, 65348, 65352, 65356, 65360, 65364, 65368, 65372, 65376, 65380, 65384, 65388, 65392, 65396, 65400, 65404, 65408, 65412, 65416, 65420, 65424, 65428, 65432, 65436, 65440, 65444, 65448, 65452, 65456, 65460, 65464, 65468, 65472, 65476, 65480, 65484, 65488, 65492, 65496, 65500, 65504, 65508, 65512, 65516, 65520, 65524, 65528, 65532)
-        beqz $t4 jrra # return
-        syscall # sleep
-        move $t4 $0
-        j draw_clear_42
+        jnez($t4, draw_clear_42)
 draw_border: # start at v1, use t4
     li $t4 0xfad053
     draw256($t4, 1548, 1552, 1556, 1560, 1564, 1568, 1572, 1576, 1580, 1584, 1588, 1592, 1596, 1600, 1604, 1608, 1612, 1616, 1620, 1624, 1628, 1632, 1636, 1640, 1644, 1648, 1652, 1656, 1660, 1664, 1668, 1672, 1676, 1680, 1684, 1688, 1692, 1696, 1700, 1704, 1708, 1712, 1716, 1720, 1724, 1728, 1732, 1736, 1740, 1744, 1748, 1752, 1756, 1760, 1764, 1768, 1772, 1776, 1780, 1784, 1788, 1792, 1796, 1800, 1804, 1808, 1812, 1816, 1820, 1824, 1828, 1832, 1836, 1840, 1844, 1848, 1852, 1856, 1860, 1864, 1868, 1872, 1876, 1880, 1884, 1888, 1892, 1896, 1900, 1904, 1908, 1912, 1916, 1920, 1924, 1928, 1932, 1936, 1940, 1944, 1948, 1952, 1956, 1960, 1964, 1968, 1972, 1976, 1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016, 2020, 2024, 2028, 2032, 2060, 2064, 2068, 2072, 2076, 2080, 2084, 2088, 2092, 2096, 2100, 2104, 2108, 2112, 2116, 2120, 2124, 2128, 2132, 2136, 2140, 2144, 2148, 2152, 2156, 2160, 2164, 2168, 2172, 2176, 2180, 2184, 2188, 2192, 2196, 2200, 2204, 2208, 2212, 2216, 2220, 2224, 2228, 2232, 2236, 2240, 2244, 2248, 2252, 2256, 2260, 2264, 2268, 2272, 2276, 2280, 2284, 2288, 2292, 2296, 2300, 2304, 2308, 2312, 2316, 2320, 2324, 2328, 2332, 2336, 2340, 2344, 2348, 2352, 2356, 2360, 2364, 2368, 2372, 2376, 2380, 2384, 2388, 2392, 2396, 2400, 2404, 2408, 2412, 2416, 2420, 2424, 2428, 2432, 2436, 2440, 2444, 2448, 2452, 2456, 2460, 2464, 2468, 2472, 2476, 2480, 2484, 2488, 2492, 2496, 2500, 2504, 2508, 2512, 2516, 2520, 2524, 2528, 2532, 2536, 2540, 2544, 2572, 2576, 3052, 3056, 3084, 3088, 3564, 3568, 3596, 3600, 4076, 4080)
@@ -5047,7 +4921,8 @@ draw_post_doll:
     sw $ra 0($sp)
 
     la $a2 postgame_doll # array of frames
-    frame2(DOLLS_FRAME)
+    sll $t4 $s7 1
+    frame(DOLLS_FRAME)
     li $v1 BASE_ADDRESS
     addi $v1 $v1 41308 # (87, 80)
     jalr $v0
