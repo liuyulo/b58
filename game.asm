@@ -645,7 +645,7 @@ init_post:
     jal draw_border
     li $a0 REFRESH_RATE # sleep
     li $s2 112 # instrument
-    li $s3 0x40 # max volume
+    li $s3 30 # max volume
     li $s5 5
     li $a1 250 # duration
 post:
