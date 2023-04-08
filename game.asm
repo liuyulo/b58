@@ -1,4 +1,4 @@
-# pregame
+# opening
 #   s0 start of music
 #   s1 end of music
 #   s2 instrument
@@ -6,7 +6,7 @@
 #   s4 address to current note
 #   s6 note duration remaining (ms)
 #   s7 time
-# ingame
+# gameplay
 #   s0 player x in bytes
 #   s1 player y in bytes
 #   s2 gravity x
@@ -15,8 +15,8 @@
 #   s5 flag: door_unlocked double_jump landed
 #   s6 jump distance remaining
 #   s7 time
-# postgame
-#   s0 constant 0 (to differentiate with pregame)
+# ending
+#   s0 constant 0 (to differentiate with opening)
 #   s2 instrument
 #   s3 max volume
 #   s5 constant 5
@@ -26,18 +26,18 @@
     .eqv SIZE           512         # screen width & height in bytes
     .eqv WIDTH_SHIFT    7           # 4 << WIDTH_SHIFT == SIZE
 
-    .eqv PRE_RATE       56          # 132 bpm, each frame is 1/32 note
-    .eqv PRE_LEN        1728        # wonderland has 216 notes, each is 2 words
-    .eqv PRE_FRAME      32          # frames to draw pre ui
-    .eqv PRE_S          29456       # location of S key (start) in pregame
-    .eqv PRE_Q          40720       # quit key
+    .eqv OP_RATE        56          # 132 bpm, each frame is 1/32 note
+    .eqv OP_LEN         1728        # wonderland has 216 notes, each is 2 words
+    .eqv OP_FRAME       32          # frames to draw opening ui
+    .eqv OP_S           29456       # location of S key (start) in opening
+    .eqv OP_Q           40720       # quit key
     .eqv REFRESH_RATE   40          # in miliseconds
 
-    .eqv POST_RATE      50          # 120 bpm, 5 frames is a 1/8 note
-    .eqv POST_FRAME     32          # frames to draw post ui
-    .eqv POST_P         17008       # location of P key (reset) in postgame
-    .eqv POST_S         28272       # restart key
-    .eqv POST_Q         39536       # quit key
+    .eqv ED_RATE      50            # 120 bpm, 5 frames is a 1/8 note
+    .eqv ED_FRAME     32            # frames to draw ending ui
+    .eqv ED_P         17008         # location of P key (reset) in ending
+    .eqv ED_S         28272         # restart key
+    .eqv ED_Q         39536         # quit key
 
     .eqv CLEAR_FRAME    172         # 4 * num of frames for clear
 # .eqv for gameplay
@@ -58,7 +58,7 @@
         62 336 63 336 65 224 67 896 60 336 63 336 67 224 72 896 60 336 63 336 70 56 72 168 70 896 65 336 62 336 70 224 67 56 68 616 67 112 65 112 67 896 67 336 65 336 64 224 65 448 72 448 65 336 63 336 62 224 63 448 70 56 72 392 71 336 72 336 74 224 67 896 71 896
         74 336 75 336 77 224 79 896 72 336 75 336 79 224 84 896 72 336 75 336 82 56 84 168 82 896 77 336 74 336 82 224 79 56 80 616 79 112 77 112 79 896 79 336 77 336 76 224 77 448 84 448 77 336 75 336 74 224 75 448 82 56 84 392 83 336 84 336 86 224 79 896 83 896
         74 336 75 336 77 224 79 896 72 336 75 336 79 224 84 896 72 336 75 336 82 56 84 168 82 896 77 336 74 336 82 224 79 56 80 616 79 112 77 112 79 896 79 336 77 336 76 224 77 448 84 448 77 336 75 336 74 224 75 448 82 56 84 392 83 336 84 336 86 224 79 336 89 336 86 224 87 1792    # each word is 8 frames
-    pregame_frames: .word draw_title draw_subtitle draw_pre_start draw_pre_quit
+    op_frames: .word draw_title draw_subtitle draw_op_start draw_op_quit
     # inclusive bounding boxes (x1, y1, x2, y2), each bbox is 16 bytes
     platforms: .word
         0   96  124 108   208 400 300 412   0   496 124 508   400 496 508 508 # stage 0
@@ -98,14 +98,14 @@
     # stage gravity (Δx, Δy) for each stage
     stage_gravity:  .half 0 4 0 -4 -4 0 4 0 4 0
     # each word is 8 frames
-    postgame_frames: .word draw_game_clear draw_post_return draw_post_restart draw_post_quit
+    ed_frames: .word draw_game_clear draw_ed_return draw_ed_restart draw_ed_quit
     # each word is 1 frame
-    postgame_doll: .word draw_post_doll_00 draw_post_doll_01
-        draw_post_doll_02 draw_post_doll_03 draw_post_doll_04 draw_post_doll_05
-        draw_post_doll_06 draw_post_doll_07 draw_post_doll_08 draw_post_doll_09
-        draw_post_doll_10 draw_post_doll_11 draw_post_doll_12 draw_post_doll_13
-        draw_post_doll_14 draw_post_doll_15 draw_post_doll_16 draw_post_doll_17
-        draw_post_doll_18 draw_post_doll_19 draw_post_doll_20 draw_post_doll_21
+    ed_doll: .word draw_ed_doll_00 draw_ed_doll_01
+        draw_ed_doll_02 draw_ed_doll_03 draw_ed_doll_04 draw_ed_doll_05
+        draw_ed_doll_06 draw_ed_doll_07 draw_ed_doll_08 draw_ed_doll_09
+        draw_ed_doll_10 draw_ed_doll_11 draw_ed_doll_12 draw_ed_doll_13
+        draw_ed_doll_14 draw_ed_doll_15 draw_ed_doll_16 draw_ed_doll_17
+        draw_ed_doll_18 draw_ed_doll_19 draw_ed_doll_20 draw_ed_doll_21
     clears: draw_clear_00 draw_clear_01 draw_clear_02 draw_clear_03 draw_clear_04 draw_clear_05 draw_clear_06 draw_clear_07
         draw_clear_08 draw_clear_09 draw_clear_10 draw_clear_11 draw_clear_12 draw_clear_13 draw_clear_14
         draw_clear_15 draw_clear_16 draw_clear_17 draw_clear_18 draw_clear_19 draw_clear_20 draw_clear_21
@@ -294,7 +294,7 @@
 .text
     save(doll, doll_address)
     save(door, door_address)
-init_pre:
+op_init:
     li $s7 0 # reset time
     li $a1 4 # clear outwards
     jal draw_clear
@@ -304,43 +304,43 @@ init_pre:
     # prepare music
     la $s0 wonderland
     move $s4 $s0
-    addi $s1 $s0 PRE_LEN
+    addi $s1 $s0 OP_LEN
     li $s2 1
     li $s3 64
     li $s6 0
-pre:
-    bge $s7 PRE_FRAME pre_ui_end
+op_loop:
+    bge $s7 OP_FRAME op_ui_end
         # load frame addr from memory
         srl $t0 $s7 1
         andi $t0 $t0 0xfffc # unset last 2 bits to make word aligned
-        la $t1 pregame_frames
+        la $t1 op_frames
         add $t0 $t0 $t1
         lw $v0 0($t0)
         setup_color($s7)
         jalr $v0
-    pre_ui_end:
+    op_ui_end:
 
-    bnez $s6 pre_music_end # wait
+    bnez $s6 op_music_end # wait
     slt $t0 $s4 $s1
     movz $s4 $s0 $t0 # rewind to start
     lw $a0 0($s4) # pitch
     lw $a1 4($s4) # duration
     move $s6 $a1
     addi $s4 $s4 8 # next note
-    beqz $a0 pre_music_end # pitch == 0 => rest
+    beqz $a0 op_music_end # pitch == 0 => rest
     move $a2 $s2 # instrument
     move $a3 $s3 # volume
     li $v0 31
     syscall # midi
-    pre_music_end:
+    op_music_end:
 
     jal ui_keypress
     addi $s7 $s7 1 # increment time
-    subi $s6 $s6 PRE_RATE
-    li $a0 PRE_RATE # sleep
+    subi $s6 $s6 OP_RATE
+    li $a0 OP_RATE # sleep
     li $v0 32
     syscall
-    j pre
+    j op_loop
 ui_keypress:
     check_keypress()
 
@@ -355,21 +355,21 @@ ui_keypress:
     beq $v0 0x73 key_start # s
     jr $ra
     key_reset:
-        la $ra init_pre
-        add $v1 $a0 POST_P
+        la $ra op_init
+        add $v1 $a0 ED_P
         beqz $s0 draw_keyp
         jr $ra
     key_quit:
         la $ra terminate
-        addi $v1 $a0 POST_Q
+        addi $v1 $a0 ED_Q
         beqz $s0 draw_keyq
-        addi $v1 $a0 PRE_Q
+        addi $v1 $a0 OP_Q
         j draw_keyq
     key_start:
         la $ra start
-        addi $v1 $a0 POST_S
+        addi $v1 $a0 ED_S
         beqz $s0 draw_keys
-        addi $v1 $a0 PRE_S
+        addi $v1 $a0 OP_S
         j draw_keys
 
 start:
@@ -381,7 +381,7 @@ start:
 main_init:
     # if all stage completed
     lw $t0 stage
-    bge $t0 STAGE_COUNT init_post
+    bge $t0 STAGE_COUNT ed_init
 
     li $s0 PLAYER_INIT # player x
     li $s1 PLAYER_INIT # player y
@@ -442,7 +442,7 @@ main:
     j main
 keypress: # check ingame keypress, return dx dy as a0 a1
     check_keypress()
-    beq $v0 0x70 init_pre # p
+    beq $v0 0x70 op_init # p
     beq $v0 0x20 keypress_spc
     # the rest are movements
     beq $v0 0x77 keypress_w
@@ -639,7 +639,7 @@ stage_3: # stage 3 gimmick
     addi $sp $sp 12
     j player_move_update
 
-init_post:
+ed_init:
     move $s0 $0
     li $s7 0 # reset time
     jal draw_border
@@ -648,32 +648,32 @@ init_post:
     li $s3 30 # max volume
     li $s5 5
     li $a1 250 # duration
-post:
-    bge $s7 POST_FRAME post_ui_end
+ed_loop:
+    bge $s7 ED_FRAME ed_ui_end
         # consume keypress
         li $t0 0xffff0000
         lw $t1 4($t0)
         # load frame addr from memory
         srl $t0 $s7 1
         andi $t0 $t0 0xfffc # unset last 2 bits to make word aligned
-        la $t1 postgame_frames
+        la $t1 ed_frames
         add $t0 $t0 $t1
         lw $v0 0($t0)
         setup_color($s7)
         jalr $v0
-    post_ui_end:
+    ed_ui_end:
     jal ui_keypress
     # draw doll
     andi $t4 $s7 1 # every 2 frames
-    bnez $t4 post_doll_end # skip
-    jal draw_post_doll
-    post_doll_end:
+    bnez $t4 ed_doll_end # skip
+    jal draw_ed_doll
+    ed_doll_end:
 
     # music
     div $s7 $s5
     mfhi $t0
-    bnez $t0 post_refresh
-    beqz $s7 post_refresh # skip first frame (so volume wont be 0)
+    bnez $t0 ed_refresh
+    beqz $s7 ed_refresh # skip first frame (so volume wont be 0)
     mflo $t0
     # mod 16
     and $t0 $t0 0xf
@@ -688,12 +688,12 @@ post:
     li $v0 31
     syscall # midi
 
-    post_refresh:
+    ed_refresh:
     addi $s7 $s7 1 # increment time
-    li $a0 POST_RATE # sleep
+    li $a0 ED_RATE # sleep
     li $v0 32
     syscall
-    j post
+    j ed_loop
 
 terminate: # terminate the program gracefully
     li $a1 -4
@@ -4700,30 +4700,30 @@ draw_border: # start at v1, use t4
     draw64($t4, 63732, 63736, 63740, 63744, 63748, 63752, 63756, 63760, 63764, 63768, 63772, 63776, 63780, 63784, 63788, 63792, 63796, 63800, 63804, 63808, 63812, 63816, 63820, 63824, 63828, 63832, 63836, 63840, 63844, 63848, 63852, 63856, 63860, 63864, 63868, 63872, 63876, 63880, 63884, 63888, 63892, 63896, 63900, 63904, 63908, 63912, 63916, 63920, 63924, 63928, 63932, 63936, 63940, 63944, 63948, 63952, 63956, 63960, 63964, 63968, 63972, 63976, 63980, 63984)
     jr $ra
 
-draw_pre_start:
+draw_op_start:
     li $v0 BASE_ADDRESS
     addi $v1 $v0 34056 # (66, 66)
     jal draw_keybase
-    addi $v1 $v0 PRE_S
+    addi $v1 $v0 OP_S
     jal draw_keys
     addi $v1 $v0 34648 # (86, 67)
     jal draw_start
     # to lazy to store ra in stack
-    j pre_ui_end
-draw_pre_quit:
+    j op_ui_end
+draw_op_quit:
     li $v0 BASE_ADDRESS
     addi $v1 $v0 45320 # (66, 88)
     jal draw_keybase
-    addi $v1 $v0 PRE_Q
+    addi $v1 $v0 OP_Q
     jal draw_keyq
     addi $v1 $v0 44376 # (86, 86)
     jal draw_quit
-    j pre_ui_end
-draw_post_return: # use t0-t9 v1
+    j op_ui_end
+draw_ed_return: # use t0-t9 v1
     li $v0 BASE_ADDRESS
     addi $v1 $v0 21608 # (26, 42)
     jal draw_keybase
-    addi $v1 $v0 POST_P
+    addi $v1 $v0 ED_P
     jal draw_keyp
     addi $v1 $v0 21692 # (47, 42)
     jal draw_to
@@ -4732,12 +4732,12 @@ draw_post_return: # use t0-t9 v1
     addi $v1 $v0 21796 # (73, 42)
     jal draw_turn
     # to lazy to store ra in stack
-    j post_ui_end
-draw_post_restart: # use t0-t9 v1
+    j ed_ui_end
+draw_ed_restart: # use t0-t9 v1
     li $v0 BASE_ADDRESS
     addi $v1 $v0 32872 # (26, 64)
     jal draw_keybase
-    addi $v1 $v0 POST_S
+    addi $v1 $v0 ED_S
     jal draw_keys
     addi $v1 $v0 32956 # (47, 64)
     jal draw_to
@@ -4745,18 +4745,18 @@ draw_post_restart: # use t0-t9 v1
     jal draw_re
     addi $v1 $v0 33064 # (74, 64)
     jal draw_start
-    j post_ui_end
-draw_post_quit: # use t0-t9 v1
+    j ed_ui_end
+draw_ed_quit: # use t0-t9 v1
     li $v0 BASE_ADDRESS
     addi $v1 $v0 44136 # (26, 86)
     jal draw_keybase
-    addi $v1 $v0 POST_Q
+    addi $v1 $v0 ED_Q
     jal draw_keyq
     addi $v1 $v0 44732 # (47, 87)
     jal draw_to
     addi $v1 $v0 44280 # (62, 86)
     jal draw_quit
-    j post_ui_end
+    j ed_ui_end
 
 draw_eclipse: # start at v1, use t4
     li $v1 BASE_ADDRESS
@@ -4916,11 +4916,11 @@ draw_alice:
     li $t4 0x540e33
     sw $t4 34408($v1)
     jr $ra
-draw_post_doll:
+draw_ed_doll:
     addi $sp $sp -4 # push ra to stack
     sw $ra 0($sp)
 
-    la $a2 postgame_doll # array of frames
+    la $a2 ed_doll # array of frames
     sll $t4 $s7 1
     frame(DOLLS_FRAME)
     li $v1 BASE_ADDRESS
@@ -4930,7 +4930,7 @@ draw_post_doll:
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
     jr $ra
-    draw_post_doll_00: # start at v1, use t4
+    draw_ed_doll_00: # start at v1, use t4
         draw64($0, 8704, 9216, 10340, 11264, 11776, 11780, 12292, 12296, 12300, 12392, 12396, 12808, 12812, 12816, 12820, 12904, 12908, 13328, 13332, 13336, 13412, 13416, 13844, 13924, 14356, 14436, 14868, 14948, 15380, 15896, 16408, 16920, 16924, 16988, 16992, 17436, 17500, 17504, 17948, 18016, 18460, 18528, 18976, 19488, 19492, 19496, 19544, 20000, 20004, 20008, 20020, 20032, 20036, 20040, 20044, 20048, 20052, 20056, 20060, 20512, 20516, 20532, 20544, 20548)
         draw16($0, 20552, 20556, 20560, 20564, 20568, 20572, 21028, 21044, 21060, 21064, 21068, 21072, 21076, 21080, 21556, 21560)
         draw4($0, 21572, 21576, 21580, 21584)
@@ -5024,7 +5024,7 @@ draw_post_doll:
         sw $t4 13900($v1)
         sw $t4 14400($v1)
         jr $ra
-    draw_post_doll_01: # start at v1, use t4
+    draw_ed_doll_01: # start at v1, use t4
         li $0 0x880033
         draw64($0, 6244, 6756, 7200, 7268, 7688, 7692, 7712, 7780, 8196, 8200, 8204, 8208, 8212, 8224, 8292, 8296, 8300, 8708, 8712, 8716, 8720, 8724, 8728, 8732, 8736, 8804, 8808, 8812, 9220, 9224, 9228, 9232, 9236, 9240, 9244, 9248, 9316, 9320, 9728, 9732, 9736, 9740, 9744, 9748, 9752, 9756, 9760, 10240, 10244, 10248, 10752, 11368, 14360, 14364, 14872, 14876, 14880, 15388, 15392, 15452, 15456, 15900, 15904, 15968)
         draw16($0, 16412, 16416, 16480, 16928, 17440, 17952, 17956, 17960, 18004, 18008, 18464, 18468, 18472, 18484, 18496, 18500)
@@ -5120,7 +5120,7 @@ draw_post_doll:
         sw $t4 12364($v1)
         sw $t4 12864($v1)
         jr $ra
-    draw_post_doll_02: # start at v1, use t4
+    draw_ed_doll_02: # start at v1, use t4
         li $0 0x880033
         draw16($0, 10344, 10348, 11264, 11268, 11776, 11880, 11884, 12392, 13328, 13332, 13336, 13404, 13824, 13828, 13832, 13836)
         draw16($0, 13840, 13844, 13848, 13916, 13920, 14336, 14340, 14344, 14348, 14352, 14356, 14428, 14432, 14848, 14852, 14856)
@@ -5236,7 +5236,7 @@ draw_post_doll:
         sw $t4 11856($v1)
         sw $t4 12356($v1)
         jr $ra
-    draw_post_doll_03: # start at v1, use t4
+    draw_ed_doll_03: # start at v1, use t4
         li $0 0x880033
         draw64($0, 1588, 1592, 1596, 1600, 1604, 1608, 1612, 1616, 2092, 2096, 2100, 2104, 2108, 2112, 2116, 2120, 2124, 2128, 2132, 2136, 2600, 2604, 2608, 2612, 2616, 2620, 2624, 2628, 2632, 2636, 2640, 2644, 2648, 2652, 3108, 3112, 3116, 3120, 3156, 3160, 3164, 3168, 3620, 3624, 3676, 3680, 4128, 4132, 4192, 4196, 4640, 4708, 5148, 5220, 6168, 8296, 8300, 8808, 8812, 9316, 10860, 11364, 11368, 11372)
         draw16($0, 11780, 12288, 12292, 12296, 12300, 12304, 12308, 12800, 12804, 12808, 12812, 12816, 12820, 12824, 13316, 13320)
@@ -5341,7 +5341,7 @@ draw_post_doll:
         draw4($t4, 13416, 13928, 14360, 14436)
         sw $t4 14440($v1)
         jr $ra
-    draw_post_doll_04: # start at v1, use t4
+    draw_ed_doll_04: # start at v1, use t4
         li $0 0x880033
         draw64($0, 4644, 5152, 5156, 5660, 5664, 5668, 6172, 6176, 6180, 6244, 6680, 6684, 6688, 6692, 6756, 7168, 7172, 7176, 7180, 7192, 7196, 7200, 7204, 7268, 7680, 7684, 7688, 7692, 7696, 7700, 7704, 7708, 7712, 7716, 8192, 8196, 8200, 8204, 8208, 8212, 8216, 8708, 9216, 9324, 9728, 10240, 10752, 10756, 11268, 11872, 12316, 12384, 12388, 12396, 12828, 12836, 12896, 12900, 13336, 13340, 13344, 13348, 13408, 13412)
         draw64($0, 13416, 13848, 13852, 13856, 13860, 13920, 13924, 13928, 14360, 14364, 14368, 14372, 14432, 14436, 14440, 14876, 14880, 14884, 14944, 14948, 15388, 15392, 15396, 15460, 15900, 15904, 15908, 15912, 15960, 15964, 15972, 16412, 16416, 16420, 16424, 16428, 16432, 16468, 16472, 16476, 16924, 16928, 16932, 16936, 16940, 16956, 16968, 16972, 16976, 16980, 16984, 16988, 16992, 17436, 17440, 17444, 17448, 17452, 17468, 17484, 17488, 17492, 17496, 17500)
@@ -5436,7 +5436,7 @@ draw_post_doll:
         sw $t4 10324($v1)
         sw $t4 10824($v1)
         jr $ra
-    draw_post_doll_05: # start at v1, use t4
+    draw_ed_doll_05: # start at v1, use t4
         li $0 0x880033
         draw16($0, 56, 560, 1068, 1576, 2088, 2596, 3108, 3620, 4132, 7208, 7720, 8816, 9220, 9224, 9732, 9736)
         draw16($0, 9740, 10244, 10248, 11780, 11784, 11800, 11804, 11808, 11876, 12292, 12296, 12300, 12304, 12308, 12312, 12320)
@@ -5538,7 +5538,7 @@ draw_post_doll:
         sw $t4 10328($v1)
         sw $t4 10832($v1)
         jr $ra
-    draw_post_doll_06: # start at v1, use t4
+    draw_ed_doll_06: # start at v1, use t4
         li $0 0x880033
         draw16($0, 60, 64, 68, 72, 76, 80, 84, 88, 564, 568, 572, 608, 1072, 1076, 1580, 1584)
         draw16($0, 2092, 2600, 2604, 3112, 3624, 6768, 7176, 7688, 7692, 8200, 8712, 10252, 10256, 10760, 10764, 10768)
@@ -5635,7 +5635,7 @@ draw_post_doll:
         sw $t4 10836($v1)
         sw $t4 10844($v1)
         jr $ra
-    draw_post_doll_07: # start at v1, use t4
+    draw_ed_doll_07: # start at v1, use t4
         li $0 0x880033
         draw64($0, 576, 580, 584, 588, 592, 596, 600, 604, 1080, 1084, 1088, 1092, 1096, 1100, 1104, 1108, 1112, 1116, 1120, 1124, 1588, 1592, 1596, 1600, 1636, 1640, 2096, 2100, 2104, 2156, 2608, 2612, 3116, 3120, 3628, 4136, 4648, 5156, 5644, 5648, 5652, 5668, 6156, 6160, 6164, 6168, 6172, 6668, 6672, 6688, 7180, 7184, 7288, 7696, 7796, 8204, 8208, 8716, 8720, 8724, 9228, 9232, 9236, 9744)
         draw16($0, 9844, 10800, 13352, 13864, 14376, 14888, 15400, 17480, 17484, 17488, 17492, 17992, 17996, 18000, 18004, 18508)
@@ -5731,7 +5731,7 @@ draw_post_doll:
         sw $t4 11872($v1)
         sw $t4 12372($v1)
         jr $ra
-    draw_post_doll_08: # start at v1, use t4
+    draw_ed_doll_08: # start at v1, use t4
         li $0 0x880033
         draw64($0, 1604, 1608, 1612, 1616, 1620, 1624, 1628, 1632, 2108, 2112, 2116, 2120, 2124, 2128, 2132, 2136, 2140, 2144, 2148, 2152, 2616, 2620, 2624, 2628, 2668, 3124, 3128, 3132, 3632, 3636, 4140, 4144, 4652, 5160, 6180, 6676, 6680, 6684, 7188, 7192, 7700, 7704, 8212, 8216, 8316, 8728, 9240, 9244, 9748, 9752, 9756, 10260, 10264, 10776, 10872, 11288, 12412, 13340, 13848, 14892, 15404, 15916, 15920, 16428)
         draw4($0, 16432, 16948, 18520, 19032)
@@ -5832,7 +5832,7 @@ draw_post_doll:
         sw $t4 12900($v1)
         sw $t4 13408($v1)
         jr $ra
-    draw_post_doll_09: # start at v1, use t4
+    draw_ed_doll_09: # start at v1, use t4
         li $0 0x880033
         draw64($0, 2632, 2636, 2640, 2644, 2648, 2652, 2656, 2660, 2664, 3136, 3140, 3144, 3148, 3152, 3156, 3160, 3164, 3168, 3172, 3176, 3180, 3184, 3640, 3644, 3648, 3652, 3656, 3660, 3664, 3668, 3672, 3676, 3680, 3684, 3688, 3692, 3696, 3700, 4148, 4152, 4156, 4160, 4164, 4168, 4208, 4212, 4216, 4656, 4660, 4664, 4668, 4672, 4728, 4732, 5164, 5168, 5172, 5176, 5180, 5244, 5248, 5672, 5676, 5680)
         draw16($0, 5684, 5688, 5692, 5760, 6184, 6188, 6192, 6196, 6200, 6692, 6696, 6700, 6704, 6708, 7196, 7200)
@@ -5935,7 +5935,7 @@ draw_post_doll:
         sw $t4 14444($v1)
         sw $t4 14944($v1)
         jr $ra
-    draw_post_doll_10: # start at v1, use t4
+    draw_ed_doll_10: # start at v1, use t4
         li $0 0x880033
         draw64($0, 4172, 4176, 4180, 4184, 4188, 4192, 4196, 4200, 4204, 4676, 4680, 4684, 4688, 4692, 4696, 4700, 4704, 4708, 4712, 4716, 4720, 4724, 5184, 5188, 5192, 5196, 5200, 5204, 5208, 5212, 5216, 5220, 5224, 5228, 5232, 5236, 5240, 5696, 5700, 5704, 5708, 5712, 5716, 5720, 5724, 5728, 5732, 5736, 5740, 5744, 5748, 5752, 5756, 6204, 6208, 6212, 6216, 6220, 6224, 6260, 6264, 6268, 6272, 6712)
         draw64($0, 6716, 6720, 6724, 6728, 6780, 6784, 6788, 7224, 7228, 7232, 7236, 7296, 7300, 7304, 7732, 7736, 7740, 7744, 7812, 7816, 8244, 8248, 8252, 8256, 8324, 8332, 8752, 8756, 8760, 8764, 9248, 9252, 9256, 9264, 9268, 9272, 9276, 9760, 9764, 9768, 9772, 9776, 9780, 9784, 9788, 10272, 10276, 10280, 10284, 10288, 10292, 10296, 10300, 10784, 10788, 10804, 10808, 11300, 11320, 11400, 11812, 12320, 12324, 12832)
@@ -6029,7 +6029,7 @@ draw_post_doll:
         sw $t4 16496($v1)
         sw $t4 16996($v1)
         jr $ra
-    draw_post_doll_11: # start at v1, use t4
+    draw_ed_doll_11: # start at v1, use t4
         li $0 0x880033
         draw64($0, 8836, 9348, 9856, 9860, 9864, 10368, 10372, 10376, 10792, 10796, 10800, 10884, 10888, 11304, 11308, 11312, 11316, 11816, 11820, 12428, 12936, 12940, 13448, 13964, 14476, 15488, 15492, 15928, 15996, 16004, 16008, 16440, 16508, 16516, 16520, 16524, 16952, 16956, 17020, 17024, 17028, 17032, 17036, 17460, 17464, 17468, 17532, 17536, 17540, 17544, 17548, 17972, 17976, 17980, 18048, 18052, 18492, 18564, 19008, 19068, 19076, 19516, 19520, 19524)
         draw16($0, 19528, 19576, 19580, 20028, 20032, 20036, 20040, 20044, 20048, 20052, 20056, 20060, 20064, 20084, 20088, 20092)
@@ -6123,7 +6123,7 @@ draw_post_doll:
         sw $t4 13928($v1)
         sw $t4 14428($v1)
         jr $ra
-    draw_post_doll_12: # start at v1, use t4
+    draw_ed_doll_12: # start at v1, use t4
         li $0 0x880033
         draw64($0, 6784, 7296, 7740, 7808, 8252, 8320, 8764, 8832, 9276, 9344, 9788, 10300, 11908, 11912, 13444, 13956, 13960, 14392, 14468, 14472, 14900, 14904, 14976, 14980, 14984, 15404, 15408, 15412, 15416, 15420, 15908, 15912, 15916, 15920, 15924, 15932, 15992, 16000, 16420, 16424, 16428, 16432, 16444, 16504, 16512, 16936, 16940, 17016, 17528, 18040, 18496, 18500, 18544, 18548, 18552, 19012, 19016, 19020, 19024, 19028, 19032, 19036, 19056, 19060)
         draw16($0, 19064, 19532, 19536, 19540, 19544, 19568, 19572, 20584, 21088, 21092, 21096, 21100, 21104, 21108, 21604, 21608)
@@ -6223,7 +6223,7 @@ draw_post_doll:
         sw $t4 12904($v1)
         sw $t4 13404($v1)
         jr $ra
-    draw_post_doll_13: # start at v1, use t4
+    draw_ed_doll_13: # start at v1, use t4
         li $0 0x880033
         draw16($0, 11396, 11400, 12316, 12424, 12932, 13880, 14364, 14368, 14372, 14376, 14380, 14384, 14388, 14464, 14876, 14880)
         draw16($0, 14884, 14888, 14892, 14896, 14908, 15388, 15392, 15396, 15400, 15484, 17984, 18032, 18036, 18504, 18508, 18512)
@@ -6319,7 +6319,7 @@ draw_post_doll:
         sw $t4 12392($v1)
         sw $t4 12892($v1)
         jr $ra
-    draw_post_doll_14: # start at v1, use t4
+    draw_ed_doll_14: # start at v1, use t4
         li $0 0x880033
         draw64($0, 2128, 2132, 2136, 2140, 2144, 2148, 2152, 2156, 2632, 2636, 2640, 2644, 2648, 2652, 2656, 2660, 2664, 2668, 2672, 2676, 3140, 3144, 3148, 3152, 3156, 3160, 3164, 3168, 3172, 3176, 3180, 3184, 3188, 3192, 3648, 3652, 3656, 3660, 3696, 3700, 3704, 3708, 4160, 4164, 4216, 4220, 4668, 4672, 4732, 4736, 5180, 5248, 5760, 7300, 7812, 8324, 8836, 9348, 11804, 11908, 11912, 12320, 12828, 12832)
         draw4($0, 12836, 12840, 13340, 13344)
@@ -6421,7 +6421,7 @@ draw_post_doll:
         draw4($t4, 13956, 14468, 14900, 14976)
         sw $t4 14980($v1)
         jr $ra
-    draw_post_doll_15: # start at v1, use t4
+    draw_ed_doll_15: # start at v1, use t4
         li $0 0x880033
         draw64($0, 4728, 5240, 5244, 5752, 5756, 6264, 6268, 6272, 6776, 6780, 6784, 7220, 7288, 7292, 7296, 7708, 7712, 7716, 7720, 7732, 7800, 7804, 7808, 8220, 8224, 8228, 8232, 8236, 8240, 8244, 8320, 8732, 9852, 9856, 9860, 9864, 10372, 10376, 10880, 10884, 10888, 11388, 11392, 11396, 11900, 11904, 12336, 12412, 12416, 12420, 12424, 12844, 12848, 12920, 12924, 12928, 12936, 13356, 13360, 13364, 13432, 13436, 13440, 13444)
         draw64($0, 13868, 13872, 13876, 13936, 13940, 13944, 13948, 13952, 13956, 14380, 14388, 14448, 14452, 14456, 14460, 14464, 14468, 14900, 14960, 14964, 14968, 14972, 14976, 14980, 15472, 15476, 15484, 15488, 15984, 15988, 16000, 16440, 16444, 16488, 16492, 16496, 16500, 16504, 16512, 16952, 16956, 16960, 16964, 16968, 16972, 16976, 16980, 17000, 17004, 17008, 17012, 17016, 17464, 17468, 17472, 17476, 17480, 17484, 17488, 17512, 17516, 17520, 17524, 17528)
@@ -6522,7 +6522,7 @@ draw_post_doll:
         sw $t4 10848($v1)
         sw $t4 11348($v1)
         jr $ra
-    draw_post_doll_16: # start at v1, use t4
+    draw_ed_doll_16: # start at v1, use t4
         li $0 0x880033
         draw64($0, 2164, 3192, 3704, 4216, 5748, 6256, 6260, 6768, 6772, 7276, 7280, 7284, 7788, 7792, 7796, 8304, 8308, 8312, 8316, 8736, 8816, 8820, 8824, 8828, 8832, 9240, 9244, 9248, 9252, 9332, 9336, 9340, 9344, 9748, 9752, 9756, 9760, 9764, 10260, 10264, 10268, 10272, 10276, 10368, 10772, 10776, 10780, 10784, 10788, 10796, 11284, 11288, 11292, 11296, 11300, 11308, 11376, 11800, 11804, 11808, 11812, 11816, 11884, 11888)
         draw16($0, 11892, 11896, 12308, 12312, 12316, 12320, 12324, 12328, 12396, 12400, 12404, 12408, 12820, 12824, 12828, 12832)
@@ -6609,7 +6609,7 @@ draw_post_doll:
         li $t4 0xd1003f
         draw4($t4, 604, 1116, 1624, 1628)
         jr $ra
-    draw_post_doll_17: # start at v1, use t4
+    draw_ed_doll_17: # start at v1, use t4
         li $0 0xd1003f
         draw64($0, 92, 96, 612, 616, 1128, 1132, 1644, 1648, 2156, 2160, 2672, 2676, 3184, 3188, 3696, 3700, 4212, 4724, 5236, 6188, 6696, 6700, 7204, 7208, 7212, 7216, 7716, 7720, 7724, 7728, 8228, 8232, 8236, 8740, 8744, 8748, 9256, 9840, 9844, 9848, 10352, 10356, 10360, 10364, 10800, 10804, 10864, 10868, 10872, 10876, 11312, 11316, 11380, 11384, 11388, 11820, 11824, 12332, 12336, 12844, 15408, 15468, 15924, 15928)
         draw4($0, 15972, 15976, 16476, 16480)
@@ -6693,7 +6693,7 @@ draw_post_doll:
         li $t4 0xfde3b2
         draw4($t4, 5688, 6200, 6204, 6716)
         jr $ra
-    draw_post_doll_18: # start at v1, use t4
+    draw_ed_doll_18: # start at v1, use t4
         li $0 0xfde3b2
         draw16($0, 60, 64, 68, 72, 76, 80, 84, 88, 564, 600, 604, 608, 1120, 1124, 1636, 1640)
         draw16($0, 2152, 2664, 2668, 3180, 3692, 4204, 4208, 4720, 5232, 5744, 9764, 9768, 10272, 10276, 10280, 10784)
@@ -6786,7 +6786,7 @@ draw_post_doll:
         sw $t4 10808($v1)
         sw $t4 11328($v1)
         jr $ra
-    draw_post_doll_19: # start at v1, use t4
+    draw_ed_doll_19: # start at v1, use t4
         li $0 0x7a3332
         draw64($0, 568, 572, 576, 580, 584, 588, 592, 596, 1072, 1076, 1112, 1116, 1580, 1632, 2088, 2148, 3108, 3176, 3616, 4716, 5228, 5740, 6260, 6264, 6772, 6776, 7284, 7288, 7792, 7796, 7800, 8300, 8304, 8308, 8312, 8820, 8824, 8828, 9332, 9336, 9340, 9840, 9844, 9848, 9852, 10348, 10352, 10356, 10360, 10364, 10864, 10868, 10872, 11348, 11860, 12896, 12908, 13408, 13412, 13420, 13920, 13924, 14432, 14436)
         draw4($0, 14440, 14948, 14952, 15460)
@@ -6882,7 +6882,7 @@ draw_post_doll:
         sw $t4 11340($v1)
         sw $t4 11844($v1)
         jr $ra
-    draw_post_doll_20: # start at v1, use t4
+    draw_ed_doll_20: # start at v1, use t4
         li $0 0x880033
         draw64($0, 1080, 1084, 1088, 1092, 1096, 1100, 1104, 1108, 1584, 1588, 1592, 1596, 1600, 1604, 1608, 1612, 1616, 1620, 1624, 1628, 2092, 2096, 2100, 2104, 2108, 2112, 2116, 2120, 2124, 2128, 2132, 2136, 2140, 2144, 2600, 2604, 2608, 2612, 2616, 2620, 2624, 2628, 2632, 2636, 2640, 2644, 2648, 2652, 2656, 2660, 3112, 3116, 3120, 3156, 3160, 3164, 3168, 3172, 3620, 3624, 3676, 3680, 3684, 3688)
         draw16($0, 4128, 4132, 4192, 4196, 4200, 4636, 4640, 4708, 4712, 5148, 5152, 5224, 5644, 5648, 5652, 5656)
@@ -6987,7 +6987,7 @@ draw_post_doll:
         sw $t4 13388($v1)
         sw $t4 13888($v1)
         jr $ra
-    draw_post_doll_21: # start at v1, use t4
+    draw_ed_doll_21: # start at v1, use t4
     li $0 0x880033
     draw64($0, 3124, 3128, 3132, 3136, 3140, 3144, 3148, 3152, 3628, 3632, 3636, 3640, 3644, 3648, 3652, 3656, 3660, 3664, 3668, 3672, 4136, 4140, 4144, 4148, 4152, 4156, 4160, 4164, 4168, 4172, 4176, 4180, 4184, 4188, 4644, 4648, 4652, 4656, 4660, 4664, 4668, 4672, 4676, 4680, 4684, 4688, 4692, 4696, 4700, 4704, 5156, 5160, 5164, 5168, 5172, 5176, 5180, 5184, 5188, 5192, 5196, 5200, 5204, 5208)
     draw64($0, 5212, 5216, 5220, 5664, 5668, 5672, 5676, 5680, 5716, 5720, 5724, 5728, 5732, 6176, 6180, 6184, 6236, 6240, 6244, 6248, 6660, 6664, 6668, 6672, 6676, 6688, 6692, 6752, 6756, 6760, 7172, 7176, 7180, 7184, 7188, 7192, 7196, 7200, 7268, 7272, 7684, 7688, 7692, 7696, 7700, 7704, 7708, 7712, 7780, 7784, 7788, 8200, 8204, 8208, 8212, 8216, 8220, 8296, 8300, 8716, 8720, 8724, 8728, 8732)
