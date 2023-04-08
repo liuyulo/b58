@@ -371,11 +371,11 @@ main_init:
     beqz $t0 draw_collect
 
     cheat: # skip to final stage and tp to exit
-    li $s0 352
-    li $s1 384
-    li $s5 7
-    li $t0 16
-    sw $t0 stage
+    # li $s0 352
+    # li $s1 384
+    # li $s5 7
+    # li $t0 16
+    # sw $t0 stage
 
     # new gravity
     lh $s2 stage_gravity($t0) # gravity x
@@ -2302,42 +2302,42 @@ draw_player: # start at v1 with Δx Δy in a0 a1, previous position in a2
     lw $ra 0($sp) # pop ra from stack
     addi $sp $sp 4
     jr $ra # return
-draw_player_00:
+draw_player_00: # start at v1
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x030302 # load color
+    li $t4 0x030302
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3c231b # load color
+    li $t4 0x3c231b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa46249 # load color
+    li $t4 0xa46249
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeaa891 # load color
+    li $t4 0xeaa891
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd0a4af # load color
+    li $t4 0xd0a4af
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc68fa1 # load color
+    li $t4 0xc68fa1
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd198a1 # load color
+    li $t4 0xd198a1
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc58993 # load color
+    li $t4 0xc58993
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc7a3b2 # load color
+    li $t4 0xc7a3b2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7f7778 # load color
+    li $t4 0x7f7778
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x261911 # load color
+    li $t4 0x261911
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -2345,677 +2345,663 @@ draw_player_00:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x120a07 # load color
+    li $t4 0x120a07
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6d3f2d # load color
+    li $t4 0x6d3f2d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd68969 # load color
+    li $t4 0xd68969
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe7bcb6 # load color
+    li $t4 0xe7bcb6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb96a7d # load color
+    li $t4 0xb96a7d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xaa4e63 # load color
+    li $t4 0xaa4e63
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc98a8f # load color
+    li $t4 0xc98a8f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe3a49e # load color
+    li $t4 0xe3a49e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdea09c # load color
+    li $t4 0xdea09c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbc7781 # load color
+    li $t4 0xbc7781
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xce7c8c # load color
+    li $t4 0xce7c8c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbf9084 # load color
+    li $t4 0xbf9084
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x49352c # load color
+    li $t4 0x49352c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x040201 # load color
+    li $t4 0x040201
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x030201 # load color
+    li $t4 0x030201
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x854d37 # load color
+    li $t4 0x854d37
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc87556 # load color
+    li $t4 0xc87556
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdaa59e # load color
+    li $t4 0xdaa59e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb76476 # load color
+    li $t4 0xb76476
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb7626e # load color
+    li $t4 0xb7626e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeab990 # load color
+    li $t4 0xeab990
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6c374 # load color
+    li $t4 0xf6c374
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf5c370 # load color
+    li $t4 0xf5c370
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6c26e # load color
+    li $t4 0xf6c26e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf2bd82 # load color
+    li $t4 0xf2bd82
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe1b7ab # load color
+    li $t4 0xe1b7ab
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe2a197 # load color
+    li $t4 0xe2a197
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd7a474 # load color
+    li $t4 0xd7a474
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x614029 # load color
+    li $t4 0x614029
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x000001 # load color
+    li $t4 0x000001
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x4c2c20 # load color
+    li $t4 0x4c2c20
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbb7151 # load color
+    li $t4 0xbb7151
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdca16b # load color
+    li $t4 0xdca16b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcb8877 # load color
+    li $t4 0xcb8877
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc17172 # load color
+    li $t4 0xc17172
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf1c58e # load color
+    li $t4 0xf1c58e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfed97c # load color
+    li $t4 0xfed97c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbdb75 # load color
+    li $t4 0xfbdb75
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfce488 # load color
+    li $t4 0xfce488
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe389 # load color
+    li $t4 0xffe389
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfad677 # load color
+    li $t4 0xfad677
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe092 # load color
+    li $t4 0xffe092
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfcdeac # load color
+    li $t4 0xfcdeac
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6ce78 # load color
+    li $t4 0xf6ce78
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcea95e # load color
+    li $t4 0xcea95e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x261a12 # load color
+    li $t4 0x261a12
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xa55f46 # load color
+    li $t4 0xa55f46
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc47b55 # load color
+    li $t4 0xc47b55
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf7c873 # load color
+    li $t4 0xf7c873
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf7cd7b # load color
+    li $t4 0xf7cd7b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeab377 # load color
+    li $t4 0xeab377
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfcdfa7 # load color
+    li $t4 0xfcdfa7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xedc39c # load color
+    li $t4 0xedc39c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe0ac6b # load color
+    li $t4 0xe0ac6b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfeebab # load color
+    li $t4 0xfeebab
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf9dbac # load color
+    li $t4 0xf9dbac
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdca063 # load color
+    li $t4 0xdca063
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfce0a5 # load color
+    li $t4 0xfce0a5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf7ca8b # load color
+    li $t4 0xf7ca8b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xefb76f # load color
+    li $t4 0xefb76f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf7d473 # load color
+    li $t4 0xf7d473
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x937241 # load color
+    li $t4 0x937241
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xbe6f50 # load color
+    li $t4 0xbe6f50
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe09e65 # load color
+    li $t4 0xe09e65
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfad378 # load color
+    li $t4 0xfad378
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfacc77 # load color
+    li $t4 0xfacc77
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf2b672 # load color
+    li $t4 0xf2b672
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe7b36a # load color
+    li $t4 0xe7b36a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb46643 # load color
+    li $t4 0xb46643
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcf955c # load color
+    li $t4 0xcf955c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfddb76 # load color
+    li $t4 0xfddb76
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd69355 # load color
+    li $t4 0xd69355
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8d482d # load color
+    li $t4 0x8d482d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc38254 # load color
+    li $t4 0xc38254
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbd178 # load color
+    li $t4 0xfbd178
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd99b64 # load color
+    li $t4 0xd99b64
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf5c073 # load color
+    li $t4 0xf5c073
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb39f56 # load color
+    li $t4 0xb39f56
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xbe6f4f # load color
+    li $t4 0xbe6f4f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe7b06a # load color
+    li $t4 0xe7b06a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeaba6d # load color
+    li $t4 0xeaba6d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbcd79 # load color
+    li $t4 0xfbcd79
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbc7955 # load color
+    li $t4 0xbc7955
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x764b3c # load color
+    li $t4 0x764b3c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x733b2c # load color
+    li $t4 0x733b2c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb78b66 # load color
+    li $t4 0xb78b66
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xecad75 # load color
+    li $t4 0xecad75
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc48374 # load color
+    li $t4 0xc48374
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x62585f # load color
+    li $t4 0x62585f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb2705f # load color
+    li $t4 0xb2705f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6c06c # load color
+    li $t4 0xf6c06c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb7814d # load color
+    li $t4 0xb7814d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbd7d54 # load color
+    li $t4 0xbd7d54
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xac9857 # load color
+    li $t4 0xac9857
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xcf7d58 # load color
+    li $t4 0xcf7d58
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe09d64 # load color
+    li $t4 0xe09d64
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd5915d # load color
+    li $t4 0xd5915d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfcd27a # load color
+    li $t4 0xfcd27a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb8885c # load color
+    li $t4 0xb8885c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa69da1 # load color
+    li $t4 0xa69da1
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x5f7f83 # load color
+    li $t4 0x5f7f83
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xddbdb0 # load color
+    li $t4 0xddbdb0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbcfbf # load color
+    li $t4 0xfbcfbf
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe2d7d2 # load color
+    li $t4 0xe2d7d2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x74a7b4 # load color
+    li $t4 0x74a7b4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcb8b70 # load color
+    li $t4 0xcb8b70
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd19251 # load color
+    li $t4 0xd19251
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x975f3a # load color
+    li $t4 0x975f3a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3e2b1a # load color
+    li $t4 0x3e2b1a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x524c2b # load color
+    li $t4 0x524c2b
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xcd7a57 # load color
+    li $t4 0xcd7a57
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd9835c # load color
+    li $t4 0xd9835c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc37950 # load color
+    li $t4 0xc37950
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe8a569 # load color
+    li $t4 0xe8a569
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd9a16a # load color
+    li $t4 0xd9a16a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xaab3b6 # load color
+    li $t4 0xaab3b6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3c96a7 # load color
+    li $t4 0x3c96a7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeee2db # load color
+    li $t4 0xeee2db
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffebe2 # load color
+    li $t4 0xffebe2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf1e6df # load color
+    li $t4 0xf1e6df
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbfc1bb # load color
+    li $t4 0xbfc1bb
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc7785c # load color
+    li $t4 0xc7785c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd67453 # load color
+    li $t4 0xd67453
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x562e21 # load color
+    li $t4 0x562e21
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x020101 # load color
+    li $t4 0x020101
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x020303 # load color
+    li $t4 0x020303
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x7d4938 # load color
+    li $t4 0x7d4938
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xce7958 # load color
+    li $t4 0xce7958
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6e3c27 # load color
+    li $t4 0x6e3c27
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8e543a # load color
+    li $t4 0x8e543a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcb7850 # load color
+    li $t4 0xcb7850
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xce9487 # load color
+    li $t4 0xce9487
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe4c2c7 # load color
+    li $t4 0xe4c2c7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbd5cf # load color
+    li $t4 0xfbd5cf
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfed5ce # load color
+    li $t4 0xfed5ce
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6cbc5 # load color
+    li $t4 0xf6cbc5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc78a79 # load color
+    li $t4 0xc78a79
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcd7451 # load color
+    li $t4 0xcd7451
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb36343 # load color
+    li $t4 0xb36343
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2d1912 # load color
+    li $t4 0x2d1912
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x0b0506 # load color
+    li $t4 0x0b0506
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x683c2f # load color
+    li $t4 0x683c2f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2e1913 # load color
+    li $t4 0x2e1913
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x261409 # load color
+    li $t4 0x261409
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x96573a # load color
+    li $t4 0x96573a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdeb2ad # load color
+    li $t4 0xdeb2ad
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf7d2d8 # load color
+    li $t4 0xf7d2d8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe2a9aa # load color
+    li $t4 0xe2a9aa
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc05c68 # load color
+    li $t4 0xc05c68
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdab3b8 # load color
+    li $t4 0xdab3b8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbd979a # load color
+    li $t4 0xbd979a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x914e44 # load color
+    li $t4 0x914e44
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1d0b04 # load color
+    li $t4 0x1d0b04
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x060302 # load color
+    li $t4 0x060302
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x020508 # load color
+    li $t4 0x020508
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x151e2d # load color
+    li $t4 0x151e2d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x302b30 # load color
+    li $t4 0x302b30
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x897c89 # load color
+    li $t4 0x897c89
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xac93a7 # load color
+    li $t4 0xac93a7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbb939f # load color
+    li $t4 0xbb939f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc9a1a7 # load color
+    li $t4 0xc9a1a7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbd99a0 # load color
+    li $t4 0xbd99a0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x736a82 # load color
+    li $t4 0x736a82
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x25253a # load color
+    li $t4 0x25253a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1e2d49 # load color
+    li $t4 0x1e2d49
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x04060a # load color
+    li $t4 0x04060a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1d2636 # load color
+    li $t4 0x1d2636
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2d3d5a # load color
+    li $t4 0x2d3d5a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x284167 # load color
+    li $t4 0x284167
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2e4169 # load color
+    li $t4 0x2e4169
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3a3f5e # load color
+    li $t4 0x3a3f5e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7d87a7 # load color
+    li $t4 0x7d87a7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x898ea0 # load color
+    li $t4 0x898ea0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x71788b # load color
+    li $t4 0x71788b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x303959 # load color
+    li $t4 0x303959
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2b3553 # load color
+    li $t4 0x2b3553
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3b5586 # load color
+    li $t4 0x3b5586
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1f2d46 # load color
+    li $t4 0x1f2d46
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x07090d # load color
+    li $t4 0x07090d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x35415e # load color
+    li $t4 0x35415e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x384c74 # load color
+    li $t4 0x384c74
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x425883 # load color
+    li $t4 0x425883
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x384061 # load color
+    li $t4 0x384061
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3e466e # load color
+    li $t4 0x3e466e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb4b4cc # load color
+    li $t4 0xb4b4cc
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdfdeeb # load color
+    li $t4 0xdfdeeb
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd6d5e6 # load color
+    li $t4 0xd6d5e6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7881a0 # load color
+    li $t4 0x7881a0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x5d6586 # load color
+    li $t4 0x5d6586
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x304870 # load color
+    li $t4 0x304870
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x080c13 # load color
+    li $t4 0x080c13
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1b1f2a # load color
+    li $t4 0x1b1f2a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x475373 # load color
+    li $t4 0x475373
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x454c67 # load color
+    li $t4 0x454c67
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7e82a0 # load color
+    li $t4 0x7e82a0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa4adc3 # load color
+    li $t4 0xa4adc3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x717897 # load color
+    li $t4 0x717897
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7383a0 # load color
+    li $t4 0x7383a0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa2a8c1 # load color
+    li $t4 0xa2a8c1
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x69677e # load color
+    li $t4 0x69677e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x283754 # load color
+    li $t4 0x283754
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x070b11 # load color
+    li $t4 0x070b11
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -3023,7 +3009,6 @@ draw_player_00:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
@@ -3032,28 +3017,28 @@ draw_player_00:
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x040506 # load color
+    li $t4 0x040506
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x21222b # load color
+    li $t4 0x21222b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6a7094 # load color
+    li $t4 0x6a7094
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x71779b # load color
+    li $t4 0x71779b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x383c4f # load color
+    li $t4 0x383c4f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x292f41 # load color
+    li $t4 0x292f41
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x4d5779 # load color
+    li $t4 0x4d5779
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x353b51 # load color
+    li $t4 0x353b51
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -3065,44 +3050,43 @@ draw_player_00:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
-    jr $ra
-draw_player_01:
+    jr $ra # return
+draw_player_01: # start at v1
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x020201 # load color
+    li $t4 0x020201
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x382119 # load color
+    li $t4 0x382119
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x9e5d46 # load color
+    li $t4 0x9e5d46
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeaa78d # load color
+    li $t4 0xeaa78d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd2a7b0 # load color
+    li $t4 0xd2a7b0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc590a2 # load color
+    li $t4 0xc590a2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd39ba4 # load color
+    li $t4 0xd39ba4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc58a94 # load color
+    li $t4 0xc58a94
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc99fae # load color
+    li $t4 0xc99fae
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8a8588 # load color
+    li $t4 0x8a8588
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x302016 # load color
+    li $t4 0x302016
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -3110,678 +3094,664 @@ draw_player_01:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x0f0906 # load color
+    li $t4 0x0f0906
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x663b2a # load color
+    li $t4 0x663b2a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd28564 # load color
+    li $t4 0xd28564
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe9bcb5 # load color
+    li $t4 0xe9bcb5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbc7184 # load color
+    li $t4 0xbc7184
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa94960 # load color
+    li $t4 0xa94960
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc4848c # load color
+    li $t4 0xc4848c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe2a39e # load color
+    li $t4 0xe2a39e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdfa19d # load color
+    li $t4 0xdfa19d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbd7982 # load color
+    li $t4 0xbd7982
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xca7688 # load color
+    li $t4 0xca7688
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc9958b # load color
+    li $t4 0xc9958b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x563f35 # load color
+    li $t4 0x563f35
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x060303 # load color
+    li $t4 0x060303
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x020101 # load color
+    li $t4 0x020101
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x804b36 # load color
+    li $t4 0x804b36
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc67354 # load color
+    li $t4 0xc67354
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdca69d # load color
+    li $t4 0xdca69d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb86a7b # load color
+    li $t4 0xb86a7b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb35a6a # load color
+    li $t4 0xb35a6a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe6b692 # load color
+    li $t4 0xe6b692
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf5c277 # load color
+    li $t4 0xf5c277
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf5c271 # load color
+    li $t4 0xf5c271
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6c26f # load color
+    li $t4 0xf6c26f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf2bd7f # load color
+    li $t4 0xf2bd7f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe2b8a9 # load color
+    li $t4 0xe2b8a9
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe09d99 # load color
+    li $t4 0xe09d99
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdda97b # load color
+    li $t4 0xdda97b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x734e32 # load color
+    li $t4 0x734e32
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x050204 # load color
+    li $t4 0x050204
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x472a1e # load color
+    li $t4 0x472a1e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xba6f50 # load color
+    li $t4 0xba6f50
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xda9e69 # load color
+    li $t4 0xda9e69
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcc8978 # load color
+    li $t4 0xcc8978
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbe6b6f # load color
+    li $t4 0xbe6b6f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xedbf8e # load color
+    li $t4 0xedbf8e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfed87b # load color
+    li $t4 0xfed87b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfcdb75 # load color
+    li $t4 0xfcdb75
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfce384 # load color
+    li $t4 0xfce384
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe388 # load color
+    li $t4 0xffe388
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbd777 # load color
+    li $t4 0xfbd777
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfedd8a # load color
+    li $t4 0xfedd8a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfee3b2 # load color
+    li $t4 0xfee3b2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf7cd7d # load color
+    li $t4 0xf7cd7d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdfb766 # load color
+    li $t4 0xdfb766
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x362719 # load color
+    li $t4 0x362719
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xa25d45 # load color
+    li $t4 0xa25d45
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc37954 # load color
+    li $t4 0xc37954
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf7c673 # load color
+    li $t4 0xf7c673
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf7cd7c # load color
+    li $t4 0xf7cd7c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe9b177 # load color
+    li $t4 0xe9b177
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbdda5 # load color
+    li $t4 0xfbdda5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf1cca4 # load color
+    li $t4 0xf1cca4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe0aa6b # load color
+    li $t4 0xe0aa6b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfee9a8 # load color
+    li $t4 0xfee9a8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfce2b3 # load color
+    li $t4 0xfce2b3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdea367 # load color
+    li $t4 0xdea367
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbdd9f # load color
+    li $t4 0xfbdd9f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf9d195 # load color
+    li $t4 0xf9d195
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xefb46e # load color
+    li $t4 0xefb46e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf9d675 # load color
+    li $t4 0xf9d675
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa68349 # load color
+    li $t4 0xa68349
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xbe6e50 # load color
+    li $t4 0xbe6e50
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdf9a63 # load color
+    li $t4 0xdf9a63
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfad278 # load color
+    li $t4 0xfad278
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf9ce77 # load color
+    li $t4 0xf9ce77
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf3b772 # load color
+    li $t4 0xf3b772
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xedbd6f # load color
+    li $t4 0xedbd6f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xba6d49 # load color
+    li $t4 0xba6d49
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcb8d58 # load color
+    li $t4 0xcb8d58
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffdf79 # load color
+    li $t4 0xffdf79
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe0a25d # load color
+    li $t4 0xe0a25d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x954c2f # load color
+    li $t4 0x954c2f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbd7d51 # load color
+    li $t4 0xbd7d51
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbd17a # load color
+    li $t4 0xfbd17a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdea267 # load color
+    li $t4 0xdea267
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf0b870 # load color
+    li $t4 0xf0b870
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcab160 # load color
+    li $t4 0xcab160
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xbd6f4f # load color
+    li $t4 0xbd6f4f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe6ae6a # load color
+    li $t4 0xe6ae6a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xebbc6f # load color
+    li $t4 0xebbc6f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfccf79 # load color
+    li $t4 0xfccf79
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc58059 # load color
+    li $t4 0xc58059
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7c4f3c # load color
+    li $t4 0x7c4f3c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x753929 # load color
+    li $t4 0x753929
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xae825f # load color
+    li $t4 0xae825f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeeb273 # load color
+    li $t4 0xeeb273
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xca8370 # load color
+    li $t4 0xca8370
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x665356 # load color
+    li $t4 0x665356
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa36a5e # load color
+    li $t4 0xa36a5e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6b96b # load color
+    li $t4 0xf6b96b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc29154 # load color
+    li $t4 0xc29154
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbb7550 # load color
+    li $t4 0xbb7550
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc0a560 # load color
+    li $t4 0xc0a560
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xcf7c58 # load color
+    li $t4 0xcf7c58
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe19f65 # load color
+    li $t4 0xe19f65
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd5915d # load color
+    li $t4 0xd5915d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfdd57a # load color
+    li $t4 0xfdd57a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb8875a # load color
+    li $t4 0xb8875a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa19498 # load color
+    li $t4 0xa19498
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x61797d # load color
+    li $t4 0x61797d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd0b5a9 # load color
+    li $t4 0xd0b5a9
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfac8b6 # load color
+    li $t4 0xfac8b6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeddad3 # load color
+    li $t4 0xeddad3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6ea5b2 # load color
+    li $t4 0x6ea5b2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc9937f # load color
+    li $t4 0xc9937f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd49451 # load color
+    li $t4 0xd49451
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa87042 # load color
+    li $t4 0xa87042
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x482c1b # load color
+    li $t4 0x482c1b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x5e5630 # load color
+    li $t4 0x5e5630
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xd07b58 # load color
+    li $t4 0xd07b58
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xda855d # load color
+    li $t4 0xda855d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc97d54 # load color
+    li $t4 0xc97d54
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xedaa6c # load color
+    li $t4 0xedaa6c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdba46a # load color
+    li $t4 0xdba46a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb0b4b6 # load color
+    li $t4 0xb0b4b6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3092a4 # load color
+    li $t4 0x3092a4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe4ded8 # load color
+    li $t4 0xe4ded8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffeae2 # load color
+    li $t4 0xffeae2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6e8e0 # load color
+    li $t4 0xf6e8e0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb4c4c1 # load color
+    li $t4 0xb4c4c1
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc98369 # load color
+    li $t4 0xc98369
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd77452 # load color
+    li $t4 0xd77452
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6e3c2a # load color
+    li $t4 0x6e3c2a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x070403 # load color
+    li $t4 0x070403
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x040503 # load color
+    li $t4 0x040503
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x864f3c # load color
+    li $t4 0x864f3c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd17b5a # load color
+    li $t4 0xd17b5a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x74402b # load color
+    li $t4 0x74402b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x91563b # load color
+    li $t4 0x91563b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcf7d52 # load color
+    li $t4 0xcf7d52
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcb9485 # load color
+    li $t4 0xcb9485
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd5bec4 # load color
+    li $t4 0xd5bec4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf9d7d2 # load color
+    li $t4 0xf9d7d2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffddd4 # load color
+    li $t4 0xffddd4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbd3cd # load color
+    li $t4 0xfbd3cd
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd19788 # load color
+    li $t4 0xd19788
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcb7552 # load color
+    li $t4 0xcb7552
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc86e4c # load color
+    li $t4 0xc86e4c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x43251b # load color
+    li $t4 0x43251b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x100809 # load color
+    li $t4 0x100809
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7a4737 # load color
+    li $t4 0x7a4737
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3c1f18 # load color
+    li $t4 0x3c1f18
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2c170b # load color
+    li $t4 0x2c170b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x9c5939 # load color
+    li $t4 0x9c5939
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd9a8a0 # load color
+    li $t4 0xd9a8a0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf8d0d7 # load color
+    li $t4 0xf8d0d7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeab8b8 # load color
+    li $t4 0xeab8b8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc3626d # load color
+    li $t4 0xc3626d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdbb0b6 # load color
+    li $t4 0xdbb0b6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbc9899 # load color
+    li $t4 0xbc9899
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xaa5d51 # load color
+    li $t4 0xaa5d51
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x311609 # load color
+    li $t4 0x311609
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x0c0604 # load color
+    li $t4 0x0c0604
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x000204 # load color
+    li $t4 0x000204
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x101723 # load color
+    li $t4 0x101723
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x362b2b # load color
+    li $t4 0x362b2b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x98838b # load color
+    li $t4 0x98838b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbfa5b6 # load color
+    li $t4 0xbfa5b6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc6959d # load color
+    li $t4 0xc6959d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd29da2 # load color
+    li $t4 0xd29da2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcb9ba2 # load color
+    li $t4 0xcb9ba2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8e8296 # load color
+    li $t4 0x8e8296
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x352d3f # load color
+    li $t4 0x352d3f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x15233a # load color
+    li $t4 0x15233a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x03060a # load color
+    li $t4 0x03060a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1a2230 # load color
+    li $t4 0x1a2230
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2d3c58 # load color
+    li $t4 0x2d3c58
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x263d60 # load color
+    li $t4 0x263d60
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2f436c # load color
+    li $t4 0x2f436c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3a405e # load color
+    li $t4 0x3a405e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x727c9e # load color
+    li $t4 0x727c9e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x82899d # load color
+    li $t4 0x82899d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x707789 # load color
+    li $t4 0x707789
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x323958 # load color
+    li $t4 0x323958
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x26304e # load color
+    li $t4 0x26304e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x395382 # load color
+    li $t4 0x395382
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x243553 # load color
+    li $t4 0x243553
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x07090c # load color
+    li $t4 0x07090c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x323f5b # load color
+    li $t4 0x323f5b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x354970 # load color
+    li $t4 0x354970
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3f5682 # load color
+    li $t4 0x3f5682
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x333c5e # load color
+    li $t4 0x333c5e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x363c63 # load color
+    li $t4 0x363c63
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb4b3cc # load color
+    li $t4 0xb4b3cc
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe0deec # load color
+    li $t4 0xe0deec
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd9d8e7 # load color
+    li $t4 0xd9d8e7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7b85a4 # load color
+    li $t4 0x7b85a4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x5c617f # load color
+    li $t4 0x5c617f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3b5381 # load color
+    li $t4 0x3b5381
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x101826 # load color
+    li $t4 0x101826
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x010101 # load color
+    li $t4 0x010101
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x202633 # load color
+    li $t4 0x202633
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x4a597c # load color
+    li $t4 0x4a597c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x495271 # load color
+    li $t4 0x495271
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x747998 # load color
+    li $t4 0x747998
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x99a3bb # load color
+    li $t4 0x99a3bb
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x757b9b # load color
+    li $t4 0x757b9b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8290ab # load color
+    li $t4 0x8290ab
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xacb1c9 # load color
+    li $t4 0xacb1c9
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7b7a93 # load color
+    li $t4 0x7b7a93
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x384666 # load color
+    li $t4 0x384666
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x111a2a # load color
+    li $t4 0x111a2a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -3789,7 +3759,6 @@ draw_player_01:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
@@ -3798,31 +3767,31 @@ draw_player_01:
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x0d0e12 # load color
+    li $t4 0x0d0e12
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x20212a # load color
+    li $t4 0x20212a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6d7395 # load color
+    li $t4 0x6d7395
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8286a8 # load color
+    li $t4 0x8286a8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x4b5067 # load color
+    li $t4 0x4b5067
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x30384f # load color
+    li $t4 0x30384f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x535c7e # load color
+    li $t4 0x535c7e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x434962 # load color
+    li $t4 0x434962
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x000104 # load color
+    li $t4 0x000104
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -3832,43 +3801,42 @@ draw_player_01:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
-    jr $ra
-draw_player_02:
+    jr $ra # return
+draw_player_02: # start at v1
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2f1c14 # load color
+    li $t4 0x2f1c14
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x93543d # load color
+    li $t4 0x93543d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeda88a # load color
+    li $t4 0xeda88a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd5a9af # load color
+    li $t4 0xd5a9af
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc490a5 # load color
+    li $t4 0xc490a5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd69ea8 # load color
+    li $t4 0xd69ea8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc38b97 # load color
+    li $t4 0xc38b97
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc999a9 # load color
+    li $t4 0xc999a9
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x9c98a0 # load color
+    li $t4 0x9c98a0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3a2a20 # load color
+    li $t4 0x3a2a20
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -3876,727 +3844,712 @@ draw_player_02:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x0c0705 # load color
+    li $t4 0x0c0705
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x5d3627 # load color
+    li $t4 0x5d3627
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcd805f # load color
+    li $t4 0xcd805f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeabcb1 # load color
+    li $t4 0xeabcb1
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc27d8d # load color
+    li $t4 0xc27d8d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa7445c # load color
+    li $t4 0xa7445c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbe7c87 # load color
+    li $t4 0xbe7c87
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe0a19e # load color
+    li $t4 0xe0a19e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdfa09e # load color
+    li $t4 0xdfa09e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbf7e86 # load color
+    li $t4 0xbf7e86
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc36d82 # load color
+    li $t4 0xc36d82
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd09992 # load color
+    li $t4 0xd09992
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6a5044 # load color
+    li $t4 0x6a5044
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x0c0706 # load color
+    li $t4 0x0c0706
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7a4833 # load color
+    li $t4 0x7a4833
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc47152 # load color
+    li $t4 0xc47152
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdda59a # load color
+    li $t4 0xdda59a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbd7484 # load color
+    li $t4 0xbd7484
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xae4f64 # load color
+    li $t4 0xae4f64
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe1ae94 # load color
+    li $t4 0xe1ae94
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf4c17b # load color
+    li $t4 0xf4c17b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf4c170 # load color
+    li $t4 0xf4c170
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf5c071 # load color
+    li $t4 0xf5c071
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf2bc7a # load color
+    li $t4 0xf2bc7a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe3b8a8 # load color
+    li $t4 0xe3b8a8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xda9a98 # load color
+    li $t4 0xda9a98
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe4aa85 # load color
+    li $t4 0xe4aa85
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8c623f # load color
+    li $t4 0x8c623f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x100908 # load color
+    li $t4 0x100908
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x41261c # load color
+    li $t4 0x41261c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb76d4e # load color
+    li $t4 0xb76d4e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd89967 # load color
+    li $t4 0xd89967
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcc8b7a # load color
+    li $t4 0xcc8b7a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb9636b # load color
+    li $t4 0xb9636b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe8b78e # load color
+    li $t4 0xe8b78e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfed67a # load color
+    li $t4 0xfed67a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfddb74 # load color
+    li $t4 0xfddb74
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbe380 # load color
+    li $t4 0xfbe380
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe387 # load color
+    li $t4 0xffe387
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfdda79 # load color
+    li $t4 0xfdda79
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfdd881 # load color
+    li $t4 0xfdd881
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe7b4 # load color
+    li $t4 0xffe7b4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf8cf88 # load color
+    li $t4 0xf8cf88
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf1c86e # load color
+    li $t4 0xf1c86e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x543f26 # load color
+    li $t4 0x543f26
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x9d5b43 # load color
+    li $t4 0x9d5b43
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc07653 # load color
+    li $t4 0xc07653
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6c372 # load color
+    li $t4 0xf6c372
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6cd7b # load color
+    li $t4 0xf6cd7b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe7af78 # load color
+    li $t4 0xe7af78
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfadaa3 # load color
+    li $t4 0xfadaa3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf7d8ad # load color
+    li $t4 0xf7d8ad
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe1aa6d # load color
+    li $t4 0xe1aa6d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfde6a2 # load color
+    li $t4 0xfde6a2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfee8ba # load color
+    li $t4 0xfee8ba
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe2ab70 # load color
+    li $t4 0xe2ab70
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf9d994 # load color
+    li $t4 0xf9d994
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbdaa2 # load color
+    li $t4 0xfbdaa2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xefb36d # load color
+    li $t4 0xefb36d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbd678 # load color
+    li $t4 0xfbd678
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbe9955 # load color
+    li $t4 0xbe9955
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xbd6e50 # load color
+    li $t4 0xbd6e50
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdc9562 # load color
+    li $t4 0xdc9562
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf9d177 # load color
+    li $t4 0xf9d177
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfad178 # load color
+    li $t4 0xfad178
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf3b771 # load color
+    li $t4 0xf3b771
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6c977 # load color
+    li $t4 0xf6c977
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc57a52 # load color
+    li $t4 0xc57a52
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc58152 # load color
+    li $t4 0xc58152
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe27c # load color
+    li $t4 0xffe27c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe9b366 # load color
+    li $t4 0xe9b366
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa15635 # load color
+    li $t4 0xa15635
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb57349 # load color
+    li $t4 0xb57349
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf9cc7a # load color
+    li $t4 0xf9cc7a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe6b16d # load color
+    li $t4 0xe6b16d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe8ac6c # load color
+    li $t4 0xe8ac6c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe5c76d # load color
+    li $t4 0xe5c76d
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xbc6e4f # load color
+    li $t4 0xbc6e4f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe6ae6a # load color
+    li $t4 0xe6ae6a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xedbf6f # load color
+    li $t4 0xedbf6f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfcd079 # load color
+    li $t4 0xfcd079
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd0895e # load color
+    li $t4 0xd0895e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x86573e # load color
+    li $t4 0x86573e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x793a27 # load color
+    li $t4 0x793a27
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa47656 # load color
+    li $t4 0xa47656
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf0ba72 # load color
+    li $t4 0xf0ba72
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xce8469 # load color
+    li $t4 0xce8469
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x704e4b # load color
+    li $t4 0x704e4b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8b5e5a # load color
+    li $t4 0x8b5e5a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeea765 # load color
+    li $t4 0xeea765
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd3a75e # load color
+    li $t4 0xd3a75e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb76d4c # load color
+    li $t4 0xb76d4c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd7b06a # load color
+    li $t4 0xd7b06a
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xce7b57 # load color
+    li $t4 0xce7b57
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe3a366 # load color
+    li $t4 0xe3a366
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd6915e # load color
+    li $t4 0xd6915e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfed67b # load color
+    li $t4 0xfed67b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb98657 # load color
+    li $t4 0xb98657
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x988588 # load color
+    li $t4 0x988588
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x697274 # load color
+    li $t4 0x697274
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbca69b # load color
+    li $t4 0xbca69b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf9bfa9 # load color
+    li $t4 0xf9bfa9
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf5d8d0 # load color
+    li $t4 0xf5d8d0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6c9fac # load color
+    li $t4 0x6c9fac
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbf9c94 # load color
+    li $t4 0xbf9c94
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd49250 # load color
+    li $t4 0xd49250
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbf884e # load color
+    li $t4 0xbf884e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x5b3322 # load color
+    li $t4 0x5b3322
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6d6036 # load color
+    li $t4 0x6d6036
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xd07b58 # load color
+    li $t4 0xd07b58
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdc895e # load color
+    li $t4 0xdc895e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xce8056 # load color
+    li $t4 0xce8056
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf1b26f # load color
+    li $t4 0xf1b26f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdda769 # load color
+    li $t4 0xdda769
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbab5b5 # load color
+    li $t4 0xbab5b5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2f92a3 # load color
+    li $t4 0x2f92a3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd3d5d1 # load color
+    li $t4 0xd3d5d1
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe8df # load color
+    li $t4 0xffe8df
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfdeae2 # load color
+    li $t4 0xfdeae2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa5c5c4 # load color
+    li $t4 0xa5c5c4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcb9682 # load color
+    li $t4 0xcb9682
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcf6f4d # load color
+    li $t4 0xcf6f4d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x905137 # load color
+    li $t4 0x905137
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x190d09 # load color
+    li $t4 0x190d09
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x070805 # load color
+    li $t4 0x070805
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x955741 # load color
+    li $t4 0x955741
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd57d5b # load color
+    li $t4 0xd57d5b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x804730 # load color
+    li $t4 0x804730
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x975b3f # load color
+    li $t4 0x975b3f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd58456 # load color
+    li $t4 0xd58456
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc99586 # load color
+    li $t4 0xc99586
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbdb8bf # load color
+    li $t4 0xbdb8bf
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf3d8d4 # load color
+    li $t4 0xf3d8d4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe6dd # load color
+    li $t4 0xffe6dd
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfedbd3 # load color
+    li $t4 0xfedbd3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdfafa2 # load color
+    li $t4 0xdfafa2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc77756 # load color
+    li $t4 0xc77756
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd87853 # load color
+    li $t4 0xd87853
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6b3c2b # load color
+    li $t4 0x6b3c2b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x000001 # load color
+    li $t4 0x000001
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x1a0d0d # load color
+    li $t4 0x1a0d0d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x935641 # load color
+    li $t4 0x935641
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x4d291e # load color
+    li $t4 0x4d291e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x361e0f # load color
+    li $t4 0x361e0f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa65c3b # load color
+    li $t4 0xa65c3b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd0988c # load color
+    li $t4 0xd0988c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf8c9d1 # load color
+    li $t4 0xf8c9d1
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf5c9c7 # load color
+    li $t4 0xf5c9c7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcd7179 # load color
+    li $t4 0xcd7179
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdeacb3 # load color
+    li $t4 0xdeacb3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbc9895 # load color
+    li $t4 0xbc9895
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbe6b5f # load color
+    li $t4 0xbe6b5f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x572a18 # load color
+    li $t4 0x572a18
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1c0f08 # load color
+    li $t4 0x1c0f08
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x060303 # load color
+    li $t4 0x060303
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x020203 # load color
+    li $t4 0x020203
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x0b0f18 # load color
+    li $t4 0x0b0f18
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3d2c26 # load color
+    li $t4 0x3d2c26
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xaa8d8c # load color
+    li $t4 0xaa8d8c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd3b8c6 # load color
+    li $t4 0xd3b8c6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd49ca0 # load color
+    li $t4 0xd49ca0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd59094 # load color
+    li $t4 0xd59094
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd3979e # load color
+    li $t4 0xd3979e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb0a2b0 # load color
+    li $t4 0xb0a2b0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x5b4151 # load color
+    li $t4 0x5b4151
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x0e1726 # load color
+    li $t4 0x0e1726
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x04070d # load color
+    li $t4 0x04070d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x141b26 # load color
+    li $t4 0x141b26
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2b3a53 # load color
+    li $t4 0x2b3a53
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x213553 # load color
+    li $t4 0x213553
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2f446b # load color
+    li $t4 0x2f446b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x414564 # load color
+    li $t4 0x414564
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x697394 # load color
+    li $t4 0x697394
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x818b9f # load color
+    li $t4 0x818b9f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x727687 # load color
+    li $t4 0x727687
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x363d58 # load color
+    li $t4 0x363d58
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1d2746 # load color
+    li $t4 0x1d2746
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x354d7a # load color
+    li $t4 0x354d7a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2b3f64 # load color
+    li $t4 0x2b3f64
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x010203 # load color
+    li $t4 0x010203
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x05070a # load color
+    li $t4 0x05070a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2d3852 # load color
+    li $t4 0x2d3852
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x32456a # load color
+    li $t4 0x32456a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3a5481 # load color
+    li $t4 0x3a5481
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2f3c5e # load color
+    li $t4 0x2f3c5e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2f3459 # load color
+    li $t4 0x2f3459
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xadacc6 # load color
+    li $t4 0xadacc6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdcdae8 # load color
+    li $t4 0xdcdae8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd3d2df # load color
+    li $t4 0xd3d2df
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7f88a6 # load color
+    li $t4 0x7f88a6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x525571 # load color
+    li $t4 0x525571
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x415784 # load color
+    li $t4 0x415784
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x21314d # load color
+    li $t4 0x21314d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x010101 # load color
+    li $t4 0x010101
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x020203 # load color
+    li $t4 0x020203
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x282f40 # load color
+    li $t4 0x282f40
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x49597f # load color
+    li $t4 0x49597f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x4b587c # load color
+    li $t4 0x4b587c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x646988 # load color
+    li $t4 0x646988
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7a88a5 # load color
+    li $t4 0x7a88a5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x777e9f # load color
+    li $t4 0x777e9f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x9da7bd # load color
+    li $t4 0x9da7bd
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb7bbd0 # load color
+    li $t4 0xb7bbd0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x908faa # load color
+    li $t4 0x908faa
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x505a7b # load color
+    li $t4 0x505a7b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x23324e # load color
+    li $t4 0x23324e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x010102 # load color
+    li $t4 0x010102
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x010101 # load color
+    li $t4 0x010101
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1b2029 # load color
+    li $t4 0x1b2029
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x21232d # load color
+    li $t4 0x21232d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6f7494 # load color
+    li $t4 0x6f7494
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x9a9cba # load color
+    li $t4 0x9a9cba
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x676a86 # load color
+    li $t4 0x676a86
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3b4865 # load color
+    li $t4 0x3b4865
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x5a6384 # load color
+    li $t4 0x5a6384
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x5c617b # load color
+    li $t4 0x5c617b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x04070e # load color
+    li $t4 0x04070e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x010202 # load color
+    li $t4 0x010202
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -4604,43 +4557,42 @@ draw_player_02:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
-    jr $ra
-draw_player_03:
+    jr $ra # return
+draw_player_03: # start at v1
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x130c09 # load color
+    li $t4 0x130c09
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6e3c2b # load color
+    li $t4 0x6e3c2b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xed9973 # load color
+    li $t4 0xed9973
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe2c0c0 # load color
+    li $t4 0xe2c0c0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcdb2c5 # load color
+    li $t4 0xcdb2c5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe4c4cb # load color
+    li $t4 0xe4c4cb
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcaaab3 # load color
+    li $t4 0xcaaab3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd5b7c3 # load color
+    li $t4 0xd5b7c3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x999ba2 # load color
+    li $t4 0x999ba2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1e150f # load color
+    li $t4 0x1e150f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -4648,679 +4600,665 @@ draw_player_03:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x341e16 # load color
+    li $t4 0x341e16
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb46d4d # load color
+    li $t4 0xb46d4d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xebaf9a # load color
+    li $t4 0xebaf9a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd29ea5 # load color
+    li $t4 0xd29ea5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa74159 # load color
+    li $t4 0xa74159
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb06075 # load color
+    li $t4 0xb06075
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd3868e # load color
+    li $t4 0xd3868e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd4868e # load color
+    li $t4 0xd4868e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb86b7b # load color
+    li $t4 0xb86b7b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc07189 # load color
+    li $t4 0xc07189
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd09f93 # load color
+    li $t4 0xd09f93
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x4d3f35 # load color
+    li $t4 0x4d3f35
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x020001 # load color
+    li $t4 0x020001
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x5c3626 # load color
+    li $t4 0x5c3626
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb7694a # load color
+    li $t4 0xb7694a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe2a28d # load color
+    li $t4 0xe2a28d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcb969f # load color
+    li $t4 0xcb969f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xaa475e # load color
+    li $t4 0xaa475e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd29a94 # load color
+    li $t4 0xd29a94
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xebb889 # load color
+    li $t4 0xebb889
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf2bd7e # load color
+    li $t4 0xf2bd7e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf3bd80 # load color
+    li $t4 0xf3bd80
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeab582 # load color
+    li $t4 0xeab582
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdba9a3 # load color
+    li $t4 0xdba9a3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcf878c # load color
+    li $t4 0xcf878c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd99a7f # load color
+    li $t4 0xd99a7f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x78563a # load color
+    li $t4 0x78563a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x0e0707 # load color
+    li $t4 0x0e0707
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x281711 # load color
+    li $t4 0x281711
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xac6548 # load color
+    li $t4 0xac6548
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcf8a60 # load color
+    li $t4 0xcf8a60
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcb8b82 # load color
+    li $t4 0xcb8b82
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb15263 # load color
+    li $t4 0xb15263
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd99d88 # load color
+    li $t4 0xd99d88
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfac971 # load color
+    li $t4 0xfac971
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffdb72 # load color
+    li $t4 0xffdb72
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbe177 # load color
+    li $t4 0xfbe177
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe07c # load color
+    li $t4 0xffe07c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffdb76 # load color
+    li $t4 0xffdb76
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfacf7d # load color
+    li $t4 0xfacf7d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe9bd # load color
+    li $t4 0xffe9bd
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf8cf93 # load color
+    li $t4 0xf8cf93
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe9bc69 # load color
+    li $t4 0xe9bc69
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x543c26 # load color
+    li $t4 0x543c26
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x824c37 # load color
+    li $t4 0x824c37
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbd7352 # load color
+    li $t4 0xbd7352
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf0ba6e # load color
+    li $t4 0xf0ba6e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf1c47b # load color
+    li $t4 0xf1c47b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdda37a # load color
+    li $t4 0xdda37a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf8d29d # load color
+    li $t4 0xf8d29d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfee6b1 # load color
+    li $t4 0xfee6b1
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xecb976 # load color
+    li $t4 0xecb976
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfce39a # load color
+    li $t4 0xfce39a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffeabb # load color
+    li $t4 0xffeabb
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xecbf7e # load color
+    li $t4 0xecbf7e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfcde91 # load color
+    li $t4 0xfcde91
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfcdea8 # load color
+    li $t4 0xfcdea8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf1b870 # load color
+    li $t4 0xf1b870
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbd879 # load color
+    li $t4 0xfbd879
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb79351 # load color
+    li $t4 0xb79351
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xbb6c4f # load color
+    li $t4 0xbb6c4f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd3885c # load color
+    li $t4 0xd3885c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf8cc76 # load color
+    li $t4 0xf8cc76
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfcd478 # load color
+    li $t4 0xfcd478
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf2b670 # load color
+    li $t4 0xf2b670
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbd684 # load color
+    li $t4 0xfbd684
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd8986c # load color
+    li $t4 0xd8986c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc27d52 # load color
+    li $t4 0xc27d52
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfee183 # load color
+    li $t4 0xfee183
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6cd80 # load color
+    li $t4 0xf6cd80
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb66c46 # load color
+    li $t4 0xb66c46
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc58455 # load color
+    li $t4 0xc58455
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfad487 # load color
+    li $t4 0xfad487
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xecb671 # load color
+    li $t4 0xecb671
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe5ac6c # load color
+    li $t4 0xe5ac6c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeece6f # load color
+    li $t4 0xeece6f
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xba6c4e # load color
+    li $t4 0xba6c4e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe2a867 # load color
+    li $t4 0xe2a867
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf2c673 # load color
+    li $t4 0xf2c673
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbd279 # load color
+    li $t4 0xfbd279
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe29a68 # load color
+    li $t4 0xe29a68
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa67348 # load color
+    li $t4 0xa67348
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8a442b # load color
+    li $t4 0x8a442b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa56d4d # load color
+    li $t4 0xa56d4d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf4c772 # load color
+    li $t4 0xf4c772
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd18559 # load color
+    li $t4 0xd18559
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7d463a # load color
+    li $t4 0x7d463a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7b4d47 # load color
+    li $t4 0x7b4d47
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe99f62 # load color
+    li $t4 0xe99f62
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdeb566 # load color
+    li $t4 0xdeb566
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc27952 # load color
+    li $t4 0xc27952
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe9bc71 # load color
+    li $t4 0xe9bc71
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xc87654 # load color
+    li $t4 0xc87654
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe5a768 # load color
+    li $t4 0xe5a768
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xda9a61 # load color
+    li $t4 0xda9a61
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfed67a # load color
+    li $t4 0xfed67a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xba8356 # load color
+    li $t4 0xba8356
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x816668 # load color
+    li $t4 0x816668
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x715c58 # load color
+    li $t4 0x715c58
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa58d80 # load color
+    li $t4 0xa58d80
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf4b592 # load color
+    li $t4 0xf4b592
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf0c6bb # load color
+    li $t4 0xf0c6bb
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6f8f9b # load color
+    li $t4 0x6f8f9b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xac9496 # load color
+    li $t4 0xac9496
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdd9a56 # load color
+    li $t4 0xdd9a56
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcf9f58 # load color
+    li $t4 0xcf9f58
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x75422d # load color
+    li $t4 0x75422d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8f7946 # load color
+    li $t4 0x8f7946
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xce7a57 # load color
+    li $t4 0xce7a57
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xde8f61 # load color
+    li $t4 0xde8f61
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd08357 # load color
+    li $t4 0xd08357
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6be74 # load color
+    li $t4 0xf6be74
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdba866 # load color
+    li $t4 0xdba866
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc1b2b0 # load color
+    li $t4 0xc1b2b0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x4498a6 # load color
+    li $t4 0x4498a6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc2cac7 # load color
+    li $t4 0xc2cac7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe1d6 # load color
+    li $t4 0xffe1d6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffeae2 # load color
+    li $t4 0xffeae2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8fbdbf # load color
+    li $t4 0x8fbdbf
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc7a596 # load color
+    li $t4 0xc7a596
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc76d48 # load color
+    li $t4 0xc76d48
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa5613f # load color
+    li $t4 0xa5613f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x301910 # load color
+    li $t4 0x301910
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x12130a # load color
+    li $t4 0x12130a
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xac664a # load color
+    li $t4 0xac664a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd67e5c # load color
+    li $t4 0xd67e5c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x96553a # load color
+    li $t4 0x96553a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xaa6948 # load color
+    li $t4 0xaa6948
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdc905c # load color
+    li $t4 0xdc905c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc89e8f # load color
+    li $t4 0xc89e8f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8fadb9 # load color
+    li $t4 0x8fadb9
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe1d7d5 # load color
+    li $t4 0xe1d7d5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffeee5 # load color
+    li $t4 0xffeee5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe7de # load color
+    li $t4 0xffe7de
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeac9bf # load color
+    li $t4 0xeac9bf
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xca8163 # load color
+    li $t4 0xca8163
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe17b55 # load color
+    li $t4 0xe17b55
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x854935 # load color
+    li $t4 0x854935
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x050304 # load color
+    li $t4 0x050304
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x301a17 # load color
+    li $t4 0x301a17
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xae674d # load color
+    li $t4 0xae674d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x693828 # load color
+    li $t4 0x693828
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x492919 # load color
+    li $t4 0x492919
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb56542 # load color
+    li $t4 0xb56542
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc18271 # load color
+    li $t4 0xc18271
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf4bcc3 # load color
+    li $t4 0xf4bcc3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfad1cf # load color
+    li $t4 0xfad1cf
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe39b9c # load color
+    li $t4 0xe39b9c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe9b6ba # load color
+    li $t4 0xe9b6ba
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbc918a # load color
+    li $t4 0xbc918a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbf6e5e # load color
+    li $t4 0xbf6e5e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8c492e # load color
+    li $t4 0x8c492e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x391f13 # load color
+    li $t4 0x391f13
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1a0e0c # load color
+    li $t4 0x1a0e0c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x120d10 # load color
+    li $t4 0x120d10
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x161e2c # load color
+    li $t4 0x161e2c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x4e3123 # load color
+    li $t4 0x4e3123
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc9a29c # load color
+    li $t4 0xc9a29c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd8bdc4 # load color
+    li $t4 0xd8bdc4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xca9195 # load color
+    li $t4 0xca9195
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa24451 # load color
+    li $t4 0xa24451
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xae6873 # load color
+    li $t4 0xae6873
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc0aeb7 # load color
+    li $t4 0xc0aeb7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x905f6b # load color
+    li $t4 0x905f6b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x29334f # load color
+    li $t4 0x29334f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x111a2b # load color
+    li $t4 0x111a2b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x17202e # load color
+    li $t4 0x17202e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2c3c58 # load color
+    li $t4 0x2c3c58
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x283f63 # load color
+    li $t4 0x283f63
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x344971 # load color
+    li $t4 0x344971
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x373956 # load color
+    li $t4 0x373956
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x757694 # load color
+    li $t4 0x757694
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8989a2 # load color
+    li $t4 0x8989a2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x84828f # load color
+    li $t4 0x84828f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x484e6d # load color
+    li $t4 0x484e6d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2d334e # load color
+    li $t4 0x2d334e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x384f7c # load color
+    li $t4 0x384f7c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x364f7c # load color
+    li $t4 0x364f7c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x05070b # load color
+    li $t4 0x05070b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x050609 # load color
+    li $t4 0x050609
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x313b56 # load color
+    li $t4 0x313b56
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x394c73 # load color
+    li $t4 0x394c73
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x415985 # load color
+    li $t4 0x415985
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3b4465 # load color
+    li $t4 0x3b4465
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x363f66 # load color
+    li $t4 0x363f66
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x9194b3 # load color
+    li $t4 0x9194b3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdfdeec # load color
+    li $t4 0xdfdeec
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdbdbea # load color
+    li $t4 0xdbdbea
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x9ca1bc # load color
+    li $t4 0x9ca1bc
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x646a89 # load color
+    li $t4 0x646a89
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x445783 # load color
+    li $t4 0x445783
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x152033 # load color
+    li $t4 0x152033
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x010102 # load color
+    li $t4 0x010102
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x13161d # load color
+    li $t4 0x13161d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x475373 # load color
+    li $t4 0x475373
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3f4863 # load color
+    li $t4 0x3f4863
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x717492 # load color
+    li $t4 0x717492
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa7b0c6 # load color
+    li $t4 0xa7b0c6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7c829f # load color
+    li $t4 0x7c829f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6b7b98 # load color
+    li $t4 0x6b7b98
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x929cb7 # load color
+    li $t4 0x929cb7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x908ea7 # load color
+    li $t4 0x908ea7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x353c55 # load color
+    li $t4 0x353c55
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x152135 # load color
+    li $t4 0x152135
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -5328,7 +5266,6 @@ draw_player_03:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
@@ -5337,31 +5274,31 @@ draw_player_03:
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x050506 # load color
+    li $t4 0x050506
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x141419 # load color
+    li $t4 0x141419
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x616787 # load color
+    li $t4 0x616787
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x757ba0 # load color
+    li $t4 0x757ba0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x484c64 # load color
+    li $t4 0x484c64
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x292f40 # load color
+    li $t4 0x292f40
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x424969 # load color
+    li $t4 0x424969
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x4e5879 # load color
+    li $t4 0x4e5879
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x020305 # load color
+    li $t4 0x020305
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -5371,43 +5308,42 @@ draw_player_03:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
-    jr $ra
-draw_player_04:
+    jr $ra # return
+draw_player_04: # start at v1
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x150c0a # load color
+    li $t4 0x150c0a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7a4431 # load color
+    li $t4 0x7a4431
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xee9d79 # load color
+    li $t4 0xee9d79
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe1c2c4 # load color
+    li $t4 0xe1c2c4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xceb1c3 # load color
+    li $t4 0xceb1c3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe1c2c8 # load color
+    li $t4 0xe1c2c8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xccabb4 # load color
+    li $t4 0xccabb4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd4bac7 # load color
+    li $t4 0xd4bac7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x7d8084 # load color
+    li $t4 0x7d8084
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x160e08 # load color
+    li $t4 0x160e08
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -5415,675 +5351,661 @@ draw_player_04:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3d231a # load color
+    li $t4 0x3d231a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xba7152 # load color
+    li $t4 0xba7152
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xebb3a1 # load color
+    li $t4 0xebb3a1
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcc929d # load color
+    li $t4 0xcc929d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa53e57 # load color
+    li $t4 0xa53e57
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb6687b # load color
+    li $t4 0xb6687b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd58a90 # load color
+    li $t4 0xd58a90
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd3878f # load color
+    li $t4 0xd3878f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb56a7a # load color
+    li $t4 0xb56a7a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc87a8e # load color
+    li $t4 0xc87a8e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc29789 # load color
+    li $t4 0xc29789
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3d2e27 # load color
+    li $t4 0x3d2e27
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x633a29 # load color
+    li $t4 0x633a29
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbb6b4c # load color
+    li $t4 0xbb6b4c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe2a693 # load color
+    li $t4 0xe2a693
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc68c98 # load color
+    li $t4 0xc68c98
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xac4a60 # load color
+    li $t4 0xac4a60
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd7a397 # load color
+    li $t4 0xd7a397
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xedb984 # load color
+    li $t4 0xedb984
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf3be7d # load color
+    li $t4 0xf3be7d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf3be7e # load color
+    li $t4 0xf3be7e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xebb584 # load color
+    li $t4 0xebb584
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd8a7a5 # load color
+    li $t4 0xd8a7a5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd38888 # load color
+    li $t4 0xd38888
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd39c7b # load color
+    li $t4 0xd39c7b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x62442b # load color
+    li $t4 0x62442b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x070304 # load color
+    li $t4 0x070304
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x2d1a13 # load color
+    li $t4 0x2d1a13
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xaf684b # load color
+    li $t4 0xaf684b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd28f63 # load color
+    li $t4 0xd28f63
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xca8980 # load color
+    li $t4 0xca8980
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb35665 # load color
+    li $t4 0xb35665
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdfa889 # load color
+    li $t4 0xdfa889
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfcce72 # load color
+    li $t4 0xfcce72
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfedc72 # load color
+    li $t4 0xfedc72
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbe17a # load color
+    li $t4 0xfbe17a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe17d # load color
+    li $t4 0xffe17d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfed876 # load color
+    li $t4 0xfed876
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfcd586 # load color
+    li $t4 0xfcd586
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfee7bd # load color
+    li $t4 0xfee7bd
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf7cd85 # load color
+    li $t4 0xf7cd85
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdeb164 # load color
+    li $t4 0xdeb164
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x332419 # load color
+    li $t4 0x332419
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x884f3a # load color
+    li $t4 0x884f3a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbf7553 # load color
+    li $t4 0xbf7553
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf2be70 # load color
+    li $t4 0xf2be70
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf1c57b # load color
+    li $t4 0xf1c57b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe0a77a # load color
+    li $t4 0xe0a77a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfad8a2 # load color
+    li $t4 0xfad8a2
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfce1af # load color
+    li $t4 0xfce1af
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeab873 # load color
+    li $t4 0xeab873
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfde7a3 # load color
+    li $t4 0xfde7a3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfee7b8 # load color
+    li $t4 0xfee7b8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe9b874 # load color
+    li $t4 0xe9b874
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe39e # load color
+    li $t4 0xffe39e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf9d59c # load color
+    li $t4 0xf9d59c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf2ba70 # load color
+    li $t4 0xf2ba70
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbdb78 # load color
+    li $t4 0xfbdb78
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x9c7b44 # load color
+    li $t4 0x9c7b44
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xbc6d4f # load color
+    li $t4 0xbc6d4f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd78e5e # load color
+    li $t4 0xd78e5e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf9ce77 # load color
+    li $t4 0xf9ce77
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbd278 # load color
+    li $t4 0xfbd278
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf2b770 # load color
+    li $t4 0xf2b770
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf7d080 # load color
+    li $t4 0xf7d080
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcd8760 # load color
+    li $t4 0xcd8760
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc78655 # load color
+    li $t4 0xc78655
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe483 # load color
+    li $t4 0xffe483
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xedbd75 # load color
+    li $t4 0xedbd75
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xaa5f3d # load color
+    li $t4 0xaa5f3d
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xca8d5c # load color
+    li $t4 0xca8d5c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbd481 # load color
+    li $t4 0xfbd481
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe5ab6c # load color
+    li $t4 0xe5ab6c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeeb970 # load color
+    li $t4 0xeeb970
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd6ba64 # load color
+    li $t4 0xd6ba64
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xba6c4e # load color
+    li $t4 0xba6c4e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe4aa68 # load color
+    li $t4 0xe4aa68
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf0c471 # load color
+    li $t4 0xf0c471
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbd079 # load color
+    li $t4 0xfbd079
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd99263 # load color
+    li $t4 0xd99263
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x966441 # load color
+    li $t4 0x966441
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x823d28 # load color
+    li $t4 0x823d28
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xab7854 # load color
+    li $t4 0xab7854
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf2bf70 # load color
+    li $t4 0xf2bf70
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc97d5c # load color
+    li $t4 0xc97d5c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6f463f # load color
+    li $t4 0x6f463f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8f5a50 # load color
+    li $t4 0x8f5a50
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf1af69 # load color
+    li $t4 0xf1af69
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcfa05c # load color
+    li $t4 0xcfa05c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc97e57 # load color
+    li $t4 0xc97e57
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd2b168 # load color
+    li $t4 0xd2b168
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xca7855 # load color
+    li $t4 0xca7855
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe5a668 # load color
+    li $t4 0xe5a668
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd8965f # load color
+    li $t4 0xd8965f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfed77a # load color
+    li $t4 0xfed77a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb48055 # load color
+    li $t4 0xb48055
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8b7477 # load color
+    li $t4 0x8b7477
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6a6362 # load color
+    li $t4 0x6a6362
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb89c8f # load color
+    li $t4 0xb89c8f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf6ba9e # load color
+    li $t4 0xf6ba9e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xeecdc6 # load color
+    li $t4 0xeecdc6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6794a3 # load color
+    li $t4 0x6794a3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc0938a # load color
+    li $t4 0xc0938a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xda9e55 # load color
+    li $t4 0xda9e55
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbc874e # load color
+    li $t4 0xbc874e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x623826 # load color
+    li $t4 0x623826
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x827341 # load color
+    li $t4 0x827341
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xce7a57 # load color
+    li $t4 0xce7a57
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdd8c5f # load color
+    li $t4 0xdd8c5f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcf8256 # load color
+    li $t4 0xcf8256
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xf3b971 # load color
+    li $t4 0xf3b971
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdaa668 # load color
+    li $t4 0xdaa668
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbab5b4 # load color
+    li $t4 0xbab5b4
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3793a3 # load color
+    li $t4 0x3793a3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd4d2ce # load color
+    li $t4 0xd4d2ce
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffe4db # load color
+    li $t4 0xffe4db
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfae8e0 # load color
+    li $t4 0xfae8e0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x96bebe # load color
+    li $t4 0x96bebe
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xca917c # load color
+    li $t4 0xca917c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xcb704b # load color
+    li $t4 0xcb704b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8a4e34 # load color
+    li $t4 0x8a4e34
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x180c08 # load color
+    li $t4 0x180c08
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x0e1009 # load color
+    li $t4 0x0e1009
     sw $t4 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0xa05e45 # load color
+    li $t4 0xa05e45
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd57d5b # load color
+    li $t4 0xd57d5b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x894d35 # load color
+    li $t4 0x894d35
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa16344 # load color
+    li $t4 0xa16344
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd88a59 # load color
+    li $t4 0xd88a59
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc79c8e # load color
+    li $t4 0xc79c8e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa6b3bc # load color
+    li $t4 0xa6b3bc
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xefdad7 # load color
+    li $t4 0xefdad7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xffeae1 # load color
+    li $t4 0xffeae1
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfedfd7 # load color
+    li $t4 0xfedfd7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe1b5a8 # load color
+    li $t4 0xe1b5a8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc97755 # load color
+    li $t4 0xc97755
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdb7954 # load color
+    li $t4 0xdb7954
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x603527 # load color
+    li $t4 0x603527
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
-    li $t4 0x211111 # load color
+    li $t4 0x211111
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa05d47 # load color
+    li $t4 0xa05d47
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x5a2f21 # load color
+    li $t4 0x5a2f21
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x412416 # load color
+    li $t4 0x412416
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb0623e # load color
+    li $t4 0xb0623e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xce9183 # load color
+    li $t4 0xce9183
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfecad0 # load color
+    li $t4 0xfecad0
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xfbcfcc # load color
+    li $t4 0xfbcfcc
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xdc888b # load color
+    li $t4 0xdc888b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xe9b8bd # load color
+    li $t4 0xe9b8bd
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb88f89 # load color
+    li $t4 0xb88f89
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xc06958 # load color
+    li $t4 0xc06958
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x65331f # load color
+    li $t4 0x65331f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1f1008 # load color
+    li $t4 0x1f1008
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x0d0706 # load color
+    li $t4 0x0d0706
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x0e0e14 # load color
+    li $t4 0x0e0e14
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1a2535 # load color
+    li $t4 0x1a2535
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x47332c # load color
+    li $t4 0x47332c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb89b9e # load color
+    li $t4 0xb89b9e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xbea6ae # load color
+    li $t4 0xbea6ae
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xad7580 # load color
+    li $t4 0xad7580
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x934452 # load color
+    li $t4 0x934452
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x9e656f # load color
+    li $t4 0x9e656f
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa996a5 # load color
+    li $t4 0xa996a5
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x6a4c5e # load color
+    li $t4 0x6a4c5e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x273c61 # load color
+    li $t4 0x273c61
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x111a2b # load color
+    li $t4 0x111a2b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1e2739 # load color
+    li $t4 0x1e2739
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2d3f5c # load color
+    li $t4 0x2d3f5c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2b4770 # load color
+    li $t4 0x2b4770
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2b3f69 # load color
+    li $t4 0x2b3f69
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x313555 # load color
+    li $t4 0x313555
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x8b8fad # load color
+    li $t4 0x8b8fad
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xa1a5b9 # load color
+    li $t4 0xa1a5b9
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x9498a7 # load color
+    li $t4 0x9498a7
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x485271 # load color
+    li $t4 0x485271
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x313753 # load color
+    li $t4 0x313753
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3c5584 # load color
+    li $t4 0x3c5584
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2b3f63 # load color
+    li $t4 0x2b3f63
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x050709 # load color
+    li $t4 0x050709
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x343f5a # load color
+    li $t4 0x343f5a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3d5078 # load color
+    li $t4 0x3d5078
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x465a84 # load color
+    li $t4 0x465a84
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x444b6b # load color
+    li $t4 0x444b6b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3f4c72 # load color
+    li $t4 0x3f4c72
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x9295b3 # load color
+    li $t4 0x9295b3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd7d8e6 # load color
+    li $t4 0xd7d8e6
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xd7d7e8 # load color
+    li $t4 0xd7d7e8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x9196b3 # load color
+    li $t4 0x9196b3
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x646c8e # load color
+    li $t4 0x646c8e
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x364b74 # load color
+    li $t4 0x364b74
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x080d14 # load color
+    li $t4 0x080d14
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x0d0e13 # load color
+    li $t4 0x0d0e13
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3d4760 # load color
+    li $t4 0x3d4760
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x373d52 # load color
+    li $t4 0x373d52
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x777b99 # load color
+    li $t4 0x777b99
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0xb0b5cb # load color
+    li $t4 0xb0b5cb
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x787d9b # load color
+    li $t4 0x787d9b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x5b6c8c # load color
+    li $t4 0x5b6c8c
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x868eab # load color
+    li $t4 0x868eab
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x74738b # load color
+    li $t4 0x74738b
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1c263a # load color
+    li $t4 0x1c263a
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x080d16 # load color
+    li $t4 0x080d16
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
@@ -6091,810 +6013,792 @@ draw_player_04:
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
-    add $v1 $v1 $t0 # shift x
     add $t2 $t2 $t1 # shift y
     move $v1 $t2 # carriage return
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x17181d
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x606788
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x666d94
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x2d3142
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x1b1e28
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x3d4464
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x404966
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    jr $ra # return
+draw_player_05: # start at v1
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x1c100e
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x93553d
+    sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x17181d # load color
+    li $t4 0xeda587
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x606788 # load color
+    li $t4 0xdabfc8
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x666d94 # load color
+    li $t4 0xd1b0bf
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x2d3142 # load color
+    li $t4 0xd8b5bd
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x1b1e28 # load color
+    li $t4 0xcda9b1
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x3d4464 # load color
+    li $t4 0xcfbfcd
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    li $t4 0x404966 # load color
+    li $t4 0x4b4946
     sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
+    li $t4 0x070200
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
     sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x040201
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x4e2e22
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xc67b5b
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe9b6aa
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xc17b89
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xa5445d
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xc27886
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xd88d91
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xd0858c
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xb2677b
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xd48e96
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x977869
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x1e1411
+    sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
     add $v1 $v1 $t0 # shift x
     sw $0 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    li $t4 0x010000
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x70412e
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xc37253
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe0aa9d
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xbd7585
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xb45d6b
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe3b296
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf1be7c
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf4c17c
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf3bf7a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xeab68e
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xd5a3a3
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xdd9588
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xbc8f64
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x352116
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x000001
+    sw $t4 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    li $t4 0x382118
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xb46b4e
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xd79869
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xc7827a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xbc666d
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xebbb89
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfed575
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfdde74
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfde181
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xffe17f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfbd374
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xffe19c
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfbdbac
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfbd076
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xa4804b
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x100a09
+    sw $t4 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    li $t4 0x975840
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xc27954
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf6c672
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf2c77b
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe7af7a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfde0a9
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf0ca9e
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe8b971
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfeebb0
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf6d7a7
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe6b069
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xffe7ae
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf4c181
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf5c474
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe8c66a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x705231
+    sw $t4 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    li $t4 0xbe6f50
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xdc9761
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfad378
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf9cc77
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf4bb73
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xedbc73
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xba6d4b
+    sw $t4 0($v1)
     add $v1 $v1 $t0 # shift x
-    jr $ra
-draw_player_05:
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x1c100e # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x93553d # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xeda587 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xdabfc8 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd1b0bf # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd8b5bd # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xcda9b1 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xcfbfcd # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x4b4946 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x070200 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x040201 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x4e2e22 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xc67b5b # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe9b6aa # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xc17b89 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xa5445d # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xc27886 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd88d91 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd0858c # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xb2677b # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd48e96 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x977869 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x1e1411 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        li $t4 0x010000 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x70412e # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xc37253 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe0aa9d # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xbd7585 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xb45d6b # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe3b296 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf1be7c # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf4c17c # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf3bf7a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xeab68e # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd5a3a3 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xdd9588 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xbc8f64 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x352116 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x000001 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        li $t4 0x382118 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xb46b4e # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd79869 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xc7827a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xbc666d # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xebbb89 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfed575 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfdde74 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfde181 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xffe17f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfbd374 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xffe19c # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfbdbac # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfbd076 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xa4804b # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x100a09 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        li $t4 0x975840 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xc27954 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf6c672 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf2c77b # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe7af7a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfde0a9 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf0ca9e # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe8b971 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfeebb0 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf6d7a7 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe6b069 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xffe7ae # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf4c181 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf5c474 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe8c66a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x705231 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        li $t4 0xbe6f50 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xdc9761 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfad378 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf9cc77 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf4bb73 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xedbc73 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xba6d4b # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd7a060 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfddc7a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd49358 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x954c2f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd99f66 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf9cf79 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xda9864 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf9ce76 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x988649 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        li $t4 0xbd6f4f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe6ad6a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xedbe6f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfacb78 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xc17e58 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x7e503a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x7a3d2c # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xc09466 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe9aa6f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xb77565 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x604f56 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xbe755a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf3c36d # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xb07348 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd29661 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x96874d # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        li $t4 0xcd7b57 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe19e65 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd7945f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfbd279 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xb18159 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x9e9498 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x63797c # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe0baaa # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf8ccbc # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xcecbc8 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x79a5b3 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xcd8764 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd19854 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x885132 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x4d3b23 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x544d2a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        li $t4 0xcf7b57 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xda845d # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xc87e54 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xecaa6b # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xd8a36c # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xa3b4b9 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x4098a8 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf5e4dc # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xffeae2 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe5e1da # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xbabdb7 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xc77355 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xc96f4f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x44241a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x020202 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x050604 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        li $t4 0x824c39 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xce7958 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x723f2a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x96593d # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xcc7b52 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xcd998d # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xdcc2c7 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfdd8d2 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xffd9d1 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xf4c8c2 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xc68774 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xce7450 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xa85d40 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x1c100d # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        li $t4 0x0d0607 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x6d3f31 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x341c17 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x332018 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x9d5b3d # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe0b2ad # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xfed7db # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xe5a8a9 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xcb6c77 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xdfbcc0 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xbd8d8e # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x86493f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x261a1a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x030100 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x111823 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x202f45 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x3b3a47 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x827b8e # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x816d7c # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x7d566e # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x7a505f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x755a69 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x6f6178 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x343c5e # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x314a78 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x0f1522 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x050608 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x2a364e # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x32466b # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x354f7c # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x2a375c # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x42476b # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xbcc0d8 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xcccfdd # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xb3b8cc # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x4e5978 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x495172 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x354f7d # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x0d141f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x030305 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x2d354a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x47577e # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x4e5a7e # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x656b89 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x73809f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x868ca9 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xabb4c8 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0xbcbdd3 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x737490 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x44557a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x0f1827 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x030304 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x1d222c # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x2b2d3a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x7d81a2 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x989ab7 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x555c77 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x3f4c6a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x6b7392 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x36394a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x04080f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        add $t2 $t2 $t1 # shift y
-        move $v1 $t2 # carriage return
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x25262f # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x5d668a # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x4f587c # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x050507 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x0b0b12 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x454e71 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        li $t4 0x282d40 # load color
-        sw $t4 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        sw $0 0($v1)
-        add $v1 $v1 $t0 # shift x
-        jr $ra
+    li $t4 0xd7a060
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfddc7a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xd49358
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x954c2f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xd99f66
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf9cf79
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xda9864
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf9ce76
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x988649
+    sw $t4 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    li $t4 0xbd6f4f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe6ad6a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xedbe6f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfacb78
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xc17e58
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x7e503a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x7a3d2c
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xc09466
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe9aa6f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xb77565
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x604f56
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xbe755a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf3c36d
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xb07348
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xd29661
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x96874d
+    sw $t4 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    li $t4 0xcd7b57
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe19e65
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xd7945f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfbd279
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xb18159
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x9e9498
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x63797c
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe0baaa
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf8ccbc
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xcecbc8
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x79a5b3
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xcd8764
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xd19854
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x885132
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x4d3b23
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x544d2a
+    sw $t4 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    li $t4 0xcf7b57
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xda845d
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xc87e54
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xecaa6b
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xd8a36c
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xa3b4b9
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x4098a8
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf5e4dc
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xffeae2
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe5e1da
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xbabdb7
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xc77355
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xc96f4f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x44241a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x020202
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x050604
+    sw $t4 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    li $t4 0x824c39
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xce7958
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x723f2a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x96593d
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xcc7b52
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xcd998d
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xdcc2c7
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfdd8d2
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xffd9d1
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xf4c8c2
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xc68774
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xce7450
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xa85d40
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x1c100d
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    li $t4 0x0d0607
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x6d3f31
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x341c17
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x332018
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x9d5b3d
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe0b2ad
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xfed7db
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xe5a8a9
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xcb6c77
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xdfbcc0
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xbd8d8e
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x86493f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x261a1a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x030100
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x111823
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x202f45
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x3b3a47
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x827b8e
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x816d7c
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x7d566e
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x7a505f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x755a69
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x6f6178
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x343c5e
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x314a78
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x0f1522
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x050608
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x2a364e
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x32466b
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x354f7c
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x2a375c
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x42476b
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xbcc0d8
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xcccfdd
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xb3b8cc
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x4e5978
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x495172
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x354f7d
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x0d141f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x030305
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x2d354a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x47577e
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x4e5a7e
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x656b89
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x73809f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x868ca9
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xabb4c8
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0xbcbdd3
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x737490
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x44557a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x0f1827
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x030304
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x1d222c
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x2b2d3a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x7d81a2
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x989ab7
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x555c77
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x3f4c6a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x6b7392
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x36394a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x04080f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $t2 $t2 $t1 # shift y
+    move $v1 $t2 # carriage return
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x25262f
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x5d668a
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x4f587c
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x050507
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x0b0b12
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x454e71
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    li $t4 0x282d40
+    sw $t4 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    add $v1 $v1 $t0 # shift x
+    sw $0 0($v1)
+    jr $ra # return
 clear_player: # start at v1
     li $a0 REFRESH_RATE
     li $v0 32
