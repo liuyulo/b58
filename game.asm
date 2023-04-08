@@ -1,3 +1,11 @@
+# pregame
+#   s0 start of music
+#   s1 end of music
+#   s2 instrument
+#   s3 volume
+#   s4 address to current note
+#   s6 note duration remaining (ms)
+#   s7 time
 # ingame
 #   s0 player x in bytes
 #   s1 player y in bytes
@@ -8,13 +16,18 @@
 #   s6 jump distance remaining
 #   s7 time
 # postgame
+#   s2 instrument
+#   s3 max volume
 #   s5 constant 5
+#   s7 time
 # .eqv
     .eqv BASE_ADDRESS   0x10008000  # ($gp)
     .eqv SIZE           512         # screen width & height in bytes
     .eqv WIDTH_SHIFT    7           # 4 << WIDTH_SHIFT == SIZE
+    .eqv PRE_RATE       56          # 132 bpm, each frame is 1/32 note
+    .eqv PRE_LEN        1728        # wonderland has 216 notes, each is 2 words
     .eqv REFRESH_RATE   40          # in miliseconds
-    .eqv POST_RATE      50
+    .eqv POST_RATE      50          # 120 bpm, 5 frames is a 1/8 note
     .eqv PRE_FRAME      32          # frames to draw pre ui
     .eqv POST_FRAME     32          # frames to draw post ui
     .eqv CLEAR_FRAME    172         # 4 * num of frames for clear
@@ -29,7 +42,13 @@
 .data
     # space padding to support 128x128 resolution
     pad: .space 36000
-    # each word is 8 frames
+    # random integers go brrrr
+    wonderland: .word
+        72 56 74 616 72 1120 65 56 67 280 65 336 67 224 60 336 62 336 63 224 72 56 74 616 75 224 72 1792 74 336 75 336 77 224 74 56 77 616 75 1120 77 56 79 280 77 336 79 224 72 336 74 336 75 224 75 56 77 616 79 224 75 1792 62 336 63 336 65 224 72 56 74 616 72 1120 65 56 67 280 65 336 67 224 60 336 62 336 63 224 72 56 74 616 75 224 72 1792 74 336 75 336 77 224 74 56 77 616 75 1120 77 56 79 280 77 336 79 224 72 336 74 336 75 224 75 56 77 616 79 224 75 1792
+        0 448 62 112 63 112 65 224 67 896 60 336 63 336 67 224 72 896 60 336 63 336 70 56 72 168 70 896 65 336 62 336 70 224 67 56 68 616 67 112 65 112 67 896 67 336 65 336 64 224 65 448 72 448 65 336 63 336 62 224 63 448 70 56 72 392 71 336 72 336 74 224 67 896 71 896
+        62 336 63 336 65 224 67 896 60 336 63 336 67 224 72 896 60 336 63 336 70 56 72 168 70 896 65 336 62 336 70 224 67 56 68 616 67 112 65 112 67 896 67 336 65 336 64 224 65 448 72 448 65 336 63 336 62 224 63 448 70 56 72 392 71 336 72 336 74 224 67 896 71 896
+        74 336 75 336 77 224 79 896 72 336 75 336 79 224 84 896 72 336 75 336 82 56 84 168 82 896 77 336 74 336 82 224 79 56 80 616 79 112 77 112 79 896 79 336 77 336 76 224 77 448 84 448 77 336 75 336 74 224 75 448 82 56 84 392 83 336 84 336 86 224 79 896 83 896
+        74 336 75 336 77 224 79 896 72 336 75 336 79 224 84 896 72 336 75 336 82 56 84 168 82 896 77 336 74 336 82 224 79 56 80 616 79 112 77 112 79 896 79 336 77 336 76 224 77 448 84 448 77 336 75 336 74 224 75 448 82 56 84 392 83 336 84 336 86 224 79 336 89 336 86 224 87 1792    # each word is 8 frames
     pregame_frames: .word draw_title draw_subtitle draw_pre_start draw_pre_quit
     # inclusive bounding boxes (x1, y1, x2, y2), each bbox is 16 bytes
     platforms: .word
@@ -186,6 +205,13 @@ init_pre:
     jal draw_border
     jal draw_pre_eclipse
     jal draw_pre_alice
+    # prepare music
+    la $s0 wonderland
+    move $s4 $s0
+    addi $s1 $s0 PRE_LEN
+    li $s2 1
+    li $s6 0
+    li $s3 64
 pre:
     bge $s7 PRE_FRAME pre_ui_end
         # load frame addr from memory
@@ -197,9 +223,25 @@ pre:
         jal setup_color
         jalr $v0
     pre_ui_end:
+
+    bnez $s6 pre_music_end # wait
+    slt $t0 $s4 $s1
+    movz $s4 $s0 $t0 # rewind to start
+    lw $a0 0($s4) # pitch
+    lw $a1 4($s4) # duration
+    move $s6 $a1
+    addi $s4 $s4 8 # next note
+    beqz $a0 pre_music_end # pitch == 0 => rest
+    move $a2 $s2 # instrument
+    move $a3 $s3 # volume
+    li $v0 31
+    syscall # midi
+    pre_music_end:
+
     jal ui_keypress
     addi $s7 $s7 1 # increment time
-    li $a0 REFRESH_RATE # sleep
+    subi $s6 $s6 PRE_RATE
+    li $a0 PRE_RATE # sleep
     li $v0 32
     syscall
     j pre
@@ -222,12 +264,13 @@ main_init:
     move $s6 $0 # jump distance remaining
     la $ra cheat # i.e. label to next line
     beqz $t0 draw_collect
-cheat: # skip to final stage and tp to exit
-    li $s0 352
-    li $s1 384
-    li $s5 7
-    li $t0 16
-    sw $t0 stage
+
+    cheat: # skip to final stage and tp to exit
+    #li $s0 352
+    #li $s1 384
+    #li $s5 7
+    #li $t0 16
+    #sw $t0 stage
 
     # new gravity
     lh $s2 stage_gravity($t0) # gravity x
@@ -517,7 +560,6 @@ init_post:
     li $s7 0 # reset time
     jal draw_border
     li $a0 REFRESH_RATE # sleep
-    li $v0 32
     li $s5 5
     li $s2 112 # instrument
     li $s3 0x40 # max volume
@@ -547,6 +589,7 @@ post:
     div $s7 $s5
     mfhi $t0
     bnez $t0 post_refresh
+    beqz $s7 post_refresh # skip first frame (so volume wont be 0)
     mflo $t0
     # mod 16
     and $t0 $t0 0xf
@@ -19481,7 +19524,7 @@ draw_pre_quit:
     jal draw_keybase
     addi $v1 $v0 42256 # (68, 82)
     jal draw_keyq
-    addi $v1 $v0 44380 # (87, 86)
+    addi $v1 $v0 44376 # (86, 86)
     jal draw_quit
     j pre_ui_end
 draw_pre_eclipse: # start at v1, use t4
