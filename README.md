@@ -66,6 +66,19 @@ A walkthrough of this game can be found [here]() (YouTube):
 
 ## Assets and Inspiration
 
+<details><summary>tl;dr I used these</summary>
+
+![](./docs/alice.gif)
+![](./docs/doll-01.gif)
+![](./docs/doll-02.gif)
+![](./docs/doll-03.gif)
+
+(first character on the second row)
+
+![](./docs/characters.jpg)
+
+</details>
+
 The [art](./assets/alice.png) in the opening, the [dolls](./assets/pickups/) as pickups during gameplay, and the animated [doll](./assets/postgame/) in the ending all come from pixels arts in [here](http://forest.her.jp/moricchi/dot.htm) (JP). Although the website was last updated in 2016, the author says they are free to use [whatsoever](http://forest.her.jp/cgi-bin/imagedot/dat/skin/pi03f_blue/index.html) (JP).
 
 The character during gameplay is drawn with [this image](https://mi-keito.tumblr.com/image/166035811580) (Tumblr) as reference. I downscaled the image and animated myself.
