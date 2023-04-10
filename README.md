@@ -105,7 +105,7 @@ The opening uses a piano arrangement of "Alice in Wonderland", which is the extr
 - [Wiki](https://en.touhouwiki.net/wiki/Mystic_Square/Music#Extra_Stage_theme)
 - OST: [YouTube](https://youtu.be/n0jbvJjTXPw) (EN), and [YouTube](https://youtu.be/UkK2Dg8kB1I) (JP)
 - piano arrangement by DMBN: [YouTube](https://youtu.be/ib3RR_QpFzo) (JP)
-- full version in recorded in the game: [YouTube](https://youtu.be/iSI5jA82-i8)
+- full version recorded in the game: [YouTube](https://youtu.be/iSI5jA82-i8)
 
 ### Ending
 
