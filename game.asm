@@ -1,3 +1,36 @@
+#####################################################################
+#
+# CSCB58 Winter 2023 Assembly Final Project
+# University of Toronto, Scarborough
+#
+# Name: Yulong Liu
+# Student Number: ⑨
+#
+# Bitmap Display Configuration:
+# - Unit width in pixels: 4
+# - Unit height in pixels: 4
+# - Display width in pixels: 512
+# - Display height in pixels: 512
+# - Base Address for Display: 0x10008000 ($gp)
+#
+# Which milestones have been reached in this submission?
+# (See the assignment handout for descriptions of the milestones)
+# - Milestone 1 2 3
+#
+# Which approved features have been implemented for milestone 3?
+# - 3C 3G 3J 3K 3L 3M
+#
+# Link to video demonstration for final submission:
+# - https://youtu.be/EOQPEltkxjo
+#
+# Are you OK with us sharing the video with people outside course staff?
+# - yes, with project github link
+#
+# Any additional information that the TA needs to know:
+# - GitHub repo: https://github.com/liuyulo/b58
+# - Checkout "Progammer's Note" section in README.md
+#
+#####################################################################
 # opening
 #   s0 start of music
 #   s1 end of music
