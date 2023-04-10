@@ -43,7 +43,7 @@ A walkthrough of this game can be found [here](https://youtu.be/EOQPEltkxjo) (Yo
 
 - transitions
 - BGM (see [Music](#music))
-- button animation (see [demo](#demostration))
+- button animation (see demo [YouTube](https://youtu.be/EOQPEltkxjo))
 
 ### Gameplay
 > 4 stages
