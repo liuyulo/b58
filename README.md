@@ -60,9 +60,9 @@ A walkthrough of this game can be found [here](https://youtu.be/EOQPEltkxjo) (Yo
 - Although the code is somewhere below 8000 lines, it contains actually ~350 000 lines of instructions after macro expansion by the assembler.
 - Some Python [scripts](./scripts/) were developed to hardcode the animated sprites, UI components, and screen transitions.
 - Character movement is optimised such that only one row/column is erased during movement. For instance, moving up would redraw the player and erase only the bottom row.
-- Key presses in the opening and ending menus are handled by the same code, but since it isn't really meaningfull to have restart option during opening, I didn't include the UI for the P button.
+- Key presses in the opening and ending menus are handled by the same code, but since it isn't really meaningful to have restart option during the opening, I didn't include the UI for the P button.
 - UI components are reused. For example, the program draws `re`, `start` and `turn` to construct `start`, `restart` and `return`.
-- Animations are stored as array of labels, which can be used with `jalr` and some functional programming.
+- Animations are stored as an array of labels, which can be used with `jalr` and some functional programming.
 
 ## Assets and Inspiration
 
@@ -79,11 +79,11 @@ A walkthrough of this game can be found [here](https://youtu.be/EOQPEltkxjo) (Yo
 
 </details>
 
-The [art](./assets/alice.png) in the opening, the [dolls](./assets/pickups/) as pickups during gameplay, and the animated [doll](./assets/postgame/) in the ending all come from pixels arts in [here](http://forest.her.jp/moricchi/dot.htm) (JP). Although the website was last updated in 2016, the author says they are free to use [whatsoever](http://forest.her.jp/cgi-bin/imagedot/dat/skin/pi03f_blue/index.html) (JP).
+The [art](./assets/alice.png) in the opening, the [dolls](./assets/pickups/) as pickups during gameplay, and the animated [doll](./assets/postgame/) in the ending all come from pixels art in [here](http://forest.her.jp/moricchi/dot.htm) (JP). Although the website was last updated in 2016, the author says they are free to use [whatsoever](http://forest.her.jp/cgi-bin/imagedot/dat/skin/pi03f_blue/index.html) (JP).
 
-The character during gameplay is drawn with [this image](https://mi-keito.tumblr.com/image/166035811580) (Tumblr) as reference. I downscaled the image and animated myself.
+The character during gameplay is drawn with [this image](https://mi-keito.tumblr.com/image/166035811580) (Tumblr) as a reference. I downscaled the image and animated myself.
 
-All other assets are handmade by myself, including the UI compenents, transitions, etc. Some [maths](./docs/math.md) were involved.
+All other assets are handmade by myself, including the UI components, transitions, etc. Some [maths](./docs/math.md) was involved.
 
 This project is also inspired by Stephen's [B58 project](https://github.com/Epicsteve2/CSCB58_Project) in Winter 2021, which was also a reference to Touhou 8. This project uses themes from Touhou 5 and 10 (see [Music](#mulic)), and the playable character is from the Touhou character, Alice Margatroid, who appeared in Touhou 5, 7, 8 and 11 ([wiki](https://en.touhouwiki.net/wiki/Alice_Margatroid)).
 
@@ -100,16 +100,16 @@ The title, "The Doll Maker of Bucuresti," is the stage 3 theme in Touhou 7 right
 
 ### Opening
 
-The opening uses a piano arragement of "Alice in Wonderland", which is the extra stage theme in Touhou 5. As the name of the theme suggests, it is inspired from the novel Alice's Adventures in Wonderland.
+The opening uses a piano arrangement of "Alice in Wonderland", which is the extra stage theme in Touhou 5. As the name of the theme suggests, it is inspired by the novel Alice's Adventures in Wonderland.
 
 - [Wiki](https://en.touhouwiki.net/wiki/Mystic_Square/Music#Extra_Stage_theme)
 - OST: [YouTube](https://youtu.be/n0jbvJjTXPw) (EN), and [YouTube](https://youtu.be/UkK2Dg8kB1I) (JP)
-- piano arragement by DMBN: [YouTube](https://youtu.be/ib3RR_QpFzo) (JP)
-- full version in this game: [YouTube](https://youtu.be/iSI5jA82-i8)
+- piano arrangement by DMBN: [YouTube](https://youtu.be/ib3RR_QpFzo) (JP)
+- full version in recorded in the game: [YouTube](https://youtu.be/iSI5jA82-i8)
 
 ### Ending
 
-Ending's theme comes from "Player Score" in Touhou 10 as it's game over theme as well. The theme itself is simply this on repeat:
+The ending theme comes from "Player Score" in Touhou 10 as it's game over theme as well. The theme itself is simply this on repeat:
 
 ![](./docs/player_score.png)
 
