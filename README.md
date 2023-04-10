@@ -11,7 +11,7 @@ Here are the opening and ending menus:
 |:-:|:-:|
 |![](./docs/op.gif)|![](./docs/ed.gif)|
 
-A walkthrough of this game can be found [here]() (YouTube):
+A walkthrough of this game can be found [here](https://youtu.be/EOQPEltkxjo) (YouTube):
 
 ## Runnning on MARS
 > Acquire the JAR [here](https://courses.missouristate.edu/KenVollmar/MARS/download.htm).
@@ -105,7 +105,7 @@ The opening uses a piano arragement of "Alice in Wonderland", which is the extra
 - [Wiki](https://en.touhouwiki.net/wiki/Mystic_Square/Music#Extra_Stage_theme)
 - OST: [YouTube](https://youtu.be/n0jbvJjTXPw) (EN), and [YouTube](https://youtu.be/UkK2Dg8kB1I) (JP)
 - piano arragement by DMBN: [YouTube](https://youtu.be/ib3RR_QpFzo) (JP)
-- full version in this game: [YouTube]()
+- full version in this game: [YouTube](https://youtu.be/iSI5jA82-i8)
 
 ### Ending
 
