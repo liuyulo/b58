@@ -22,6 +22,7 @@ $$
   \therefore&&a&=\frac{2k\pm\sqrt{4k^2-4(2k-1)k}}{2(2k-1)}=\frac{k\pm\sqrt{k-k^2}}{2k-1}\\
 \end{align*}
 $$
+
 Based the figure, we have $0\le a\le 1$. Therefore:
 
 $$
